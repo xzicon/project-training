@@ -6,7 +6,7 @@ export default class Result extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        this.props.history.push('');
+        this.props.history.push('/home');
     }
     render() {
         const result = [

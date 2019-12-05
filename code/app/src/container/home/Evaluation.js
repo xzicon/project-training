@@ -10,7 +10,7 @@ export default class Evaluation extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        this.props.history.push('');
+        this.props.history.push('/home');
     }
     state = {
         data: ['1', '2','3','4','5', '6'],

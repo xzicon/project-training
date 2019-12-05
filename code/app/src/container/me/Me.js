@@ -38,10 +38,12 @@ export default class Me extends Component {
                     <div style={{width:'68px',height:'68px',position:'absolute',top:'60%',left:'7%'}}>
                      <img src='images/my/head.jpg' style={{border:'1px solid gray',borderRadius:'50%',width:'100%',height:'100%'}}/>
                     </div>
+                    </Link >
+                    <Link to='/mySettings'>
+                        <img src='images/my/settings.png'
+                        style={{width:'25px',height:'25px',position:'absolute',top:'7%',right:'5%'}}
+                        />
                     </Link>
-                    <img src='images/my/settings.png'
-                     style={{width:'25px',height:'25px',position:'absolute',top:'7%',right:'5%'}}
-                    />
                 </div>
                 <div style={{width:'100%',height:'17%',float:'left',padding:'2% 2%',borderBottom:'1px solid gray',backgroundColor:'#fff'}}>
                     <span style={{fontSize:'16px',float:'left'}}>

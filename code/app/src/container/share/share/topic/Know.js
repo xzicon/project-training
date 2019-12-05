@@ -15,10 +15,10 @@ export default class Know extends Component {
         
     }
     handleClick(){
-        this.props.history.push('/');
+        this.props.history.push('/share');
     }
     handleClick2(){
-        this.props.history.push('/add');
+        this.props.history.push('/share');
     }
 
     render() {

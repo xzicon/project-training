@@ -39,12 +39,13 @@ export default class Mydetail extends Component {
           sexValue: sex,
         });
     };
+    
     render() {
         return (
             <div>
                 <div>
                 <NavBar
-                    icon={<Icon type="left" />}
+                    icon={<Link to='/me'><Icon  type="left" /></Link>}
                     style={{backgroundColor:'rgb(231, 231, 231)',color:'#000'}}
                     onLeftClick={() => console.log('onLeftClick')}
                 >个人信息</NavBar>

@@ -54,7 +54,7 @@ export default class Clock extends Component{
         console.log(this.state.colorValue)
     }
     back=()=>{
-        this.props.history.push('/');
+        this.props.history.push('/sleep');
     }
     onChangeColor = (color) => {
         this.setState({
@@ -62,7 +62,7 @@ export default class Clock extends Component{
         });
     };
     baocun(){
-      this.props.history.push('/');
+      this.props.history.push('/sleep');
       
     }
     
@@ -74,7 +74,7 @@ export default class Clock extends Component{
                 <NavBar
                 style={{backgroundColor:'rgba(255,255,255,0.5)',color:'#fff'}}
                 mode="dark"
-                icon={<Link to={{pathname:'/',query:'redTab' }}><Icon type="left" /></Link>}
+                icon={<Link to={{pathname:'/sleep',query:'redTab' }}><Icon type="left" /></Link>}
                 // onLeftClick={this.back}>
                 >
                     闹钟

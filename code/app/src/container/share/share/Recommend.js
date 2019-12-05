@@ -12,7 +12,7 @@ export default class Recommend extends Component {
                     pic:'logo.png',
                     name:'简眠官方',
                     time:'5小时前',
-                    follow:'关注',
+                    follow:'已关注',
                     isFollow:false,
                     article:'早安，今天你睡的好吗？今日睡眠小知识：睡前一杯温牛奶有助于睡眠哦！',
                     tag:'#早安##睡眠小知识#',

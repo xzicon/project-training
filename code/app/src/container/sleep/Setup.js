@@ -29,10 +29,10 @@ export default class Setup extends Component {
         });
       };
     back=()=>{
-        this.props.history.push('/');
+        this.props.history.push('/sleep');
     }
     baocun=()=>{
-      this.props.history.push('/');
+      this.props.history.push('/sleep');
       
     }
     render() {

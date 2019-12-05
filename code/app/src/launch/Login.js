@@ -20,7 +20,7 @@ export default class Login extends Component {
                         <Link to='/forgetpwd'><span style={{float:'right',color:'black'}}>忘记密码</span></Link>
                         </p>
                         <div className='sub_btn'>
-                            <Link to='/tab'><button type='submit' style={{color:'black'}}>立即登录</button></Link>
+                            <Link to='/home'><button type='submit' style={{color:'black'}}>立即登录</button></Link>
                             {/* <button type='submit' style={{color:'black'}}>立即登录</button> */}
                         </div>
                     </form>

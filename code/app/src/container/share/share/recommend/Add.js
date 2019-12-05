@@ -9,7 +9,7 @@ export default class Add extends Component {
         this.handleClick2 = this.handleClick2.bind(this);
     }
     handleClick(){
-        this.props.history.push('/');
+        this.props.history.push('/share');
     }
     handleClick2(){
         this.props.history.push('/share');

@@ -8,7 +8,7 @@ export default class Apptab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'redTab'
+      selectedTab: 'blueTab'
     };
   }
   render() {
