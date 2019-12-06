@@ -2,12 +2,12 @@
 ----
 GitHub：https://github.com/xzicon/project-training
 
-##项目简介
+## 项目简介
 
 是一款提供作文素材，练习写作，提高初高中学生写作能力的APP。
 
 ----
-##项目成员
+## 项目成员
 
 姓名|身份职务|GitHub仓库
 -|-|-
