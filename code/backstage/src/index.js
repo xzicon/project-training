@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './index.css';
-import 'antd-mobile/dist/antd-mobile.css';
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-)
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));

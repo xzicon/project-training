@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Sleep extends Component {
+export default class Jifa extends Component {
     render() {
         return (
             <div>
-                Sleep
+                jifa
             </div>
         )
     }

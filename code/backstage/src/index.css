@@ -1,8 +1,112 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  padding:0;
+  margin:0;
+}
+ul li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+/* header */
+.header{
+  float:left;
+  width:100%;
+  height:60px;
+  background-color: #ff0000;
+}
+/* login */
+.login_form{
+  width:400px;
+  height:300px;
+  margin:0 auto;
+}
+form{
+  width:400px;
+  height:300px;
+  padding-top:150px;
+}
+.item{
+  width:420px;
+  height:40px;
+  margin:0 auto;
+  margin-bottom: 40px;
+}
+.item input{
+  width:340px;
+  height:40px;
+  padding-left:10px;
+  font-size: 16px;
+  border:1px solid gray;
+  margin-left: 20px;
+}
+.item img{
+  float:left;
+  width:32px;
+  line-height: 40px;
+}
+.login_btn{
+  width:250px;
+  height:40px;
+  font-size: 16px;
+  margin:40px 100px;
+  color:#fff;
+  background-color: #ff0000;
+  border:1px solid #ff0000;
+}
+/* leader */
+.leaderwrap{
+  width:300px;
+  height:500px;
+  margin-left:10px;
+  border-right: 1px solid gray;
+}
+.leaderwrap button{
+  width:230px;
+  height:60px;
+  font-size: 16px;
+  background-color: #fff;
+  border:1px solid gray;
+
+   margin:10px 25px;
+}
+/* home */
+.content{
+  width:900px;
+  height:600px;
+  float:left;
+  overflow: hidden;                                                                                                                                                                                                                                                          ;
+}
+
+.ant-table-tbody > tr > td {
+  width:250px;
+  height:40px;
+  padding:10px 0;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* WorksManage */
+.items{
+  width:200px;
+  height:100px;
+  border:1px solid red;
+  text-align: center;
+  line-height:100px;
+  margin-bottom:40px;
+  color: black;
+  border-radius:50%;
+}
+
+/* sysManage */
+.title > li{
+  float:left;
+  width:200px;
+  height:50px;
+  text-align: center;
+  line-height: 50px;
+}
+.title >li > button{
+  width:50px;
+  height:25px;
 }
