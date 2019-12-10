@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Zuowen extends Component {
+export default class Share extends Component {
     render() {
         return (
             <div>
-                zuowen
+                分享
             </div>
         )
     }

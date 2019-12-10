@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Lianbi extends Component {
+export default class Home extends Component {
     render() {
         return (
             <div>
-                Lianbi
+                首页
             </div>
         )
     }
