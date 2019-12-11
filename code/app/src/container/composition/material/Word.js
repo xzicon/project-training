@@ -61,9 +61,9 @@ export default class Word extends Component {
                     <div style={{float:'left',marginTop:'3%',marginBottom:'15%'}}>
                         {
                             this.state.write.map((item,idx)=>(
-                                <Link to='/write' key={idx} style={{height:'250px',float:'left',marginBottom:'2%',backgroundColor:'#fff'}}>
+                                <Link to='/composition/write' key={idx} style={{height:'250px',float:'left',marginBottom:'2%',backgroundColor:'#fff'}}>
                                     <div style={{float:'left',marginTop:'3%',marginLeft:'3%'}}>
-                                        <img src={'./images/write/'+item.pic} style={{width:'15%',height:'15%',borderRadius:'50%',float:'left'}} />
+                                        <img src={'/images/write/'+item.pic} style={{width:'15%',height:'15%',borderRadius:'50%',float:'left'}} />
                                         <div style={{float:'left',marginLeft:'3%'}}>
                                             <a style={{width:'60%', float:'left',color:'#000',marginLeft:'5%',marginTop:'3%'}}>{item.name}</a>
                                             <a style={{fontSize:'80%',float:'left',color:'#968696',marginLeft:'5%',marginTop:'5%'}}>{item.time}</a>
@@ -73,9 +73,9 @@ export default class Word extends Component {
                                             <a style={{fontSize:'120%',float:'left',color:'#000',marginTop:'3%'}}>&nbsp;&nbsp;&nbsp;&nbsp;{item.body}</a>
                                         </div>
                                         <div style={{float:'left',marginTop:'3%'}}>
-                                            <img src='./images/write/zan1.png'   style={{width:'7%',height:'7%',marginRight:'2%'}} /><a style={{color:'#000',fontSize:'120%',marginRight:'10%'}}>赞同</a>
-                                            <img src='./images/write/collect1.png'   style={{width:'7%',height:'7%',marginRight:'2%'}} /><a style={{color:'#000',fontSize:'120%',marginRight:'10%'}}>收藏</a>
-                                            <img src='./images/write/say.png'  style={{width:'8%',height:'8%',marginRight:'2%'}}  /><a style={{color:'#000',fontSize:'120%'}}>评论</a>
+                                            <img src='/images/write/zan1.png'   style={{width:'7%',height:'7%',marginRight:'2%'}} /><a style={{color:'#000',fontSize:'120%',marginRight:'10%'}}>赞同</a>
+                                            <img src='/images/write/collect1.png'   style={{width:'7%',height:'7%',marginRight:'2%'}} /><a style={{color:'#000',fontSize:'120%',marginRight:'10%'}}>收藏</a>
+                                            <img src='/images/write/say.png'  style={{width:'8%',height:'8%',marginRight:'2%'}}  /><a style={{color:'#000',fontSize:'120%'}}>评论</a>
                                     
                                         </div>
                                     </div>
@@ -89,17 +89,17 @@ export default class Word extends Component {
                 </div>
 
                 <div style={{backgroundColor:'#fff',bottom:0,float:'left',width:'100%',position:'fixed'}}>
-                    <div style={{float:'left',textAlign:'center'}}>
+                    <div style={{float:'left',width:'40%',textAlign:'center'}}>
                         <div style={{height:'80%'}}>
-                            <img src='./images/write/collect1.png' style={{width:'15%',height:'15%'}}/>
+                            <img src='/images/write/collect1.png' style={{width:'15%',height:'15%'}}/>
                         </div>
                         
                         <a style={{}}>收藏</a>
                     </div>
-                    <div style={{float:'left',textAlign:'center'}}>
-                        <Link to='/writing'>
+                    <div style={{float:'left',width:'40%',textAlign:'center'}}>
+                        <Link to='/composition/writing'>
                             <div style={{height:'80%'}}>
-                                <img src='./images/write/write.png' style={{width:'15%',height:'15%',}}/>
+                                <img src='/images/write/write.png' style={{width:'15%',height:'15%',}}/>
                             </div>
                             <a style={{color:'#000'}}>练笔</a>
                         </Link>

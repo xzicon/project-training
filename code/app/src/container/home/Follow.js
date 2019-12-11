@@ -1,28 +1,26 @@
 import React, { Component } from 'react'
 import {Carousel,WingBlank,Tabs,SearchBar,TabBar} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
-import Follow from './Follow';
-import Create from './Create';
-import Recommend from './Recommend';
-export default class Home extends Component {
+export default class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:[],
           selectedTab: '/home',
           selectHome:{
+            color:'#000',
+            borderBottom:'1px solid #fff'
+        },
+        selectCreate:{
+            color:'#000',
+            borderBottom:'1px solid #fff'
+        },
+        selectFollow:{
             color:'#d83e34',
             borderBottom:'4px solid #ffdf41'
-            },
-            selectCreate:{
-                color:'#000',
-                borderBottom:'1px solid #fff'
-            },
-            selectFollow:{
-                color:'#000',
-                borderBottom:'1px solid #fff'
-            },
-        }
+        },
+        data: [],
+            
+        };
     }
     componentDidMount(){
         fetch('http://116.62.14.0:8402/article')
@@ -47,7 +45,7 @@ export default class Home extends Component {
                         barTintColor="white"
                     >
                         <TabBar.Item
-                        title="作文"
+                        title="首页"
                         key="Home"
                         icon={<div style={{
                             width: '22px',
@@ -74,37 +72,35 @@ export default class Home extends Component {
                                     <Link to='/home/news'><img src="./images/home/remind.png" style={{float:'right', width:'8%',marginTop:'8px',marginRight:'8px'}} /></Link>
                                 </div>
                                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                                    <Link to={`/home/follow`} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
+                                    <Link to={`/home/follow`} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'24px',marginLeft:'10px'}}>关注</Link>
                                     <Link to={`/home/create`} style={{color:this.state.selectCreate.color,borderBottom:this.state.selectCreate.borderBottom,fontSize:'16px',marginLeft:'10px'}}>创作</Link>
-                                    <Link to={`/home`} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'24px',marginLeft:'10px'}}>素材</Link>
+                                    <Link to={`/home`} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'16px',marginLeft:'10px'}}>素材</Link>
                                     
                                 </div>
                                 
                                 <div style={{marginTop:'100px'}}>
                 </div>
-                {this.state.data.map(data=>(
+                                {this.state.data.map(data=>(
                     <div style={{width:'100%'}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
                             <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                 <img src="images/home/touxiang.png" style={{height:'80%',marginLeft:'2%',marginTop:'1%',marginRight:'1%'}} />
-                                {data.uname}
-                                <br/>
-                                {data.utime}
+                                两朵小花
                             </div>
                             
                             <div></div>
-                            <h2 style={{textAlign:'center',color:'#000'}}>{data.atitle}</h2>
-                            <div style={{height:'160px',overflow:'hidden',color:'#000'}}>{data.acontent}<br/>{data.atag}</div>
+                            <h2 style={{textAlign:'center',color:'#000'}}>{data.uname}</h2>
+                            <div style={{height:'160px',overflow:'hidden',color:'#000'}}>{data.acontent}<br/></div>
                             <Link to='/home/article'>
-                                <span style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</span>
+                                <span style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文<br/>{data.atag}</span>
                             </Link>
                         </div>
                     </div>
                 ))}
                                 <Link to='/home/write'>
                                     <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
-                                        +{this.props.location.state}
+                                        +
                                     </div>
                                 </Link>
                             </div>
@@ -124,14 +120,14 @@ export default class Home extends Component {
                             background: 'url(images/apptab/composition1.png) center center /  21px 21px no-repeat' }}
                             />
                         }
-                        title="素材"
+                        title="作文"
                         key="Composition"
                         selected={this.state.selectedTab === '/composition'}
                         onPress={() => {
                             this.setState({
                             selectedTab: '/composition',
                             });
-                            this.props.history.push({pathname:'/composition',state:this.props.location.state})
+                            this.props.history.push('/composition')
                         }}
                         >
                             {/* <Composition/> */}

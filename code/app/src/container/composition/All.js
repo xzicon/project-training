@@ -33,7 +33,7 @@ export default class All extends Component {
                         {
                             this.state.tabs.map((item,idx)=>(
                                 
-                                <Link to='./material'  ><button style={{width:'15%',borderRadius:'10%',outline:'none',border:'1px solid #000',backgroundColor:'#fff',fontSize:'120%',paddingTop:'1%',paddingBottom:'1%',marginRight:'5%',marginBottom:'3%'}}>{item.title}</button></Link>
+                                <Link to='/composition/material'  ><button style={{width:'15%',borderRadius:'10%',outline:'none',border:'1px solid #000',backgroundColor:'#fff',fontSize:'120%',paddingTop:'1%',paddingBottom:'1%',marginRight:'5%',marginBottom:'3%'}}>{item.title}</button></Link>
                                 
                                 
                             ))

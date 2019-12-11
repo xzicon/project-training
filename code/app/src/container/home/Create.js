@@ -1,30 +1,29 @@
 import React, { Component } from 'react'
 import {Carousel,WingBlank,Tabs,SearchBar,TabBar} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
-import Follow from './Follow';
-import Create from './Create';
-import Recommend from './Recommend';
-export default class Home extends Component {
+export default class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedTab: '/home',
             data:[],
-          selectedTab: '/home',
-          selectHome:{
-            color:'#d83e34',
-            borderBottom:'4px solid #ffdf41'
-            },
-            selectCreate:{
+            selectHome:{
                 color:'#000',
                 borderBottom:'1px solid #fff'
+            },
+            selectCreate:{
+                color:'#d83e34',
+                borderBottom:'4px solid #ffdf41'
             },
             selectFollow:{
                 color:'#000',
                 borderBottom:'1px solid #fff'
             },
-        }
+        };
     }
     componentDidMount(){
+        // let page = this.props.location.search;
+        // console.log(page);
         fetch('http://116.62.14.0:8402/article')
         .then((res)=>res.json())
         .then((res)=>{
@@ -75,28 +74,25 @@ export default class Home extends Component {
                                 </div>
                                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
                                     <Link to={`/home/follow`} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
-                                    <Link to={`/home/create`} style={{color:this.state.selectCreate.color,borderBottom:this.state.selectCreate.borderBottom,fontSize:'16px',marginLeft:'10px'}}>创作</Link>
-                                    <Link to={`/home`} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'24px',marginLeft:'10px'}}>素材</Link>
+                                    <Link to={`/home/create`} style={{color:this.state.selectCreate.color,borderBottom:this.state.selectCreate.borderBottom,fontSize:'24px',marginLeft:'10px'}}>创作</Link>
+                                    <Link to={`/home`} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'16px',marginLeft:'10px'}}>素材</Link>
                                     
                                 </div>
-                                
                                 <div style={{marginTop:'100px'}}>
                 </div>
-                {this.state.data.map(data=>(
+                                {this.state.data.map(data=>(
                     <div style={{width:'100%'}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
                             <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                 <img src="images/home/touxiang.png" style={{height:'80%',marginLeft:'2%',marginTop:'1%',marginRight:'1%'}} />
-                                {data.uname}
-                                <br/>
-                                {data.utime}
+                                两朵小花
                             </div>
                             
                             <div></div>
-                            <h2 style={{textAlign:'center',color:'#000'}}>{data.atitle}</h2>
+                            <h2 style={{textAlign:'center',color:'#000'}}>{data.uname}</h2>
                             <div style={{height:'160px',overflow:'hidden',color:'#000'}}>{data.acontent}<br/>{data.atag}</div>
-                            <Link to='/home/article'>
+                            <Link to={{pathname:'/home/article/'+data.aid,state1:data.aid}}>
                                 <span style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</span>
                             </Link>
                         </div>
@@ -104,7 +100,7 @@ export default class Home extends Component {
                 ))}
                                 <Link to='/home/write'>
                                     <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
-                                        +{this.props.location.state}
+                                        +
                                     </div>
                                 </Link>
                             </div>
@@ -131,7 +127,7 @@ export default class Home extends Component {
                             this.setState({
                             selectedTab: '/composition',
                             });
-                            this.props.history.push({pathname:'/composition',state:this.props.location.state})
+                            this.props.history.push('/composition')
                         }}
                         >
                             {/* <Composition/> */}

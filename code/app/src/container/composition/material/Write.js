@@ -46,7 +46,7 @@ export default class Write extends Component {
                             <a style={{float:'right',color:'gray',marginTop:'3%',fontSize:'110%'}}>— —罗曼·罗兰</a>
                         </div>
                         <div style={{float:'left',marginTop:'5%',paddingTop:'3%',backgroundColor:'#fff',width:'100%',borderTop:'1px dashed #000'}}>
-                            <Link to='/word' >
+                            <Link to='/composition/word' >
                                 <a style={{color:'gray',fontSize:'110%'}}>更多作品</a>
                                 <img src='./images/write/right.png' style={{width:'4%',height:'4%',float:'right'}} />
                             </Link>
