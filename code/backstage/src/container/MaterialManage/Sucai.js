@@ -21,7 +21,7 @@ export default class Sucai extends Component {
     }
 
     render() {
-        let url = this.props.match.url;///即home/sucai
+        let url = this.props.match.url;
         return (
             <div>
                 <ul style={{width:'800px',height:'100px',margin:'20px 50px'}}>

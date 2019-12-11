@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Link,Route} from 'react-router-dom';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 import Leader from '../components/Leader';
 import System from './SysManage'
 import RecManage from './RecManage';
 import ComManage from './ComManage';
 import UserManage from './UserManage';
-import WorksManage from './WorksManage/WorksManage';
+import WorksManage from './WorksManage';
 import MaterialManage from './MaterialManage/MaterialManage';
 import Sucai from './MaterialManage/Sucai';
 import Fanwen from './MaterialManage/Fanwen';
 import Jifa from './MaterialManage/Jifa';
-import Zuowen from './WorksManage/Zuowen';
-import Lianbi from './WorksManage/Lianbi';
+import Sucaicomment from './Sucaicomment';
+import Zuowencomment from './Zuowencomment'
 
 export default class Home extends Component {
     render() {
@@ -31,8 +31,8 @@ export default class Home extends Component {
                     <Route path='/home/sucai' component={Sucai}/>
                     <Route path='/home/fanwen' component={Fanwen}/>
                     <Route path='/home/jifa' component={Jifa}/>
-                    <Route path='/home/zuowen' component={Zuowen}/>
-                    <Route path='/home/lianbi' component={Lianbi}/>
+                    <Route path='/home/sucaicomment' component={Sucaicomment}/>
+                    <Route path='/home/zuowencomment' component={Zuowencomment}/>
                 </div>
             </div>
             </Router>

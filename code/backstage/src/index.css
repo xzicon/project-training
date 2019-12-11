@@ -72,7 +72,7 @@ form{
 }
 /* home */
 .content{
-  width:900px;
+  width:1000px;
   height:600px;
   float:left;
   overflow: hidden;                                                                                                                                                                                                                                                          ;
@@ -99,14 +99,39 @@ form{
 }
 
 /* sysManage */
-.title > li{
+.sys_title > li{
   float:left;
   width:200px;
   height:50px;
   text-align: center;
   line-height: 50px;
 }
-.title >li > button{
+.sys_title > li > button{
+  width:50px;
+  height:25px;
+}
+
+/* worksManage */
+.works_title > li{
+  float:left;
+  width:130px;
+  height:50px;
+  text-align: center;
+  line-height: 50px;
+}
+.works_title > li > button{
+  width:50px;
+  height:25px;
+}
+/* userManage */
+.user_title > li{
+  float:left;
+  width:200px;
+  height:50px;
+  text-align: center;
+  line-height: 50px;
+}
+.user_title > li > button{
   width:50px;
   height:25px;
 }

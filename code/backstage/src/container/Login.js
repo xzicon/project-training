@@ -7,7 +7,7 @@ export default class Login extends Component {
             maname:document.getElementById('username').value,
             mapassword:document.getElementById('pwd').value
         }
-        console.log(msg);
+        // console.log(msg);
         fetch('http://116.62.14.0:8402/loginback',{
             method:'post',
             headers: {
@@ -16,7 +16,7 @@ export default class Login extends Component {
             body:JSON.stringify(msg)
         }).then((res)=>res.json())
         .then((data)=>{
-            console.log(data)
+            // console.log(data)
             switch(data.status){
                 case '0':
                     console.log('登陆成功！');
@@ -28,6 +28,8 @@ export default class Login extends Component {
                 case '2':
                     alert('用户不存在');
                     break;
+                default:
+                    break;
             }
         })
     }
@@ -37,12 +39,12 @@ export default class Login extends Component {
                 <div className='login_form'>
                 <form>
                     <div className='item'>
-                        <img src='/images/user.png'/>
+                        <img src='/images/user.png' alt=''/>
                         <input type='text' placeholder='请输入用户名' id='username'/>
                     </div>
                     <div className='item'>
-                        <img src='/images/pwd.png'/>
-                        <input type='text' placeholder='请输入密码' id='pwd'/>
+                        <img src='/images/pwd.png' alt=''/>
+                        <input type='password' placeholder='请输入密码' id='pwd'/>
                     </div>
                     <Link to='/forgetpwd'>
                         <p style={{float:'right',color:'black'}}>忘记密码</p>

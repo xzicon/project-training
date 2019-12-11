@@ -20,16 +20,16 @@ export default class UserManage extends Component {
     render() {
         return (
             <div>
-              <ul className='title' style={{width:'700px',height:'200px',margin:'50px 0 0 100px'}}>
+              <ul className='user_title' style={{width:'700px',height:'200px',margin:'50px 0 0 100px'}}>
                 <li style={{fontWeight:'bold'}}>用户名</li>
                 <li style={{fontWeight:'bold'}}>邮箱</li>
                 <li style={{fontWeight:'bold'}}>操作</li>
                 {
                   this.state.users.map((item,index)=>(
-                    <ul className='title' key={index}>
-                      <li>{item.maname}</li>
-                      <li>2630216587.11.com</li>
-                      <li><button>编辑</button><button>删除</button></li>
+                    <ul className='user_title' key={index}>
+                      <li>{item.uname}</li>
+                      <li>{item.uemail}</li>
+                      <li><button>删除</button></li>
                     </ul>
                   ))
                 }
