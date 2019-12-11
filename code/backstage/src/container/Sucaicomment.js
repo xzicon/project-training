@@ -8,8 +8,8 @@ export default class Sucaicomment extends Component {
         }
     }
     componentDidMount(){
-        fetch('http://116.62.14.0:8402/comment/')
-        .then((res)=>res.text())
+        fetch('http://116.62.14.0:8402/comment/material')
+        .then((res)=>res.json())
         .then((res)=>{
             console.log(res.data)
             // this.setState({
