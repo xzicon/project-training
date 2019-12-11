@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavBar,Icon,Tabs, SearchBar } from 'antd-mobile';
-import {Link} from 'react-router-dom';
+import {Link,Route} from 'react-router-dom';
+import Material from './material/Material';
 export default class Composition extends Component {
     constructor(){
         super();
@@ -28,6 +29,8 @@ export default class Composition extends Component {
         
     }
     render() {
+        let url = this.props.match.url;
+        console.log(url);
         return (
             
             <div >
@@ -38,10 +41,16 @@ export default class Composition extends Component {
                     <Link to='/add'><img src='./images/write/jia.png' style={{float:'right',width:'7%',height:'8%',marginTop:'3%',marginRight:'3%'}} /></Link>
                 </div>
                 
+
+
+
+
+
+
                 <div style={{backgroundColor:'#fff',float:'left',marginBottom:'3%',paddingBottom:'3%'}}>
                     <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'5%',paddingLeft:'5%'}}> 素材</a>
-                    <Link to='/material'><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
-                    <div style={{marginTop:'3%'}}>
+                    <Link to= {url+'?tab=sucai'}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                    {/* <div style={{marginTop:'3%'}}>
                         
                             <Link to='/word'  style={{height:'200px',float:'left',marginLeft:'5%',marginRight:'5%',marginBottom:'2%',paddingTop:'10%',backgroundColor:'#e0e1f4'}}>
                                 
@@ -60,7 +69,7 @@ export default class Composition extends Component {
                             </Link>
 
                         
-                    </div>
+                    </div> */}
                     
                 </div>
                    
@@ -69,8 +78,8 @@ export default class Composition extends Component {
                 <div style={{backgroundColor:'#fff',float:'left',marginBottom:'3%'}}>
                     
                     <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'2%',paddingLeft:'5%',marginBottom:'2%'}}> 范文</a>
-                    <Link to='/essay'><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
-                    <div style={{marginTop:'5%'}}>
+                    <Link to={url+'?tab=fanwen'}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                    {/* <div style={{marginTop:'5%'}}>
                         {
                             this.state.essay.map((item,idx)=>(
                                 <Link to='' style={{height:'200px',float:'left',marginLeft:'3%',marginRight:'3%',marginBottom:'2%',paddingTop:'8%',borderTop:'2px dashed #000'}}>
@@ -96,14 +105,14 @@ export default class Composition extends Component {
                             
                         
                         
-                    </div>
+                    </div> */}
                 </div>
 
                 <div style={{width:'100%',backgroundColor:'#fff',float:'left',marginBottom:'3%'}}>
                     
                     <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'2%',paddingLeft:'5%',marginBottom:'2%'}}> 技法</a>
-                    <Link to='/skill'><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
-                    <div style={{marginTop:'5%'}}>
+                    <Link to={url+'?tab=jifa'}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                    {/* <div style={{marginTop:'5%'}}>
                         
                                 <Link to='' style={{height:'200px',width:'90%',float:'left',marginLeft:'5%',marginRight:'5%',marginBottom:'2%',paddingTop:'2%',paddingBottom:'2%'}}>
                                 
@@ -112,9 +121,9 @@ export default class Composition extends Component {
                                     <a style={{float:'left',color:'gray'}}>胸中有提纲，笔下出美章</a>
                                     
                                 </Link>
-                    </div>
+                    </div> */}
                 </div>
-                
+                <Route path={`${url}`} component={Material} />
             </div>
         )
     }
