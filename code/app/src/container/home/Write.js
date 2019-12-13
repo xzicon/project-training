@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {NavBar,List,TextareaItem} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 var date = new Date();
-var Y = date.getFullYear() + '/';
-var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '/';
+var Y = date.getFullYear() + '-';
+var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
 var D = date.getDate()+' ';
 var h = date.getHours() + ':';
 var m = date.getMinutes() + ':';
@@ -17,7 +17,7 @@ export default class Write extends Component {
             atitle:document.getElementsByClassName('biaoti')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
-            uid:2,
+            uid:this.props.location.state,
             utime:Y+M+D+h+m+s
         }
         console.log(data);
@@ -37,7 +37,7 @@ export default class Write extends Component {
                 <NavBar
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    leftContent={<Link to='/home'>
+                    leftContent={<Link to={{pathname:'/home',state:this.props.location.state}}>
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={

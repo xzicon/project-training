@@ -25,6 +25,16 @@ export default class Composition extends Component {
         ]
         };
     }
+    componentDidMount(){
+        
+
+        fetch('http://116.62.14.0:8402/material')
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({data:res.data});
+            console.log(res.data);
+        })
+    }
     render() {
         let url = this.props.match.url;
         console.log(url);
@@ -101,7 +111,7 @@ export default class Composition extends Component {
                 
                 <div style={{backgroundColor:'#fff',float:'left',marginBottom:'3%',paddingBottom:'3%'}}>
                     <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'5%',paddingLeft:'5%'}}> 素材</a>
-                    <Link to={{pathname:'/composition/material',search:'?mtab=sucai'}}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                    <Link to={{pathname:'/composition/material',mtab:'sucai'}}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
                     {/* <div style={{marginTop:'3%'}}>
                         
                             <Link to='/composition/word'  style={{height:'200px',float:'left',marginLeft:'5%',marginRight:'5%',marginBottom:'2%',paddingTop:'10%',backgroundColor:'#e0e1f4'}}>
@@ -130,7 +140,7 @@ export default class Composition extends Component {
                 {/* <div style={{backgroundColor:'#fff',float:'left',marginBottom:'3%'}}> */}
                     
                     <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'2%',paddingLeft:'5%',marginBottom:'2%'}}> 范文</a>
-                    <Link to={{pathname:'/composition/material',search:'?mtab=fanwen'}}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                    <Link to={{pathname:'/composition/material',mtab:'fanwen'}}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
                     {/* <div style={{marginTop:'5%'}}>
                         {
                             this.state.essay.map((item,idx)=>(
@@ -163,7 +173,7 @@ export default class Composition extends Component {
                 {/* <div style={{width:'100%',backgroundColor:'#fff',float:'left',marginBottom:'3%'}}> */}
                     
                     <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'2%',paddingLeft:'5%',marginBottom:'2%'}}> 技法</a>
-                    <Link to={{pathname:'/composition/material',search:'?mtab=jifa'}}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                    <Link to={{pathname:'/composition/material',mtab:'jifa'}}><button  style={{float:'right',backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
                     {/* <div style={{marginTop:'5%'}}>
                         
                                 <Link to='' style={{height:'200px',width:'90%',float:'left',marginLeft:'5%',marginRight:'5%',marginBottom:'2%',paddingTop:'2%',paddingBottom:'2%'}}>

@@ -26,9 +26,9 @@ export default class Material extends Component {
     }
     
     componentDidMount(){
-        let page = this.props.location.search;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/material/'+page)
+        let mtab = this.props.location.mtab;
+        console.log(mtab);
+        fetch('http://116.62.14.0:8402/material/mtab/'+mtab)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -42,7 +42,7 @@ export default class Material extends Component {
                 {
                             this.state.data.map(data=>(
                         <div>
-                            {data.mtitle}
+                            {data.msname}
                         </div>
      
                             ))}

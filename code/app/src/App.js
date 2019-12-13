@@ -13,7 +13,6 @@ import Comment from './container/home/Comment';
 import Home from './container/home/Home';
 import Composition from './container/composition/Composition';
 import Mine from './container/mine/Mine';
-import Recommend from './container/home/Recommend';
 import Follow from './container/home/Follow';
 import Create from './container/home/Create';
 import Start from './launch/Start';
@@ -21,19 +20,10 @@ import Login from './launch/Login';
 import Register from './launch/Register';
 import Forgetpwd from './launch/Forgetpwd';
 import Modify from './launch/Modify';
+import Crnew from './container/home/Crnew';
 
 //作文页
 import Material from './container/composition/material/Material'
-import Essay1 from './container/composition/essay/Essay';
-import Skill from './container/composition/skill/Skill';
-import All from './container/composition/All';
-import Character from './container/composition/material/mkind/Character';
-import Word from './container/composition/material/Word';
-import Figure from './container/composition/material/Figure';
-import Add from './container/composition/Add';
-import Inform from './container/composition/Inform';
-import Write1 from  './container/composition/material/Write'
-import Writing from  './container/composition/material/Writing'
 
 //我的
 import Write2 from './container/mine/Write';
@@ -41,13 +31,17 @@ import Collect2 from './container/mine/Collect';
 import Praise2 from './container/mine/Praise';
 import Follow2 from './container/mine/Follow';
 import Fans from './container/mine/Fans';
+import Mnew from './container/mine/Mnew';
+import Mpraise from './container/mine/Mpraise';
+import Marticle from './container/mine/Marticle';
+import Search from './container/home/Search';
 
 export default class App extends Component {
     render() {
         return (
             <Router>
                 <div>
-                    {/* 首页 */}
+                    {/* 作文 */}
                     <Route path='/' exact component={Start}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>
@@ -56,7 +50,7 @@ export default class App extends Component {
                     <Route path='/home' exact component={Home}/>
                     {/* <Route path='/home/recommend' component={Recommend}/> */}
                     <Route path='/home/follow' component={Follow}/>
-                    <Route path='/home/create' component={Create}/> 
+                    <Route path='/home/create' exact component={Create}/> 
                     <Route path='/home/write' component={Write}/>
                     <Route path='/home/article/:page' component={Article}/>
                     <Route path='/home/collection' component={Collection}/>
@@ -65,8 +59,10 @@ export default class App extends Component {
                     <Route path='/home/praise' component={Praise}/>
                     <Route path='/home/manage' component={Manage}/>
                     <Route path='/home/comment' component={Comment}/>
+                    <Route path='/home/crnew' component={Crnew}/>
+                    <Route path='/home/search' component={Search}/>
 
-                    {/* 作文 */}
+                    {/* 素材 */}
                     <Route path='/composition' exact component={Composition}/>
                     <Route path='/composition/material' component={Material}/>
                     {/* <Route path='/composition/essay' component={Essay1}/>
@@ -87,8 +83,16 @@ export default class App extends Component {
                     <Route path='/mine/praise' component={Praise2}/>
                     <Route path='/mine/follow' component={Follow2}/>
                     <Route path='/mine/fans' component={Fans}/>
+                    <Route path='/mine/mnew' exact component={Mnew}/>
+                    <Route path='/mine/mpraise' component={Mpraise}/>
+                    <Route path='/mine/marticle' component={Marticle}/>
                 </div>
             </Router>
         )
     }
 }
+//state:uid 用户id
+//state1:aid 作文id
+//state2:upid 作文详情用户id
+//state3:aid 我的作文id
+//state4:uid 关注的用户

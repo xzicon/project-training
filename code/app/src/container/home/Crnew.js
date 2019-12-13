@@ -1,62 +1,41 @@
 import React, { Component } from 'react'
 import {Carousel,WingBlank,Tabs,SearchBar,TabBar} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
-import Follow from './Follow';
-import Create from './Create';
-import Recommend from './Recommend';
-export default class Home extends Component {
+export default class Crnew extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedTab: '/home',
             data:[],
-          selectedTab: '/home',
-          selectHome:{
-            color:'#d83e34',
-            borderBottom:'4px solid #ffdf41'
-            },
-            selectCreate:{
-                color:'#000',
-                borderBottom:'1px solid #fff'
+            
+            selectHome:{
+                color:'#d83e34',
+                borderBottom:'4px solid #ffdf41'
             },
             selectFollow:{
                 color:'#000',
                 borderBottom:'1px solid #fff'
             },
-            selectCreateHot:{
+            selectCreateNew:{
                 color:'#d83e34',
                 borderBottom:'4px solid #ffdf41'
             },
-            selectCreateNew:{
+            selectCreateHot:{
                 color:'#000',
                 borderBottom:'1px solid #fff'
             }
-        }
+        };
     }
     componentDidMount(){
-        fetch('http://116.62.14.0:8402/article/all')
+        // let page = this.props.location.search;
+        // console.log(page);
+        fetch('http://116.62.14.0:8402/article/new')
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
             console.log(res.data);
         })
     }
-    // fetchSousuo = (e)=>{
-    //     let data = {
-    //         search:document.getElementsByClassName('sousuo')[0].value
-    //     }
-    //     console.log(data);
-    //     fetch('http://116.62.14.0:8402/search/article', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     })
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //     })
-    // }
     render() {
         return (
             <div>
@@ -95,26 +74,24 @@ export default class Home extends Component {
                         >
                             <div>
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
-                                    {/* <input className='sousuo' style={{width:'86%',backgroundColor:'#f5f5f9',float:'left'}} type='text' name='search' placeholder="输入关键字搜索"/>
-                                    <input οnClick={(e)=>{this.fetchSousuo(e)}} type='button' value='搜索'/> */}
-                                    <Link to='/home/search'><button>搜索</button></Link>
+                                    <SearchBar style={{width:'86%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索"/>
                                     <Link to={{pathname:'/home/news',state:this.props.location.state}}><img src="./images/home/remind.png" style={{float:'right', width:'8%',marginTop:'8px',marginRight:'8px'}} /></Link>
                                 </div>
                                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                                    <Link to={{pathname:'/home/follow/'+this.props.location.state2,state:this.props.location.state,state2:this.props.location.state2,state4:this.props.location.state4}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
-                                    {/* <Link to={`/home/create`} style={{color:this.state.selectCreate.color,borderBottom:this.state.selectCreate.borderBottom,fontSize:'16px',marginLeft:'10px'}}>创作</Link> */}
+                                    <Link to={{pathname:'/home/follow',state:this.props.location.state}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
+                                    {/* <Link to={`/home/create`} style={{color:this.state.selectCreate.color,borderBottom:this.state.selectCreate.borderBottom,fontSize:'24px',marginLeft:'10px'}}>创作</Link> */}
                                     <Link to={{pathname:'/home',state:this.props.location.state}} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'24px',marginLeft:'10px'}}>推荐</Link>
+                                    
                                 </div>
-                                
                                 <div style={{marginTop:'100px'}}>
                 </div>
                 <div style={{width:'100%'}}>
                     <div>
-                        <Link to={{pathname:'/home'}}  style={{color:this.state.selectCreateHot.color,borderBottom:this.state.selectCreateHot.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最热</Link>
+                        <Link to={{pathname:'/home',state:this.props.location.state}}  style={{color:this.state.selectCreateHot.color,borderBottom:this.state.selectCreateHot.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最热</Link>
                         <Link to={{pathname:'/home/Crnew',state:this.props.location.state}}  style={{color:this.state.selectCreateNew.color,borderBottom:this.state.selectCreateNew.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最新</Link>
                     </div>
                 </div>
-                {this.state.data.map(data=>(
+                                {this.state.data.map(data=>(
                     <div style={{width:'100%'}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
@@ -163,7 +140,7 @@ export default class Home extends Component {
                             this.setState({
                             selectedTab: '/composition',
                             });
-                            this.props.history.push({pathname:'/composition',state:this.props.location.state})
+                            this.props.history.push('/composition')
                         }}
                         >
                             {/* <Composition/> */}
@@ -178,7 +155,7 @@ export default class Home extends Component {
                             this.setState({
                             selectedTab: '/mine',
                             });
-                            this.props.history.push({pathname:'/mine',state:this.props.location.state,state1:this.props.location.state1,state2:this.props.location.state2})
+                            this.props.history.push({pathname:'/mine',state:this.props.location.state})
                         }}
                         >
                             {/* <Mine/> */}
