@@ -27,7 +27,7 @@ function lend(sqlStr,res){
     });
 }
 //用户我的页面
-router.get('/:uid',(req,res,next)=>{
+router.get('/me/:uid',(req,res,next)=>{
     let uid = req.params.uid;
     let sql_ufans = 'SELECT COUNT(uid) FROM userconcern WHERE uid = $1';
     pgdb.query(sql_ufans,[uid],(err,val)=>{
@@ -44,7 +44,7 @@ router.get('/:uid',(req,res,next)=>{
                             if(err || val.rowCount<=0){
                                 res.json({status:'-3',data:'error'});
                             }else{
-                                res.json({status:'0',data:val.rows})
+                                res.json({status:'0',data:val.rows[0]})
                             }
                         })
                     }
@@ -52,20 +52,23 @@ router.get('/:uid',(req,res,next)=>{
             }
     })
 })
+
 //用户关注(不太对)
 router.post('/userconcern',(req,res,next)=>{
 	let data = req.body;
+if(data.uid!==data.upid){
 	let sql = `SELECT * FROM userconcern WHERE uid=$1 AND upid=$2`;
-	pgdb.query(sql,[data.uid,data.upid],(res,val)=>{
+	pgdb.query(sql,[data.uid,data.upid],(err,val)=>{
 		if(err){
 			res.json({status:'-1',data:'error'})
 		}else{
 			if(val.rowCount>0){
-				res.json({status:'0',data:'已关注'})
+				res.json({status:'1',data:'已经关注了该用户'})
 			}else{
-				let sql_con = `INSERT INTO userconcern SET uid=$1,upid=$2`
+				let sql_con = `INSERT INTO userconcern (uid,upid) VALUES($1,$2)`
 				pgdb.query(sql_con,[data.uid,data.upid],(err,data)=>{
 					if(err){
+						console.log(err)
 						res.json({status:'-2',data:'关注失败，可能用户ID不存在'})
 					}else{
 						let sql_user = `UPDATE users SET ufans=$1 WHERE uid = $2`;
@@ -77,7 +80,11 @@ router.post('/userconcern',(req,res,next)=>{
 				})
 			}
 		}
-	})	
+	})
+}else{
+	res.json({status:'-3',data:'自己不能关注自己'})
+
+}	
 })
 //用户关注列表
 router.get('/userconcern/:uid',(req,res,next)=>{
@@ -131,6 +138,29 @@ router.get('/marticlelikes/:uid',(req,res,next)=>{
             }
     })
 })
+router.get('/mcomment/:uid',(req,res,next)=>{
+	let uid = req.params.uid;
+	let sql = `SELECT * FROM materialcomment WHERE uid=$1`;
+	pgdb.query(sql,[uid],(err,val)=>{
+		if(err || val.rowCount<0){
+			res.json({status:'-1',data:'error'});
+		}else{
+			res.json({status:'0',data:val.rows});
+		}
+	})
+})
+router.get('/acomment/:uid',(req,res,next)=>{
+        let uid = req.params.uid;
+        let sql = `SELECT * FROM articlecomment WHERE uid=$1`;
+        pgdb.query(sql,[uid],(err,val)=>{
+                if(err || val.rowCount<0){
+                        res.json({status:'-1',data:'error'});
+                }else{
+                        res.json({status:'0',data:val.rows});
+                }
+        })
+})
+
 //用户的动态显示
 router.get('/article/:uid',(req,res,next)=>{
     let uid = req.params.uid;

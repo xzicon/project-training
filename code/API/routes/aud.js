@@ -19,8 +19,8 @@ console.log(data);
             res.json({status:'-1',data:'error'});
         }else{
             let mid = val.rows[0].max+1;
-            let sql_add = `INSERT INTO material (mid,mtitle,mlocal,manalyse,mcontent,mimage,msid) VALUES ($1,$2,$3,$4,$5,$6,$7)`;
-            pgdb.query(sql_add,[mid,data.mtitle,data.mlocal,data.manalyse,data.mcontent,data.mimage,data.msid],(err,val)=>{
+            let sql_add = `INSERT INTO material (mid,mtitle,mlocal,manalyse,mcontent,mimage,msid,mtime) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`;
+            pgdb.query(sql_add,[mid,data.mtitle,data.mlocal,data.manalyse,data.mcontent,data.mimage,data.msid,data.mtime],(err,val)=>{
                 if(err){
 			console.log(err);
                     res.json({status:'-1',data:'error'})
@@ -43,7 +43,26 @@ router.post('/delmaterial',(req,res,next)=>{
             res.json({status:'0',data:'删除成功'})
         }
     })
+});
+//修改素材
+router.post('/updatematerial',(req,res,next)=>{
+    let data = req.body;
+console.log(data);
+    res.setHeader('Content-Type','text/html;charset=utf-8');
+            let sql_add = `UPDATE material SET (mtitle=$2,mlocal=$3,manalyse=$4,mcontent=$5,mimage=$6,msid=$7,mtime=$8) WHERE mid=$1`;
+            pgdb.query(sql_add,[data.mid,data.mtitle,data.mlocal,data.manalyse,data.mcontent,data.mimage,data.msid,data.mtime],(err,val)=>{
+                if(err){
+                        console.log(err);
+                    res.json({status:'-1',data:'error'})
+                }else{
+                    res.json({status:'0',data:val.rows})
+                }
+            })
+        
+   
+
 })
+
 router.post('/addarticle',(req,res,next)=>{
     let data = req.body;
     console.log(data);
@@ -65,6 +84,20 @@ router.post('/addarticle',(req,res,next)=>{
         })
     }
     })
+})
+router.post('/updatearticle',(req,res,next)=>{
+    let data = req.body;
+    console.log(data);
+    res.setHeader('Content-Type','text/html;charset=utf-8');
+	let sql = `UPDATE article SET (atitle=$2,acontent=$3,atag=$4,utime=$5) WHERE aid=$1`;
+	pgdb.query(sql,[data.aid,data.atitle.data.acontent,data.atag,data.utime],(err,val)=>{
+		if(err){
+			console.log(err);
+			res.json({status:'-1',data:'error'})
+		}else{
+			res.json({status:'0',data:'修改成功'})
+		}
+	})	
 })
 router.post('/delarticle',(req,res,next)=>{
     let data = req.body;

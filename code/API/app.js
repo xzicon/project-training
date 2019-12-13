@@ -14,6 +14,10 @@ var materialRouter = require('./routes/material');
 var articleRouter = require('./routes/article');
 var audRouter = require('./routes/aud');
 var commentRouter = require('./routes/comment');
+var likesRouter = require('./routes/likes');
+var messageRouter = require('./routes/message');
+var searchRouter = require('./routes/searc');
+var usortRouter = require('./routes/usort');
 //var uploadRouter = require('./routes/upload');
 //未实现图片上传
 var app = express();
@@ -49,6 +53,10 @@ app.use('/material',materialRouter);//素材
 app.use('/article',articleRouter);//作文练笔
 app.use('/aud',audRouter);//素材增删改，作文增删改
 app.use('/comment',commentRouter);//评论增删改
+app.use('/likes',likesRouter);
+app.use('/message',messageRouter);
+app.use('/search',searchRouter);
+app.use('/usort',usortRouter);//感兴趣标签
 //app.use('/upload',uploadRouter);//上传图片
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

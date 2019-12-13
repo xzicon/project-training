@@ -9,7 +9,7 @@ var pgdb = new pg.Pool({
     database: 'dongxin'
 });
 
-router.get('/back',(req,res,next)=>{
+router.get('/',(req,res,next)=>{
     let sql = `SELECT * FROM material`;
     pgdb.query(sql,[],(err,val)=>{
         if(err || val.rowCount < 0){
@@ -21,13 +21,10 @@ router.get('/back',(req,res,next)=>{
     });
 
 })
-router.get('/',(req,res,next)=>{
-    let mtab = req.query.mtab;
-    let msid = req.query.msid;
-    let order = req.query.order;
-    if(mtab===undefined&&msid===undefined&&order===undefined){
-        let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid';
-        pgdb.query(sql,[],(err,val)=>{
+router.get('/mtab/:mtab',(req,res,next)=>{
+    let mtab = req.params.mtab;
+	let sql = `SELECT * FROM msort WHERE mtab=$1`;
+        pgdb.query(sql,[mtab],(err,val)=>{
             if(err || val.rowCount < 0){
                 console.log(err);
                 res.json({status:'1',data:'error'});
@@ -35,8 +32,11 @@ router.get('/',(req,res,next)=>{
                 res.json({status:'0',data:val.rows});
             }
         });
-    }else if(mtab!==undefined&&msid===undefined&&order===undefined){
-        //let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE b.mtab = $1';
+});
+/*router.get('/mtab/:mtab/:msid',(req,res,next)=>{
+    let mtab = req.params.mtab;
+let msid = req.params.msid;
+if(mtab!==undefined&&msid===undefined){
         let sql = `SELECT * FROM msort WHERE mtab=$1`;
         pgdb.query(sql,[mtab],(err,val)=>{
             if(err || val.rowCount < 0){
@@ -46,9 +46,9 @@ router.get('/',(req,res,next)=>{
                 res.json({status:'0',data:val.rows});
             }
         });
-    }else if(mtab!==undefined&&msid!==undefined&&order===undefined){
-        let sql = `SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid = $1 AND b.mtab = $2`;
-        pgdb.query(sql,[msid,mtab],(err,val)=>{
+}else(mtab!==undefined&&msid!==undefined){
+	let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mtime DESC';
+        pgdb.query(sql,[msid],(err,val)=>{
             if(err || val.rowCount < 0){
                 console.log(err);
                 res.json({status:'1',data:'error'});
@@ -56,9 +56,18 @@ router.get('/',(req,res,next)=>{
                 res.json({status:'0',data:val.rows});
             }
         });
-    }else if(mtab!==undefined&&msid!==undefined&&order!==undefined){
-        let sql = `SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid = $1 AND b.mtab = $2 order by a.mcollect DESC`;
-        pgdb.query(sql,[msid,mtab],(err,val)=>{
+	
+}else{
+	res.json({status:'-1',data:'error'})
+}
+});
+*/
+/*router.get('/fenlei/zuixin/:msid',(req,res,next)=>{
+    	let msid = req.params.msid;
+   	let order = req.params.order;
+	if(msid!==undefined){
+        let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mtime DESC';
+        pgdb.query(sql,[msid],(err,val)=>{
             if(err || val.rowCount < 0){
                 console.log(err);
                 res.json({status:'1',data:'error'});
@@ -66,74 +75,153 @@ router.get('/',(req,res,next)=>{
                 res.json({status:'0',data:val.rows});
             }
         });
-    }else{
-        res.json({status:'-1',data:'页面不存在'})
+	
+    }
+  else{
+	res.json({status:'-1',data:'未传值'})
+    }
+})*/
+router.get('/fenlei/zuixin/',(req,res,next)=>{
+	let mtab = req.query.mtab;        
+	let msid = req.query.msid;
+        if(msid!=='undefined'&&mtab!==undefined){
+        let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mtime DESC';
+        pgdb.query(sql,[msid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                console.log(err);
+                res.json({status:'-5',data:'error'});
+            }else{
+                res.json({status:'0',data:val.rows});
+            }
+        });
+
+    	}else if(msid==='undefined'&&mtab!==undefined){
+		let sql = `SELECT * from msort WHERE mtab=$1`;
+		pgdb.query(sql,[mtab],(err,val)=>{
+			if(err || val.rowCount<0){
+               		 console.log(err);
+                	res.json({status:'1',data:'error'});
+            		}else{
+			console.log(val.rows[0]);
+			let sql1 = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mtime DESC';
+        		pgdb.query(sql1,[val.rows[0].msid],(err,val1)=>{
+            		if(err || val1.rowCount < 0){
+                		console.log(err);
+                		res.json({status:'-2',data:'error'});
+            		}else{
+                		res.json({status:'0',data:val1.rows});
+            		}
+  		});
+            }
+
+		})
+
+	}
+  else{
+        res.json({status:'-1',data:'未传值'})
+    }
+})
+
+/*router.get('/fenlei/zuire/',(req,res,next)=>{
+let msid = req.params.msid;
+if(msid!==undefined){
+        let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mcollect DESC';
+        pgdb.query(sql,[msid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                console.log(err);
+                res.json({status:'1',data:'error'});
+            }else{
+                res.json({status:'0',data:val.rows});
+            }
+        });
+    }
+else{
+        res.json({status:'-1',data:'未传值'})
+    }
+})*/
+router.get('/fenlei/zuire/',(req,res,next)=>{
+        let mtab = req.query.mtab;
+        let msid = req.query.msid;
+        if(msid!=='undefined'&&mtab!==undefined){
+        let sql = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mcollect DESC';
+        pgdb.query(sql,[msid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                console.log(err);
+                res.json({status:'-5',data:'error'});
+            }else{
+                res.json({status:'0',data:val.rows});
+            }
+        });
+
+        }else if(msid==='undefined'&&mtab!==undefined){
+                let sql = `SELECT * from msort WHERE mtab=$1`;
+                pgdb.query(sql,[mtab],(err,val)=>{
+                        if(err || val.rowCount<0){
+                         console.log(err);
+                        res.json({status:'1',data:'error'});
+                        }else{
+                        console.log(val.rows[0]);
+                        let sql1 = 'SELECT a.*,b.* FROM material as a LEFT JOIN msort b ON a.msid = b.msid WHERE a.msid=$1 ORDER BY mcollect DESC';
+                        pgdb.query(sql1,[val.rows[0].msid],(err,val1)=>{
+                        if(err || val1.rowCount < 0){
+                                console.log(err);
+                                res.json({status:'-2',data:'error'});
+                        }else{
+                                res.json({status:'0',data:val1.rows});
+                        }
+                });
+            }
+
+                })
+
+        }
+  else{
+        res.json({status:'-1',data:'未传值'})
     }
 })
 
 
-router.get('/:mid',(req,res,next)=>{
-let mid = req.params.mid;
-
-    let sql = `SELECT * FROM material  WHERE mid = $1`;
-                pgdb.query(sql,[mid],(err,val)=>{
-                        if(err || val.rowCount < 0){
-                                console.log(err);
-                                res.json({status:'1',data:'error'});
-                        }else{
-                                res.json({status:'0',data:val.rows});
-                        }
-
-                })
-
-})
-router.get('/:mid/:huifu',(req,res,next)=>{
-
+router.get('/xiangqing/:mid',(req,res,next)=>{
     let mid = req.params.mid;
-    let huifu = req.params.huifu;
-if(huifu===undefined&&mid!==undefined){
-	let sql = `SELECT * FROM material  WHERE mid = $1`;
-                pgdb.query(sql,[mid],(err,val)=>{
-                        if(err || val.rowCount < 0){
-                                console.log(err);
-                                res.json({status:'1',data:'error'});
-                        }else{
-                                res.json({status:'0',data:val.rows});
-                        }
-
-                })
-
-}else if(huifu!==undefined&&mid!==undefined){
-if(huifu==='lianbi'){
-                let sql = `SELECT a.*,b.* FROM material as a, article as b WHERE a.mid = $1 AND b.mid = $1`;
-                pgdb.query(sql,[mid],(err,val)=>{
-                        if(err || val.rowCount < 0){
-                                console.log(err);
-                                res.json({status:'1',data:'error'});
-                        }else{
-                                res.json({status:'0',data:val.rows});
-                        }
-
-                })
-
-        }else if(huifu==='pinglun'){
-                let sql = `SELECT a.*,b.* FROM material as a LEFT JOIN materialcomment as b ON a.mid = b.mid WHERE msid = $1`;
-                pgdb.query(sql,[mid],(err,val)=>{
-                        if(err || val.rowCount < 0){
-                                console.log(err);
-                                res.json({status:'1',data:'error'});
-                        }else{
-                                res.json({status:'0',data:val.rows});
-                        }
-
-                })
-}else{
-	res.json({status:'-1',data:'页面不存在lianbipinglun'})
-}
-}else{
-	 res.json({status:'-1',data:'页面不存在'})
-}
+    let sql = `SELECT * FROM material  WHERE mid = $1`;
+    pgdb.query(sql,[mid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                    console.log(err);
+                    res.json({status:'1',data:'error'});
+            }else{
+                    res.json({status:'0',data:val.rows});
+            }
+        
+    })
 
 })
-   
+router.get('/xiangqing/pinglun/:mid',(req,res,next)=>{
+    let mid = req.params.mid;
+    let sql = `SELECT * FROM materialcomment WHERE mid = $1 ORDER BY mctime DESC`;
+    pgdb.query(sql,[mid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                    console.log(err);
+                    res.json({status:'1',data:'error'});
+            }else{
+                    res.json({status:'0',data:val.rows});
+            }
+
+    })
+
+})
+router.get('/xiangqing/lianbi/:mid',(req,res,next)=>{
+    let mid = req.params.mid;
+    let sql = `SELECT * FROM article WHERE mid = $1`;
+    pgdb.query(sql,[mid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                    console.log(err);
+                    res.json({status:'1',data:'error'});
+            }else{
+                    res.json({status:'0',data:val.rows});
+            }
+
+    })
+
+})
+
 module.exports = router;

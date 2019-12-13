@@ -9,6 +9,27 @@ var pgdb = new pg.Pool({
     password: '111111',
     database: 'dongxin'
 });
+router.get('/material',(req,res,next)=>{
+    let sql = `SELECT a.*,b.mtitle FROM materialcomment as a LEFT JOIN material as b ON a.mid = b.mid`;
+    pgdb.query(sql,[],(err,val)=>{
+        if(err){
+            res.json({status:'-1',data:'error'})
+        }else{
+            res.json({status:'0',data:val.rows})
+        }
+    })
+})
+router.get('/article',(req,res,next)=>{
+    let sql = `SELECT a.*,b.atitle FROM articlecomment as a LEFT JOIN article as b ON a.aid = b.aid`;
+    pgdb.query(sql,[],(err,val)=>{
+        if(err){
+	console.log(err);
+            res.json({status:'-1',data:'error'})
+        }else{
+            res.json({status:'0',data:val.rows})
+        }
+    })
+})
 router.post('/addmaterial',(req,res,next)=>{
     let data = req.body;
     res.setHeader('Content-Type','text/html;charset=utf-8');
