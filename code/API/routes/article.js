@@ -22,7 +22,7 @@ router.get('/',(req,res,next)=>{
 
 });
 router.get('/new',(req,res,next)=>{
-	let sql = `SELECT * FROM article ORDER BY utime DESC`;
+	let sql = `SELECT a.*,b.* FROM article as a LEFT JOIN users as b ON a.uid=b.uid  ORDER BY utime DESC`;
 	pgdb.query(sql,[],(err,val)=>{
 		if(err || val.rowCount < 0){
                         console.log(err);
@@ -45,7 +45,7 @@ router.get('/new',(req,res,next)=>{
         })
 })*/
 router.get('/all',(req,res,next)=>{
-        let sql = `SELECT * FROM article ORDER BY alikes  DESC`;
+        let sql = `SELECT a.*,b.* FROM article as a LEFT JOIN users as b ON a.uid=b.uid  ORDER BY alikes  DESC`;
         pgdb.query(sql,[],(err,val)=>{
                 if(err || val.rowCount < 0){
                         console.log(err);
@@ -123,7 +123,11 @@ router.get('/uconcern/:uid',(req,res,next)=>{
 		}else{
                     res.json({status:'0',data:val.rows})
 		}*/
-		res.json({status:'0',data:val.rows})
+	//	if(val.rowCount===0){
+	//		res.json({status:'1',data:'未关注任何人，快去关注吧'})
+	//	}else{
+			res.json({status:'0',data:val.rows})
+	//	}
             }
 
     })
