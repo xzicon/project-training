@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { NavBar,Tabs,Icon} from 'antd-mobile';
 import {Link,Route,NavLink,Redirect} from 'react-router-dom';
-import Xword from '../Xword';
-import Rword from '../Rword';
 
-export default class Word extends Component {
+export default class Tword extends Component {
     // constructor(props){
     //     super(props);
     //     this.handleClick = this.handleClick.bind(this);

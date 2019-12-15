@@ -8,7 +8,7 @@ var D = date.getDate()+' ';
 var h = date.getHours() + ':';
 var m = date.getMinutes() + ':';
 var s = date.getSeconds();
-export default class Write extends Component {
+export default class Lwrite extends Component {
     handleClick = () => {
         this.inputRef.focus();
     }
@@ -18,7 +18,8 @@ export default class Write extends Component {
             atag:document.getElementsByClassName('biaoqian')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
             uid:this.props.location.state,
-            utime:Y+M+D+h+m+s
+            utime:Y+M+D+h+m+s,
+            mid:this.props.location.mtab2
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/aud/addarticle', {
@@ -32,7 +33,7 @@ export default class Write extends Component {
               switch (data.status) {
                 case "0":{
                     console.log(data.data);
-                    this.props.history.push({pathname:'/home',state:data.data});
+                    this.props.history.push({pathname:'/composition/sdetails/'+this.props.location.mtab2,state:this.props.location.state,mtab2:this.props.location.mtab2});
                     break;
                 }
                 default:{
@@ -48,7 +49,7 @@ export default class Write extends Component {
                 <NavBar
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    leftContent={<Link to={{pathname:'/home',state:this.props.location.state}}>
+                    leftContent={<Link to={{pathname:'/composition/sdetails/'+this.props.location.mtab2,mtab2:this.props.location.mtab2,state:this.props.location.state}}>
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={

@@ -40,23 +40,6 @@ export default class Home extends Component {
             console.log(res.data);
         })
     }
-    // fetchSousuo = (e)=>{
-    //     let data = {
-    //         search:document.getElementsByClassName('sousuo')[0].value
-    //     }
-    //     console.log(data);
-    //     fetch('http://116.62.14.0:8402/search/article', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     })
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //     })
-    // }
     render() {
         return (
             <div>
@@ -106,16 +89,15 @@ export default class Home extends Component {
                                     <Link to={{pathname:'/home',state:this.props.location.state}} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'24px',marginLeft:'10px'}}>推荐</Link>
                                 </div>
                                 
-                                <div style={{marginTop:'100px'}}>
-                </div>
-                <div style={{width:'100%'}}>
-                    <div>
-                        <Link to={{pathname:'/home'}}  style={{color:this.state.selectCreateHot.color,borderBottom:this.state.selectCreateHot.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最热</Link>
-                        <Link to={{pathname:'/home/Crnew',state:this.props.location.state}}  style={{color:this.state.selectCreateNew.color,borderBottom:this.state.selectCreateNew.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最新</Link>
-                    </div>
-                </div>
+                                <div style={{marginTop:'100px'}}></div>
+                                <div style={{width:'100%'}}>
+                                <div>
+                                    <Link to={{pathname:'/home',state:this.props.location.state}}  style={{color:this.state.selectCreateHot.color,borderBottom:this.state.selectCreateHot.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最热</Link>
+                                    <Link to={{pathname:'/home/Crnew',state:this.props.location.state}}  style={{color:this.state.selectCreateNew.color,borderBottom:this.state.selectCreateNew.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最新</Link>
+                                </div>
+                            </div>
                 {this.state.data.map(data=>(
-                    <div style={{width:'100%'}}>
+                    <div style={{width:'100%',whiteSpace:"pre-wrap"}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
                             <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
@@ -158,12 +140,12 @@ export default class Home extends Component {
                         }
                         title="素材"
                         key="Composition"
-                        selected={this.state.selectedTab === '/composition'}
+                        selected={this.state.selectedTab === '/composition/composition/'+this.props.location.state}
                         onPress={() => {
                             this.setState({
                             selectedTab: '/composition',
                             });
-                            this.props.history.push({pathname:'/composition',state:this.props.location.state})
+                            this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state})
                         }}
                         >
                             {/* <Composition/> */}

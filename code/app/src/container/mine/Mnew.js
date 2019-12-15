@@ -10,9 +10,9 @@ export default class Mnew extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/acomment/'+uid)
+        let state=this.props.location.state;
+        console.log(state);
+        fetch('http://116.62.14.0:8402/login/mcomment/'+state)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -28,20 +28,19 @@ export default class Mnew extends Component {
                     onLeftClick={() => console.log('onLeftClick')}>评论</NavBar>
                     <div style={{width:'100%',position:'absolute',top:'50px'}}>
                 <Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>素材评论</span></Link>
-                <Link to={{pathname:'/mine/mnew/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>文章评论</span></Link>
+                <Link to={{pathname:'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>文章评论</span></Link>
                 </div>
                 {this.state.data.map(data=>(
                     <div style={{width:'100%',position:'absolute',top:'80px',zIndex:'99'}}>
-                    <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>在作文--{data.aid}下发表了评论：</div>
                     <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>
-                        <span style={{fontSize:'16px'}}>{data.accontent}</span>
+                        <span style={{fontSize:'16px'}}>{data.mccontent}</span>
                         <br/>
-                        {data.actime}
+                        {data.mctime}
                     </div>
                 </div>
                 ))}
                 <div>
-                <Route path='/mine/mnew/mcnew' component={Mcnew}/>
+                
                 </div>
             
             </div>

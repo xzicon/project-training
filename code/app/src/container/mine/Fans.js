@@ -61,7 +61,7 @@ export default class Fans extends Component {
                         <Flex>
                             <div style={{marginRight:'10%'}}><img src={`http://116.62.14.0:8402/images/${data.uimage}`} style={{height:'60px'}}/></div>
                             <div style={{marginRight:'22%'}}>{data.uname}</div>
-                            <div><input type='button'  onClick={(e)=>{this.fetchConcern(e)}} class='concern' value='关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>
+                            <div><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='concern' value='关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>
                         </Flex>
                     </div>   
                 </div>

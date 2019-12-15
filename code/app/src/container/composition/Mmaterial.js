@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavBar,Tabs,Icon, Flex} from 'antd-mobile';
 import {NavLink,Link,Route} from 'react-router-dom';
-export default class Material extends Component {
+export default class Mmaterial extends Component {
     constructor(props){
         super(props);
         // this.handleClick = this.handleClick.bind(this);
@@ -44,8 +44,8 @@ export default class Material extends Component {
                     onLeftClick={() => console.log('onLeftClick')}>素材</NavBar>
                     
                     <div style={{backgroundColor:'#fff',position:'absolute',top:'50px'}}>
-                    <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1,state:this.props.location.state}}>最热</NavLink>     
-                    <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1,state:this.props.location.state}}>最新</NavLink>
+                    <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1}}>最热</NavLink>     
+                    <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1}}>最新</NavLink>
                     {
                         this.state.data.map(data=>(
                             <div>
@@ -54,7 +54,7 @@ export default class Material extends Component {
                             
                         </div>
                     </div>
-                                <Link to={{pathname:'/composition/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>{data.mtitle}</Link>
+                                <Link to={{pathname:'/composition/mdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>{data.mtitle}</Link>
                         </div>
                     ))}
                     

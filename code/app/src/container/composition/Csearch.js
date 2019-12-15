@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Search extends Component {
+export default class Csearch extends Component {
     constructor(props){
         super(props);
         // this.handleClick = this.handleClick.bind(this);
@@ -14,7 +14,7 @@ export default class Search extends Component {
             search:document.getElementsByClassName('sousuo')[0].value
         }
         console.log(data);
-        fetch('http://116.62.14.0:8402/search/article', {
+        fetch('http://116.62.14.0:8402/search/material', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default class Search extends Component {
             <div>
                 <input className='sousuo' type='text' placeholder="输入关键字搜索"/>
                 <input onClick={(e)=>{this.fetchSousuo(e)}} type='button' value='搜索'/>
-                {this.state.data.atitle}
+                {this.state.data.mtitle}
             </div>
         )
     }

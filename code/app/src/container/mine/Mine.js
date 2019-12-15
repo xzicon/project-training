@@ -99,12 +99,12 @@ export default class Mine extends Component {
                         }
                         title="素材"
                         key="Composition"
-                        selected={this.state.selectedTab === '/composition'}
+                        selected={this.state.selectedTab === '/composition/composition/'+this.props.location.state}
                         onPress={() => {
                             this.setState({
-                            selectedTab: '/composition',
+                            selectedTab: '/composition/composition/'+this.props.location.state,
                             });
-                            this.props.history.push({pathname:'/composition',state:this.props.location.state})
+                            this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state})
                         }}
                         >
                         </TabBar.Item>
@@ -150,7 +150,7 @@ export default class Mine extends Component {
                 <Flex>
                     
                     <div style={{width:'30%',marginLeft:'14%'}}>
-                    <Link to={{pathname:'/mine/follow/'+this.props.location.state,state:this.props.location.state}}>
+                    <Link to={{pathname:'/mine/follow/'+this.props.location.state,state:this.props.location.state,state2:this.props.location.state2}}>
                         关注
                         </Link>
                     </div>
@@ -188,7 +188,7 @@ export default class Mine extends Component {
                     <Link to={{pathname:'/mine/mnew',state:this.props.location.state}}>
                         我评论的
                         </Link>
-                    </div>                    
+                    </div>             
                 </Flex>
             </div>
             <div style={{width:'96%',backgroundColor:'#fff',margin:'2% 2% auto'}}>

@@ -22,7 +22,7 @@ export default class Login extends Component {
                 case "0":{
                     console.log(data.data);
                     //登录成功
-                    this.props.history.push({pathname:'/home',state:data.data});
+                    this.props.history.push({pathname:'/xselect',state:data.data});
                     break;
                 }
                 case "1":{

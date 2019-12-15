@@ -26,7 +26,9 @@ export default class Collect extends Component {
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>收藏</NavBar>
                 <div style={{width:'100%'}}>
+                    
                     {this.state.data.map(data=>(
+                        <Link to={{pathname:'/composition/mdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>                      
                             <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                 {data.mtime}
@@ -35,7 +37,9 @@ export default class Collect extends Component {
                     <div style={{height:'100px',overflow:'hidden',color:'#000'}}>{data.mlocal}<br/>{data.manalyse}<br/></div>
                             <br/>{data.mcontent}
                         </div>
+                        </Link>
                     ))}
+                    
                 </div>
             </div>
         )

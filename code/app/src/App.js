@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {HashRouter as Router,Route} from 'react-router-dom';
 
-//首页
+//作文
 import Write from './container/home/Write';
 import Article from './container/home/Article';
 import Collection from './container/home/collection/Collection';
@@ -21,9 +21,11 @@ import Register from './launch/Register';
 import Forgetpwd from './launch/Forgetpwd';
 import Modify from './launch/Modify';
 import Crnew from './container/home/Crnew';
+import Search from './container/home/Search';
 
-//作文页
+//素材
 import Material from './container/composition/material/Material'
+import All from './container/composition/All';
 
 //我的
 import Write2 from './container/mine/Write';
@@ -34,7 +36,20 @@ import Fans from './container/mine/Fans';
 import Mnew from './container/mine/Mnew';
 import Mpraise from './container/mine/Mpraise';
 import Marticle from './container/mine/Marticle';
-import Search from './container/home/Search';
+import Word from './container/composition/material/Word';
+import Mmaterial from './container/composition/Mmaterial';
+import Tmaterial from './container/composition/Tmaterial';
+import Sdetails from './container/composition/Sdetails';
+import Mdetails from './container/composition/Mdetails';
+import Tdetails from './container/composition/Tdetails';
+import Xword from './container/composition/Xword';
+import Smcomment from './container/composition/Smcomment';
+import Lwrite from './container/composition/Lwrite';
+import Lcomment from './container/composition/Lcomment';
+import Select from './launch/Select';
+import Xselect from './launch/Xselect';
+import Mcnew from './container/mine/Mcnew';
+import Csearch from './container/composition/Csearch';
 
 export default class App extends Component {
     render() {
@@ -47,6 +62,8 @@ export default class App extends Component {
                     <Route path='/register' component={Register}/>
                     <Route path='/forgetpwd' component={Forgetpwd}/>
                     <Route path='/modify' component={Modify}/>
+                    <Route path='/select' component={Select}/>
+                    <Route path='/xselect' component={Xselect}/>
                     <Route path='/home' exact component={Home}/>
                     {/* <Route path='/home/recommend' component={Recommend}/> */}
                     <Route path='/home/follow' component={Follow}/>
@@ -63,18 +80,29 @@ export default class App extends Component {
                     <Route path='/home/search' component={Search}/>
 
                     {/* 素材 */}
-                    <Route path='/composition' exact component={Composition}/>
+                    <Route path='/composition/composition/:page' component={Composition}/>
                     <Route path='/composition/material' component={Material}/>
-                    {/* <Route path='/composition/essay' component={Essay1}/>
-                    <Route path='/composition/skill' component={Skill}/>
+                    <Route path='/composition/mmaterial' component={Mmaterial}/>
+                    {/* <Route path='/composition/tmaterial' component={Tmaterial}/> */}
+                    {/* <Route path='/composition/essay' component={Essay1}/> */}
+                    {/* <Route path='/composition/skill' component={Skill}/> */}
                     <Route path='/composition/all' component={All}/>
-                    <Route path='/composition/add' component={Add}/>
-                    <Route path='/composition/inform' component={Inform}/>
-                    <Route path='/composition/character' component={Character}/>
-                    <Route path='/composition/word' component={Word}/>
-                    <Route path='/composition/figure' component={Figure}/>
-                    <Route path='/composition/write' component={Write1}/>
-                    <Route path='/composition/writing' component={Writing}/> */}
+                    {/* <Route path='/composition/add' component={Add}/> */}
+                    {/* <Route path='/composition/inform' component={Inform}/> */}
+                    <Route path='/composition/sdetails/:page' component={Sdetails}/>    
+                    <Route path='/composition/mdetails/:page' component={Mdetails}/>
+                    {/* <Route path='/composition/tdetails/:page' component={Tdetails}/>        */}
+                    <Route path='/composition/lwrite' component={Lwrite}/>
+                    <Route path='/composition/lcomment' component={Lcomment}/>
+                    <Route path='/home/csearch' component={Csearch}/>
+                    <div>
+                    {/* <Route path='/composition/word' component={Word}/>
+                    <Route path='/composition/xword' component={Xword}/> */}
+                    {/* <Route path='/composition/smcomment' component={Smcomment}/> */}
+                    </div>
+                    {/* <Route path='/composition/figure' component={Figure}/> */}
+                    {/* <Route path='/composition/write' component={Write1}/> */}
+                    {/* <Route path='/composition/writing' component={Writing}/> */}
 
                     {/* 我的 */}
                     <Route path='/mine' exact component={Mine}/>
@@ -86,6 +114,7 @@ export default class App extends Component {
                     <Route path='/mine/mnew' exact component={Mnew}/>
                     <Route path='/mine/mpraise' component={Mpraise}/>
                     <Route path='/mine/marticle' component={Marticle}/>
+                    <Route path='/mine/mcnew' component={Mcnew}/>
                 </div>
             </Router>
         )
@@ -96,3 +125,6 @@ export default class App extends Component {
 //state2:upid 作文详情用户id
 //state3:aid 我的作文id
 //state4:uid 关注的用户
+//mtab:sucai,fanwen,jifa
+//mtab1:gexing
+//mtab2:素材详情mid

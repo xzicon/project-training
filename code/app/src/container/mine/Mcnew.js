@@ -9,9 +9,9 @@ export default class Mcnew extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/acomment/'+uid)
+        let state=this.props.location.state;
+        console.log(state);
+        fetch('http://116.62.14.0:8402/login/acomment/'+state)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -25,9 +25,12 @@ export default class Mcnew extends Component {
                     icon={<Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>评论</NavBar>
-                {this.state.data.map(data=>(
                     <div style={{width:'100%',position:'absolute',top:'50px',zIndex:'99'}}>
-                    <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>在作文--{data.aid}下发表了评论：</div>
+                    <Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>素材评论</span></Link>
+                        <Link to={{pathname:'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>文章评论</span></Link>
+                        </div>
+                {this.state.data.map(data=>(
+                    <div style={{width:'100%',position:'absolute',top:'100px',zIndex:'99'}}>
                     <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>
                         <span style={{fontSize:'16px'}}>{data.accontent}</span>
                         <br/>
