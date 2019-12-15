@@ -44,8 +44,8 @@ export default class Material extends Component {
                     onLeftClick={() => console.log('onLeftClick')}>素材</NavBar>
                     
                     <div style={{backgroundColor:'#fff',position:'absolute',top:'50px'}}>
-                    <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1,state:this.props.location.state}}>最热</NavLink>     
-                    <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1,state:this.props.location.state}}>最新</NavLink>
+                    <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}}>最热</NavLink>     
+                    <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}}>最新</NavLink>
                     {
                         this.state.data.map(data=>(
                             <div>
@@ -54,7 +54,7 @@ export default class Material extends Component {
                             
                         </div>
                     </div>
-                                <Link to={{pathname:'/composition/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>{data.mtitle}</Link>
+                                <Link to={{pathname:'/composition/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,state1:this.props.location.state1}}>{data.mtitle}</Link>
                         </div>
                     ))}
                     
