@@ -9,9 +9,9 @@ export default class Fans extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/fans/'+uid)
+        let page=this.props.location.state;
+        console.log(page);
+        fetch('http://116.62.14.0:8402/login/fans/'+page)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -55,8 +55,9 @@ export default class Fans extends Component {
                     icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>粉丝</NavBar>
-                    {this.state.data.map(data=>(
-                <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>                    
+                    
+                <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>
+                {this.state.data.map(data=>(                    
                     <div style={{width:'96%',margin:'2% 2% auto',height:'60px',backgroundColor:'#fff',marginTop:'10px',padding:'4% 4%'}}>
                         <Flex>
                             <div style={{marginRight:'10%'}}><img src={`http://116.62.14.0:8402/images/${data.uimage}`} style={{height:'60px'}}/></div>
@@ -64,8 +65,9 @@ export default class Fans extends Component {
                             <div><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='concern' value='关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>
                         </Flex>
                     </div>   
+                    ))}
                 </div>
-                ))}
+                
             </div>
         )
     }
