@@ -21,9 +21,11 @@ export default class Xselect extends Component {
     render() {
         return (
             <div>
-               {this.state.data?
+               {
+               this.state.data?
                 <div>{this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state})}</div>:
-                <div>{this.props.history.push({pathname:'/select',state:this.props.location.state})}</div>}
+                <div>{this.props.history.push({pathname:'/select',state:this.props.location.state})}</div>
+                }
             </div>
         )
     }

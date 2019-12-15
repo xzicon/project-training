@@ -79,20 +79,14 @@ export default class Sdetails extends Component {
                 </div>
                 ))}
                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                    <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state}}>练笔</Link>
+                    <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state,state1:this.props.location.state1}}>练笔</Link>
                     <Link to={{pathname:url+'/pinglun',mtab2:this.props.location.mtab2,state:this.props.location.state}}>评论</Link>
                 </div>
                 <div style={{marginTop:'100px'}}></div>
                 <div style={{width:'100%'}}>
-                    {/* <div>
-                        <Link to={{pathname:'/composition/word/'+this.props.location.mtab2,mtab2:this.props.location.mtab2}}>最热</Link>
-                        <Link to={{pathname:'/composition/xword/'+this.props.location.mtab2,mtab2:this.props.location.mtab2}}>最新</Link>
-                    </div> */}
                     <div>
                     <Route path={`${url}`} exact component={Word}/>
                     <Route path={`${url}/pinglun/`} component={Smcomment}/>
-                        {/* <Route path='/composition/word' component={Word}/>
-                        <Route path='/composition/xword' component={Xword}/>  */}
                     </div>
                 </div>
                 <div style={{backgroundColor:'#fff',bottom:0,float:'left',width:'100%',position:'fixed'}}>

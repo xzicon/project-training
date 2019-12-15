@@ -4,7 +4,6 @@ import {Link,Route} from 'react-router-dom';
 export default class Marticle extends Component {
     constructor(props){
         super(props);
-        // this.handleClick = this.handleClick.bind(this);
         this.state={
             data:[]
         }
@@ -47,6 +46,7 @@ export default class Marticle extends Component {
             }
         })
     }
+    
     render() { 
         return (
             <div>
@@ -57,8 +57,11 @@ export default class Marticle extends Component {
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
                     rightContent={
+                        <div>
+                        <Link to={{pathname:'/mine/edit',state3:data.aid,atitle1:data.atitle,acontent1:data.acontent,atag1:data.atag,state:this.props.location.state}}><input type='button' style={{backgroundColor:'#da4036',fontSize:'18px',color:'#fff',border:'1px solid #da4036'}} value='编辑' class='edit'/></Link>
                         <input type='button' onClick={(e)=>{this.fetchDelete(e)}} style={{backgroundColor:'#da4036',fontSize:'18px',color:'#fff',border:'1px solid #da4036'}} value='删除' class='delete'/>
-                    }>{data.atitle}</NavBar>
+                        </div>
+    }>{data.atitle}{data.aid}</NavBar>
                 <div style={{width:'100%'}}>
                     
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>                      

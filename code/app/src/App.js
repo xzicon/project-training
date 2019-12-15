@@ -50,6 +50,8 @@ import Select from './launch/Select';
 import Xselect from './launch/Xselect';
 import Mcnew from './container/mine/Mcnew';
 import Csearch from './container/composition/Csearch';
+import Edit from './container/mine/Edit';
+import Writing from './container/composition/material/Writing';
 
 export default class App extends Component {
     render() {
@@ -102,19 +104,20 @@ export default class App extends Component {
                     </div>
                     {/* <Route path='/composition/figure' component={Figure}/> */}
                     {/* <Route path='/composition/write' component={Write1}/> */}
-                    {/* <Route path='/composition/writing' component={Writing}/> */}
+                    <Route path='/composition/writing/:page' component={Writing}/>
 
                     {/* 我的 */}
                     <Route path='/mine' exact component={Mine}/>
                     <Route path='/mine/write' component={Write2}/>
                     <Route path='/mine/collect' component={Collect2}/>
                     <Route path='/mine/praise' component={Praise2}/>
-                    <Route path='/mine/follow' component={Follow2}/>
-                    <Route path='/mine/fans' component={Fans}/>
+                    <Route path='/mine/follow/:page' component={Follow2}/>
+                    <Route path='/mine/fans/:page' component={Fans}/>
                     <Route path='/mine/mnew' exact component={Mnew}/>
                     <Route path='/mine/mpraise' component={Mpraise}/>
                     <Route path='/mine/marticle' component={Marticle}/>
                     <Route path='/mine/mcnew' component={Mcnew}/>
+                    <Route path='/mine/edit' component={Edit}/>
                 </div>
             </Router>
         )

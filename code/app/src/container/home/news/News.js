@@ -23,7 +23,7 @@ export default class News extends Component {
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/home',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/mine',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
                 >消息通知</NavBar>

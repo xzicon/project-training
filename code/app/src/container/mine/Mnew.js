@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Mcnew from './Mcnew';
 import {Link,Route} from 'react-router-dom';
 import {Icon,NavBar} from 'antd-mobile';
+
 export default class Mnew extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +20,7 @@ export default class Mnew extends Component {
             console.log(res.data);
         })
     }
+    
     render() {
         return (
             <div>
@@ -34,8 +36,7 @@ export default class Mnew extends Component {
                     <div style={{width:'100%',position:'absolute',top:'80px',zIndex:'99'}}>
                     <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>
                         <span style={{fontSize:'16px'}}>{data.mccontent}</span>
-                        <br/>
-                        {data.mctime}
+                        <br/>{data.mctime}
                     </div>
                 </div>
                 ))}

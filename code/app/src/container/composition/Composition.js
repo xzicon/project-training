@@ -86,7 +86,7 @@ export default class Composition extends Component {
                         >
                             <div >
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
-                                    <Link to={{pathname:'/composition/all',state:this.props.location.state}}><img src='/images/write/all.png' style={{float:'left',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
+                                    <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
                                     <Link to='/composition/csearch'><img src='/images/write/all.png' style={{float:'right',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
                                 </div>
                                 <div style={{position:'absolute',top: '50px',zIndex:'99',width:'96%',margin:'2% 2% auto',backgroundColor:'#fff'}}>

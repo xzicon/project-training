@@ -13,7 +13,7 @@ GitHub：https://github.com/xzicon/project-training
 -|-|-
 |徐铮   | 前端工程师，UI设计师，测试 | https://github.com/xzicon      |
 |董心   | 后端工程师，数据库管理员   | https://github.com/DongXin9    |
-|王梦   | 前端工程师，UI设计者       | https://github.com/wangmeng456 |
-|黄碧莲 | 前端工程师，UI设计者       | https://github.com/huangbilian |
+|王梦   | 前端工程师，UI设计者，测试 | https://github.com/wangmeng456 |
+|黄碧莲 | 前端工程师，UI设计者，测试 | https://github.com/huangbilian |
 |王陆宇 | 后端工程师，数据库管理员   | https://github.com/wangluyu1998|
 
