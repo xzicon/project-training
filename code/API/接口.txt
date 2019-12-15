@@ -1,0 +1,356 @@
+一、用户登录、注册
+//1、用户表所有信息
+//method:'GET' http://116.62.14.0:8402/login 
+//我的页面
+//method:'GET' http://116.62.14.0:8402/login/me/:uid
+//uid是用户id,在登陆页面有返回这个值； 返回数据
+/**
+ * {"status":"0","data":{"uid":2,"uname":"妙笔2","uemail":"3197985967@qq.com","uimage":"","udescribe":"介绍一下自己吧"}}
+ */
+
+
+//2、登录验证
+//method:'POST' http://116.62.14.0:8402/login
+//接收uemail、upassword
+//0 登录返回uid、1密码错误、2账户不存在
+
+//3、用户注册
+//method:'POST' http://116.62.14.0:8402/register
+//接收uemail、upassword
+//data.status
+//1 该邮箱已经被注册、2 发送验证码成功code
+
+//method:'POST' http://116.62.14.0:8402/register/code
+//接收uemail、upassword、code
+//data.status
+//3 注册成功、4 验证码错误
+
+//4、用户忘记密码
+//使用邮箱验证
+//method:'POST' http://116.62.14.0:8402/register/forget
+//接收uemail
+//data.status
+//1 该邮箱没有被注册、2 发送验证码成功
+'这里isLive状态变成0，ustatus=0'
+
+//验证验证码是否正确
+//method:'POST' http://116.62.14.0:8402/register/forgetcode
+//接收uemail、code
+//data.status
+//0 验证成功、1 验证码错误
+
+//修改密码
+//method:'POST' http://116.62.14.0:8402/register/updatepassword
+//接收uemail、upassword
+//data.status
+//0 密码已经修改、-2 邮箱错误,也就是传参时邮箱错了
+'退出登录'
+//method:'POST' http://116.62.14.0:8402/login/exit
+
+'修改用户信息'
+//method:'POST' http://116.62.14.0:8402/login/update
+//接收 data.uid data.uname data.udescrib
+
+
+
+
+
+管理员表---需要修正
+//4、管理员表所有信息
+//method:'GET' http://116.62.14.0:8402/loginback
+
+//登录验证
+//method:'POST' http://116.62.14.0:8402/loginback
+//接收maname、mapassword
+//0 登录成功，1 密码错误，2 账户不存在
+                                   
+//管理员忘记密码（未测试）
+// 'method:'POST' http://116.62.14.0:8402/loginback/forget'
+// 获取用户名maname
+// status：2 验证码发送成功
+// 'method:'POST' http://116.62.14.0:8402/loginback/forgetcode'
+// 获取用户名maname、验证码mcode
+// status：0 验证成功
+// 'method:'POST' http://116.62.14.0:8402/loginback/updatepassword'
+// 获取用户名maname、密码mapassword
+//status:0 修改成功
+
+二作文接口
+//http://116.62.14.0:8402/article,所有文章内容
+//http://116.62.14.0:8402/article/xiangqing/:aid,文章详情页（获取aid,aid是文章id）
+
+//作文评论按照最新，最热排序
+//http://116.62.14.0:8402/article/zuixin/:aid
+
+// 所有作文最热排序
+// http://116.62.14.0:8402/article/all
+
+//所有最新排序
+//http://116.62.14.0:8402/article/new
+添加作文(已测试)
+data.atitle,data.acontent,data.atag(可以为空),data.utime,data.uid,data.mid(所属素材可以为空)
+//http://116.62.14.0:8402/aud/addarticle添加素材POST
+
+删除作文(已测试)
+//需要文章aid
+//http://116.62.14.0:8402/aud/delarticle POST请求
+
+修改作文(未测试)
+// http://116.62.14.0:8402/aud/updatearticle   POST请求
+data.aid,data.atitle.data.acontent,data.atag,data.utime
+data.uid
+
+
+
+
+收藏素材显示列表
+//http://116.62.14.0:8402/login/materialcollection/:uid GET请求
+点赞作文显示列表
+//http://116.62.14.0:8402/login/marticlelikes/:uid GET请求
+关注列表
+//http://116.62.14.0:8402/login/userconcern/:uid GET请求
+粉丝列表
+//http://116.62.14.0:8402/login/fans/:uid GET请求
+用户发表的文章
+//http://116.62.14.0:8402/login/article/:uid
+素材评论显示列表
+//http://116.62.14.0:8402/login/mcomment/:uid
+作文评论显示列表
+//http://116.62.14.0:8402/login/acomment/:uid
+
+
+收藏素材(未测试)
+//http://116.62.14.0:8402/likes/material
+//接收uid（用户ID）、mid（素材ID）
+取消收藏素材(未测试)
+//http://116.62.14.0:8402/likes/delmaterial
+//接收uid（用户ID）、mid（素材ID）
+
+点赞作文
+//http://116.62.14.0:8402/likes/article
+//接收uid（用户ID）和aid（作文ID）
+关注用户
+//http://116.62.14.0:8402/login/userconcern  POST请求
+//接收uid和被关注的用户uid(upid)
+                // 点赞素材评论
+                // //http://116.62.14.0:8402/likes/mcomment
+                // //uid、mcid（素材评论id）
+                // 点赞作文评论
+                // //http://116.62.14.0:8402/likes/acomment
+                // //uid、acid(作文评论id)
+关注人的动态
+//http://116.62.14.0:8402/article/uconcern/:uid
+//如果返回status=1,是没有关注任何人
+//如果返回status=0,data返回关注人动态
+
+素材接口
+//http://116.62.14.0:8402/material，所有素材
+//http://116.62.14.0:8402/material/mtab/sucai 获得对应的标签
+//http://116.62.14.0:8402/material/mtab/fanwen
+//http://116.62.14.0:8402/material/mtab/jifa
+//msid是标签的id
+//http://116.62.14.0:8402/material/fenlei/zuixin/?mtab=mtab&msid=msid 对应标签下的最新排序
+//http://116.62.14.0:8402/material/fenlei/zuire/?mtab=mtab&msid=msid 最热排序
+
+明天改一下接口
+//http://116.62.14.0:8402/material/zuixin/:msid 对应标签下的最新排序
+//http://116.62.14.0:8402/material/zuire/:msid 最热排序
+
+//http://116.62.14.0:8402/material/xiangqing/:mid，素材详情
+//http://116.62.14.0:8402/material/xiangqing/pinglun/:mid 最新
+//http://116.62.14.0:8402/material/xiangqing/lianbi/:mid 最热
+//http://116.62.14.0:8402/material/xiangqing/lianbi/new/:mid 最新
+添加素材(已测试)
+//http://116.62.14.0:8402/aud/addmaterial添加素材POST
+//接收mtitle（素材标题）、mlocal（素材出处）、manalyse（素材解析）、mcontent（详情）、msid（所属标签msid）、mimage、mtime
+修改素材(未测试)
+//http://116.62.14.0:8402/aud/updatematerial添加素材POST
+//接收mid（素材mid）、mtitle、mlocal、manalyse、mcontent、msid、mimage、mtime
+删除素材(未测试)
+//素材mid
+//http://116.62.14.0:8402/aud/delmaterial   material POST请求
+
+
+
+
+
+获得所有素材评论
+//http://116.62.14.0:8402/comment/material
+获得所有文章评论
+//http://116.62.14.0:8402/comment/article
+添加素材评论
+//http://116.62.14.0:8402/comment/addmaterial POST
+//data.mccontent,data.mctime,data.uid(用户uid),data.mid(素材mid)
+添加文章评论
+//http://116.62.14.0:8402/comment/addarticle POST
+//data.accontent,data.actime,data.uid(用户uid),data.aid(文章aid)
+删除素材评论
+//http://116.62.14.0:8402/comment/delmaterial POST
+//data.mcid 评论id
+删除文章评论
+//http://116.62.14.0:8402/comment/delarticle POST
+//data.acid 评论id
+
+
+搜索素材
+POST请求
+//http://116.62.14.0:8402/search/article
+//http://116.62.14.0:8402/search/material
+data.search
+
+搜索作文练笔
+
+// alter table managers add column memail varchar(30) not null default '';
+
+// 评论消息
+//http://116.62.14.0:8402/message/pinglun/:uid
+// 点赞消息
+//http://116.62.14.0:8402/message/zan/:uid
+
+
+关注标签
+//http://116.62.14.0:8402/usort   POST请求
+data.uid /msid1/msid2/msid3/msid4/msid5
+获取用户关注的标签
+//http://116.62.14.0:8402/usort/msid/:uid
+获取标签对应的十条最新内容
+//http://116.62.14.0:8402/usort/tab/:msid
+跳过关注的页面GET请求
+//http://116.62.14.0:8402/usort/tiaoguo
+
+更新标签
+//http://116.62.14.0:8402/usort/update   POST请求
+data.uid /msid1/msid2/msid3/msid4/msid5
+
+
+已关注和已点赞和已经收藏
+
+总练笔数总文章数总用户数
+//http://116.62.14.0:8402/loginback/count
+接口文档
+数据库设计说明
+实训项目流程
+
+// http://116.62.14.0:8402/upload/modifyPic
+
+let sql_col = `SELECT COUNT(aid) FROM articlelikes WHERE aid=$1`;
+            pgdb.query(sql_col,[data.aid],(err,val1)=>{
+                if(err || val.rowCount < 0){
+                    console.log(err);
+                    res.json({status:'-2',data:'error'});
+                }else{
+                    let sql_mcol = `UPDATE article SET alikes=$1 WHERE aid=$2`
+                    pgdb.query(sql_mcol,[val1.rows[0].count,data.aid],(err,val2)=>{
+                        if(err || val.rowCount < 0){
+                            console.log(err);
+                            res.json({status:'-3',data:'error'});
+                        }else{
+                            res.json({status:'0',data:'点赞成功'});
+                        }
+                    })
+                }
+            })
+
+
+
+
+
+            let express = require('express');
+            let router = express.Router();
+            let fs = require('fs');
+            let {User} = require('../data/db');
+            let formidable = require('formidable');
+            let cacheFolder = 'public/images/';//放置路径
+            router.post('/modifyPic', function (req, res, next) {
+                let userDirPath = cacheFolder + "Img";
+                if (!fs.existsSync(userDirPath)) {
+                    fs.mkdirSync(userDirPath);//创建目录
+                }
+                let form = new formidable.IncomingForm(); //创建上传表单
+                form.encoding = 'utf-8'; //设置编码
+                form.uploadDir = userDirPath; //设置上传目录
+                form.keepExtensions = true; //保留后缀
+                form.maxFieldsSize = 2 * 1024 * 1024; //文件大小
+                form.type = true;
+                form.parse(req, function (err, fields, files) {
+                    if (err) {
+                        return res.json(err);
+                    }
+                    let extName = ''; //后缀名
+                    switch (files.file.type) {
+                        case 'image/pjpeg':
+                            extName = 'jpg';
+                            break;
+                        case 'image/jpeg':
+                            extName = 'jpg';
+                            break;
+                        case 'image/png':
+                            extName = 'png';
+                            break;
+                        case 'image/x-png':
+                            extName = 'png';
+                            break;
+                    }
+                    if (extName.length === 0) {
+                        return res.json({
+                            msg: '只支持png和jpg格式图片'
+                        });
+                    } else {
+                        let avatarName = '/' + Date.now() + '.' + extName;
+                        let newPath = form.uploadDir + avatarName;
+                        fs.renameSync(files.file.path, newPath); //重命名
+                        console.log(newPath)
+                        //更新表
+                        User.update({
+                            picture: newPath
+                        }, {
+                            where: {
+                                username: req.session.user.username
+                            }
+                        }).then(function (data) {
+                            if (data[0] !== undefined) {
+                                User.findAll({
+                                    where: {
+                                        username: req.session.user.username
+                                    }
+                                }).then(function (data) {
+                                    if (data[0] !== undefined) {
+                                        req.session.user.picture = data[0].dataValues.picture;
+                                        res.send(true);
+                                    } else {
+                                        res.send(false);
+                                    }
+                                })
+                            }
+                        }).catch(function (err) {
+                            console.log(err);
+                        });
+                    }
+                });
+            });
+
+
+
+            let sql_ufans = 'SELECT COUNT(uid) FROM userconcern WHERE uid = $1';
+            pgdb.query(sql_ufans,[uid],(err,val)=>{
+                if(err){
+                        res.json({status:'-1',data:'error'});
+                }else{
+                        let sql_users = 'UPDATE users SET ufans=$1 WHERE uid=$2';
+                        pgdb.query(sql_users,[val.rows[0].count,uid],(err,val)=>{
+                            if(err){
+                                    res.json({status:'-2',data:'error'})
+                            }else{
+                                let sql = `SELECT uid,uname,uemail,uimage,udescribe,ufans FROM users WHERE uid=$1`;
+                                pgdb.query(sql,[uid],(err,val)=>{
+                                    if(err || val.rowCount<=0){
+                                        res.json({status:'-3',data:'error'});
+                                    }else{
+                                        res.json({status:'0',data:val.rows[0]})
+                                    }
+                                })
+                            }
+                        })
+                    }
+            })
+        

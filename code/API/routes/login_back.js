@@ -11,7 +11,17 @@ var pgdb = new pg.Pool({
     password: '111111',
     database: 'dongxin'
 });
-
+router.get('/count',(req,res,next)=>{
+	let sql = `SELECT t1.mid,t2.aid,t3.uid FROM (SELECT COUNT(*) mid FROM material)t1,(SELECT COUNT(*) aid FROM article)t2,(SELECT COUNT(*) uid FROM users)t3`;
+	pgdb.query(sql,[],(err,val)=>{
+		if(err || val.rowCount<0){
+			console.log(err);
+			res.json({status:'-1',data:'error'})
+		}else{
+			res.json({status:'0',data:val.rows})
+		}
+	})
+})
 router.get('/',(req,res,next)=>{
     let sql = `SELECT * FROM managers`;
 	lend(sql,res);

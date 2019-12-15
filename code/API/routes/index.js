@@ -29,7 +29,7 @@ function lend(sqlStr,res){
 //用户我的页面
 router.get('/me/:uid',(req,res,next)=>{
     let uid = req.params.uid;
-    let sql_ufans = 'SELECT COUNT(uid) FROM userconcern WHERE uid = $1';
+    let sql_ufans = 'SELECT COUNT(uid) FROM userconcern WHERE upid = $1';
     pgdb.query(sql_ufans,[uid],(err,val)=>{
         if(err){
                 res.json({status:'-1',data:'error'});
@@ -56,35 +56,39 @@ router.get('/me/:uid',(req,res,next)=>{
 //用户关注(不太对)
 router.post('/userconcern',(req,res,next)=>{
 	let data = req.body;
-if(data.uid!==data.upid){
+	if(data.uid!==data.upid){
 	let sql = `SELECT * FROM userconcern WHERE uid=$1 AND upid=$2`;
 	pgdb.query(sql,[data.uid,data.upid],(err,val)=>{
-		if(err){
+		if(err || val.rowCount<0){
 			res.json({status:'-1',data:'error'})
 		}else{
 			if(val.rowCount>0){
-				res.json({status:'1',data:'已经关注了该用户'})
+				let sql_del = `DELETE FROM userconcern WHERE uid=$1 AND upid=$2`;
+				pgdb.query(sql_del,[data.uid,data.upid],(err,val)=>{
+					if(err || val.rowCount<0){
+						console.log(err);
+						res.json({status:'-2',data:'error'})
+					}else{
+						res.json({status:'1',data:'取消关注了该用户'})
+					}
+				})
+				//res.json({status:'1',data:'已经关注了该用户'})
 			}else{
 				let sql_con = `INSERT INTO userconcern (uid,upid) VALUES($1,$2)`
 				pgdb.query(sql_con,[data.uid,data.upid],(err,data)=>{
-					if(err){
+					if(err || val.rowCount<0){
 						console.log(err)
-						res.json({status:'-2',data:'关注失败，可能用户ID不存在'})
+						res.json({status:'-2',data:'error'})
 					}else{
-						let sql_user = `UPDATE users SET ufans=$1 WHERE uid = $2`;
-						
-							res.json({status:'0',data:'关注成功'})
-						
-					
+						res.json({status:'0',data:'关注成功'})
 					}
 				})
 			}
 		}
 	})
-}else{
-	res.json({status:'-3',data:'自己不能关注自己'})
-
-}	
+	}else{
+		res.json({status:'-3',data:'自己不能关注自己'})
+	}	
 })
 //用户关注列表
 router.get('/userconcern/:uid',(req,res,next)=>{
@@ -94,19 +98,28 @@ router.get('/userconcern/:uid',(req,res,next)=>{
 		if(err){
 			res.json({status:'-1',data:'error'})
 		}else{
-			res.json({status:'0',data:val.rows})
+//			if(val.rowCount===0){
+  //                              res.json({status:'1',data:'还没有关注人'})
+    //                    }else{
+                                res.json({status:'0',data:val.rows})
+      //                  }
+
 		}
 	})
 })
 //用户粉丝列表显示
 router.get('/fans/:uid',(req,res,next)=>{
 	let uid = req.params.uid;
-	let sql = `SELECT b.* FROM userconcern as a LEFT JOIN users as b ON a.upid = b.uid WHERE a.upid = $1`;
+	let sql = `SELECT b.* FROM userconcern as a LEFT JOIN users as b ON a.uid = b.uid WHERE a.upid = $1`;
         pgdb.query(sql,[uid],(err,val)=>{
                 if(err){
                         res.json({status:'-1',data:'error'})
                 }else{
-                        res.json({status:'0',data:val.rows})
+//			if(val.rowCount===0){
+//				res.json({status:'1',data:'没有粉丝'})
+//			}else{
+                        	res.json({status:'0',data:val.rows})
+//			}
                 }
         })
 
@@ -119,10 +132,14 @@ router.get('/materialcollection/:uid',(req,res,next)=>{
     let uid = req.params.uid;
     let sql = `SELECT b.* FROM materialcollection as a LEFT JOIN material as b ON a.mid = b.mid WHERE a.uid = $1`;
     pgdb.query(sql,[uid],(err,val)=>{
-            if(err){
+            if(err || val.rowCount < 0){
                     res.json({status:'-1',data:'error'})
             }else{
+//		if(val.rowCount===0){
+//			res.json({status:'1',data:'未收藏过素材'})
+//		}else{
                     res.json({status:'0',data:val.rows})
+//		}
             }
     })
 })
@@ -134,7 +151,11 @@ router.get('/marticlelikes/:uid',(req,res,next)=>{
             if(err){
                     res.json({status:'-1',data:'error'})
             }else{
+//		if(val.rowCount===0){
+//			res.json({status:'1',data:'未点过赞'})
+//		}else{
                     res.json({status:'0',data:val.rows})
+//		}
             }
     })
 })
@@ -226,6 +247,19 @@ router.post('/',function(req,res,next){
 	}
 
     })
+
+})
+router.post('/update',(req,res,next)=>{
+	let data = req.body;
+	res.setHeader('Content-Type','text/html;charset=utf-8');
+	let sql = `UPDATE users SET uname=$1,udescrib=$2 WHERE uid=$3`;
+	pgdb.query(sql,[data.uname,data.udescribe,data.uid],(err,val)=>{
+		if(err || val.rowCount<0){
+			res.json({status:'-1',data:'error'})
+		}else{
+			res.json({status:'0',data:'修改成功'})
+		}
+	})
 
 })
 module.exports = router;
