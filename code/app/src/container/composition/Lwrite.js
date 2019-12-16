@@ -4,10 +4,16 @@ import {Link} from 'react-router-dom';
 var date = new Date();
 var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-var D = date.getDate()+' ';
-var h = date.getHours() + ':';
-var m = date.getMinutes();
+var D = (date.getDate()<10 ? '0'+(date.getDate()) : date.getDate())+' ';
+var h = (date.getHours()<10 ? '0'+(date.getHours()) : date.getHours()) + ':';
+var m = (date.getMinutes()<10 ? '0'+(date.getMinutes()) : date.getMinutes());
 export default class Lwrite extends Component {
+    constructor(){
+        super();
+        this.state={
+            data:[]
+        }
+    }
     handleClick = () => {
         this.inputRef.focus();
     }
@@ -18,7 +24,8 @@ export default class Lwrite extends Component {
             acontent:document.getElementsByClassName('neirong')[0].value,
             uid:this.props.location.state,
             utime:Y+M+D+h+m,
-            mid:this.props.location.mtab2
+            mid:this.props.location.mtab2,
+            aimage:this.state.data
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/aud/addarticle', {
@@ -42,6 +49,17 @@ export default class Lwrite extends Component {
             }
           })
     }
+    onChange = (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        fetch('http://116.62.14.0:8402/upload', {
+        method: 'POST',
+          body: formData,
+        }).then(res=>res.json()).then(res=>
+            this.setState({data:res.data},console.log(res.data))
+        )
+      };
     render() {
         return (
             <div>
@@ -88,6 +106,11 @@ export default class Lwrite extends Component {
                             type='text'
                         />
                     </List>
+                    <div className='upload-container' style={{marginTop:'400px'}}>
+                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
+                    {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
+                </div>
+                {this.state.data?<img src={`http://116.62.14.0:8402/images/`+this.state.data}/>:''}
                 </div>
             </div>
         )

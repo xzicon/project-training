@@ -81,7 +81,7 @@ export default class Create extends Component {
                                 
                                 <div style={{marginTop:'100px'}}>
                 </div>
-                                {this.state.data.map(data=>(
+                                {this.state.data.length===0?this.state.data.map(data=>(
                     <div style={{width:'100%'}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
@@ -98,7 +98,7 @@ export default class Create extends Component {
                             </Link>
                         </div>
                     </div>
-                ))}
+                )):<div>你还没有关注任何人哦</div>}
                                 <Link to={{pathname:'/home/write/follow',state:this.props.location.state}}>
                                     <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
                                         +

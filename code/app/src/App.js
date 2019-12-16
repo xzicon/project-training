@@ -73,6 +73,7 @@ export default class App extends Component {
                     <Route path='/home/article/:page' component={Article}/>
                     <Route path='/home/follow/article/:page' component={Article}/>
                     <Route path='/home/home/crnew/article/:page' component={Article}/>
+                    <Route path='/home/home/search/search/article/:page' component={Article}/>
                     <Route path='/home/news' component={News}/>
                     <Route path='/home/praise' component={Praise}/>
                     <Route path='/home/manage' component={Manage}/>
@@ -88,6 +89,7 @@ export default class App extends Component {
                     <Route path='/composition/all' component={All}/>
                     <Route path='/composition/sdetails/:page' component={Sdetails}/>
                     <Route path='/composition/label/sdetails/:page' component={Sdetails}/>
+                    <Route path='/composition/search/sucai/sdetails/:page' component={Sdetails}/>
                     <Route path='/composition/mdetails/:page' component={Mdetails}/>
                     <Route path='/composition/lwrite' component={Lwrite}/>
                     <Route path='/composition/lcomment' component={Lcomment}/>

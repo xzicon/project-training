@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 var date = new Date();
 var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-var D = date.getDate()+' ';
-var h = date.getHours() + ':';
-var m = date.getMinutes();
+var D = (date.getDate()<10 ? '0'+(date.getDate()) : date.getDate())+' ';
+var h = (date.getHours()<10 ? '0'+(date.getHours()) : date.getHours()) + ':';
+var m = (date.getMinutes()<10 ? '0'+(date.getMinutes()) : date.getMinutes());
 export default class Comment extends Component {
     fetchComment=(e)=>{
         let data = {

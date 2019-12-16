@@ -67,7 +67,7 @@ export default class Select extends Component {
         return (
             <div>
                 <button className='biaoqian' type='text' onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>
-                <Link to={{pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state}}><button className='biaoqian2' type='text'>取消</button></Link>
+                <Link to={{pathname:'/composition/composition',state:this.props.location.state}}><button className='biaoqian2' type='text'>取消</button></Link>
                 {this.state.data.map(data => (
                     <label><input type="checkbox" name="biaoqian" value={data.msid} onChange={this.handleChange}/>{data.msname}</label>
                 ))}

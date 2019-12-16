@@ -104,8 +104,10 @@ export default class Article extends Component {
             var data1='/home';
         }else if(arr.length===5){
             var data1='/home/follow/'+this.props.location.state;
-        }else{
+        }else if(arr.length===6){
             var data1='/home/crnew';
+        }else{
+            var data1='/home/search';
         }
         console.log(data1);
         return (
@@ -124,7 +126,7 @@ export default class Article extends Component {
                     <div style={{margin:'2% 2% auto',backgroundColor:'#f1edea',whiteSpace:"pre-wrap"}}>
                         <h2 style={{textAlign:'center'}}>{data.atitle}<br/>{data.alikes}</h2>
                         {data.acontent}<br/>
-                        <br/><br/>{data.atag}<br/>
+                        <br/><br/>{data.atag}<br/><img src={`http://116.62.14.0:8402/images/`+data.aimage}/>
                     </div>
                     </div></div>
                     ))}

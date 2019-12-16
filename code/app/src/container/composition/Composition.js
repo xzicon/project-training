@@ -8,7 +8,7 @@ export default class Composition extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          selectedTab: '/composition/composition/'+this.props.location.state,
+          selectedTab: '/composition/composition',
           data:[]
         };
     }
@@ -22,19 +22,10 @@ export default class Composition extends Component {
             console.log(res.data);
         })
     }
-    // componentDidMount(){
-    //     let state = this.props.location.state;
-    //     console.log(state);
-    //     fetch('http://116.62.14.0:8402/usort/tiaoguo')
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         this.setState({data:res.data});
-    //         console.log(res.data);
-    //     })
-    // }
     render() {
         let url = this.props.match.url;
         console.log(url);
+        console.log(this.state.data.length);
         return (
             <div>
                 <div style={{
@@ -90,10 +81,10 @@ export default class Composition extends Component {
                         }
                         title="素材"
                         key="Composition"
-                        selected={this.state.selectedTab === '/composition/composition/'+this.props.location.state}
+                        selected={this.state.selectedTab === '/composition/composition'}
                         onPress={() => {
                             this.setState({
-                            selectedTab: '/composition/composition/'+this.props.location.state,
+                            selectedTab: '/composition/composition',
                             });
                             
                         }}
@@ -105,9 +96,9 @@ export default class Composition extends Component {
                                 </div>
                                 <div>
                                     <Link to={{pathname:url,state:this.props.location.state}}>推荐</Link>
-                                {this.state.data?this.state.data.map(data => (
+                                {this.state.data.length===0?this.state.data.map(data => (
                                     <Link to={{pathname:url,search:`?msid=${data.msid}`,mtab3:data.msid,state:this.props.location.state}}><div>{data.msname}</div></Link>
-                                )):<div></div>}
+                                )):<p></p>}
                                 <Link to={{pathname:'/gselect',state:this.props.location.state}}>修改标签</Link>
                                 </div>
                                 <div>

@@ -76,6 +76,7 @@ export default class Home extends Component {
                         }}
                         >
                             <div>
+                                
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
                                     <Link to={{pathname:'/home/search',state:this.props.location.state}}><button>搜索</button></Link>
                                 </div>
@@ -91,7 +92,7 @@ export default class Home extends Component {
                                     <Link to={{pathname:'/home/Crnew',state:this.props.location.state}}  style={{color:this.state.selectCreateNew.color,borderBottom:this.state.selectCreateNew.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最新</Link>
                                 </div>
                             </div>
-                {this.state.data.map(data=>(
+                {this.state?this.state.data.map(data=>(
                     <div style={{width:'100%',whiteSpace:"pre-wrap"}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
@@ -110,7 +111,7 @@ export default class Home extends Component {
                             </Link>
                         </div>
                     </div>
-                ))}
+                )):<div></div>}
                                 <Link to={{pathname:'/home/write',state:this.props.location.state}}>
                                     <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
                                         +

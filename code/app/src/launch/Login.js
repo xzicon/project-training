@@ -58,7 +58,7 @@ export default class Login extends Component {
                         </div>
                         <div className='wraper'>
                             <img src='/images/login/mima.png'/>
-                            <input type='text' name='password' placeholder='请输入密码' required class='pwd'/>
+                            <input type='password' name='password' placeholder='请输入密码' required class='pwd'/>
                         </div>
                         <p>
                         <Link to='/register'><span style={{color:'black'}}>立即注册</span></Link>

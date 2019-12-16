@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Checkbox,List,Toast} from 'antd-mobile';
+import {Toast,NavBar,Icon} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 export default class Gselect extends Component {
     constructor(props){
@@ -45,7 +45,7 @@ export default class Gselect extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('修改成功', 1);
-                    this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state});
+                    this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
                     break;
                 }
                 default:{
@@ -62,15 +62,24 @@ export default class Gselect extends Component {
         let index = items.indexOf(item);
         index === -1 ? items.push(item) : items.splice(index, 1);
         this.setState({value: items});
+        console.log(this.state.value);
     }
     render() {  
         return (
             <div>
-                <button className='biaoqian' type='text' onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>
-                <Link to={{pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state}}><button className='biaoqian2' type='text'>取消</button></Link>
-                {this.state.data.map(data => (
-                    <label><input type="checkbox" name="biaoqian" value={data.msid} onChange={this.handleChange}/>{data.msname}</label>
-                ))}
+                <NavBar
+                icon={<Link to={{pathname:'/composition/composition',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    rightContent={<button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>}
+                    style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
+                    onLeftClick={() => console.log('onLeftClick')}>全部标签</NavBar>
+                    <div style={{width:'100%',margin:'auto',position:'absolute',top:'70px'}}>
+                    {this.state.data.map(data => (
+                        <li style={{width:'30%',fontSize:'140%',listStyle:'none',display:'inline-block',textAlign:'center',lineHeight:'180%'}}><input type="checkbox"  name="biaoqian" value={data.msid} onChange={this.handleChange}/>{data.msname}</li>
+                    ))}
+                    </div>
+                    <div>
+                        {this.state.value[0]}
+                    </div>
             </div>
         )
     }

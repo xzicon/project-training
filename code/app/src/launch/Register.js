@@ -9,6 +9,14 @@ export default class Register extends Component {
             uemail:document.getElementsByClassName('uemail')[0].value,
             upassword:document.getElementsByClassName('upassword')[0].value
         }
+        var reg = /^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$/;
+        if(data.upassword===''&&!data.uemail.match(reg)){
+            Toast.fail('密码错误或者邮箱格式不正确')
+        }else if(!data.uemail.match(reg)){
+            Toast.fail('邮箱格式不正确')
+        }else if(data.upassword===''){
+            Toast.fail('密码错误')
+        }else{
         console.log(data);
         fetch('http://116.62.14.0:8402/register', {
             method: 'POST',
@@ -39,6 +47,7 @@ export default class Register extends Component {
                   }
               }
           })
+        }
     }
     fetchForm1=(e)=>{
         let data = {
