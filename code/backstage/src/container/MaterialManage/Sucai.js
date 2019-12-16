@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Link,Route} from 'react-router-dom'
+import {Link,Route} from 'react-router-dom'
 import Detail from './Detail';
 
 export default class Sucai extends Component {
@@ -10,7 +10,9 @@ export default class Sucai extends Component {
         }
     }
     componentDidMount(){
-        fetch('http://116.62.14.0:8402/material/?mtab=sucai')
+        let url = this.props.match.url.split('/')[3];
+        // console.log(url)
+        fetch(`http://116.62.14.0:8402/material/mtab/${url}`)
         .then((res)=>res.json())
         .then((res)=>{
             // console.log(res.data);
@@ -24,22 +26,24 @@ export default class Sucai extends Component {
         let url = this.props.match.url;
         return (
             <div>
-                <ul style={{width:'800px',height:'100px',margin:'20px 50px'}}>
+                <ul style={{width:'900px',height:'150px',margin:'30px 0 10px 60px'}}>
                     {
                         this.state.tags.map((item,index)=>(
-                            <Link to={{pathname:'',search:`?mtab=sucai&msid=${item.msid}`}} key={index}>
-                                <li style={{margin:'10px 20px',listStyle:'none',float:'left',color:'#000'}}>{item.msname}</li>
-                            </Link>
+                            <li key={index} className='tags'>
+                                <Link to={{pathname:`${url}/detail`,search:`?msid=${item.msid}`}}>
+                                    <button className='tag_btns'>{item.msname}</button>
+                                </Link>
+                                <Link to={{pathname:`/home/material/addmaterial`,search:`?msid=${item.msid}`}}>
+                                    <button className='add_btns'>点击添加</button>
+                                </Link>
+                            </li>
+                            
                         ))
                     }
                 </ul>
-                <div>
-                    <Router>
-                        <div style={{padding:'50px'}}>
-                            <Route path={`${url}`} component={Detail}/>
-                        </div>
-                    </Router>
-                </div>
+                    <div style={{padding:'0 30px'}}>
+                        <Route path={`${url}/detail`} component={Detail}/>
+                    </div>
             </div>
         )
     }
