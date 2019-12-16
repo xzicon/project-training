@@ -6,8 +6,7 @@ var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
 var D = date.getDate()+' ';
 var h = date.getHours() + ':';
-var m = date.getMinutes() + ':';
-var s = date.getSeconds();
+var m = date.getMinutes();
 export default class Edit extends Component {
     handleClick = () => {
         this.inputRef.focus();
@@ -33,7 +32,7 @@ export default class Edit extends Component {
             atitle:document.getElementsByClassName('biaoti')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
-            utime:Y+M+D+h+m+s
+            utime:Y+M+D+h+m
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/aud/updatearticle', {

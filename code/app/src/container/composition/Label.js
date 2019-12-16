@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
-export default class Source extends Component {
+
+export default class Label extends Component {
     constructor(props){
         super(props);
+        // this.handleClick = this.handleClick.bind(this);
         this.state={
             data:[]
         }
-        
-    } 
+    }
+    
     componentDidMount(){
-        let state = this.props.location.state;
-        console.log(state);
-        fetch('http://116.62.14.0:8402/material/mtab/sucai')
+        let page = this.props.location.mtab3;
+        console.log(page);
+        fetch('http://116.62.14.0:8402/usort/tab/'+page)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -20,15 +21,13 @@ export default class Source extends Component {
     }
     render() {
         return (
-            <div>
-                <div>
-                    {
+            <div style={{backgroundColor:'blue',height:'300px'}}>
+                {
                         this.state.data.map(data=>(
                             <div>
-                            <Link to={{pathname:'/composition/material/'+data.msid,mtab1:data.msid,state:this.props.location.state}}>{data.msname}</Link>
+                                {data.mtitle}
                             </div>
-                    ))}
-                </div>
+                ))}
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Checkbox,List,Toast} from 'antd-mobile';
 import {Link} from 'react-router-dom';
-export default class Select extends Component {
+export default class Gselect extends Component {
     constructor(props){
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -31,7 +31,7 @@ export default class Select extends Component {
             msid5:this.state.value[4]
         }
         console.log(data);
-        fetch('http://116.62.14.0:8402/usort', {
+        fetch('http://116.62.14.0:8402/usort/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,8 +44,8 @@ export default class Select extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
-                    Toast.success('选择标签成功', 1);
-                    this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
+                    Toast.success('修改成功', 1);
+                    this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state});
                     break;
                 }
                 default:{

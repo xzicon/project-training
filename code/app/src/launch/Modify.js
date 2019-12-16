@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Toast, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 export default class Modify extends Component {
     fetchForm3 = (e)=>{
         let data = {
@@ -21,6 +21,7 @@ export default class Modify extends Component {
                 case "0":{
                     console.log(data.data);
                     //成功
+                    Toast.success('密码修改成功', 1);
                     this.props.history.push('/login');
                     break;
                 }
@@ -31,19 +32,6 @@ export default class Modify extends Component {
             }
         })
     }
-    // constructor(){
-    //     super();
-    //     this.state={
-    //         uemail:[]
-    //     }
-    // }
-    // componentWillMount(){
-    //     if(this.props.location.state){
-    //         this.setState({
-    //             uemail:this.props.location.state.uemail
-    //           })
-    //     }
-    // }
     render() {
         return (
             <div className='reset_pwd'>

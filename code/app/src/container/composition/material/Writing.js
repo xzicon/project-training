@@ -20,6 +20,34 @@ export default class Writing extends Component {
             console.log(res.data);
         })
     }
+    componentDidUpdate(){
+        let page = this.props.location.state1;
+        let mtab2 = this.props.location.mtab2;
+        console.log(page,mtab2);
+        fetch('http://116.62.14.0:8402/article/xiangqing/'+page)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({data:res.data});
+        })
+    }
+    fetchGood = (e)=>{
+        let data = {
+            uid:this.props.location.state,
+            aid:this.props.location.state1
+        }
+        console.log(data);
+        fetch('http://116.62.14.0:8402/likes/article', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+        })
+    }
     render() {
         const item = [
             {title:'322',img:'pinglun'},
@@ -31,7 +59,7 @@ export default class Writing extends Component {
                 {this.state.data.map(data=>(
                     <div>
                 <NavBar
-                    icon={<Icon type="left" style={{color:'#000'}}/>}
+                    icon={<Link to={{pathname:'/composition/sdetails/'+this.props.location.mtab2,mtab2:this.props.location.mtab2}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
                     rightContent={

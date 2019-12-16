@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {Tabs,SearchBar,TabBar} from 'antd-mobile';
 import {HashRouter as Router,Link,Route} from 'react-router-dom';
 import Material from './material/Material'
+import Popular from './Popular';
+import Label from './Label';
 export default class Composition extends Component {
     constructor(props) {
         super(props);
@@ -20,10 +22,22 @@ export default class Composition extends Component {
             console.log(res.data);
         })
     }
+    // componentDidMount(){
+    //     let state = this.props.location.state;
+    //     console.log(state);
+    //     fetch('http://116.62.14.0:8402/usort/tiaoguo')
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         this.setState({data:res.data});
+    //         console.log(res.data);
+    //     })
+    // }
     render() {
+        let url = this.props.match.url;
+        console.log(url);
         return (
             <div>
-                <div style={{ 
+                <div style={{
                 position: 'fixed',
                 height: '100%', 
                 width: '100%', 
@@ -87,22 +101,17 @@ export default class Composition extends Component {
                             <div >
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
                                     <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
-                                    <Link to='/composition/csearch'><img src='/images/write/all.png' style={{float:'right',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
-                                </div>
-                                <div style={{position:'absolute',top: '50px',zIndex:'99',width:'96%',margin:'2% 2% auto',backgroundColor:'#fff'}}>
-                                    <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'5%',paddingLeft:'5%'}}> 素材</a>
-                                    <Link to={{pathname:'/composition/material',mtab:'sucai',state:this.props.location.state}}><button  style={{backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
-                                    <br/>
-                                    <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'2%',paddingLeft:'5%',marginBottom:'2%'}}> 范文</a>
-                                    <Link to={{pathname:'/composition/material',mtab:'fanwen',state:this.props.location.state}}><button  style={{backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
-                                    <br/>
-                                    <a style={{borderLeft:'8px  solid red',fontSize:'150%',marginTop:'2%',paddingLeft:'5%',marginBottom:'2%'}}> 技法</a>
-                                    <Link to={{pathname:'/composition/material',mtab:'jifa',state:this.props.location.state}}><button  style={{backgroundColor:'#fff',color:'#8fa0cb',borderRadius:'15%',outline:'none',border:'1px solid #8fa0cb',paddingTop:'2%',paddingBottom:'2%',marginRight:'5%'}} >查看更多</button></Link>
+                                    <Link to={{pathname:'/composition/csearch',state:this.props.location.state}}><img src='/images/write/all.png' style={{float:'right',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
                                 </div>
                                 <div>
-                                {this.state.data.map(data => (
-                                    <div>{data.msname}</div>
-                                ))}
+                                    <Link to={{pathname:url,state:this.props.location.state}}>推荐</Link>
+                                {this.state.data?this.state.data.map(data => (
+                                    <Link to={{pathname:url,search:`?msid=${data.msid}`,mtab3:data.msid,state:this.props.location.state}}><div>{data.msname}</div></Link>
+                                )):<div></div>}
+                                <Link to={{pathname:'/gselect',state:this.props.location.state}}>修改标签</Link>
+                                </div>
+                                <div>
+                                    <Route path={`${url}`} exact component={Popular}/>
                                 </div>
                             </div>
                         </TabBar.Item>

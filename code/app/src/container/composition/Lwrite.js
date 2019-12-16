@@ -6,8 +6,7 @@ var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
 var D = date.getDate()+' ';
 var h = date.getHours() + ':';
-var m = date.getMinutes() + ':';
-var s = date.getSeconds();
+var m = date.getMinutes();
 export default class Lwrite extends Component {
     handleClick = () => {
         this.inputRef.focus();
@@ -18,7 +17,7 @@ export default class Lwrite extends Component {
             atag:document.getElementsByClassName('biaoqian')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
             uid:this.props.location.state,
-            utime:Y+M+D+h+m+s,
+            utime:Y+M+D+h+m,
             mid:this.props.location.mtab2
         }
         console.log(data);

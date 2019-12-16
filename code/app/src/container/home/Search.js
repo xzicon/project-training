@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom';
+import {Icon,NavBar} from 'antd-mobile';
 export default class Search extends Component {
     constructor(props){
         super(props);
@@ -43,6 +44,10 @@ export default class Search extends Component {
     render() {
         return (
             <div>
+                <NavBar
+                    icon={<Link to={{pathname:'/home',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
+                    onLeftClick={() => console.log('onLeftClick')}></NavBar>  
                 <input className='sousuo' type='text' placeholder="输入关键字搜索"/>
                 <input onClick={(e)=>{this.fetchSousuo(e)}} type='button' value='搜索'/>
                 {this.state.data.atitle}

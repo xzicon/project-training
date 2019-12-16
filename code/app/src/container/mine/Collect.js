@@ -10,8 +10,10 @@ export default class Collect extends Component {
     }
     componentDidMount(){
         let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/materialcollection/'+uid)
+        let upid = this.props.location.state4;
+        let id = (upid===2)? uid : upid;
+        console.log(uid,upid,id);
+        fetch('http://116.62.14.0:8402/login/materialcollection/'+id)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});

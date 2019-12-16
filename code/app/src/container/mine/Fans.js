@@ -10,8 +10,10 @@ export default class Fans extends Component {
     }
     componentDidMount(){
         let page=this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/fans/'+page)
+        let ppage=this.props.location.state4;
+        let id=(ppage===2)?page:ppage;
+        console.log(page,ppage,id);
+        fetch('http://116.62.14.0:8402/login/fans/'+id)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -23,8 +25,6 @@ export default class Fans extends Component {
             uid:this.props.location.state,
             upid:this.props.location.state2
         }
-        // let imgObj = document.getElementsByClassName(shoucang);
-        // let Flag=(imgObj.getAttribute("src",2)=="/images/home/zan.png");
         console.log(data);
         fetch('http://116.62.14.0:8402/login/userconcern', {
             method: 'POST',

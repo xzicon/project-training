@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Toast, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import {Link} from 'react-router-dom';
 import './launch.css';
 export default class Login extends Component {
@@ -22,16 +23,19 @@ export default class Login extends Component {
                 case "0":{
                     console.log(data.data);
                     //登录成功
+                    Toast.success('登录成功', 1);
                     this.props.history.push({pathname:'/xselect',state:data.data});
                     break;
                 }
                 case "1":{
                     //密码错误
+                    Toast.fail('密码错误,请重新输入密码', 1);
                     console.log(data.data);
                     break;
                 }
                 case "2":{
                     //不存在，请注册
+                    Toast.offline('账号不存在，请注册', 1);
                     break;
                 }
                 default:{

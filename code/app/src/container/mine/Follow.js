@@ -10,8 +10,10 @@ export default class Follow extends Component {
     }
     componentDidMount(){
         let page=this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/userconcern/'+page)
+        let ppage=this.props.location.state4;
+        let id=(ppage===2)?page:ppage;
+        console.log(page,ppage,id);
+        fetch('http://116.62.14.0:8402/login/userconcern/'+id)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -19,11 +21,15 @@ export default class Follow extends Component {
         })
     }
     componentDidUpdate(){
-        let page = this.props.location.state;
-        fetch('http://116.62.14.0:8402/login/userconcern/'+page)
+        let page=this.props.location.state;
+        let ppage=this.props.location.state4;
+        let id=(ppage===2)?page:ppage;
+        console.log(page,ppage,id);
+        fetch('http://116.62.14.0:8402/login/userconcern/'+id)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
+            console.log(res.data);
         })
     }
     fetchConcern = (e)=>{

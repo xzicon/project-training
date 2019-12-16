@@ -10,28 +10,6 @@ export default class Mine extends Component {
           data:[]
         }
     }
-    // follow =(idx)=>{
-    //     var data = [...this.state.data];
-    //     if(!data[idx].isFollow){
-            
-    //         data[idx].isFollow=!data[idx].isFollow;
-    //         data[idx].follow='已关注'
-    //         this.setState({
-    //             data
-    //         },()=>{
-    //             localStorage.setItem('data',this.state.data);
-    //         })      
-            
-    //     }else{
-    //         data[idx].isFollow=!data[idx].isFollow;
-    //         data[idx].follow='关注'; 
-    //         this.setState({
-    //             data
-    //         },()=>{
-    //             localStorage.setItem('data',this.state.data);
-    //         })  
-    //     }
-    //   }
     componentDidMount(){
         let uid=this.props.location.state;
         console.log(uid);
@@ -99,12 +77,12 @@ export default class Mine extends Component {
                         }
                         title="素材"
                         key="Composition"
-                        selected={this.state.selectedTab === '/composition/composition/'+this.props.location.state}
+                        selected={this.state.selectedTab === '/composition/composition'}
                         onPress={() => {
                             this.setState({
-                            selectedTab: '/composition/composition/'+this.props.location.state,
+                            selectedTab: '/composition/composition',
                             });
-                            this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state})
+                            this.props.history.push({pathname:'/composition/composition',state:this.props.location.state})
                         }}
                         >
                         </TabBar.Item>
@@ -133,7 +111,7 @@ export default class Mine extends Component {
             <img style={{marginLeft:'10px',marginTop:'10px',borderRadius:'100%',width:'24%'}} src='/images/apptab/inform (2).png'/>
             <div style={{width:'80%',float:'right',backgroundColor:'white',paddingLeft:'2%',paddingTop:'2%'}}>
                 <a>昵称：{this.state.data.uname}</a>
-              <Link to='/mydetail'>
+              <Link to={{pathname:'/mine/personal',state:this.state.data.uid,uname:this.state.data.uname,udescribe:this.state.data.udescribe}}>
               <button style={{backgroundColor:'white',border:'0.2px solid black',height:'30px',float:'right',marginRight:'4%'}}>编辑资料</button>
               </Link>
            </div>
@@ -195,7 +173,7 @@ export default class Mine extends Component {
                 <Link to={{pathname:'/',state:this.props.location.state}}>
                     <List>
                         <Item arrow="horizontal" multipleLine>
-                            意见反馈
+                            <Link to={{pathname:'/mine/feedback',state:this.props.location.state}}>意见反馈</Link>
                         </Item>
                         <Item arrow="horizontal" multipleLine>
                             设置

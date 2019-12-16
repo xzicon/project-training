@@ -53,14 +53,13 @@ export default class Word extends Component {
     }
     render() {
         let path = this.props.match.path;
-        // var u=this.props.location.search.split("=")[]
         console.log(path);
         return (
             <div style={{backgroundColor:'red',height:'300px'}}>
                 <div>
-                    <NavLink to={{pathname:`${path}`,search:'',mtab2:this.props.location.mtab2,state1:this.props.location.state1}}>最热</NavLink>
+                    <NavLink to={{pathname:`${path}`,search:'',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}}>最热</NavLink>
                     
-                    <NavLink to={{pathname:`${path}`,search:'?id=new',mtab2:this.props.location.mtab2,state1:this.props.location.state1}}>最新</NavLink>
+                    <NavLink to={{pathname:`${path}`,search:'?id=new',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}}>最新</NavLink>
                     <div>
                     
                     </div>
@@ -81,8 +80,7 @@ export default class Word extends Component {
                                 {data.aid}
                                 <br/>
                                 <br/>
-                                <div  onClick={(e)=>{this.fetchGood(e)}}>点赞</div>
-                                {data.alikes}
+                        <div onClick={(e)=>{this.fetchGood(e)}}>点赞{data.alikes}</div>
                             </div>
                 ))}
                 </div>

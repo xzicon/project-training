@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import { NavBar,Tabs,Icon, Flex} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
-// const tabs = [
-//     { title: '个性' },
-//     { title: '自律' },
-//     { title: '成长' },
-//     { title: '匠心' },
-//     { title: '自信' },
-//     { title: '坚持' },
-//     { title: '梦想' },
-//     { title: '热爱' },
-//     { title: '亲情' },
-//     { title: '友谊' },
-//   ];
 
 export default class Character extends Component {
     constructor(props){

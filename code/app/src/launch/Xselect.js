@@ -16,17 +16,16 @@ export default class Xselect extends Component {
         .then((res)=>{
             this.setState({data:res.data});
             console.log(res.data);
+            if(res.data){
+                this.props.history.push({pathname:'/composition/composition',state:this.props.location.state})
+            }else{
+                this.props.history.push({pathname:'/select',state:this.props.location.state})
+            }
         })
     }
     render() {
         return (
-            <div>
-               {
-               this.state.data?
-                <div>{this.props.history.push({pathname:'/composition/composition/'+this.props.location.state,state:this.props.location.state})}</div>:
-                <div>{this.props.history.push({pathname:'/select',state:this.props.location.state})}</div>
-                }
-            </div>
+            <div></div>
         )
     }
 }

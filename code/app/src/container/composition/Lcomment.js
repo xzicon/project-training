@@ -6,15 +6,14 @@ var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
 var D = date.getDate()+' ';
 var h = date.getHours() + ':';
-var m = date.getMinutes() + ':';
-var s = date.getSeconds();
+var m = date.getMinutes();
 export default class Lcomment extends Component {
     fetchComment=(e)=>{
         let data = {
             mccontent:document.getElementsByClassName('pinglun')[0].value,
             uid:this.props.location.state,
             mid:this.props.location.mtab2,
-            mctime:Y+M+D+h+m+s
+            mctime:Y+M+D+h+m
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/comment/addmaterial', {

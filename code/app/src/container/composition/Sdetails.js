@@ -63,12 +63,19 @@ export default class Sdetails extends Component {
     }
     render() {
         let url = this.props.match.url;
+        let arr=this.props.location.pathname.split('/');
+        if(arr.length===4){
+            var data1='/composition/material/'+this.props.location.mtab1;
+        }else{
+            var data1='/composition/composition';
+        }
+        console.log(data1);
         return (
             <div>
                 {this.state.data.map(data=>(
                 <div>
                     <NavBar
-                        icon={<Link to={{pathname:'/composition/material/'+data.msid,mtab1:data.msid,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                        icon={<Link to={{pathname:data1,mtab1:data.msid,state:this.props.location.state,mtab2:this.props.location.mtab2}}><Icon type="left" style={{color:'#000'}}/></Link>}
                         style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                         onLeftClick={() => console.log('onLeftClick')}></NavBar>     
                     <div style={{top:'40px',position:'absolute',zIndex:'99',width:'100%'}}>
@@ -79,7 +86,7 @@ export default class Sdetails extends Component {
                 </div>
                 ))}
                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                    <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state,state1:this.props.location.state1}}>练笔</Link>
+                    <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state}}>练笔</Link>
                     <Link to={{pathname:url+'/pinglun',mtab2:this.props.location.mtab2,state:this.props.location.state}}>评论</Link>
                 </div>
                 <div style={{marginTop:'100px'}}></div>
