@@ -11,10 +11,22 @@ var pgdb = new pg.Pool({
     password: '111111',
     database: 'dongxin'
 });
-let casheFolder = '../public/images/'
-router.post('/modifyPic',(req,res,next)=>{
-	let userDirPath = cacheFolder+"Img";
+let casheFolder = '../public/images/';
+router.get('',(req,res,next)=>{
+	let sql = `SELECT * FROM userinfo`;
+	pgdb.query(sql,[],(err,val)=>{
+		if(err){
+			console.log(err);
+			res.json({status:'-1',data:'error'})
+		}else{
+			res.json({status:'0',data:val.rows})
+		}
+	})
+})
+router.post('/mk',(req,res,next)=>{
+	let userDirPath = cacheFolder+"temp";
 	let form = new formidable.IncomingForm();
+	console.log(form);
 	form.encoding = 'utf-8';
 	form.keepExtensions = true;
 	form.uploadDir = userDirPath;
@@ -46,8 +58,9 @@ router.post('/modifyPic',(req,res,next)=>{
                         let newPath = form.uploadDir + avatarName;
                         fs.renameSync(files.file.path, newPath); //重命名
                         console.log(newPath);
-			let sql = `UPDATE image SET image=$1 WHERE uid=$2`;
-        	        pgdb.query(sql,[imgPath,uid],(err,val)=>{
+		//	let sql = `UPDATE image SET image=$1 WHERE uid=$2`;
+        		let sql = `INSERT INTO userinfo VALUES($1,$2,$3)`;  
+		      pgdb.query(sql,[2,imgPath,imgPath],(err,val)=>{
                 	        if(err) { console.log(err);res.json({status:'-1',data:'error'})}
                         	else{
 					res.json({status:'1',data:'修改成功'})
@@ -58,5 +71,58 @@ router.post('/modifyPic',(req,res,next)=>{
 	})
 
 });
-
+router.post('/', function(req, res) {
+                var form = new formidable.IncomingForm();
+                form.uploadDir = "../public/images/temp/"; 
+                form.parse(req, function(error, fields, files) {
+                    for (var key in files) {
+                        var file = files[key];
+                        var fName = (new Date()).getTime();
+                        switch (file.type) {
+                            case "image/jpeg":
+                                fName = fName + ".jpg";
+                                break;
+                            case "image/png":
+                                fName = fName + ".png";
+                                break;
+                            default:
+                                fName = fName + ".png";
+                                break;
+                        }
+                        console.log(file, file.size);
+                        var uploadDir = "../public/images/" + fName;
+                        fs.rename(file.path, uploadDir, function(err) {
+                            if (err) {
+                                res.write(err + "\n");
+                                res.end();
+                            }
+            
+            
+                            var userAddSql = 'INSERT INTO userinfo(Id,UserName,UserPass) VALUES(0,?,?)';
+                            var userAddSql_Params = ['path', "/upload/" + fName];
+                            
+                            pgdb.query(userAddSql, userAddSql_Params, function(err, val) {
+                                if (err) {
+                                    console.log('[INSERT ERROR] - ', err.message);
+                             //       return;
+					res.json({status:'0',data:'error'})
+                                }else{
+					res.json({status:'1',data:'成功'})
+				}
+            
+                                //console.log('--------------------------INSERT----------------------------');
+                               // console.log('INSERT ID:', result);
+                               // console.log('-----------------------------------------------------------------\n\n');
+                            });
+            
+                            //connection.end();
+                           // res.write("<img src='/upload/" + fName + "' />");
+                           // res.end();
+            
+            
+                        })
+            
+                    }
+                });
+            });
 module.exports = router;

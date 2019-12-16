@@ -1,4 +1,4 @@
-一、用户登录、注册
+﻿一、用户登录、注册
 //1、用户表所有信息
 //method:'GET' http://116.62.14.0:8402/login 
 //我的页面
@@ -222,135 +222,12 @@ data.uid /msid1/msid2/msid3/msid4/msid5
 //http://116.62.14.0:8402/usort/update   POST请求
 data.uid /msid1/msid2/msid3/msid4/msid5
 
-
-已关注和已点赞和已经收藏
-
 总练笔数总文章数总用户数
 //http://116.62.14.0:8402/loginback/count
-接口文档
-数据库设计说明
-实训项目流程
 
-// http://116.62.14.0:8402/upload/modifyPic
+获得所有反馈消息
+//http://116.62.14.0:8402/feedback GET请求
+添加反馈
+//http://116.62.14.0:8402/feedback POST请求
+data.fcontent,data.ftime,data.uid
 
-let sql_col = `SELECT COUNT(aid) FROM articlelikes WHERE aid=$1`;
-            pgdb.query(sql_col,[data.aid],(err,val1)=>{
-                if(err || val.rowCount < 0){
-                    console.log(err);
-                    res.json({status:'-2',data:'error'});
-                }else{
-                    let sql_mcol = `UPDATE article SET alikes=$1 WHERE aid=$2`
-                    pgdb.query(sql_mcol,[val1.rows[0].count,data.aid],(err,val2)=>{
-                        if(err || val.rowCount < 0){
-                            console.log(err);
-                            res.json({status:'-3',data:'error'});
-                        }else{
-                            res.json({status:'0',data:'点赞成功'});
-                        }
-                    })
-                }
-            })
-
-
-
-
-
-            let express = require('express');
-            let router = express.Router();
-            let fs = require('fs');
-            let {User} = require('../data/db');
-            let formidable = require('formidable');
-            let cacheFolder = 'public/images/';//放置路径
-            router.post('/modifyPic', function (req, res, next) {
-                let userDirPath = cacheFolder + "Img";
-                if (!fs.existsSync(userDirPath)) {
-                    fs.mkdirSync(userDirPath);//创建目录
-                }
-                let form = new formidable.IncomingForm(); //创建上传表单
-                form.encoding = 'utf-8'; //设置编码
-                form.uploadDir = userDirPath; //设置上传目录
-                form.keepExtensions = true; //保留后缀
-                form.maxFieldsSize = 2 * 1024 * 1024; //文件大小
-                form.type = true;
-                form.parse(req, function (err, fields, files) {
-                    if (err) {
-                        return res.json(err);
-                    }
-                    let extName = ''; //后缀名
-                    switch (files.file.type) {
-                        case 'image/pjpeg':
-                            extName = 'jpg';
-                            break;
-                        case 'image/jpeg':
-                            extName = 'jpg';
-                            break;
-                        case 'image/png':
-                            extName = 'png';
-                            break;
-                        case 'image/x-png':
-                            extName = 'png';
-                            break;
-                    }
-                    if (extName.length === 0) {
-                        return res.json({
-                            msg: '只支持png和jpg格式图片'
-                        });
-                    } else {
-                        let avatarName = '/' + Date.now() + '.' + extName;
-                        let newPath = form.uploadDir + avatarName;
-                        fs.renameSync(files.file.path, newPath); //重命名
-                        console.log(newPath)
-                        //更新表
-                        User.update({
-                            picture: newPath
-                        }, {
-                            where: {
-                                username: req.session.user.username
-                            }
-                        }).then(function (data) {
-                            if (data[0] !== undefined) {
-                                User.findAll({
-                                    where: {
-                                        username: req.session.user.username
-                                    }
-                                }).then(function (data) {
-                                    if (data[0] !== undefined) {
-                                        req.session.user.picture = data[0].dataValues.picture;
-                                        res.send(true);
-                                    } else {
-                                        res.send(false);
-                                    }
-                                })
-                            }
-                        }).catch(function (err) {
-                            console.log(err);
-                        });
-                    }
-                });
-            });
-
-
-
-            let sql_ufans = 'SELECT COUNT(uid) FROM userconcern WHERE uid = $1';
-            pgdb.query(sql_ufans,[uid],(err,val)=>{
-                if(err){
-                        res.json({status:'-1',data:'error'});
-                }else{
-                        let sql_users = 'UPDATE users SET ufans=$1 WHERE uid=$2';
-                        pgdb.query(sql_users,[val.rows[0].count,uid],(err,val)=>{
-                            if(err){
-                                    res.json({status:'-2',data:'error'})
-                            }else{
-                                let sql = `SELECT uid,uname,uemail,uimage,udescribe,ufans FROM users WHERE uid=$1`;
-                                pgdb.query(sql,[uid],(err,val)=>{
-                                    if(err || val.rowCount<=0){
-                                        res.json({status:'-3',data:'error'});
-                                    }else{
-                                        res.json({status:'0',data:val.rows[0]})
-                                    }
-                                })
-                            }
-                        })
-                    }
-            })
-        

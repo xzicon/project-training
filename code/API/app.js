@@ -19,6 +19,7 @@ var messageRouter = require('./routes/message');
 var searchRouter = require('./routes/searc');
 var usortRouter = require('./routes/usort');
 var uploadRouter = require('./routes/image');
+var feedbackRouter = require('./routes/feedback');
 //未实现图片上传
 var app = express();
 app.all("*", function (req, res, next) {
@@ -57,6 +58,7 @@ app.use('/message',messageRouter);
 app.use('/search',searchRouter);
 app.use('/usort',usortRouter);//感兴趣标签
 app.use('/upload',uploadRouter);//上传图片
+app.use('/feedback',feedbackRouter);//反馈
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

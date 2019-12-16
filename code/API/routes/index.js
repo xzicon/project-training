@@ -252,9 +252,10 @@ router.post('/',function(req,res,next){
 router.post('/update',(req,res,next)=>{
 	let data = req.body;
 	res.setHeader('Content-Type','text/html;charset=utf-8');
-	let sql = `UPDATE users SET uname=$1,udescrib=$2 WHERE uid=$3`;
+	let sql = `UPDATE users SET uname=$1,udescribe=$2 WHERE uid=$3`;
 	pgdb.query(sql,[data.uname,data.udescribe,data.uid],(err,val)=>{
 		if(err || val.rowCount<0){
+			console.log(err);
 			res.json({status:'-1',data:'error'})
 		}else{
 			res.json({status:'0',data:'修改成功'})

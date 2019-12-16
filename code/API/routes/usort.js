@@ -29,7 +29,7 @@ router.post('/update',(req,res,next)=>{
 		if(err || val.rowCount<0){
 			res.json({status:'-2',data:'error'})
 		}else{
-			let sql = `UPDATE usort SET msid=$2,$2),($1,$3),($1,$4),($1,$5),($1,$6)`;
+			let sql = `INSERT INTO usort  VALUES($1,$2),($1,$3),($1,$4),($1,$5),($1,$6)`;
 		        pgdb.query(sql,[data.uid,data.msid1,data.msid2,data.msid3,data.msid4,data.msid5],(err,val)=>{
                 	if(err){
                         	res.json({status:'-1',data:'error'})
