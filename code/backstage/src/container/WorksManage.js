@@ -54,7 +54,7 @@ export default class WorksManage extends Component {
                     <li style={{fontWeight:'bold'}}>作文内容</li>
                     <li style={{fontWeight:'bold'}}>所属素材</li>
                     <li style={{fontWeight:'bold'}}>用户</li>
-                    <li style={{width:'130px',fontWeight:'bold'}}>发布时间</li>
+                    <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
                     <li style={{fontWeight:'bold'}}>操作</li>
                 {
                     this.state.data.map((item,index)=>(
@@ -64,7 +64,7 @@ export default class WorksManage extends Component {
                             <li style={{overflow:'hidden'}}>{item.acontent}</li>
                             <li style={{overflow:'hidden'}}>{item.mtitle}</li>
                             <li>{item.uname}</li>
-                            <li style={{width:'130px',fontSize:'13.1px'}}>{item.utime}</li>
+                            <li style={{width:'160px'}}>{item.utime}</li>
                             <li><button onClick={(e)=>{this.deleteItem(e)}}>删除</button></li>
                         </ul>
                     ))

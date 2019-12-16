@@ -53,7 +53,7 @@ export default class Sucaicomment extends Component {
                     <li style={{fontWeight:'bold'}}>所属素材ID</li>
                     <li style={{fontWeight:'bold'}}>素材标题</li>
                     <li style={{fontWeight:'bold'}}>用户ID</li>
-                    <li style={{width:'130px',fontWeight:'bold'}}>发布时间</li>
+                    <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
                     <li style={{fontWeight:'bold'}}>操作</li>
                 {
                     this.state.comments.map((item,index)=>(
@@ -64,7 +64,7 @@ export default class Sucaicomment extends Component {
                             <li>{item.mid}</li>
                             <li style={{overflow:'hidden'}}>{item.mtitle}</li>
                             <li>{item.uid}</li>
-                            <li style={{width:'130px',fontSize:'13.1px'}}>{item.mctime}</li>
+                            <li style={{width:'160px'}}>{item.mctime}</li>
                             <li><button onClick={(e)=>{this.deleteItem(e)}}>删除</button></li>
                         </ul>
                     ))

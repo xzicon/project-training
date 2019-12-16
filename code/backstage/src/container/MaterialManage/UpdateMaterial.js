@@ -115,7 +115,7 @@ export default class UpdateMaterial extends Component {
                     <button type="primary" className='upload-button'>上传图片</button>
                     <div style={{width:'200px',height:'125px',border:'1px solid gray'}}>
                         {
-                        this.state.location.length===0 ? <p>请添加图片</p> :
+                        this.state.location.length===0 ? <p></p> :
                         <img src={`http://116.62.14.0:8402/images/`+this.state.location} alt='主题图片' style={{width:'200px',height:'100px'}}/>
                         }
                     </div>

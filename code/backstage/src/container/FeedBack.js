@@ -25,8 +25,8 @@ export default class FeedBack extends Component {
                 <li style={{fontWeight:'bold'}}>反馈内容</li>
                 <li style={{fontWeight:'bold'}}>用户ID</li>
                 <li style={{fontWeight:'bold'}}>用户名</li>
-                <li style={{width:'130px',fontWeight:'bold'}}>反馈时间</li>
                 <li style={{width:'160px',fontWeight:'bold'}}>用户邮箱</li>
+                <li style={{width:'150px',fontWeight:'bold'}}>反馈时间</li>
                 <li style={{fontWeight:'bold'}}>操作</li>
                 {
                   this.state.data.map((item,index)=>(
@@ -35,8 +35,8 @@ export default class FeedBack extends Component {
                       <li>{item.fcontent}</li>
                       <li>{item.uid}</li>
                       <li>{item.uname}</li>
-                      <li style={{width:'130px',fontSize:'13.1px'}}>{item.ftime}</li>
                       <li style={{width:'160px'}}>{item.uemail}</li>
+                      <li style={{width:'150px'}}>{item.ftime}</li>
                       <li><button>删除</button></li>
                     </ul>
                   ))

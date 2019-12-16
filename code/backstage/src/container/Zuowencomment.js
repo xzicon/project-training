@@ -51,7 +51,7 @@ export default class Zuowencomment extends Component {
                     <li style={{fontWeight:'bold'}}>所属作文ID</li>
                     <li style={{fontWeight:'bold'}}>作文标题</li>
                     <li style={{fontWeight:'bold'}}>用户ID</li>
-                    <li style={{width:'130px',fontWeight:'bold'}}>发布时间</li>
+                    <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
                     <li style={{fontWeight:'bold'}}>操作</li>
                 {
                     this.state.comments.map((item,index)=>(
@@ -62,7 +62,7 @@ export default class Zuowencomment extends Component {
                             <li>{item.aid}</li>
                             <li>{item.atitle}</li>
                             <li>{item.uid}</li>
-                            <li style={{width:'130px',fontSize:'13.1px'}}>{item.actime}</li>
+                            <li style={{width:'160px'}}>{item.actime}</li>
                             <li><button onClick={(e)=>{this.deleteItem(e)}}>删除</button></li>
                         </ul>
                     ))

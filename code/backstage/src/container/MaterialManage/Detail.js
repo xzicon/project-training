@@ -72,7 +72,7 @@ export default class Detail extends Component {
                     <li style={{fontWeight:'bold'}}>素材解析</li>
                     <li style={{fontWeight:'bold'}}>素材内容</li>
                     <li style={{fontWeight:'bold'}}>出处</li>
-                    <li style={{width:'140px',fontWeight:'bold'}}>发布时间</li>
+                    <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
                     <li style={{fontWeight:'bold'}}>操作</li>
                 {
                     this.state.data.map((item,index)=>(
@@ -82,7 +82,7 @@ export default class Detail extends Component {
                             <li style={{overflow:'hidden'}}>{item.manalyse}</li>
                             <li style={{overflow:'hidden'}}>{item.mcontent}</li>
                             <li style={{overflow:'hidden'}}>{item.mlocal}</li>
-                            <li style={{width:'140px',fontSize:'13.1px'}}>{item.mtime}</li>
+                            <li style={{width:'160px'}}>{item.mtime}</li>
                             <li>
                                 <Link to={`/home/material/updatematerial${search}&mid=${item.mid}`}>
                                     <button style={{width:'50px',height:'25px'}}>编辑</button>

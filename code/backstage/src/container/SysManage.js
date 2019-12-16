@@ -24,7 +24,7 @@ export default class System extends Component {
   }
   render() {
     return (
-        <div>
+        <div style={{paddingTop:'60px'}}>
             <div className='count' style={{marginLeft:'200px'}}>
                 <p>累计用户数量</p>
                 <p className='number'>{this.state.data[0].uid}</p>
