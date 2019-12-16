@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Tabs,NavBar,TabBar,Flex,Icon, WhiteSpace,List} from 'antd-mobile';
+import {Tabs,NavBar,TabBar,Flex,Icon, WhiteSpace,List,Button} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 const Item = List.Item;
 export default class Mine extends Component {
@@ -20,7 +20,7 @@ export default class Mine extends Component {
             console.log(res.data);
         })
     }
-
+    
     render() {
         console.log(this.state.data);
         return (
@@ -108,7 +108,7 @@ export default class Mine extends Component {
         
           <div style={{width:'96%',margin:'2% 2% auto',backgroundColor:'#fff',marginTop:'54px',fontSize:'16px'}}>
               <Flex>
-            <img style={{marginLeft:'10px',marginTop:'10px',borderRadius:'100%',width:'24%'}} src='/images/apptab/inform (2).png'/>
+            <img style={{marginLeft:'10px',marginTop:'10px',borderRadius:'100%',width:'24%'}} src={`http://116.62.14.0:8402/images/`+this.state.data.uimage}/>
             <div style={{width:'80%',float:'right',backgroundColor:'white',paddingLeft:'2%',paddingTop:'2%'}}>
                 <a>昵称：{this.state.data.uname}</a>
               <Link to={{pathname:'/mine/personal',state:this.state.data.uid,uname:this.state.data.uname,udescribe:this.state.data.udescribe}}>
@@ -166,7 +166,8 @@ export default class Mine extends Component {
                     <Link to={{pathname:'/mine/mnew',state:this.props.location.state}}>
                         我评论的
                         </Link>
-                    </div>             
+                    </div>  
+                             
                 </Flex>
             </div>
             <div style={{width:'96%',backgroundColor:'#fff',margin:'2% 2% auto'}}>

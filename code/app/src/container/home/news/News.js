@@ -39,7 +39,7 @@ export default class News extends Component {
                         <img src="/images/home/pinglun1.png" />  回复列表
                         <br/>
                         <div style={{width:'100%',textAlign:'center'}}>
-                        {this.state.data?this.state.data.map(data=>(
+                        {this.state.data.length!==0?this.state.data.map(data=>(
                             <div>
                                 <br/>{data.uname}<br/>
                             </div>

@@ -117,7 +117,6 @@ export default class Write extends Component {
                     </List>
                     <div className='upload-container' style={{marginTop:'400px'}}>
                     <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
-                    {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
                 </div>
                 {this.state.data.length!==0?<img src={`http://116.62.14.0:8402/images/`+this.state.data}/>:<div></div>}
                 </div>

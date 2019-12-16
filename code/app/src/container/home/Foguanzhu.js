@@ -62,7 +62,7 @@ export default class Foguanzhu extends Component {
                 
                     <div>
                 <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>
-                {this.state.data?this.state.data.map(data=>(
+                {this.state.data.length!==0?this.state.data.map(data=>(
                     <div style={{width:'96%',margin:'2% 2% auto',height:'60px',backgroundColor:'#fff',marginTop:'10px',padding:'4% 4%'}}>
                         <Flex>
                             <div style={{marginRight:'10%'}}><img src={`http://116.62.14.0:8402/images/${data.uimage}`} style={{height:'60px'}}/></div>
@@ -70,7 +70,7 @@ export default class Foguanzhu extends Component {
                             <div><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='已关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>
                         </Flex>
                     </div>
-                    )):<div>2222</div>}
+                    )):<div>他还没有关注过任何人</div>}
                 </div>
                 </div>
                 

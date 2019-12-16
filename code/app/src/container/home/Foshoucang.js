@@ -23,8 +23,8 @@ export default class Foshoucang extends Component {
             <div>
                 <div style={{width:'100%'}}>
                     
-                    {this.state.data.map(data=>(
-                        <Link to={{pathname:'/composition/mdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>
+                    {this.state.data.length!==0?this.state.data.map(data=>(
+                        <Link to={{pathname:'/home/composition/mdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>                      
                             <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                 {data.mtime}
@@ -34,7 +34,7 @@ export default class Foshoucang extends Component {
                             <br/>{data.mcontent}
                         </div>
                         </Link>
-                    ))}
+                    )):<div>他还没有收藏~</div>}
                     
                 </div>
             </div>

@@ -38,8 +38,6 @@ export default class Home extends Component {
         })
     }
     render() {
-        let arr=this.props.location.pathname.split('/');
-        var data1='/'+arr[1];
         return (
             <div>
                 <div style={{ 
@@ -81,7 +79,7 @@ export default class Home extends Component {
                                     <Link to={{pathname:'/home/search',state:this.props.location.state}}><button>搜索</button></Link>
                                 </div>
                                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                                    <Link to={{pathname:'/home/follow/'+this.props.location.state,state:this.props.location.state,state2:this.props.location.state2,state4:this.props.location.state4}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
+                                    <Link to={{pathname:'/home/follow/'+this.props.location.state,state:this.props.location.state,state4:this.props.location.state4}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
                                     <Link to={{pathname:'/home',state:this.props.location.state}} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'24px',marginLeft:'10px'}}>推荐</Link>
                                 </div>
                                 

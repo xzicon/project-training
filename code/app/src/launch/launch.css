@@ -1,5 +1,5 @@
 html,body{
-    height:100%; width:100%; overflow:hidden; margin:0;padding:0;
+    height:100%; width:100%; margin:0;padding:0;
 }
 /* 启动页 */
 .bg_start{
@@ -48,6 +48,8 @@ html,body{
     background-size:100% 100%;
     position: fixed;
     top:0;right:0;
+    position: 'absolute';
+    bottom: '0px';
 }
 .bg_register{
     width:100%;

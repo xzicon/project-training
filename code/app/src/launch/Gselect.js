@@ -77,9 +77,6 @@ export default class Gselect extends Component {
                         <li style={{width:'30%',fontSize:'140%',listStyle:'none',display:'inline-block',textAlign:'center',lineHeight:'180%'}}><input type="checkbox"  name="biaoqian" value={data.msid} onChange={this.handleChange}/>{data.msname}</li>
                     ))}
                     </div>
-                    <div>
-                        {this.state.value[0]}
-                    </div>
             </div>
         )
     }

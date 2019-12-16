@@ -96,9 +96,9 @@ export default class Composition extends Component {
                                 </div>
                                 <div>
                                     <Link to={{pathname:url,state:this.props.location.state}}>推荐</Link>
-                                {this.state.data.length===0?this.state.data.map(data => (
+                                {this.state.data.map(data => (
                                     <Link to={{pathname:url,search:`?msid=${data.msid}`,mtab3:data.msid,state:this.props.location.state}}><div>{data.msname}</div></Link>
-                                )):<p></p>}
+                                ))}
                                 <Link to={{pathname:'/gselect',state:this.props.location.state}}>修改标签</Link>
                                 </div>
                                 <div>

@@ -10,10 +10,8 @@ export default class Fans extends Component {
     }
     componentDidMount(){
         let page=this.props.location.state;
-        let ppage=this.props.location.state4;
-        let id=(ppage===2)?page:ppage;
-        console.log(page,ppage,id);
-        fetch('http://116.62.14.0:8402/login/fans/'+id)
+        console.log(page);
+        fetch('http://116.62.14.0:8402/login/fans/'+page)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -21,9 +19,13 @@ export default class Fans extends Component {
         })
     }
     fetchConcern = (e)=>{
+        let item = e.target.parentNode.parentNode;
+        console.log(item);
+        console.log(item.children[0].innerHTML);
+        let obj = {upid:item.children[0].innerHTML}
         let data = {
             uid:this.props.location.state,
-            upid:this.props.location.state2
+            upid:obj.upid
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/login/userconcern', {
@@ -49,6 +51,7 @@ export default class Fans extends Component {
         })
     }
     render() {
+        console.log(this.state.data.length);
         return (
             <div>
                 <NavBar
@@ -57,15 +60,16 @@ export default class Fans extends Component {
                     onLeftClick={() => console.log('onLeftClick')}>粉丝</NavBar>
                     
                 <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>
-                {this.state.data.map(data=>(                    
+                {this.state.data.length!==0?this.state.data.map(data=>(                    
                     <div style={{width:'96%',margin:'2% 2% auto',height:'60px',backgroundColor:'#fff',marginTop:'10px',padding:'4% 4%'}}>
                         <Flex>
+                        <div style={{width:'0'}}>{data.uid}</div>
                             <div style={{marginRight:'10%'}}><img src={`http://116.62.14.0:8402/images/${data.uimage}`} style={{height:'60px'}}/></div>
                             <div style={{marginRight:'22%'}}>{data.uname}</div>
                             <div><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='concern' value='关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>
                         </Flex>
                     </div>   
-                    ))}
+                    )):<div>你还没有粉丝</div>}
                 </div>
                 
             </div>

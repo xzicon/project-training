@@ -71,7 +71,7 @@ export default class App extends Component {
                     <Route path='/home/write/follow' exact component={Write}/>
                     <Route path='/home/home/crnew/write' component={Write}/>
                     <Route path='/home/article/:page' component={Article}/>
-                    <Route path='/home/follow/article/:page' component={Article}/>
+                    <Route path='/home/article/home/:page' component={Article}/>
                     <Route path='/home/home/crnew/article/:page' component={Article}/>
                     <Route path='/home/home/search/search/article/:page' component={Article}/>
                     <Route path='/home/news' component={News}/>
@@ -79,7 +79,9 @@ export default class App extends Component {
                     <Route path='/home/manage' component={Manage}/>
                     <Route path='/home/comment' component={Comment}/>
                     <Route path='/home/crnew' component={Crnew}/>
-                    <Route path='/home/search' component={Search}/>
+                    <Route path='/home/search' exact component={Search}/>
+                    <Route path='/home/search/follow' exact component={Search}/>
+                    <Route path='/home/home/crnew/search' component={Search}/>
                     <Route path='/home/fopeople' component={Fopeople}/>
 
                     {/* 素材 */}
@@ -91,6 +93,7 @@ export default class App extends Component {
                     <Route path='/composition/label/sdetails/:page' component={Sdetails}/>
                     <Route path='/composition/search/sucai/sdetails/:page' component={Sdetails}/>
                     <Route path='/composition/mdetails/:page' component={Mdetails}/>
+                    <Route path='/home/composition/mdetails/:page' component={Mdetails}/>
                     <Route path='/composition/lwrite' component={Lwrite}/>
                     <Route path='/composition/lcomment' component={Lcomment}/>
                     <Route path='/composition/csearch' component={Csearch}/>

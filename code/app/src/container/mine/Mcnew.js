@@ -22,7 +22,7 @@ export default class Mcnew extends Component {
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>评论</NavBar>
                     <div style={{width:'100%',position:'absolute',top:'50px',zIndex:'99'}}>

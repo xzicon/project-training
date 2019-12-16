@@ -23,14 +23,14 @@ export default class Article extends Component {
             console.log(res.data);
         })
     }
-    componentDidUpdate(){
-        let page = this.props.location.state1;
-        fetch('http://116.62.14.0:8402/article/xiangqing/'+page)
-        .then((res)=>res.json())
-        .then((res)=>{
-            this.setState({data:res.data});
-        })
-    }
+    // componentDidUpdate(){
+    //     let page = this.props.location.state1;
+    //     fetch('http://116.62.14.0:8402/article/xiangqing/'+page)
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         this.setState({data:res.data});
+    //     })
+    // }
     fetchGood = (e)=>{
         let data = {
             uid:this.props.location.state,
@@ -112,7 +112,7 @@ export default class Article extends Component {
         console.log(data1);
         return (
             <div>
-                {this.state.data.map(data=>(
+                {this.state.data.length?this.state.data.map(data=>(
                     <div>
                 <NavBar
                     icon={<Link to={{pathname:data1,state1:this.props.location.state1,state:this.props.location.state,state2:this.props.location.state2}}><Icon type="left" style={{color:'#000'}}/></Link>}
@@ -126,17 +126,18 @@ export default class Article extends Component {
                     <div style={{margin:'2% 2% auto',backgroundColor:'#f1edea',whiteSpace:"pre-wrap"}}>
                         <h2 style={{textAlign:'center'}}>{data.atitle}<br/>{data.alikes}</h2>
                         {data.acontent}<br/>
-                        <br/><br/>{data.atag}<br/><img src={`http://116.62.14.0:8402/images/`+data.aimage}/>
+                        <br/><br/>{data.atag}<br/>
+                        {data.aimage.length!==0?<img src={`http://116.62.14.0:8402/images/`+data.aimage}/>:<p></p>}
                     </div>
                     </div></div>
-                    ))}
+                    )):<div></div>}
                     <div style={{margin:'2% 2% auto',position:'absolute',top:'200px',zIndex:99}}>
                         <hr/>
                         <Link to={{pathname:url,state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>精彩评论</span></Link>
                         <Route path={`${url}`} component={Commentzuire} />
                     </div>
                     {/* state:uid */}
-                    <footer style={{width:'100%',marginTop:'10px',backgroundColor:'#fff', bottom:'0px',position:'fixed'}}>
+                    <footer style={{width:'100%',marginTop:'20px',backgroundColor:'#fff', bottom:'0px',position:'fixed',height:'40px',zIndex:'1000'}}>
                                 <Link to={{pathname:'/home/comment',state1:this.props.location.state1,state:this.props.location.state}}>
                                 <div style={{width:'8%',float:'left',margin:'0% 12%',color:'#000'}}><img src={`/images/home/${item[0].img}.png`} /></div>
                                 </Link>
