@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Leader from '../components/Leader';
 import Sider from '../components/Sider';
-import System from './SysManage';
+import SysManage from './SysManage';
 import ComManage from './ComManage';
 import UserManage from './UserManage';
 import WorksManage from './WorksManage';
@@ -25,7 +25,7 @@ export default class Home extends Component {
                 </div>
                 <div className='content'>
                     <Switch>
-                    <Route exact path='/home/' component={System}/>
+                    <Route exact path='/home/' component={CountManage}/>
                     <Route path='/home/users' component={UserManage}/>
                     <Route path='/home/material/updatematerial' component={UpdateMaterial}/>
                     <Route path='/home/material/addmaterial' component={AddMaterial}/>
@@ -33,7 +33,7 @@ export default class Home extends Component {
                     <Route path='/home/material' component={MaterialManage}/>
                     <Route path='/home/works' component={WorksManage}/>
                     <Route path='/home/comment' component={ComManage}/>
-                    <Route path='/home/count' component={CountManage}/>
+                    <Route path='/home/system' component={SysManage}/>
                     <Route path='/home/feedback' component={FeedBack}/>
                     <Route path='/home/sucaicomment' component={Sucaicomment}/>
                     <Route path='/home/zuowencomment' component={Zuowencomment}/>

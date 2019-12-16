@@ -1,40 +1,43 @@
 import React, { Component } from 'react'
 
 export default class CountManage extends Component {
-    constructor(){
-        super();
-        this.state={
-          users:[]
-        }
-      }
-      componentDidMount(){
-        fetch('http://116.62.14.0:8402/loginback')
-        .then((res)=>res.json())
-        .then((res)=>{
-          // console.log(res.data)
-          this.setState({
-            users:res.data
-          })
+  constructor(){
+    super();
+    this.state={
+        data:[
+            {
+                mid:'',
+                aid:'',
+                uid:''
+            }
+        ]
+    }
+  }
+  componentDidMount(){
+    fetch('http://116.62.14.0:8402/loginback/count')
+    .then((res)=>res.json())
+    .then((res)=>{
+        this.setState({
+            data:res.data
         })
-      }
-      render() {
-          return (
-            <div>
-              <ul className='sys_title' style={{width:'600px',height:'200px',margin:'50px 0 0 100px'}}>
-                <li style={{fontWeight:'bold'}}>用户名</li>
-                <li style={{fontWeight:'bold'}}>邮箱</li>
-                <li style={{fontWeight:'bold'}}>操作</li>
-                {
-                  this.state.users.map((item,index)=>(
-                    <ul className='sys_title' key={index}>
-                      <li>{item.maname}</li>
-                      <li>{item.memail}</li>
-                      <li><button>编辑</button><button>删除</button></li>
-                    </ul>
-                  ))
-                }
-              </ul>
+    })
+  }
+  render() {
+    return (
+        <div style={{paddingTop:'60px'}}>
+            <div className='count' style={{marginLeft:'200px'}}>
+                <p>累计用户数量</p>
+                <p className='number'>{this.state.data[0].uid}</p>
             </div>
-          )
-      }
+            <div className='count'>
+                <p>素材总量</p>
+                <p className='number'>{this.state.data[0].mid}</p>
+            </div>
+            <div className='count'>
+                <p>作文总量</p>
+                <p className='number'>{this.state.data[0].aid}</p>
+            </div>
+        </div>
+    )
+  }    
 }
