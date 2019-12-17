@@ -98,20 +98,43 @@ router.get('/userconcern/:uid',(req,res,next)=>{
 		if(err){
 			res.json({status:'-1',data:'error'})
 		}else{
-//			if(val.rowCount===0){
-  //                              res.json({status:'1',data:'还没有关注人'})
-    //                    }else{
-                                res.json({status:'0',data:val.rows})
-      //                  }
-
+                        res.json({status:'0',data:val.rows})
 		}
 	})
 })
+//用户关注列表（优化）解决查看个人主页关注列表的问题
+router.get('/guanzhu/:uid/:look',(req,res,next)=>{
+        let uid = req.params.uid;
+	let look = req.params.look;
+	/*if(uid===look){
+        let sql = `SELECT b.uid as taid,b.uname,b.udescribe,b.uid as woid FROM userconcern as a LEFT JOIN users as b ON a.upid = b.uid WHERE a.uid = $1`;
+        pgdb.query(sql,[uid],(err,val)=>{
+                if(err || val.rowCount<0){
+			console.log(err)
+                        res.json({status:'-1',data:'error'})
+                }else{
+                        res.json({status:'0',data:val.rows})
+                }
+        })
+	}else{*/
+		let sql = `select * from (select a.upid as taid,c.uname,c.udescribe  from userconcern as a LEFT JOIN users as c ON c.uid=a.upid WHERE a.uid=$1) as b LEFT JOIN (select d.upid as woid from userconcern as d where d.uid=$2) as e ON b.taid=e.woid`;
+		pgdb.query(sql,[uid,look],(err,val)=>{
+			if(err || val.rowCount<0){
+				res.json({status:'-2',data:'error'})
+			}else{
+				res.json({status:'1',data:val.rows})
+			}
+		})
+//	}
+})
+
 //用户粉丝列表显示
 router.get('/fans/:uid',(req,res,next)=>{
 	let uid = req.params.uid;
-	let sql = `SELECT b.* FROM userconcern as a LEFT JOIN users as b ON a.uid = b.uid WHERE a.upid = $1`;
-        pgdb.query(sql,[uid],(err,val)=>{
+	//let sql = `SELECT b.*,c.uid as guanzhu FROM userconcern as a LEFT JOIN users as b ON a.uid = b.uid LEFT JOIN userconcern as c ON c.upid=b.uid WHERE a.upid = $1`;
+        //let sql = `SELECT b.* as guanzhu FROM userconcern as a LEFT JOIN users as b ON a.uid = b.uid WHERE a.upid = $1`;
+	let sql = `select d.*,c.* as guanzhu from (select u.uid as fans from userconcern as u where u.upid=$1) as a LEFT JOIN (select b.upid as guanzhu from userconcern as b where b.uid=$1)  as c ON a.fans = c.guanzhu LEFT JOIN users as d ON d.uid=a.fans`;
+	pgdb.query(sql,[uid],(err,val)=>{
                 if(err){
                         res.json({status:'-1',data:'error'})
                 }else{
@@ -181,7 +204,20 @@ router.get('/acomment/:uid',(req,res,next)=>{
                 }
         })
 })
-
+//我的获赞
+router.get('/likes/:uid',(req,res,next)=>{
+	let uid = req.params.uid;
+	//let sql = `select c.*,d.* from (select a.aid,a.atitle from article as a LEFT JOIN users as b ON a.uid=b.uid WHERE b.uid=$1) as c LEFT JOIN (select e.aid,f.uid,f.uname from articlelikes as e LEFT JOIN users as f ON e.uid=f.uid) as d ON c.aid=d.aid `;
+	let sql = `select d.uid,d.uimage,d.uname,d.udescribe,c.aid,c.atitle,c.acontent FROM (select a.uid,b.aid,b.atitle,b.acontent from articlelikes as a LEFT JOIN article as b ON a.aid=b.aid WHERE b.uid=$1) as c LEFT JOIN users as d ON c.uid=d.uid`;
+	pgdb.query(sql,[uid],(err,val)=>{
+		if(err || val.rowCount<0){
+			console.log(err);
+			res.json({status:'-1',data:'error'})
+		}else{
+			res.json({status:'0',data:val.rows})
+		}
+	})
+})
 //用户的动态显示
 router.get('/article/:uid',(req,res,next)=>{
     let uid = req.params.uid;
@@ -252,8 +288,8 @@ router.post('/',function(req,res,next){
 router.post('/update',(req,res,next)=>{
 	let data = req.body;
 	res.setHeader('Content-Type','text/html;charset=utf-8');
-	let sql = `UPDATE users SET uname=$1,udescribe=$2 WHERE uid=$3`;
-	pgdb.query(sql,[data.uname,data.udescribe,data.uid],(err,val)=>{
+	let sql = `UPDATE users SET uname=$1,udescribe=$2,uimage=$4 WHERE uid=$3`;
+	pgdb.query(sql,[data.uname,data.udescribe,data.uid,data.uimage],(err,val)=>{
 		if(err || val.rowCount<0){
 			console.log(err);
 			res.json({status:'-1',data:'error'})
@@ -262,6 +298,19 @@ router.post('/update',(req,res,next)=>{
 		}
 	})
 
+})
+router.post('/del',(req,res,next)=>{
+	let data = req.body;
+	res.setHeader('Content-Type','text/html;charset=utf-8');
+	let sql = `DELETE FROM users WHERE uid=$1`;
+	pgdb.query(sql,[data.uid],(err,val)=>{
+		if(err || val.rowCount<0){
+			console.log(err);
+			res.json({status:'-1',data:'error'})
+		}else{
+			res.json({status:'0',data:'删除成功'})
+		}
+	})
 })
 module.exports = router;
 

@@ -44,9 +44,10 @@ router.post('/update',(req,res,next)=>{
 })
 
 router.get('/tiaoguo',(req,res,next)=>{
-	let sql_ms = `SELECT * FROM material ORDER BY mcomment DESC  LIMIT 10`;
+	let sql_ms = `SELECT * FROM material as a LEFT JOIN msort as b ON a.msid=b.msid   ORDER BY mcollect DESC  LIMIT 30`;
         pgdb.query(sql_ms,[],(err,val1)=>{
         			if(err || val1.rowCount<0){
+						console.log(err)
                                                 res.json({status:'-1',data:'error'})
                                         }else{
                                                 res.json({status:'0',data:val1.rows})
