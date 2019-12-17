@@ -9,8 +9,8 @@ export default class App extends Component {
   render() {
     return (
       <Router>
+        <Header/>
         <div style={{width:'100%',height:'100%',float:'left'}}>
-          <Header/>
           <div className='main' style={{width:'100%',height:'500px',float:'left'}}>
             <Route exact path='/' component={Login}/>
             <Route path='/home' component={Home}/>

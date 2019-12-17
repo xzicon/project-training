@@ -30,11 +30,11 @@ export default class CountManage extends Component {
                 <p className='number'>{this.state.data[0].uid}</p>
             </div>
             <div className='count'>
-                <p>素材总量</p>
+                <p>目前素材总量</p>
                 <p className='number'>{this.state.data[0].mid}</p>
             </div>
             <div className='count'>
-                <p>作文总量</p>
+                <p>用户创作总量</p>
                 <p className='number'>{this.state.data[0].aid}</p>
             </div>
         </div>

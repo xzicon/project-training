@@ -20,7 +20,7 @@ export default class FeedBack extends Component {
     render() {
         return (
             <div>
-              <ul className='user_title' style={{width:'1000px',height:'200px',margin:'50px 0 0 50px'}}>
+              <ul className='user_title' style={{width:'900px',height:'200px',margin:'30px 0 0 30px'}}>
                 <li style={{fontWeight:'bold'}}>反馈ID</li>
                 <li style={{fontWeight:'bold'}}>反馈内容</li>
                 <li style={{fontWeight:'bold'}}>用户ID</li>

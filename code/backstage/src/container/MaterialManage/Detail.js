@@ -66,16 +66,19 @@ export default class Detail extends Component {
         let search = this.props.location.search;
         return (
             <div>
-                <ul className='works_title' style={{width:'1000px',height:'200px'}}>
-                    <li style={{fontWeight:'bold'}}>素材id</li>
-                    <li style={{fontWeight:'bold'}}>素材标题</li>
-                    <li style={{fontWeight:'bold'}}>素材解析</li>
-                    <li style={{fontWeight:'bold'}}>素材内容</li>
-                    <li style={{fontWeight:'bold'}}>出处</li>
-                    <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
-                    <li style={{fontWeight:'bold'}}>操作</li>
-                {
-                    this.state.data.map((item,index)=>(
+                <div style={{width:'950px',height:'400px'}}>
+                    <ul className='works_title' style={{width:'1000px',height:'50px'}}>
+                        <li style={{fontWeight:'bold'}}>素材id</li>
+                        <li style={{fontWeight:'bold'}}>素材标题</li>
+                        <li style={{fontWeight:'bold'}}>素材解析</li>
+                        <li style={{fontWeight:'bold'}}>素材内容</li>
+                        <li style={{fontWeight:'bold'}}>出处</li>
+                        <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
+                        <li style={{fontWeight:'bold'}}>操作</li>
+                    </ul>
+                    <div style={{width:'950px',height:'400px',float:'left',overflowY:'auto'}}>
+                    {
+                      this.state.data.map((item,index)=>(
                         <ul className='works_title' key={index}>
                             <li>{item.mid}</li>
                             <li style={{overflow:'hidden'}}>{item.mtitle}</li>
@@ -90,9 +93,10 @@ export default class Detail extends Component {
                                 <button onClick={(e)=>{this.deleteItem(e)}}>删除</button>
                             </li>
                         </ul>
-                    ))
-                }
-                </ul>
+                      ))
+                    }
+                </div>
+                </div>
             </div>
         )
     }

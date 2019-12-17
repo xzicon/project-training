@@ -89,7 +89,7 @@ export default class AddMaterial extends Component {
                 <textarea id='analyse' type='text' placeholder='素材分析'></textarea>    
                 <textarea id='content' type='text' placeholder='素材内容' ></textarea>   
                 <div className='upload-container'>
-                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
+                    <input type="file" name="image" accept='image/*' className='upload-input' onChange={(e)=>this.onChange(e)} />
                     <button type="primary" className='upload-button'>上传图片</button>
                     <div style={{width:'200px',height:'125px',border:'1px solid gray'}}>
                     {
@@ -98,7 +98,7 @@ export default class AddMaterial extends Component {
                     }
                     </div>
                 </div>
-                <div style={{width:'200px',height:'120px',float:'left',padding:'120px 0 0 0'}}>
+                <div style={{width:'200px',height:'120px',float:'left',padding:'100px 0 0 40px'}}>
                     <button style={{width:'65px',height:'35px'}} onClick={()=>this.handleClick(msid)}>提交</button>
                     <button style={{width:'65px',height:'35px',marginLeft:'50px'}} onClick={()=>this.handleOver(msid)}>取消</button>
                 </div> 

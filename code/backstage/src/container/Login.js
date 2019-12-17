@@ -24,6 +24,7 @@ export default class Login extends Component {
                     break;
                 case '1':
                     alert('密码输入错误');
+                    document.getElementById('pwd').value='';
                     break;
                 case '2':
                     alert('用户不存在');

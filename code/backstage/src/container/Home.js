@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Leader from '../components/Leader';
-import Sider from '../components/Sider';
 import SysManage from './SysManage';
 import ComManage from './ComManage';
 import UserManage from './UserManage';
@@ -14,6 +13,7 @@ import AddMaterial from './MaterialManage/AddMaterial';
 import UpdateMaterial from './MaterialManage/UpdateMaterial';
 import MaterialManage from './MaterialManage/MaterialManage';
 import FeedBack from './FeedBack';
+import SearchDetail from './MaterialManage/SearchDetail';
 
 export default class Home extends Component {
     render() {
@@ -25,8 +25,9 @@ export default class Home extends Component {
                 </div>
                 <div className='content'>
                     <Switch>
-                    <Route exact path='/home/' component={CountManage}/>
+                    <Route exact path='/home' component={CountManage}/>
                     <Route path='/home/users' component={UserManage}/>
+                    <Route path='/home/search' component={SearchDetail}/>
                     <Route path='/home/material/updatematerial' component={UpdateMaterial}/>
                     <Route path='/home/material/addmaterial' component={AddMaterial}/>
                     <Route path='/home/material/:mtab' component={Sucai}/>
@@ -38,9 +39,6 @@ export default class Home extends Component {
                     <Route path='/home/sucaicomment' component={Sucaicomment}/>
                     <Route path='/home/zuowencomment' component={Zuowencomment}/>
                     </Switch>
-                </div>
-                <div className='sider'>
-                    <Sider/>
                 </div>
             </div>
             </Router>

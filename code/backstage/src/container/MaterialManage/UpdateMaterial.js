@@ -26,6 +26,7 @@ export default class UpdateMaterial extends Component {
         let mid = this.props.location.search.split('=')[2];
         let msid0 = this.props.location.search.split('=')[1];
         let msid1 = msid0.split('&')[0];
+        let image = this.state.location ? '': this.state.location;
         let title = document.getElementById('title').value;
         let local = document.getElementById('local').value;
         let analyse = document.getElementById('analyse').value;
@@ -44,7 +45,7 @@ export default class UpdateMaterial extends Component {
             manalyse:analyse,
             mcontent:content,
             msid:msid1,
-            // mimage:,
+            mimage:image,
             mtime:Y+M+D+h+m+s
         }
         fetch('http://116.62.14.0:8402/aud/updatematerial',{
@@ -75,7 +76,8 @@ export default class UpdateMaterial extends Component {
         }
     }
     handleOver = ()=>{
-        let msid = this.props.location.search.split('=')[1];
+        let msid0 = this.props.location.search.split('=')[1];
+        let msid = msid0.split('&')[0];
         if(msid==6 || msid==7){
             this.props.history.push(`/home/material/jifa/detail?msid=${msid}`);
         }else if(35<=msid<=39 || msid==5 ||msid==4){
@@ -103,7 +105,7 @@ export default class UpdateMaterial extends Component {
         })
     }
     render() {
-        console.log(this.state.location)
+        let msid = this.props.location.search.split('=')[1];
         return (
             <div className='add_material'>
                 <textarea id='title' type='text' placeholder='素材标题' style={{width:'490px',height:'22px',paddingLeft:'10px'}}></textarea> 
@@ -111,7 +113,7 @@ export default class UpdateMaterial extends Component {
                 <textarea id='analyse' type='text' placeholder='素材分析'></textarea>    
                 <textarea id='content' type='text' placeholder='素材内容' ></textarea>  
                 <div className='upload-container'>
-                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
+                    <input type="file" name="image" accept='image/*' className='upload-input' onChange={(e)=>this.onChange(e)} />
                     <button type="primary" className='upload-button'>上传图片</button>
                     <div style={{width:'200px',height:'125px',border:'1px solid gray'}}>
                         {
@@ -120,9 +122,9 @@ export default class UpdateMaterial extends Component {
                         }
                     </div>
                 </div>
-                <div style={{width:'200px',height:'120px',float:'left',padding:'120px 0 0 0'}}>
+                <div style={{width:'200px',height:'120px',float:'left',padding:'100px 0 0 40px'}}>
                     <button style={{width:'65px',height:'35px'}} onClick={()=>this.handleClick()}>保存</button>
-                    <button style={{width:'65px',height:'35px',marginLeft:'50px'}} onClick={()=>this.handleOver()}>取消</button>
+                    <button style={{width:'65px',height:'35px',marginLeft:'50px'}} onClick={()=>this.handleOver(msid)}>取消</button>
                 </div>  
             </div>
         )

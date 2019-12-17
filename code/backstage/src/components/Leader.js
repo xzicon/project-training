@@ -13,19 +13,26 @@ export default class Leader extends Component {
             className:e.target.getAttribute('index')
         })
     }
-    componentDidUpdate(prevProps,prevState){
-        if(prevState.className !== this.state.className){
-            let newClassName = this.state.className;
-            // console.log(newClassName);
-            this.setState({
-                className:newClassName
-            })
-        }
-    }
+    // componentDidMount(){
+    //     let newClassName = this.state.className;
+    //         // console.log(newClassName);
+    //         this.setState({
+    //             className:newClassName
+    //     })
+    // }
+    // componentDidUpdate(prevProps,prevState){
+    //     if(prevState.className !== this.state.className){
+    //         let newClassName = this.state.className;
+    //         // console.log(newClassName);
+    //         this.setState({
+    //             className:newClassName
+    //         })
+    //     }
+    // }
     render() {
         return (
             <div className='leaderwrap'>
-                <Link to='/home/'>
+                <Link to='/home'>
                     <button className={this.state.className==1?'leader_btns':'noset'} onClick={this.handleClick} index={1}>首页</button>
                 </Link>
                 <Link to='/home/users'>
