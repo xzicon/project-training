@@ -13,8 +13,8 @@ export default class Material extends Component {
     componentDidMount(){
         let mtab1 = this.props.location.mtab1;
         let state = this.props.location.state;
-        let id = this.props.location.search.split('=')[1] ? 'zuire/':'zuixin/';
-        console.log(mtab1);
+        let id = (this.props.location.search.split('=')[1]=== 'zuire' || this.props.location.search.split('=')[1])? 'zuire/' :'zuixin/';
+        console.log(mtab1,id);
         console.log(state);
         fetch('http://116.62.14.0:8402/material/'+id+mtab1)
         .then((res)=>res.json())
@@ -26,7 +26,7 @@ export default class Material extends Component {
     componentDidUpdate(prevProps, prevState){
         if(prevProps.location.search !== this.props.location.search){
             let mtab1 = this.props.location.mtab1;
-            let id = this.props.location.search.split('=')[1] ? 'zuire/':'zuixin/';
+            let id = this.props.location.search.split('=')[1]==='zuire' || this.props.location.search==='' ? 'zuire/':'zuixin/';
             fetch('http://116.62.14.0:8402/material/'+id+mtab1)
                 .then((res)=>res.json())
                 .then((res)=>{

@@ -8,21 +8,40 @@ var pgdb = new pg.Pool({
     password: '111111',
     database: 'dongxin'
 });
+//收藏素材
 router.post('/material',(req,res,next)=>{
     let data=req.body;
     let sql = `INSERT INTO materialcollection (uid,mid) VALUES ($1,$2)`;
     pgdb.query(sql,[data.uid,data.mid],(err,val)=>{
         if(err || val.rowCount < 0){
             console.log(err);
-            res.json({status:'-1',data:'已经收藏过了哦'});
+		let sql_col = `SELECT COUNT(mid) FROM materialcollection WHERE mid=$1`;
+            	pgdb.query(sql_col,[data.mid],(err,val1)=>{
+                if(err || val1.rowCount < 0){
+                    console.log(err);
+                    res.json({status:'-5',data:'error'});
+                }else{
+                    let sql_mcol = `UPDATE material SET mcollect=$1 WHERE mid=$2`
+                    pgdb.query(sql_mcol,[val1.rows[0].count,data.mid],(err,val2)=>{
+                        if(err || val2.rowCount < 0){
+                            console.log(err);
+                            res.json({status:'-4',data:'error'});
+                        }else{
+                            res.json({status:'1',data:'已经收藏了哦'});
+                        }
+                    })
+                }
+            })
+
+            //res.json({status:'-1',data:'已经收藏过了哦'});
         }else{
-            let sql_col = `SELECT COUNT(mid) FROM materialcollection`;
-            pgdb.query(sql_col,[],(err,val1)=>{
-                if(err || val.rowCount < 0){
+            let sql_col = `SELECT COUNT(mid) FROM materialcollection WHERE mid=$1`;
+            pgdb.query(sql_col,[data.mid],(err,val1)=>{
+                if(err || val1.rowCount < 0){
                     console.log(err);
                     res.json({status:'-2',data:'error'});
                 }else{
-                    let sql_mcol = `UPDATE material SET mcomment=$1 WHERE mid=$2`
+                    let sql_mcol = `UPDATE material SET mcollect=$1 WHERE mid=$2`
                     pgdb.query(sql_mcol,[val1.rows[0].count,data.mid],(err,val2)=>{
                         if(err || val.rowCount < 0){
                             console.log(err);
@@ -32,8 +51,7 @@ router.post('/material',(req,res,next)=>{
                         }
                     })
                 }
-            })
-            
+            }) 
         }
     });
 });

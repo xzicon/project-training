@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import {NavBar,List,TextareaItem} from 'antd-mobile';
+import {NavBar,List,TextareaItem,Button} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 var date = new Date();
 var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-var D = date.getDate()+' ';
-var h = date.getHours() + ':';
-var m = date.getMinutes();
+var D = (date.getDate()<10 ? '0'+(date.getDate()) : date.getDate())+' ';
+var h = (date.getHours()<10 ? '0'+(date.getHours()) : date.getHours()) + ':';
+var m = (date.getMinutes()<10 ? '0'+(date.getMinutes()) : date.getMinutes());
 export default class Write extends Component {
+    constructor(){
+        super();
+        this.state={
+            data:[]
+        }
+    }
     handleClick = () => {
         this.inputRef.focus();
     }
@@ -17,8 +23,10 @@ export default class Write extends Component {
             atag:document.getElementsByClassName('biaoqian')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
             uid:this.props.location.state,
-            utime:Y+M+D+h+m
+            utime:Y+M+D+h+m,
+            aimage:this.state.data
         }
+        console.log(data.aimage);
         console.log(data);
         fetch('http://116.62.14.0:8402/aud/addarticle', {
             method: 'POST',
@@ -41,6 +49,17 @@ export default class Write extends Component {
             }
           })
     }
+    onChange = (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        fetch('http://116.62.14.0:8402/upload', {
+        method: 'POST',
+          body: formData,
+        }).then(res=>res.json()).then(res=>
+            this.setState({data:res.data},console.log(res.data))
+        )
+      };
     render() {
         let arr=this.props.location.pathname.split('/');
         if(arr.length===3){
@@ -96,6 +115,10 @@ export default class Write extends Component {
                             type='text'
                         />
                     </List>
+                    <div className='upload-container' style={{marginTop:'400px'}}>
+                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
+                </div>
+                {this.state.data.length!==0?<img src={`http://116.62.14.0:8402/images/`+this.state.data}/>:<div></div>}
                 </div>
             </div>
         )

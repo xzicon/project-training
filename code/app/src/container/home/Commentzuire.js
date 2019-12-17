@@ -19,26 +19,26 @@ export default class Commentzuire extends Component {
             console.log(res.data);
         })
     }
-    componentDidUpdate(){
-        let page = this.props.location.state1;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/article/zuixin/'+page)
-        .then((res)=>res.json())
-        .then((res)=>{
-            this.setState({data:res.data});
-            console.log(res.data);
-        })
-    }
+    // componentDidUpdate(){
+    //     let page = this.props.location.state1;
+    //     console.log(page);
+    //     fetch('http://116.62.14.0:8402/article/zuixin/'+page)
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         this.setState({data:res.data});
+    //         console.log(res.data);
+    //     })
+    // }
     render() {
         return (
             <div>
-                {
+                {this.state.data?
                     this.state.data.map((data)=>(
                         <div>
                             {data.accontent}
                         </div>
                     ))
-                }
+                :<div>无评论</div>}
             </div>
         )
     }

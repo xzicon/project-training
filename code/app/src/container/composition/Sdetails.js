@@ -66,8 +66,10 @@ export default class Sdetails extends Component {
         let arr=this.props.location.pathname.split('/');
         if(arr.length===4){
             var data1='/composition/material/'+this.props.location.mtab1;
-        }else{
+        }else if(arr.length===5){
             var data1='/composition/composition';
+        }else{
+            var data1='/composition/csearch';
         }
         console.log(data1);
         return (

@@ -64,12 +64,19 @@ export default class Mdetails extends Component {
     }
     render() {
         let url = this.props.match.url;
+        let arr=this.props.location.pathname.split('/');
+        if(arr.length===4){
+            var data1='/mine/collect';
+        }else{
+            var data1='/home/fopeople';
+        }
+        console.log(data1);
         return (
             <div>
                 {this.state.data.map(data=>(
                 <div>
                     <NavBar
-                        icon={<Link to={{pathname:'/mine/collect',mtab1:data.msid,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                        icon={<Link to={{pathname:data1,mtab1:data.msid,state:this.props.location.state,state2:data.uid}}><Icon type="left" style={{color:'#000'}}/></Link>}
                         style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                         onLeftClick={() => console.log('onLeftClick')}></NavBar>     
                     <div style={{top:'40px',position:'absolute',zIndex:'99',width:'100%'}}>

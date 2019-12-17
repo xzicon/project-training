@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom';
+import {Icon,NavBar} from 'antd-mobile';
 export default class Csearch extends Component {
     constructor(props){
         super(props);
@@ -28,7 +29,7 @@ export default class Csearch extends Component {
                 case "0":{
                     console.log(data.data[0]);
                     this.setState({
-                        data:data.data[0]
+                        data:data.data
                     })
                     break;
                 }
@@ -43,9 +44,15 @@ export default class Csearch extends Component {
     render() {
         return (
             <div>
+                <NavBar
+                    icon={<Link to={{pathname:'/composition/composition',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    style={{backgroundColor:'#fff',color:'#000'}}
+                    onLeftClick={() => console.log('onLeftClick')}></NavBar>  
                 <input className='sousuo' type='text' placeholder="输入关键字搜索"/>
                 <input onClick={(e)=>{this.fetchSousuo(e)}} type='button' value='搜索'/>
-                {this.state.data.mtitle}
+                {this.state.data.map(data=>(
+                    <div><Link to={{pathname:'/composition/search/sucai/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>{data.mtitle}</Link></div>
+                ))}
             </div>
         )
     }

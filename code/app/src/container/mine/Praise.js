@@ -28,7 +28,7 @@ export default class Praise extends Component {
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>我赞过的</NavBar>
                     <div style={{width:'100%',position:'absolute',top:'50px',zIndex:'99'}}>
-                    {this.state.data.map(data=>(
+                    {this.state.data.length!==0?this.state.data.map(data=>(
                     <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>                      
                         <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                             {data.utime}
@@ -37,7 +37,7 @@ export default class Praise extends Component {
                         <div style={{height:'100px',overflow:'hidden',color:'#000'}}>{data.acontent}<br/></div>
                         <br/>#{data.atag}
                     </div>
-                ))}
+                )):<div>还没有赞过任何人</div>}
                 </div>
             </div>
         )

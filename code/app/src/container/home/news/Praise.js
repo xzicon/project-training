@@ -28,11 +28,11 @@ export default class Praise extends Component {
                 >点赞</NavBar>
                 <br/>
                 <div style={{top:'56px',position:'absolute',zIndex:'99',width:'100%',textAlign:'center',backgroundColor:'#fff'}}>
-                {this.state.data.map(data=>(
+                {this.state.data.length!==0?this.state.data.map(data=>(
                     <div>
                         <br/>{data.uname}<br/>
                     </div>
-                ))}
+                )):<div>无赞</div>}
                 </div>
             </div>
         )

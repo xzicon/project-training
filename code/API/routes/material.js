@@ -215,6 +215,7 @@ router.get('/fenlei/zuire/',(req,res,next)=>{
 
 router.get('/xiangqing/:mid',(req,res,next)=>{
     let mid = req.params.mid;
+	
     let sql = `SELECT * FROM material  WHERE mid = $1`;
     pgdb.query(sql,[mid],(err,val)=>{
             if(err || val.rowCount < 0){
@@ -227,9 +228,54 @@ router.get('/xiangqing/:mid',(req,res,next)=>{
     })
 
 })
+router.get('/xiang/:mid/:look',(req,res,next)=>{
+    let mid = req.params.mid;
+    let uid = req.params.look;
+	let sql_add = `SELECT COUNT(mid) FROM materialcollection WHERE mid=$1`;
+	pgdb.query(sql_add,[mid],(err,val1)=>{
+	    if(err || val1.rowCount < 0){
+                console.log(err);
+                res.json({status:'-1',data:'error'});
+            }else{
+                let sql_mcol = `UPDATE material SET mcollect=$1 WHERE mid=$2`
+                pgdb.query(sql_mcol,[val1.rows[0].count,mid],(err,val2)=>{
+                    if(err || val2.rowCount < 0){
+                        console.log(err);
+                        res.json({status:'-2',data:'error'});
+                    }else{
+                        let sql = `SELECT d.*,c.uid as look FROM (SELECT a.* FROM material as a WHERE a.mid = $1) as d LEFT JOIN (SELECT * FROM materialcollection as b WHERE b.uid=$2) as c
+ON d.mid=c.mid`;
+    			pgdb.query(sql,[mid,uid],(err,val)=>{
+            			if(err || val.rowCount < 0){
+                   			console.log(err);
+                    			res.json({status:'1',data:'error'});
+            			}else{
+                    			res.json({status:'0',data:val.rows});
+            			}
+
+    			})
+
+                    }
+                })
+            }	
+	})
+    /*let sql = `SELECT d.*,c.uid as look FROM (SELECT a.* FROM material as a WHERE a.mid = $1) as d LEFT JOIN (SELECT * FROM materialcollection as b WHERE b.uid=$2) as c
+ON d.mid=c.mid`;
+    pgdb.query(sql,[mid,uid],(err,val)=>{
+            if(err || val.rowCount < 0){
+                    console.log(err);
+                    res.json({status:'1',data:'error'});
+            }else{
+                    res.json({status:'0',data:val.rows});
+            }
+
+    })*/
+
+})
+
 router.get('/xiangqing/pinglun/:mid',(req,res,next)=>{
     let mid = req.params.mid;
-    let sql = `SELECT * FROM materialcomment WHERE mid = $1 ORDER BY mctime DESC`;
+    let sql = `SELECT a.*,b.* FROM materialcomment as a LEFT JOIN users as b ON a.uid=b.uid WHERE mid = $1 ORDER BY a.mctime DESC`;
     pgdb.query(sql,[mid],(err,val)=>{
             if(err || val.rowCount < 0){
                     console.log(err);
@@ -243,7 +289,7 @@ router.get('/xiangqing/pinglun/:mid',(req,res,next)=>{
 })
 router.get('/xiangqing/lianbi/:mid',(req,res,next)=>{
     let mid = req.params.mid;
-    let sql = `SELECT * FROM article WHERE mid = $1 ORDER BY alikes DESC`;
+    let sql = `SELECT a.*,b.* FROM article as a LEFT JOIN users as b ON a.uid=b.uid WHERE mid = $1 ORDER BY a.alikes DESC`;
     pgdb.query(sql,[mid],(err,val)=>{
             if(err || val.rowCount < 0){
                     console.log(err);
@@ -257,7 +303,7 @@ router.get('/xiangqing/lianbi/:mid',(req,res,next)=>{
 })
 router.get('/xiangqing/lianbi/new/:mid',(req,res,next)=>{
     let mid = req.params.mid;
-    let sql = `SELECT * FROM article WHERE mid = $1 ORDER BY utime DESC`;
+    let sql = `SELECT a.*,b.* FROM article as a LEFT JOIN users as b ON a.uid=b.uid WHERE mid = $1 ORDER BY a.utime DESC`;
     pgdb.query(sql,[mid],(err,val)=>{
             if(err || val.rowCount < 0){
                     console.log(err);

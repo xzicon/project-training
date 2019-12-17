@@ -11,7 +11,7 @@ var pgdb = new pg.Pool({
     password: '111111',
     database: 'dongxin'
 });
-let casheFolder = '../public/images/';
+let casheFolder = './public/images/';
 router.get('',(req,res,next)=>{
 	let sql = `SELECT * FROM userinfo`;
 	pgdb.query(sql,[],(err,val)=>{
@@ -23,7 +23,7 @@ router.get('',(req,res,next)=>{
 		}
 	})
 })
-router.post('/mk',(req,res,next)=>{
+/*router.post('/mk',(req,res,next)=>{
 	let userDirPath = cacheFolder+"temp";
 	let form = new formidable.IncomingForm();
 	console.log(form);
@@ -70,10 +70,10 @@ router.post('/mk',(req,res,next)=>{
 		} 
 	})
 
-});
+});*/
 router.post('/', function(req, res) {
                 var form = new formidable.IncomingForm();
-                form.uploadDir = "../public/images/temp/"; 
+                form.uploadDir = "./public/images/temp/"; 
                 form.parse(req, function(error, fields, files) {
                     for (var key in files) {
                         var file = files[key];
@@ -90,35 +90,16 @@ router.post('/', function(req, res) {
                                 break;
                         }
                         console.log(file, file.size);
-                        var uploadDir = "../public/images/" + fName;
+                        var uploadDir = "./public/images/" + fName;
                         fs.rename(file.path, uploadDir, function(err) {
                             if (err) {
-                                res.write(err + "\n");
-                                res.end();
-                            }
-            
-            
-                            var userAddSql = 'INSERT INTO userinfo(Id,UserName,UserPass) VALUES(0,?,?)';
-                            var userAddSql_Params = ['path', "/upload/" + fName];
-                            
-                            pgdb.query(userAddSql, userAddSql_Params, function(err, val) {
-                                if (err) {
-                                    console.log('[INSERT ERROR] - ', err.message);
-                             //       return;
-					res.json({status:'0',data:'error'})
-                                }else{
-					res.json({status:'1',data:'成功'})
+				console.log(err);
+                                //res.write(err + "\n");
+                                //res.end();
+                                res.json({status:'-1',data:'error'})
+                            }else{
+				res.json({status:'0',data:fName})
 				}
-            
-                                //console.log('--------------------------INSERT----------------------------');
-                               // console.log('INSERT ID:', result);
-                               // console.log('-----------------------------------------------------------------\n\n');
-                            });
-            
-                            //connection.end();
-                           // res.write("<img src='/upload/" + fName + "' />");
-                           // res.end();
-            
             
                         })
             

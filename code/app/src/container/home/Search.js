@@ -29,7 +29,7 @@ export default class Search extends Component {
                 case "0":{
                     console.log(data.data[0]);
                     this.setState({
-                        data:data.data[0]
+                        data:data.data
                     })
                     break;
                 }
@@ -42,15 +42,26 @@ export default class Search extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
+        if(arr.length===3){
+            var data1='/home';
+        }else if(arr.length===4){
+            var data1='/home/follow/'+this.props.location.state;
+        }else{
+            var data1='/home/crnew';
+        }
+        console.log(data1);
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/home',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
-                    style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
+                    icon={<Link to={{pathname:data1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    style={{backgroundColor:'#fff',color:'#000'}}
                     onLeftClick={() => console.log('onLeftClick')}></NavBar>  
                 <input className='sousuo' type='text' placeholder="输入关键字搜索"/>
                 <input onClick={(e)=>{this.fetchSousuo(e)}} type='button' value='搜索'/>
-                {this.state.data.atitle}
+                {this.state.data.map(data=>(
+                    <div><Link to={{pathname:'/home/home/search/search/article/'+data.aid,state1:data.aid,state:this.props.location.state,state2:data.uid}}>{data.atitle}</Link></div>
+                ))}
             </div>
         )
     }

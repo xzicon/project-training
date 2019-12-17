@@ -32,14 +32,14 @@ export default class Mnew extends Component {
                 <Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>素材评论</span></Link>
                 <Link to={{pathname:'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>文章评论</span></Link>
                 </div>
-                {this.state.data.map(data=>(
+                {this.state.data.length!==0?this.state.data.map(data=>(
                     <div style={{width:'100%',position:'absolute',top:'80px',zIndex:'99'}}>
                     <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>
                         <span style={{fontSize:'16px'}}>{data.mccontent}</span>
                         <br/>{data.mctime}
                     </div>
                 </div>
-                ))}
+                )):<div>还没有发表过任何评论</div>}
                 <div>
                 
                 </div>

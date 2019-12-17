@@ -35,17 +35,33 @@ router.post('/addmaterial',(req,res,next)=>{
     res.setHeader('Content-Type','text/html;charset=utf-8');
     let sql = `SELECT MAX(mcid) FROM materialcomment`;
     pgdb.query(sql,[],(err,val)=>{
-    if(err){
+    if(err || val.rowCount<0){
         res.json({status:'-1',data:'error'});
     }else{
         let mcid = val.rows[0].max+1;
         let sql_add = `INSERT INTO materialcomment (mcid,mccontent,mctime,uid,mid) VALUES ($1,$2,$3,$4,$5)`;
-        pgdb.query(sql_add,[mcid,data.mccontent,data.mctime,data.uid,data.mid],(err,val)=>{
-            if(err){
+        pgdb.query(sql_add,[mcid,data.mccontent,data.mctime,data.uid,data.mid],(err,val1)=>{
+            if(err || val1.rowCount<0){
                 console.log(err);
                 res.json({status:'-1',data:'error'})
             }else{
-                res.json({status:'0',data:'添加素材评论成功'})
+		let sql_x = `SELECT COUNT(mcid) FROM materialcomment WHERE mid=$1`;
+		pgdb.query(sql_x,[data.mid],(err,val2)=>{
+			if(err || val2.rowCount<0){
+				res.json({status:'-2',data:'error'})
+			}else{
+				let sql_i = `UPDATE material SET mcomment=$1 WHERE mid=$2`;
+				pgdb.query(sql_i,[val2.rows[0].count,data.mid],(err,val3)=>{
+					if(err || val3.rowCount<0){
+						console.log(err)
+						res.json({status:'-3',data:'error'})
+					}else{
+						res.json({status:'0',data:'添加素材评论成功'})
+					}
+				})	
+			}
+		})
+                //res.json({status:'0',data:'添加素材评论成功'})
             }
         })
     }
@@ -57,17 +73,34 @@ router.post('/addarticle',(req,res,next)=>{
     res.setHeader('Content-Type','text/html;charset=utf-8');
     let sql = `SELECT MAX(acid) FROM articlecomment`;
     pgdb.query(sql,[],(err,val)=>{
-    if(err){
+    if(err || val.rowCount<0){
         res.json({status:'-1',data:'error'});
     }else{
         let acid = val.rows[0].max+1;
         let sql_add = `INSERT INTO articlecomment (acid,accontent,actime,uid,aid) VALUES ($1,$2,$3,$4,$5)`;
-        pgdb.query(sql_add,[acid,data.accontent,data.actime,data.uid,data.aid],(err,val)=>{
-            if(err){
+        pgdb.query(sql_add,[acid,data.accontent,data.actime,data.uid,data.aid],(err,val1)=>{
+            if(err || val1.rowCount<0){
                 console.log(err);
                 res.json({status:'-1',data:'error'})
             }else{
-                res.json({status:'0',data:'添加文章评论成功'})
+		let sql_in = `SELECT COUNT(acid) FROM articlecomment WHERE aid=$1`;
+		pgdb.query(sql_in,[data.aid],(err,val2)=>{
+			if(err || val2.rowCount<0){
+				console.log(err)
+				res.json({status:'-2',data:'error'})
+			}else{
+				let sql_up = `UPDATE article set acomment = $1 WHERE aid=$2`;
+				pgdb.query(sql_up,[val2.rows[0].count,data.aid],(err,val3)=>{
+					if(err || val.rowCount<0){
+						console.log(err);
+						res.json({status:'-3',data:'error'})
+					}else{
+						res.json({status:'0',data:'添加作文评论成功'})
+					}
+				})	
+			}
+		})
+                //res.json({status:'0',data:'添加文章评论成功'})
             }
         })
     }
@@ -80,7 +113,24 @@ router.post('/delmaterial',(req,res,next)=>{
         if(err){
             res.json({status:'-1',data:'error'})
         }else{
-            res.json({status:'0',data:'删除成功'})
+		let sql_x = `SELECT COUNT(mcid) FROM materialcomment WHERE mid=$1`;
+                pgdb.query(sql_x,[data.mid],(err,val2)=>{
+                        if(err || val2.rowCount<0){
+                                res.json({status:'-2',data:'error'})
+                        }else{
+                                let sql_i = `UPDATE material SET mcomment=$1 WHERE mid=$2`;
+                                pgdb.query(sql_i,[val2.rows[0].count,data.mid],(err,val3)=>{
+                                        if(err || val3.rowCount<0){
+                                                console.log(err)
+                                                res.json({status:'-3',data:'error'})
+                                        }else{
+                                                res.json({status:'0',data:'删除素材评论成功'})
+                                        }
+                                })
+                        }
+                })
+
+  //          res.json({status:'0',data:'删除成功'})
         }
     })
 })
@@ -91,7 +141,25 @@ router.post('/delarticle',(req,res,next)=>{
         if(err){
             res.json({status:'-1',data:'error'})
         }else{
-            res.json({status:'0',data:'删除成功'})
+		let sql_in = `SELECT COUNT(acid) FROM articlecomment WHERE aid=$1`;
+                pgdb.query(sql_in,[data.aid],(err,val2)=>{
+                        if(err || val2.rowCount<0){
+                                console.log(err)
+                                res.json({status:'-2',data:'error'})
+                        }else{
+                                let sql_up = `UPDATE article set acomment = $1 WHERE aid=$2`;
+                                pgdb.query(sql_up,[val2.rows[0].count,data.aid],(err,val3)=>{
+                                        if(err || val.rowCount<0){
+                                                console.log(err);
+                                                res.json({status:'-3',data:'error'})
+                                        }else{
+                                                res.json({status:'0',data:'删除作文评论成功'})
+                                        }
+                                })
+                        }
+                })
+
+//        res.json({status:'0',data:'删除成功'})
         }
     })
 })

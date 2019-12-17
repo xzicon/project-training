@@ -38,8 +38,6 @@ export default class Home extends Component {
         })
     }
     render() {
-        let arr=this.props.location.pathname.split('/');
-        var data1='/'+arr[1];
         return (
             <div>
                 <div style={{ 
@@ -76,11 +74,12 @@ export default class Home extends Component {
                         }}
                         >
                             <div>
+                                
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
                                     <Link to={{pathname:'/home/search',state:this.props.location.state}}><button>搜索</button></Link>
                                 </div>
                                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                                    <Link to={{pathname:'/home/follow/'+this.props.location.state,state:this.props.location.state,state2:this.props.location.state2,state4:this.props.location.state4}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
+                                    <Link to={{pathname:'/home/follow/'+this.props.location.state,state:this.props.location.state,state4:this.props.location.state4}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'16px',marginLeft:'10px'}}>关注</Link>
                                     <Link to={{pathname:'/home',state:this.props.location.state}} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'24px',marginLeft:'10px'}}>推荐</Link>
                                 </div>
                                 
@@ -91,7 +90,7 @@ export default class Home extends Component {
                                     <Link to={{pathname:'/home/Crnew',state:this.props.location.state}}  style={{color:this.state.selectCreateNew.color,borderBottom:this.state.selectCreateNew.borderBottom,fontSize:'16px',marginLeft:'10px'}}>最新</Link>
                                 </div>
                             </div>
-                {this.state.data.map(data=>(
+                {this.state?this.state.data.map(data=>(
                     <div style={{width:'100%',whiteSpace:"pre-wrap"}}>
                         <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
                         
@@ -110,7 +109,7 @@ export default class Home extends Component {
                             </Link>
                         </div>
                     </div>
-                ))}
+                )):<div></div>}
                                 <Link to={{pathname:'/home/write',state:this.props.location.state}}>
                                     <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
                                         +

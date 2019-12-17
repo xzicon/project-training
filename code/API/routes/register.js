@@ -30,7 +30,7 @@ router.post('/',(req,res,next)=>{
 			}else{
 				let sql_uid = `SELECT MAX(uid) FROM users`;
 	            pgdb.query(sql_uid,[],(err,val)=>{
-                    if(err){
+                    if(err || val.rowCount<0){
                         res.json({status:'-1',data:'error'})
                     }else{
                         var mail = {
@@ -39,7 +39,25 @@ router.post('/',(req,res,next)=>{
                             to:data.uemail,
                             text:'请用'+code+'作为你的验证码'
                         }
-                        console.log(val.rows[0]);
+			if(nodemail(mail)){
+				res.json({status:'0',data:'邮箱不存在'})
+			}else{
+				console.log(val.rows[0]);
+                        var uid = val.rows[0].max+1;
+                        console.log('该注册用户的uid:',uid);
+                        var uname = '妙笔'+uid;
+                        let sql_user =`INSERT INTO users (uid,uname,uemail,upassword,code) VALUES ($1,$2,$3,$4,$5)`;
+                        pgdb.query(sql_user,[uid,uname,data.uemail,md5(data.upassword),code],(err,val)=>{
+                            if(err){
+                                res.json({status:'-1',data:'error'})
+                            }else{
+//                                nodemail(mail);
+                                res.json({status:'2',data:'发送成功'})
+                            }
+                        })
+				
+			}
+  /*                      console.log(val.rows[0]);
                         var uid = val.rows[0].max+1;
                         console.log('该注册用户的uid:',uid);
 			var uname = '妙笔'+uid;
@@ -51,7 +69,7 @@ router.post('/',(req,res,next)=>{
                                 nodemail(mail);
                                 res.json({status:'2',data:'发送成功'})
                             }
-                        }) 	
+                        })*/ 	
                     }
 	            })
 			}

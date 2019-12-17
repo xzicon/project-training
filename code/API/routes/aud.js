@@ -73,9 +73,9 @@ router.post('/addarticle',(req,res,next)=>{
         res.json({status:'-1',data:'error'});
     }else{
         let aid = val.rows[0].max+1;
-        let sql_add = `INSERT INTO article (aid,atitle,acontent,atag,utime,uid,mid) VALUES ($1,$2,$3,$4,$5,$6,$7)`;
-        pgdb.query(sql_add,[aid,data.atitle,data.acontent,data.atag,data.utime,data.uid,data.mid],(err,val)=>{
-            if(err){
+        let sql_add = `INSERT INTO article (aid,atitle,acontent,atag,utime,aimage,uid,mid) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`;
+        pgdb.query(sql_add,[aid,data.atitle,data.acontent,data.atag,data.utime,data.aimage,data.uid,data.mid],(err,val)=>{
+            if(err || val.rowCount<0){
                 console.log(err);
                 res.json({status:'-1',data:'error'})
             }else{
