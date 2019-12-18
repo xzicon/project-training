@@ -20,7 +20,7 @@ export default class SearchDetail extends Component {
             body:JSON.stringify(obj)
             }).then((res)=>res.json())
             .then((res)=>{
-                console.log(res.data)
+                // console.log(res.data)
                 this.setState({
                     data:res.data
                 })

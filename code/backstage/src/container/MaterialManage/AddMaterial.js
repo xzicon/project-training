@@ -6,13 +6,13 @@ export default class AddMaterial extends Component {
         super();
         this.state={
             data:[],
-            location:[]
+            location:''
         }
     }
     handleClick = (msid)=>{
         let title = document.getElementById('title').value;
         let local = document.getElementById('local').value;
-        let image = this.state.location ? '': this.state.location;
+        let image = this.state.location==='' ? '': this.state.location;
         let analyse = document.getElementById('analyse').value;
         let content = document.getElementById('content').value;
         var date = new Date();
@@ -82,6 +82,7 @@ export default class AddMaterial extends Component {
     }
     render() {
         let msid = this.props.location.search.split('=')[1];
+        let type = this.state.location.split('.')[1];
         return (
             <div className='add_material'>
                 <textarea id='title' type='text' placeholder='素材标题' style={{width:'490px',height:'22px',paddingLeft:'10px'}}></textarea> 
@@ -89,12 +90,15 @@ export default class AddMaterial extends Component {
                 <textarea id='analyse' type='text' placeholder='素材分析'></textarea>    
                 <textarea id='content' type='text' placeholder='素材内容' ></textarea>   
                 <div className='upload-container'>
-                    <input type="file" name="image" accept='image/*' className='upload-input' onChange={(e)=>this.onChange(e)} />
+                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
                     <button type="primary" className='upload-button'>上传图片</button>
-                    <div style={{width:'200px',height:'125px',border:'1px solid gray'}}>
+                    <div style={{width:'212px',height:'140px',border:'1px solid gray'}}>
                     {
-                        this.state.location.length===0 ? <p></p> :
-                        <img src={`http://116.62.14.0:8402/images/`+this.state.location} alt='主题图片' style={{width:'200px',height:'100px'}}/>
+                        this.state.location==='' ? <p></p> : ( type === 'mp4' ? 
+                            <video src={`http://116.62.14.0:8402/images/`+this.state.location} id="myPlayer" poster='' controls playsInline webkit-playsinline style={{width:'100%'}}>
+                            </video> : 
+                            <img src={`http://116.62.14.0:8402/images/`+this.state.location} alt='主题图片' style={{width:'212.6px',height:'115px'}}/>
+                        )
                     }
                     </div>
                 </div>

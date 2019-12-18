@@ -35,6 +35,14 @@ export default class WorksManage extends Component {
                 switch(data.status){
                     case '0':
                         alert('删除成功！');
+                        fetch('http://116.62.14.0:8402/article')
+                        .then((res)=>res.json())
+                        .then((res)=>{
+                            // console.log(res.data)
+                            this.setState({
+                            data:res.data
+                            })
+                        })
                         break;
                     case '-1':
                         alert('删除失败！');

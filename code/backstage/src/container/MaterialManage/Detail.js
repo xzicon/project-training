@@ -37,6 +37,9 @@ export default class Detail extends Component {
         }
     }
     deleteItem =(e)=>{
+        let newsearch = this.props.location.search;
+            let url = this.props.match.url.split('/')[3];
+            let msid = newsearch.split('=')[1];
         let item = e.target.parentNode.parentNode;
         // console.log(item);
         let mid = item.children[0].innerHTML;
@@ -54,6 +57,13 @@ export default class Detail extends Component {
             switch(data.status){
                 case '0':
                     alert('删除成功！');
+                    fetch(`http://116.62.14.0:8402/material/fenlei/zuixin/?mtab=${url}&msid=${msid}`)
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        this.setState({
+                            data:res.data
+                        })
+                    })
                     break;
                 case '-1':
                     alert('删除失败！');
