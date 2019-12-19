@@ -27,6 +27,18 @@ export default class Sdetails extends Component {
             console.log(res.data);
         })
     }
+    Change1=(e)=>{
+        document.getElementById("A1").style.color="red"
+        document.getElementById("A1").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A2").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A2").style.color="#000"
+    }
+    Change2=(e)=>{
+        document.getElementById("A2").style.color="red"
+        document.getElementById("A2").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A1").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A1").style.color="#000"
+    }
     // componentDidUpdate(){
     //     let page = this.props.location.mtab2;
     //     fetch('http://116.62.14.0:8402/material/xiangqing/'+page)
@@ -81,7 +93,7 @@ export default class Sdetails extends Component {
         }else if(arr.length===11 || arr.length===12){
             var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state2;
         }else{
-            
+            var data1='/mine/mnew';
         }
         console.log(data1);
         return (
@@ -133,9 +145,9 @@ export default class Sdetails extends Component {
                         </div>)
                     }
                             
-                    <div style={{zIndex:'100',float:'left',width:'96%',margin:'2% 2% auto'}}>
-                        <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state,mtab1:this.props.location.mtab1}} style={{color:'#000',marginRight:'5%',fontSize:'120%'}}>练笔</Link>
-                        <Link to={{pathname:url+'/pinglun',mtab2:this.props.location.mtab2,state:this.props.location.state,mtab1:this.props.location.mtab1}} style={{color:'#000',fontSize:'120%'}}>评论</Link>
+                    <div style={{zIndex:'100',float:'left',width:'96%',margin:'3% 2% auto'}}>
+                        <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state,mtab1:this.props.location.mtab1}} style={{color:'red',marginRight:'5%',fontSize:'120%',borderBottom:"4px solid #ffdf41"}} id='A1' onClick={(e)=>{this.Change1(e)}}>练笔</Link>
+                        <Link to={{pathname:url+'/pinglun',mtab2:this.props.location.mtab2,state:this.props.location.state,mtab1:this.props.location.mtab1}} style={{color:'#000',fontSize:'120%'}} id='A2' onClick={(e)=>{this.Change2(e)}}>评论</Link>
                     </div>
                     <div style={{width:'96%',float:'left',marginBottom:'14%'}}>
                         <div>

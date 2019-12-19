@@ -39,6 +39,18 @@ export default class Material extends Component {
                 })
         }
     }
+    Change5=(e)=>{
+        document.getElementById("A5").style.color="red"
+        document.getElementById("A5").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A6").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A6").style.color="#000"
+    }
+    Change6=(e)=>{
+        document.getElementById("A6").style.color="red"
+        document.getElementById("A6").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A5").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A5").style.color="#000"
+    }
     render() {
         let path = this.props.match.path;
         return (
@@ -50,8 +62,8 @@ export default class Material extends Component {
                     
                     <div style={{position:'absolute',top:'50px',width:'100%'}}>
                     <div style={{backgroundColor:'#fff',marginBottom:'2%',float:'left',width:'100%',height:'35px',lineHeight:'35px'}}>
-                        <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginLeft:'8%',}}>最热</NavLink>     
-                        <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginLeft:'8%',}}>最新</NavLink>
+                        <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'red',fontSize:'130%',marginLeft:'8%',borderBottom:"4px solid #ffdf41"}} id='A5' onClick={(e)=>{this.Change5(e)}}>最热</NavLink>     
+                        <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginLeft:'8%',}} id='A6' onClick={(e)=>{this.Change6(e)}}>最新</NavLink>
                     </div>
                     <div style={{float:'left',width:'100%'}}>
                     { 
@@ -71,7 +83,7 @@ export default class Material extends Component {
                                     //     </Link>
                                     // </div> 
                                     <div style={{height:'270px',backgroundColor:'#fff',width:'94%',margin:'3%'}}>
-                                        <Link to={{pathname:'/composition/label/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'110%'}}>
+                                        <Link to={{pathname:'/composition/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'110%'}}>
                                             <video src={`http://116.62.14.0:8402/images/`+data.mimage} id="myPlayer" poster='' controls playsInline webkit-playsinline style={{width:'100%'}}></video>
                                             <div ref={el => (this.componentRef = el)}></div>
                                             <div style={{width:'100%',height:'25%',float:'left',fontWeight:'600',fontSize:'120%',paddingTop:'5%',paddingLeft:'2%',paddingRight:'2%'}}>

@@ -77,10 +77,12 @@ export default class Mnew extends Component {
                         <div style={{width:'94%',float:'left',zIndex:'99',backgroundColor:'#fff',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',paddingBottom:'2%'}}>
                             <div style={{display:'none'}}>{data.aid}</div>
                             <div style={{display:'none'}}>{data.mcid}</div>
+                            <Link to={{pathname:'/mine/mn/mn/mn/mn/mn/sucai/s/s/s/s/s/sdetails/'+data.mid+'/'+this.props.location.state,mtab2:data.mid,state:this.props.location.state}}>
                             <div style={{width:'90%',margin:'2% 5% auto',paddingTop:'2%',paddingBottom:'2%'}}>
                                 <div style={{fontSize:'110%',marginBottom:'2%'}}>{data.mccontent}</div>
                                 <div style={{fontSize:'90%',color:'gray'}}>{data.mctime}</div>
                             </div>
+                            </Link>
                             <div>
                                 
                             <input type='button' className='delete' value='删除' onClick={(e)=>{this.fetchDelete(e)}}  style={{width:'80px',backgroundColor:'red',color:'#fff',border:'none',borderRadius:'15%',border:'1px solid #fff',float:'right',marginRight:'5%',fontSize:'120%',padding:'1% 2% '}} />

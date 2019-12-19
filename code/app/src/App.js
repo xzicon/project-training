@@ -104,6 +104,7 @@ export default class App extends Component {
                     <Route path='/composition/label/s/sdetails/:page' component={Sdetails}/>
                     <Route path='/composition/search/sucai/s/s/s/sdetails/:page' component={Sdetails}/>
                     <Route path='/composition/article/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/mine/mn/mn/mn/mn/mn/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
                     {/* <Route path='/composition/w/a/w/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/> */}
                     <Route path='/composition/mdetails/:page' component={Mdetails}/>
                     <Route path='/home/composition/mdetails/:page' component={Mdetails}/>

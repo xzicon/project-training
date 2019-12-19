@@ -51,14 +51,26 @@ export default class Word extends Component {
             console.log(data);
         })
     }
+    Change3=(e)=>{
+        document.getElementById("A3").style.color="red"
+        document.getElementById("A3").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A4").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A4").style.color="#000"
+    }
+    Change4=(e)=>{
+        document.getElementById("A4").style.color="red"
+        document.getElementById("A4").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A3").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A3").style.color="#000"
+    }
     render() {
         let path = this.props.match.path;
         console.log(path);
         return (
             <div>
                 <div style={{backgroundColor:'#fff'}}>
-                    <NavLink to={{pathname:`${path}`,search:'',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}} style={{color:'#000',fontSize:'110%',marginLeft:'8%',height:'35px',lineHeight:'35px'}}>最热</NavLink> 
-                    <NavLink to={{pathname:`${path}`,search:'?id=new',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}} style={{color:'#000',fontSize:'110%',marginLeft:'8%',height:'35px',lineHeight:'35px'}}>最新</NavLink>
+                    <NavLink to={{pathname:`${path}`,search:'',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}} style={{color:'red',fontSize:'110%',marginLeft:'8%',height:'35px',lineHeight:'35px',borderBottom:"4px solid #ffdf41"}} id='A3' onClick={(e)=>{this.Change3(e)}}>最热</NavLink> 
+                    <NavLink to={{pathname:`${path}`,search:'?id=new',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}} style={{color:'#000',fontSize:'110%',marginLeft:'8%',height:'35px',lineHeight:'35px'}} id='A4' onClick={(e)=>{this.Change4(e)}}>最新</NavLink>
                 </div>
                 <div>
                 {
