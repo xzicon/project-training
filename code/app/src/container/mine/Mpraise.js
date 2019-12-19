@@ -25,7 +25,7 @@ export default class Mpraise extends Component {
                     icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>获赞</NavBar>
-                {/* {this.state.data.length!==0?this.state.data.map(data=>(
+                {this.state.data.length!==0?this.state.data.map(data=>(
                 <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>
                     
                     <div style={{width:'96%',margin:'2% 2% auto',height:'40px',backgroundColor:'#fff',marginTop:'10px',padding:'4% 4%'}}>
@@ -36,7 +36,7 @@ export default class Mpraise extends Component {
                     </div>
                     
                 </div>
-                )):<div>你还没有收到赞</div>} */}
+                )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有赞过别人哦~  </div>}
             </div>
         )
     }

@@ -67,7 +67,7 @@ export default class Fopeople extends Component {
         }else if(arr.length===9 || arr.length===10){
             var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state;
         }else if(arr.length===11 || arr.length===12){
-            var data1='/composition/sdetails/'+this.props.location.mtab2
+            var data1='/composition/writing/'+this.props.location.state1+'/'+this.props.location.state;
         }else{
             var data1='/mine'
         }
@@ -95,10 +95,10 @@ export default class Fopeople extends Component {
                         </div>
                 </div> 
                 <div style={{backgroundColor:'#fff',marginTop:'3%',paddingTop:'2%',paddingBottom:'2%'}}>
-                    <Link to={{pathname:url,state4:this.props.location.state4,state:this.props.location.state}} style={{color:'#000',fontSize:'120%',marginLeft:'5%'}}>
+                    <Link to={{pathname:url,state4:this.props.location.state4,state:this.props.location.state,state1:this.props.location.state1,mtab2:this.props.location.mtab2}} style={{color:'#000',fontSize:'120%',marginLeft:'5%'}}>
                     创作</Link>
-                    <Link to={{pathname:url+'/shoucang',state4:this.props.location.state4,state:this.props.location.state}} style={{color:'#000',fontSize:'120%',marginLeft:'5%'}}>收藏</Link>
-                    <Link to={{pathname:url+'/guanzhu',state:this.props.location.state,state2:this.props.location.state2,state4:this.props.location.state4}} style={{color:'#000',fontSize:'120%',marginLeft:'5%'}}>关注</Link>
+                    <Link to={{pathname:url+'/shoucang',state4:this.props.location.state4,state:this.props.location.state,state1:this.props.location.state1,mtab2:this.props.location.mtab2}} style={{color:'#000',fontSize:'120%',marginLeft:'5%'}}>收藏</Link>
+                    <Link to={{pathname:url+'/guanzhu',state:this.props.location.state,state2:this.props.location.state2,state4:this.props.location.state4,state1:this.props.location.state1,mtab2:this.props.location.mtab2}} style={{color:'#000',fontSize:'120%',marginLeft:'5%'}}>关注</Link>
                 </div>
                 <div style={{width:'96%',margin:'2% 2% auto'}}>
                     <Route path={`${url}`} exact component={Fowrite}/>

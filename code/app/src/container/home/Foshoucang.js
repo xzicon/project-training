@@ -35,7 +35,7 @@ export default class Foshoucang extends Component {
                     
                     {this.state.data.length!==0?this.state.data.map(data=>(
                         <Link to={{pathname:'/home/f/s/tdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,state4:this.props.location.state4}}>
-                        <div style={{width:'93%',marginBottom:'2%',backgroundColor:'#fff',paddingLeft:'3%',paddingRight:'3%',float:'left'}}>                      
+                        <div style={{width:'93%',marginBottom:'2%',backgroundColor:'#fff',padding:'3%',float:'left'}}>                      
                                 <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                     {data.mtime}
                                 </div>

@@ -87,7 +87,7 @@ export default class Write extends Component {
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={
-                        <input type='button' onClick={(e)=>{this.fetchComposition(e)}} style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',border:'1px solid red',borderRadius:'15%'}} style={{color:'#000'}} value='发布'/>
+                        <input type='button' onClick={(e)=>{this.fetchComposition(e)}} style={{width:'60px',height:'30px',backgroundColor:'#fff',color:'#000',borderRadius:'15%',outline:'none',border:'1px solid #da4036'}} value='发布'/>
                     }
                 ></NavBar>
                 <div>
@@ -98,7 +98,7 @@ export default class Write extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'2%'}}
+                            style={{backgroundColor:'none',width:'98%'}}
                             className='biaoti'
                             type='text'
                         />
@@ -108,7 +108,7 @@ export default class Write extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginTop:'2.5%',marginLeft:'2%'}}
+                            style={{backgroundColor:'none',width:'98%'}}
                             className='biaoqian'
                             type='text'
                         />
@@ -118,7 +118,7 @@ export default class Write extends Component {
                             data-seed="logId"
                             autoHeight
                             ref={el => this.customFocusInst = el}
-                            style={{backgroundColor:'none',width:'96%',marginTop:'3%',marginLeft:'2%'}}
+                            style={{backgroundColor:'none',width:'98%'}}
                             className='neirong'
                             type='text'
                             rows={15}

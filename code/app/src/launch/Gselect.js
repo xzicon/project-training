@@ -31,6 +31,7 @@ export default class Gselect extends Component {
             msid5:this.state.value[4]
         }
         console.log(data);
+        data.msid1 !==undefined && data.msid2 !==undefined && data.msid3 !==undefined && data.msid4 !==undefined && data.msid5 !==undefined ?
         fetch('http://116.62.14.0:8402/usort/update', {
             method: 'POST',
             headers: {
@@ -54,7 +55,8 @@ export default class Gselect extends Component {
                     break;
                 }
             }
-        })
+        }):Toast.fail('你还没有选择标签，请进行选择',1);
+
     }
     handleChange(event) {
         let item = event.target.value;

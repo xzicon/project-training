@@ -23,6 +23,13 @@ export default class Lwrite extends Component {
         this.state.data3=''
     }
     fetchComposition=(e)=>{
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr.length);
+        if(arr.length===8){
+            var data1='/composition/label/s/sdetails/'+this.props.location.mtab2;
+        }else if(arr.length===3){
+            var data1='/composition/sdetails/'+this.props.location.mtab2;
+        }
         let data = {
             atitle:document.getElementsByClassName('biaoti')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
@@ -44,7 +51,7 @@ export default class Lwrite extends Component {
               switch (data.status) {
                 case "0":{
                     console.log(data.data);
-                    this.props.history.push({pathname:'/composition/sdetails/'+this.props.location.mtab2,state:this.props.location.state,mtab2:this.props.location.mtab2});
+                    this.props.history.push({pathname:data1,state:this.props.location.state,mtab2:this.props.location.mtab2});
                     break;
                 }
                 default:{
@@ -66,12 +73,19 @@ export default class Lwrite extends Component {
         )
       };
     render() {
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr.length);
+        if(arr.length===8){
+            var data1='/composition/label/s/sdetails/'+this.props.location.mtab2;
+        }else if(arr.length===3){
+            var data1='/composition/sdetails/'+this.props.location.mtab2;
+        }
         return (
             <div>
                 <NavBar
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    leftContent={<Link to={{pathname:'/composition/sdetails/'+this.props.location.mtab2,mtab2:this.props.location.mtab2,state:this.props.location.state}}>
+                    leftContent={<Link to={{pathname:data1,mtab2:this.props.location.mtab2,state:this.props.location.state}}>
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={
@@ -86,7 +100,7 @@ export default class Lwrite extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'2%'}}
+                            style={{backgroundColor:'none',width:'98%',}}
                             className='biaoti'
                             type='text'
                         />
@@ -96,7 +110,7 @@ export default class Lwrite extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginTop:'2.5%',marginLeft:'2%'}}
+                            style={{backgroundColor:'none',width:'98%'}}
                             className='biaoqian'
                             type='text'
                         />
@@ -106,7 +120,7 @@ export default class Lwrite extends Component {
                             data-seed="logId"
                             autoHeight
                             ref={el => this.customFocusInst = el}
-                            style={{backgroundColor:'none',width:'96%',marginTop:'3%',marginLeft:'2%'}}
+                            style={{backgroundColor:'none',width:'98%',}}
                             className='neirong'
                             type='text'
                             rows={10}
@@ -115,8 +129,8 @@ export default class Lwrite extends Component {
                         <div className='upload-container' style={{float:'left',width:'100%',marginTop:'3%'}}>
                             <div style={{width:'100%',float:'right',position:'relative',height:'30px'}}><input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'70px',float:'right',marginRight:'3%',opacity:'0'}} /><img src='/images/home/pic.png' style={{width:'8%',height:'100%',position:'absolute',right:'8%'}} /></div>
                             {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
-                            <div style={{width:'100%',float:'left',height:'200px'}}>
-                                {this.state.data3?<img src={`http://116.62.14.0:8402/images/`+this.state.data3} style={{height:'200px',width:'fixwidth'}}/>:''  }
+                            <div style={{width:'100%',float:'left'}}>
+                                {this.state.data3.length!==0?<img src={`http://116.62.14.0:8402/images/`+this.state.data3} style={{height:'200px',width:'fixwidth'}}/>:''  }
                             </div>
                         </div>
                     </List>  

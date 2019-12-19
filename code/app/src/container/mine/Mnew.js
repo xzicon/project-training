@@ -33,8 +33,10 @@ export default class Mnew extends Component {
         console.log(item);
         console.log(item.children[1].innerHTML);
         let obj = {mcid:item.children[1].innerHTML}
+        let obj1 = {mid:item.children[0].innerHTML}
         let data = {
             mcid:obj.mcid,
+            mid:obj1.mid
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/comment/delmaterial', {
@@ -75,7 +77,7 @@ export default class Mnew extends Component {
                 <div style={{marginTop:'26%',float:'left',width:'100%'}}>
                     {this.state.data.length!==0?this.state.data.map(data=>(
                         <div style={{width:'94%',float:'left',zIndex:'99',backgroundColor:'#fff',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',paddingBottom:'2%'}}>
-                            <div style={{display:'none'}}>{data.aid}</div>
+                            <div style={{display:'none'}}>{data.mid}</div>
                             <div style={{display:'none'}}>{data.mcid}</div>
                             <Link to={{pathname:'/mine/mn/mn/mn/mn/mn/sucai/s/s/s/s/s/sdetails/'+data.mid+'/'+this.props.location.state,mtab2:data.mid,state:this.props.location.state}}>
                             <div style={{width:'90%',margin:'2% 5% auto',paddingTop:'2%',paddingBottom:'2%'}}>

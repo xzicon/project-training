@@ -30,9 +30,11 @@ export default class Mcnew extends Component {
         let item = e.target.parentNode.parentNode;
         console.log(item);
         console.log(item.children[0].innerHTML);
-        let obj = {acid:item.children[0].innerHTML}
+        let obj = {acid:item.children[1].innerHTML};
+        let obj1 = {aid:item.children[0].innerHTML};
         let data = {
             acid:obj.acid,
+            aid:obj1.aid
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/comment/delarticle', {
@@ -73,6 +75,7 @@ export default class Mcnew extends Component {
                 <div  style={{marginTop:'26%',float:'left',width:'100%'}}>
                     {this.state.data.length!==0?this.state.data.map(data=>(
                         <div style={{width:'94%',float:'left',zIndex:'99',backgroundColor:'#fff',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',paddingBottom:'2%'}}>
+                            <div style={{display:'none'}}>{data.aid}</div>
                             <div style={{display:'none'}}>{data.acid}</div>
                             <div style={{width:'100%',backgroundColor:'#fff',paddingTop:'2%',paddingBottom:'2%'}}>
                                 <div style={{fontSize:'115%',marginBottom:'3%',marginLeft:'3%'}}>{data.accontent}</div>

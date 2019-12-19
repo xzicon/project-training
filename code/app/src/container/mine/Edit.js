@@ -4,10 +4,17 @@ import {Link} from 'react-router-dom';
 var date = new Date();
 var Y = date.getFullYear() + '-';
 var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-var D = date.getDate()+' ';
-var h = date.getHours() + ':';
-var m = date.getMinutes();
+var D = (date.getDate()<10 ? '0'+(date.getDate()) : date.getDate())+' ';
+var h = (date.getHours()<10 ? '0'+(date.getHours()) : date.getHours()) + ':';
+var m = (date.getMinutes()<10 ? '0'+(date.getMinutes()) : date.getMinutes());
 export default class Edit extends Component {
+    constructor(){
+        super();
+        this.state={
+            data:[],
+            data3:''
+        }
+    }
     handleClick = () => {
         this.inputRef.focus();
     }
@@ -18,12 +25,16 @@ export default class Edit extends Component {
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({
-                data:res.data,
+                data:res.data[0],
             });
             document.getElementsByClassName('biaoti')[0].value=res.data[0].atitle;
             document.getElementsByClassName('neirong')[0].value=res.data[0].acontent;
             document.getElementsByClassName('biaoqian')[0].value=res.data[0].atag;
+            this.state.data3=res.data[0].aimage;
+            document.getElementById('s').src='http://116.62.14.0:8402/images/'+this.state.data3;
             console.log(res.data);
+            console.log(this.state.data3)
+            console.log(res.data[0].aimage);
         })
     }
     fetchEdit = (e)=>{
@@ -32,6 +43,7 @@ export default class Edit extends Component {
             atitle:document.getElementsByClassName('biaoti')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
+            aimage:this.state.data3,
             utime:Y+M+D+h+m
         }
         console.log(data);
@@ -58,7 +70,20 @@ export default class Edit extends Component {
             }
         })
     }
+    onChange = (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        fetch('http://116.62.14.0:8402/upload', {
+        method: 'POST',
+          body: formData,
+        }).then(res=>res.json()).then(res=>
+            this.setState({data3:res.data},console.log(res.data))
+        )
+      };
     render() {
+        console.log(this.state.data.aimage);
+        console.log(this.state.data3);
         return (
             <div>
                 <NavBar
@@ -79,7 +104,7 @@ export default class Edit extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'1.5%'}}
+                            style={{backgroundColor:'none',width:'98%'}}
                             className='biaoti'
                             type='text'
                         />
@@ -89,7 +114,7 @@ export default class Edit extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginLeft:'1.5%'}}
+                            style={{backgroundColor:'none',width:'98%',}}
                             className='biaoqian'
                             type='text'
                         />
@@ -99,11 +124,21 @@ export default class Edit extends Component {
                             data-seed="logId"
                             autoHeight
                             ref={el => this.customFocusInst = el}
-                            style={{backgroundColor:'none',width:'96%',marginLeft:'1.5%'}}
+                            style={{backgroundColor:'none',width:'98%',}}
                             className='neirong'
                             type='text'
                             rows={15}
                         />
+                        {this.state.data.aimage===undefined?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}>
+                            {/* <img src={'http://116.62.14.0:8402/images/'+this.state.data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /> */}</div>}
+                        <div className='upload-container' style={{float:'left',width:'100%',marginTop:'3%'}}>
+                            <div style={{width:'100%',float:'right',position:'relative',height:'30px'}}><input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'70px',float:'right',marginRight:'3%',opacity:'0'}} /><img src='/images/home/pic.png' style={{width:'8%',height:'100%',position:'absolute',right:'8%'}} /></div>
+                            {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
+                            
+                            <div style={{width:'100%',float:'left'}}>
+                                <img src={'http://116.62.14.0:8402/images/'+this.state.data3} id='s' style={{height:'200px',width:'fixwidth'}}/>
+                            </div>
+                        </div>
                     </List>
                 </div>
             </div>

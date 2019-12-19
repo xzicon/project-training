@@ -14,24 +14,28 @@ export default class Article extends Component {
     
     componentDidMount(){
         let page = this.props.location.state1;
-        let state2 = this.props.location.state2;
+        let state = this.props.location.state;
         console.log(page);
         console.log(this.props.match.params);
-        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state2)
+        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
             console.log(res.data);
         })
     }
-    // componentDidUpdate(){
-    //     let page = this.props.location.state1;
-    //     fetch('http://116.62.14.0:8402/article/xiangqing/'+page)
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         this.setState({data:res.data});
-    //     })
-    // }
+    componentDidUpdate(){
+        let page = this.props.location.state1;
+        let state = this.props.location.state;
+        console.log(page);
+        console.log(this.props.match.params);
+        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({data:res.data});
+            console.log(res.data);
+        })
+    }
     fetchGood = (e)=>{
         let data = {
             uid:this.props.location.state,
@@ -139,11 +143,11 @@ export default class Article extends Component {
                                 <img src='/images/write/left.png' style={{width:'8%',height:'45%',position:'absolute',top:'27%',left:'2%',}} />
                                 
                             </Link>
-                            <div style={{width:'80%',zIndex:'9',color:'#000',height:'100%',textAlign:'center',float:'right'}}>
-                            <Link to={{pathname:'/home/a/a/a/home/home/article/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1}} style={{width:'100%',height:'100%',color:'#000'}}>
-                                <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'80%',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left'}} />
+                            <div style={{width:'80%',zIndex:'9',color:'#000',height:'100%',textAlign:'center',float:'right',marginRight:'10%'}}>
+                                <Link to={{pathname:'/home/a/a/a/home/home/article/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1}} style={{width:'100%',height:'100%',color:'#000'}}>
+                                    <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'80%',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
                                 </Link>
-                                <div style={{fontSize:'120%',float:'left',marginTop:'5%'}}>{data.uname}</div>
+                                <div style={{fontSize:'120%',float:'left',marginTop:'5%',textAlign:'center',}}>{data.uname}</div>
                             </div>
                             
                         </div>
@@ -154,15 +158,16 @@ export default class Article extends Component {
                                     <h2 style={{textAlign:'center'}}>{data.atitle}</h2>
                                     <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',width:'90%'}}>{data.acontent}</div>
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}>{data.atag}</div><br/>
-                                    {data.aimage===''|| '{}'?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'90%',height:'150px',marginLeft:'2%',marginTop:'1%',marginRight:'3%',float:'left'}} /></div>}
+                                    {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}
                                 </div>
                             :
                                 <div style={{margin:'3% 3% auto',backgroundColor:'#fff',whiteSpace:"pre-wrap",float:'left',width:'94%'}}>
-                                    <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%',color:'gray'}}>{data.utime}</div>
+                                    <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%',color:'gray'}}>{data.utime}</div>
                                     <h2 style={{textAlign:'center'}}>{data.atitle}</h2>
-                                    <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',width:'90%'}}>{data.acontent}</div>
-                                    <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}>#{data.atag}</div><br/>
-                                    {data.aimage===''|| '{}'?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'90%',height:'150px',marginLeft:'2%',marginTop:'1%',marginRight:'3%',float:'left'}} /></div>}
+                                    <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',width:'94%'}}>{data.acontent}</div>
+                                    <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}>#{data.atag}</div><br/>
+                                    {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}
+                                    
                                     <Link to={{pathname:'/composition/article/sucai/s/s/s/s/s/sdetails/'+data.mid,state1:this.props.location.state1,state2:this.props.location.state2,mtab2:data.mid,state:this.props.location.state}}>
                                     <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',paddingTop:'3%',paddingBottom:'3%',borderTop:'1px dashed gray',width:'90%',color:'#000'}}>
                                         <div style={{display:'none'}}>{data.mid}</div>
@@ -186,7 +191,7 @@ export default class Article extends Component {
                                     {data.look===null?<img src='/images/home/zan.png' id='zan' onClick={(e)=>{this.fetchGood(e)}} style={{width:'15%',height:'15%'}}/>:<img src='/images/home/zan1.png' id='zan' onClick={(e)=>{this.fetchGood(e)}} style={{width:'15%',height:'15%'}}/>}
                                 </div>
                                     
-                                <a style={{}} >点赞&nbsp;&nbsp;{data.alikes}</a>
+                                {data.look===null?<a style={{}} >点赞&nbsp;&nbsp;{data.alikes}</a>:<a style={{}} >已点赞&nbsp;&nbsp;{data.alikes}</a>}
                             </div>
                                     
                             <div style={{float:'left',width:'40%',textAlign:'center'}}>

@@ -45,7 +45,7 @@ export default class Praise extends Component {
                                                 
                             </div>
                         </div>
-                    )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有赞过别人哦~  </div>
+                    )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>还没有人赞过你哦~  </div>
                 }
                 </div>
             </div>

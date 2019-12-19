@@ -185,9 +185,9 @@ export default class Mine extends Component {
                                             <Item arrow="horizontal" multipleLine>
                                                 关于我们
                                             </Item>
-                                            <Item arrow="horizontal" multipleLine>
-                                                常见问题
-                                            </Item>
+                                            <Link to={{pathname:'/mine/question',state:this.props.location.state}} style={{color:'#000'}}>
+                                                <Item arrow="horizontal" multipleLine>常见问题</Item>
+                                            </Link>
                                             <Item arrow="horizontal" multipleLine>
                                                 帮助
                                             </Item>

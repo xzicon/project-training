@@ -19,10 +19,11 @@ export default class Collect extends Component {
         })
     }
     fetchDelete = (e)=>{
-        let item = e.target.parentNode;
+        let item = e.target.parentNode.parentNode;
         console.log(item);
         console.log(item.children[0].innerHTML);
         let obj = {mid:item.children[0].innerHTML}
+        
         let data = {
             uid:this.props.location.state,
             mid:obj.mid

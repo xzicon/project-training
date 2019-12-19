@@ -7,7 +7,7 @@ export default class Start extends Component {
         return (
             <div className='bg_start'>
                 <div className='bg_title'>
-                    <img src="/images/login/logo.png"/>
+                    <img src="/images/login/logo1.png"/>
                 </div>
                 <div className="btns">
                     <Link to='/login'><button className='btn'>登录</button></Link>

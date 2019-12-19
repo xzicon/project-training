@@ -20,16 +20,17 @@ export default class Follow extends Component {
         })
         console.log(this.state.data.uid);
     }
-    // componentDidUpdate(){
-    //     let page=this.props.location.state;
-    //     console.log(page);
-    //     fetch('http://116.62.14.0:8402/login/userconcern/'+page)
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         this.setState({data:res.data});
-    //         console.log(res.data);
-    //     })
-    // }
+    componentDidUpdate(){
+        let page=this.props.location.state;
+        console.log(page);
+        fetch('http://116.62.14.0:8402/login/userconcern/'+page)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({data:res.data});
+            console.log(res.data);
+        })
+        console.log(this.state.data.uid);
+    }
     fetchConcern = (e)=>{
         let item = e.target.parentNode.parentNode;
         console.log(item);
@@ -91,10 +92,10 @@ export default class Follow extends Component {
                                     </div>
                                    
                             </div>
-                            {data.guanzhu===null ?<div style={{width:'30%',float:'left'}}><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>:<div style={{width:'30%',float:'left'}}><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='已关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>}
+                            {data.guanzhu===null ?<div style={{width:'30%',float:'left',marginTop:'5%'}}><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>:<div style={{width:'30%',float:'left',marginTop:'5%'}}><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='已关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>}
                         </div>
                     </div>
-                    )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有关注过任何人哦~  </div>                }
+                    )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'110%',marginLeft:'3%'}}>你还没有关注过任何人哦~  </div>                }
                 </div>
 
                 </div>

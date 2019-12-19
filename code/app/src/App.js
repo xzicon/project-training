@@ -50,6 +50,7 @@ import Gselect from './launch/Gselect';
 import Feedback from './container/mine/Feedback';
 import Personal from './container/mine/Personal';
 import Myset from './container/mine/Myset';
+import Question from './container/mine/Question';
 
 export default class App extends Component {
     render() {
@@ -110,6 +111,7 @@ export default class App extends Component {
                     <Route path='/home/composition/mdetails/:page' component={Mdetails}/>
                     <Route path='/home/f/s/tdetails/:page' component={Tdetails}/>
                     <Route path='/composition/lwrite' component={Lwrite}/>
+                    <Route path='/composition/c/c/c/c/c/lwrite' component={Lwrite}/>
                     <Route path='/composition/mat' component={Lcomment}/>
                     <Route path='/composition/com/mat' component={Lcomment}/>
                     <Route path='/composition/csearch' component={Csearch}/>
@@ -130,6 +132,7 @@ export default class App extends Component {
                     <Route path='/mine/feedback' component={Feedback}/>
                     <Route path='/mine/personal' component={Personal}/>
                     <Route path='/mine/myset' component={Myset}/>
+                    <Route path='/mine/question' component={Question}/>
                 </div>
             </Router>
         )

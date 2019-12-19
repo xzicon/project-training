@@ -193,7 +193,7 @@ Change6=(e)=>{
                                 <div style={{float:'left',width:'100%',paddingBottom:'2%'}}>
                                     <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
                                     <Link to={{pathname:'/composition/csearch',state:this.props.location.state}}><SearchBar style={{width:'65%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索"/></Link>
-                                    <Link to={{pathname:'/gselect',state:this.props.location.state}} style={{color:'red'}}><div style={{width:'20%',marginTop:'2%',marginRight:'3%',float:'right',fontSize:'120%'}}>修改标签</div></Link>
+                                    <Link to={{pathname:'/gselect',state:this.props.location.state}} style={{color:'red'}}><div style={{width:'20%',marginTop:'3%',marginRight:'3%',float:'right',fontSize:'120%'}}>修改标签</div></Link>
                                 </div>
                                 <div style={{marginTop:'12%',backgroundColor:'#fff',fontSize:'130%',paddingBottom:'2%',}}>
                                     <Link to={{pathname:url,state:this.props.location.state}} style={{color:'red',marginLeft:'5%',borderBottom:"4px solid #ffdf41"}} id='A1' onClick={(e)=>{this.Change1(e)}}>推荐</Link>

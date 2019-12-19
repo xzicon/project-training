@@ -18,6 +18,16 @@ export default class Marticle extends Component {
             console.log(res.data);
         })
     }
+    // componentDidUpdate(){
+    //     let page = this.props.location.state3;
+    //     console.log(page);
+    //     fetch('http://116.62.14.0:8402/article/xiangqing/'+page)
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         this.setState({data:res.data});
+    //         console.log(res.data);
+    //     })
+    // }
     fetchDelete = (e)=>{
         let data = {
             aid:this.props.location.state3
@@ -62,9 +72,10 @@ export default class Marticle extends Component {
                             <h2 style={{textAlign:'center'}}>{data.atitle}</h2>
                             <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',width:'90%'}}>{data.acontent}</div>
                             <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}>{data.atag}</div><br/>
+                            {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}
                             <div style={{float:'left',width:'100%',paddingBottom:'3%'}}>
-                            <input type='button' onClick={(e)=>{this.fetchDelete(e)}}  style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',border:'1px solid #da4036',borderRadius:'15%',float:'right',marginRight:'5%'}} value='删除' class='delete'/>
-                                <Link to={{pathname:'/mine/edit',state3:data.aid,atitle1:data.atitle,acontent1:data.acontent,atag1:data.atag,state:this.props.location.state}}><input type='button' style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',borderRadius:'15%',border:'1px solid #da4036',float:'right',marginRight:'8%'}} value='编辑' class='edit'/></Link>
+                                <input type='button' onClick={(e)=>{this.fetchDelete(e)}}  style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',border:'1px solid #da4036',borderRadius:'15%',float:'right',marginRight:'5%'}} value='删除' class='delete'/>
+                                <Link to={{pathname:'/mine/edit',state3:data.aid,atitle1:data.atitle,acontent1:data.acontent,atag1:data.atag,state:this.props.location.state,aimge:data.aimge}}><input type='button' style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',borderRadius:'15%',border:'1px solid #da4036',float:'right',marginRight:'8%'}} value='编辑' class='edit'/></Link>
                                 
                             </div>
                         </div>

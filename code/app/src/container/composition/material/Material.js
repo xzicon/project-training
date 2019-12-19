@@ -62,8 +62,8 @@ export default class Material extends Component {
                     
                     <div style={{position:'absolute',top:'50px',width:'100%'}}>
                     <div style={{backgroundColor:'#fff',marginBottom:'2%',float:'left',width:'100%',height:'35px',lineHeight:'35px'}}>
-                        <NavLink to={{pathname:`${path}`,search:'?id=zuire',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'red',fontSize:'130%',marginLeft:'8%',borderBottom:"4px solid #ffdf41"}} id='A5' onClick={(e)=>{this.Change5(e)}}>最热</NavLink>     
-                        <NavLink to={{pathname:`${path}`,search:'?id=zuixin',mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginLeft:'8%',}} id='A6' onClick={(e)=>{this.Change6(e)}}>最新</NavLink>
+                        <NavLink to={{pathname:`${path}/`+this.props.location.mtab1,search:'?id=zuire',msname:this.props.location.msname,mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'red',fontSize:'130%',marginLeft:'8%',borderBottom:"4px solid #ffdf41"}} id='A5' onClick={(e)=>{this.Change5(e)}}>最热</NavLink>     
+                        <NavLink to={{pathname:`${path}/`+this.props.location.mtab1,search:'?id=zuixin',msname:this.props.location.msname,mtab1:this.props.location.mtab1,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginLeft:'8%',}} id='A6' onClick={(e)=>{this.Change6(e)}}>最新</NavLink>
                     </div>
                     <div style={{float:'left',width:'100%'}}>
                     { 

@@ -19,16 +19,17 @@ export default class Foguanzhu extends Component {
             console.log(res.data);
         })
     }
-    // componentDidUpdate(){
-    //     let page=this.props.location.state4;
-    //     console.log(page);
-    //     fetch('http://116.62.14.0:8402/login/userconcern/'+page)
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         this.setState({data:res.data});
-    //         console.log(res.data);
-    //     })
-    // }
+    componentDidUpdate(){
+        let page=this.props.location.state4;
+        let page1=this.props.location.state;
+        console.log(page,page1);
+        fetch('http://116.62.14.0:8402/login/guanzhu/'+page+'/'+page1)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({data:res.data});
+            console.log(res.data);
+        })
+    }
     fetchConcern = (e)=>{
         let data = {
             uid:this.props.location.state,

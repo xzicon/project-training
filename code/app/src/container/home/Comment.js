@@ -27,31 +27,31 @@ export default class Comment extends Component {
           })
     }
     render() {
-        // let arr=this.props.location.pathname.split('/');
-        // if(arr.length===3){
-        //     var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state;
-        // }else{
-        //     var data1='/composition/writing/'+this.props.location.state1+'/'+this.props.location.state;
-        // }
-        // console.log(data1);
+        let arr=this.props.location.pathname.split('/');
+        if(arr.length===3){
+            var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state;
+        }else{
+            var data1='/composition/writing/'+this.props.location.state1+'/'+this.props.location.state;
+        }
+        console.log(data1);
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/home/article/'+this.props.location.state1+'/'+this.props.location.state2,state2:this.props.location.state2,state:this.props.location.state,state1:this.props.location.state1}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:data1,state2:this.props.location.state2,state:this.props.location.state,state1:this.props.location.state1,mtab2:this.props.location.mtab2}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    rightContent={<Link to={{pathname:'/home/article/'+this.props.location.state1+'/'+this.props.location.state2,state:this.props.location.state,state2:this.props.location.state2,state1:this.props.location.state1}}>
+                    rightContent={<Link to={{pathname:data1,state:this.props.location.state,state2:this.props.location.state2,state1:this.props.location.state1,mtab2:this.props.location.mtab2}}>
                         <input type='button' onClick={(e)=>{this.fetchComment(e)}} style={{width:'60px',height:'30px',backgroundColor:'#fff',color:'#000',borderRadius:'15%',outline:'none',border:'1px solid #da4036'}} value='发布'/>
                     </Link>}
                 >写评论</NavBar>
                 <div style={{float:'left'}}>
-                    <List style={{top:'40px',position:'absolute',zIndex:'99',margin:'3% 2% auto',backgroundColor:'#fff',width:'96%',paddingTop:'2%',paddingBottom:'2%'}}>
+                    <List style={{top:'40px',position:'absolute',zIndex:'99',margin:'3% 2% auto',backgroundColor:'#fff',width:'96%',paddingTop:'1%'}}>
                         <textarea
                             placeholder="在此输入评论"
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'1.5%'}}
+                            style={{backgroundColor:'none',width:'98%'}}
                             className='pinglun'
                             rows={5}
                         />

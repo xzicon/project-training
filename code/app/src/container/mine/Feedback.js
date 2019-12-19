@@ -52,7 +52,7 @@ export default class Feedback extends Component {
                     }
                 ></NavBar>
                 <div>
-                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',height:'300px',width:'96%'}}>
+                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',width:'96%'}}>
                         <textarea
                             placeholder="请输入反馈内容"
                             data-seed="logId"
@@ -61,7 +61,7 @@ export default class Feedback extends Component {
                             style={{backgroundColor:'none',width:'100%'}}
                             className='fankui'
                             type='text'
-                            rows={5}
+                            rows={15}
                         />
                     </List>
                 </div>

@@ -25,14 +25,17 @@ export default class Mdetails extends Component {
             console.log(res.data);
         })
     }
-    // componentDidUpdate(){
-    //     let page = this.props.location.mtab2;
-    //     fetch('http://116.62.14.0:8402/material/xiangqing/'+page)
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         this.setState({data:res.data});
-    //     })
-    // }
+    componentDidUpdate(){
+        let page = this.props.location.mtab2;
+        let state = this.props.location.state;
+        console.log(page);
+        fetch('http://116.62.14.0:8402/material/xiang/'+page+'/'+state)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({data:res.data});
+            console.log(res.data);
+        })
+    }
     fetchDelete = (e)=>{
         let data = {
             uid:this.props.location.state,
