@@ -48,7 +48,7 @@ export default class Feedback extends Component {
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={
-                        <input type='button' onClick={(e)=>{this.fetchFeedback(e)}} style={{color:'#000'}} value='反馈'/>
+                        <input type='button' onClick={(e)=>{this.fetchFeedback(e)}} style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} value='反馈'/>
                     }
                 ></NavBar>
                 <div>
@@ -61,6 +61,7 @@ export default class Feedback extends Component {
                             style={{backgroundColor:'none',width:'100%'}}
                             className='fankui'
                             type='text'
+                            rows={5}
                         />
                     </List>
                 </div>

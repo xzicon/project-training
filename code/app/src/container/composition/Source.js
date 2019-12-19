@@ -20,15 +20,13 @@ export default class Source extends Component {
     }
     render() {
         return (
-            <div>
-                <div>
-                    {
-                        this.state.data.map(data=>(
-                            <div>
-                            <Link to={{pathname:'/composition/material/'+data.msid,mtab1:data.msid,state:this.props.location.state}}>{data.msname}</Link>
-                            </div>
+            <div style={{backgroundColor:'#fff',paddingBottom:'5%'}}>
+                {
+                    this.state.data.map(data=>(
+                        <button style={{border:'1px solid #000',borderRadius:'18%',outline:'none',marginLeft:'10%',marginTop:'5%',backgroundColor:'#fff',width:'80px',height:'35px'}}>
+                        <Link to={{pathname:'/composition/material/'+data.msid,mtab1:data.msid,state:this.props.location.state,msname:data.msname}}  style={{color:'#000',fontSize:'115%'}}>{data.msname}</Link>
+                        </button>
                     ))}
-                </div>
             </div>
         )
     }

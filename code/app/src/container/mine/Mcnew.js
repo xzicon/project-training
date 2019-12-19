@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import {Link,Route} from 'react-router-dom';
-import {Icon,NavBar} from 'antd-mobile';
+import {Icon,NavBar,Toast} from 'antd-mobile';
 export default class Mcnew extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          data:[]
+          data:[],
+          selectA:{
+            color:'#d83e34',
+            borderBottom:'4px solid #ffdf41'
+        },
+        selectM:{
+            color:'#000',
+            borderBottom:'1px solid #fff'
+        }
         }
     }
     componentDidMount(){
@@ -18,6 +26,39 @@ export default class Mcnew extends Component {
             console.log(res.data);
         })
     }
+    fetchDelete = (e)=>{
+        let item = e.target.parentNode.parentNode;
+        console.log(item);
+        console.log(item.children[0].innerHTML);
+        let obj = {acid:item.children[0].innerHTML}
+        let data = {
+            acid:obj.acid,
+        }
+        console.log(data);
+        fetch('http://116.62.14.0:8402/comment/delarticle', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            switch (data.status) {
+                case "0":{
+                    console.log(data.data);
+                    Toast.success('删除评论成功',1);
+                    item.parentElement.removeChild(item)
+                    break;
+                }
+                default:{
+                    console.log(data.data);
+                    break;
+                }
+            }
+        })
+    }
     render() {
         return (
             <div>
@@ -25,20 +66,26 @@ export default class Mcnew extends Component {
                     icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>评论</NavBar>
-                    <div style={{width:'100%',position:'absolute',top:'50px',zIndex:'99'}}>
-                    <Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>素材评论</span></Link>
-                        <Link to={{pathname:'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px'}}>文章评论</span></Link>
+                <div style={{width:'100%',position:'absolute',top:'55px',zIndex:'99'}}>
+                    <Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{color:this.state.selectM.color,borderBottom:this.state.selectM.borderBottom,fontSize:'14px',color:'#000',marginLeft:'5%'}}>素材评论</span></Link>
+                    <Link to={{pathname:'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{color:this.state.selectA.color,borderBottom:this.state.selectA.borderBottom,fontSize:'18px',color:'#000',marginLeft:'5%'}}>文章评论</span></Link>
+                </div>
+                <div  style={{marginTop:'26%',float:'left',width:'100%'}}>
+                    {this.state.data.length!==0?this.state.data.map(data=>(
+                        <div style={{width:'94%',float:'left',zIndex:'99',backgroundColor:'#fff',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',paddingBottom:'2%'}}>
+                            <div style={{display:'none'}}>{data.acid}</div>
+                            <div style={{width:'100%',backgroundColor:'#fff',paddingTop:'2%',paddingBottom:'2%'}}>
+                                <div style={{fontSize:'115%',marginBottom:'3%',marginLeft:'3%'}}>{data.accontent}</div>
+                                <div style={{fontSize:'90%',color:'gray',marginLeft:'3%',marginTop:'3%'}}>{data.actime}</div>
+                            </div>
+                            <div style={{float:'left',marginTop:'1%',width:'100%'}}>
+                                <input type='button' className='delete' value='删除' onClick={(e)=>{this.fetchDelete(e)}}  style={{width:'80px',backgroundColor:'red',color:'#fff',border:'none',borderRadius:'15%',border:'1px solid #fff',float:'right',marginRight:'5%',fontSize:'120%',padding:'1% 2% '}} />
+                            </div>
                         </div>
-                {this.state.data.map(data=>(
-                    <div style={{width:'100%',position:'absolute',top:'100px',zIndex:'99'}}>
-                    <div style={{width:'90%',margin:'2% 5% auto',backgroundColor:'#fff'}}>
-                        <span style={{fontSize:'16px'}}>{data.accontent}</span>
-                        <br/>
-                        {data.actime}
-                    </div>
+                    )):<div style={{position:'absolute',height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有评论文章哦~  </div>}
+                    
                 </div>
-                ))}
-                </div>
+            </div>
         )
     }
 }

@@ -37,6 +37,7 @@ import Marticle from './container/mine/Marticle';
 import Mmaterial from './container/composition/Mmaterial';
 import Sdetails from './container/composition/Sdetails';
 import Mdetails from './container/composition/Mdetails';
+import Tdetails from './container/composition/Tdetails';
 import Lwrite from './container/composition/Lwrite';
 import Lcomment from './container/composition/Lcomment';
 import Select from './launch/Select';
@@ -48,6 +49,7 @@ import Writing from './container/composition/material/Writing';
 import Gselect from './launch/Gselect';
 import Feedback from './container/mine/Feedback';
 import Personal from './container/mine/Personal';
+import Myset from './container/mine/Myset';
 
 export default class App extends Component {
     render() {
@@ -70,19 +72,28 @@ export default class App extends Component {
                     <Route path='/home/write' exact component={Write}/>
                     <Route path='/home/write/follow' exact component={Write}/>
                     <Route path='/home/home/crnew/write' component={Write}/>
-                    <Route path='/home/article/:page' component={Article}/>
+                    <Route path='/home/article/:page/:page1' component={Article}/>
                     <Route path='/home/article/home/:page' component={Article}/>
                     <Route path='/home/home/crnew/article/:page' component={Article}/>
                     <Route path='/home/home/search/search/article/:page' component={Article}/>
+                    <Route path='/home/h/fopeople/fowrite/fowrite/article/:page' component={Article}/>
+                    <Route path='/home/mine/p/fopeople/fowrite/fowrite/article/:page' component={Article}/>
+                    <Route path='/home/mine/prise/prise/fopeople/fowrite/fowrite/article/:page' component={Article}/>
                     <Route path='/home/news' component={News}/>
                     <Route path='/home/praise' component={Praise}/>
                     <Route path='/home/manage' component={Manage}/>
                     <Route path='/home/comment' component={Comment}/>
+                    <Route path='/composition/writin/comment' component={Comment}/>
                     <Route path='/home/crnew' component={Crnew}/>
                     <Route path='/home/search' exact component={Search}/>
                     <Route path='/home/search/follow' exact component={Search}/>
                     <Route path='/home/home/crnew/search' component={Search}/>
                     <Route path='/home/fopeople' component={Fopeople}/>
+                    <Route path='/home/f/fopeople/follow' component={Fopeople}/>
+                    <Route path='/home/c/c/home/crnew/fopeople' component={Fopeople}/>
+                    <Route path='/home/a/a/a/home/home/article/fopeople' component={Fopeople}/>
+                    <Route path='/com/w/w/w/w/com/com/com/writing/fopeople' component={Fopeople}/>
+                    <Route path='/mine/m/m/m/m/m/mine/com/com/com/mine/fopeople' component={Fopeople}/>
 
                     {/* 素材 */}
                     <Route path='/composition/composition' component={Composition}/>
@@ -90,14 +101,18 @@ export default class App extends Component {
                     <Route path='/composition/mmaterial' component={Mmaterial}/>
                     <Route path='/composition/all' component={All}/>
                     <Route path='/composition/sdetails/:page' component={Sdetails}/>
-                    <Route path='/composition/label/sdetails/:page' component={Sdetails}/>
-                    <Route path='/composition/search/sucai/sdetails/:page' component={Sdetails}/>
+                    <Route path='/composition/label/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/composition/search/sucai/s/s/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/composition/article/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
+                    {/* <Route path='/composition/w/a/w/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/> */}
                     <Route path='/composition/mdetails/:page' component={Mdetails}/>
                     <Route path='/home/composition/mdetails/:page' component={Mdetails}/>
+                    <Route path='/home/f/s/tdetails/:page' component={Tdetails}/>
                     <Route path='/composition/lwrite' component={Lwrite}/>
-                    <Route path='/composition/lcomment' component={Lcomment}/>
+                    <Route path='/composition/mat' component={Lcomment}/>
+                    <Route path='/composition/com/mat' component={Lcomment}/>
                     <Route path='/composition/csearch' component={Csearch}/>
-                    <Route path='/composition/writing/:page' component={Writing}/>
+                    <Route path='/composition/writing/:page/:page1' component={Writing}/>
 
                     {/* 我的 */}
                     <Route path='/mine' exact component={Mine}/>
@@ -113,6 +128,7 @@ export default class App extends Component {
                     <Route path='/mine/edit' component={Edit}/>
                     <Route path='/mine/feedback' component={Feedback}/>
                     <Route path='/mine/personal' component={Personal}/>
+                    <Route path='/mine/myset' component={Myset}/>
                 </div>
             </Router>
         )

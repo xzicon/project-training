@@ -67,40 +67,47 @@ export default class Create extends Component {
                             selectedTab: '/home',
                             });
                         }}
-                        >
+                        > 
                             <div>
-                                <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
-                                <Link to={{pathname:'/home/search/follow',state:this.props.location.state}}><button>搜索</button></Link>
+                            <div style={{float:'left'}}>
+                                <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'100%',backgroundColor:'#f5f5f9',paddingTop:'2%',paddingBottom:'2%'}}>
+                                <Link to={{pathname:'/home/search/follow',state:this.props.location.state}}><SearchBar style={{width:'86%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索作文"/></Link>
                                 </div>
-                                <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
+                                <div style={{zIndex:'100',top: '8%',position:'absolute',width:'100%',backgroundColor:'#fff',paddingTop:'2%',paddingBottom:'3%'}}>
                                     <Link to={{pathname:'/home/follow',state:this.props.location.state}} style={{color:this.state.selectFollow.color,borderBottom:this.state.selectFollow.borderBottom,fontSize:'24px',marginLeft:'10px'}}>关注</Link>
                                     {/* <Link to={`/home/create`} style={{color:this.state.selectCreate.color,borderBottom:this.state.selectCreate.borderBottom,fontSize:'16px',marginLeft:'10px'}}>创作</Link> */}
                                     <Link to={{pathname:'/home',state:this.props.location.state}} style={{color:this.state.selectHome.color,borderBottom:this.state.selectHome.borderBottom,fontSize:'16px',marginLeft:'10px'}}>推荐</Link>
-                                    
+                                    </div>
                                 </div>
-                                
-                                <div style={{marginTop:'100px'}}>
-                </div>
+                                <div style={{width:'100%',float:'left',marginTop:'95px'}}></div>
+                                <div style={{float:'left'}}>
                                 {this.state.data.length!==0?this.state.data.map(data=>(
-                    <div style={{width:'100%'}}>
-                        <div style={{width:'93%',margin:'0 3.4% auto',backgroundColor:'#f1edea'}}>
+                    <div style={{width:'100%',whiteSpace:"pre-wrap",float:'left'}}>
+                        <div style={{width:'94%',marginTop:'3%',marginLeft:'3%',marginRight:'3%',backgroundColor:'#fff',float:'left',paddingBottom:'2%',height:'250px'}}>
                         
-                            <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
-                                <img src="images/home/touxiang.png" style={{height:'80%',marginLeft:'2%',marginTop:'1%',marginRight:'1%'}} />
-                                {data.uname}
+                            <div style={{float:'left',width:'100%',color:'#000',float:'left',marginTop:'3%'}}>
+                            <Link to={{pathname:'/home/f/fopeople/follow',state:this.props.location.state,state4:data.upid}}><img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{width:'55px',height:'55px',marginLeft:'2%',marginRight:'3%',borderRadius:'50%',float:'left'}} /></Link>
+                            <div style={{float:'left',paddingTop:'2%',width:'70%'}}>
+                                <div style={{float:'left',width:'100%',marginBottom:'3%'}}><a style={{fontSize:'120%'}}>{data.uname}</a></div>
+                                                        
+                                <div style={{float:'left'}}><a style={{fontSize:'100%',color:'gray'}}>{data.utime}</a></div>
                             </div>
+                        </div>
                             
-                            <div></div>
-                            <h2 style={{textAlign:'center',color:'#000'}}>{data.uname}</h2>
-                            <div style={{height:'160px',color:'#000'}}>{data.acontent}<br/></div>
-                            <Link to={{pathname:'/home/article/follow/'+data.aid,state1:data.aid,state:this.props.location.state,state2:data.upid}}>
-                                <span style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文<br/>{data.atag}</span>
+                        <div style={{float:'left',width:'90%',marginLeft:'5%',marginRight:'5%'}}>
+                            <div style={{textAlign:'center',color:'#000',fontSize:'150%',marginTop:'3%',marginBottom:'3%'}}>{data.atitle}</div>
+                            <div style={{height:'70px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'5%'}}>{data.acontent}</div>
+                            <div style={{color:'#000',fontSize:'120%',marginBottom:'3%'}}>#{data.atag}</div>
+                            <Link to={{pathname:'/home/article/follow/'+data.aid+'/'+data.upid,state1:data.aid,state:this.props.location.state,state2:data.upid}}>
+                                <a style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</a>
                             </Link>
+                        </div>
                         </div>
                     </div>
                 )):<div>你还没有关注任何人哦</div>}
+                </div>
                                 <Link to={{pathname:'/home/write/follow',state:this.props.location.state}}>
-                                    <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
+                                <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
                                         +
                                     </div>
                                 </Link>

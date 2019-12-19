@@ -11,11 +11,16 @@ export default class Write extends Component {
     constructor(){
         super();
         this.state={
-            data:[]
+            data:[],
+            data3:''
         }
     }
     handleClick = () => {
         this.inputRef.focus();
+    }
+    componentDidMount(){
+        document.getElementsByClassName('biaoqian')[0].value='#';
+        this.state.data3=''
     }
     fetchComposition=(e)=>{
         let data = {
@@ -24,7 +29,7 @@ export default class Write extends Component {
             acontent:document.getElementsByClassName('neirong')[0].value,
             uid:this.props.location.state,
             utime:Y+M+D+h+m,
-            aimage:this.state.data
+            aimage:this.state.data3
         }
         console.log(data.aimage);
         console.log(data);
@@ -39,7 +44,10 @@ export default class Write extends Component {
               switch (data.status) {
                 case "0":{
                     console.log(data.data);
-                    this.props.history.push({pathname:'/home',state:data.data});
+                    this.props.history.push({pathname:'/home',state:this.props.location.state});
+                    // history.back(-1);
+                    // window.location.reload();
+                    // window.location.href=document.referrer
                     break;
                 }
                 default:{
@@ -57,7 +65,7 @@ export default class Write extends Component {
         method: 'POST',
           body: formData,
         }).then(res=>res.json()).then(res=>
-            this.setState({data:res.data},console.log(res.data))
+            this.setState({data3:res.data},console.log(res.data))
         )
       };
     render() {
@@ -79,18 +87,18 @@ export default class Write extends Component {
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={
-                        <input type='button' onClick={(e)=>{this.fetchComposition(e)}} style={{color:'#000'}} value='发布'/>
+                        <input type='button' onClick={(e)=>{this.fetchComposition(e)}} style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',border:'1px solid red',borderRadius:'15%'}} style={{color:'#000'}} value='发布'/>
                     }
                 ></NavBar>
                 <div>
-                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',height:'300px',width:'96%'}}>
+                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',width:'96%'}}>
                         <textarea
                             title="标题"
                             placeholder="在此输入作文标题"
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'2%'}}
                             className='biaoti'
                             type='text'
                         />
@@ -100,7 +108,7 @@ export default class Write extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'2.5%',marginLeft:'2%'}}
                             className='biaoqian'
                             type='text'
                         />
@@ -110,16 +118,20 @@ export default class Write extends Component {
                             data-seed="logId"
                             autoHeight
                             ref={el => this.customFocusInst = el}
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'3%',marginLeft:'2%'}}
                             className='neirong'
                             type='text'
+                            rows={15}
                         />
+                        <div className='upload-container' style={{float:'left',width:'100%',marginTop:'3%'}}>
+                            <div style={{width:'100%',float:'right',position:'relative',height:'30px'}}><input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'70px',float:'right',marginRight:'3%',opacity:'0'}} /><img src='/images/home/pic.png' style={{width:'8%',height:'100%',position:'absolute',right:'8%'}} /></div>
+                            {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
+                            <div style={{width:'100%',float:'left'}}>
+                                {this.state.data3.length!==0?<img src={`http://116.62.14.0:8402/images/`+this.state.data3} style={{height:'200px',width:'fixwidth'}}/>:''  }
+                            </div>
+                        </div>
                     </List>
-                    <div className='upload-container' style={{marginTop:'400px'}}>
-                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
-                </div>
-                {this.state.data.length!==0?<img src={`http://116.62.14.0:8402/images/`+this.state.data}/>:<div></div>}
-                </div>
+                    </div>
             </div>
         )
     }

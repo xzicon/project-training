@@ -55,34 +55,45 @@ export default class Word extends Component {
         let path = this.props.match.path;
         console.log(path);
         return (
-            <div style={{backgroundColor:'red',height:'300px'}}>
-                <div>
-                    <NavLink to={{pathname:`${path}`,search:'',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}}>最热</NavLink>
-                    
-                    <NavLink to={{pathname:`${path}`,search:'?id=new',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}}>最新</NavLink>
-                    <div>
-                    
-                    </div>
-                </div>
-                <div style={{width:'100%'}}>
-                    <div>
-                    <div>
-                    </div>
-                    </div>
+            <div>
+                <div style={{backgroundColor:'#fff'}}>
+                    <NavLink to={{pathname:`${path}`,search:'',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}} style={{color:'#000',fontSize:'110%',marginLeft:'8%',height:'35px',lineHeight:'35px'}}>最热</NavLink> 
+                    <NavLink to={{pathname:`${path}`,search:'?id=new',mtab2:this.props.location.mtab2,state1:this.props.location.state1,state:this.props.location.state}} style={{color:'#000',fontSize:'110%',marginLeft:'8%',height:'35px',lineHeight:'35px'}}>最新</NavLink>
                 </div>
                 <div>
                 {
-                        this.state.data.map(data=>(
-                            <div>
-                                <br/>
-                                <Link to={{pathname:'/composition/writing/'+data.aid,mtab2:data.mid,state1:data.aid,state:this.props.location.state}}>{data.atitle}</Link>
-                                <br/>
-                                {data.aid}
-                                <br/>
-                                <br/>
-                        <div onClick={(e)=>{this.fetchGood(e)}}>点赞{data.alikes}</div>
-                            </div>
-                ))}
+                        this.state.data.length!==0?this.state.data.map(data=>(
+                                
+                                <div>
+                                    <Link to={{pathname:'/composition/writing/'+data.aid+'/'+data.uid,state2:data.uid,mtab2:data.mid,state1:data.aid,state:this.props.location.state}}>
+                                        <div style={{width:'94%',marginTop:'3%',marginLeft:'3%',marginRight:'3%',backgroundColor:'#f5f1e8',float:'left',paddingBottom:'1%',height:'220px',marginBottom:'2%'}}>
+                                                
+                                                <div style={{float:'left',width:'100%',color:'#000',float:'left',marginTop:'3%'}}>
+                                                    <Link to={{pathname:'/home/fopeople',state:this.props.location.state,state4:data.uid}}><img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{width:'50px',height:'50px',marginLeft:'2%',marginTop:'1%',marginRight:'3%',borderRadius:'50%',float:'left'}} /></Link>
+                                                    <div style={{float:'left',paddingTop:'2%',width:'70%'}}>
+                                                        <div style={{float:'left',width:'100%',marginBottom:'3%'}}><a style={{fontSize:'120%'}}>{data.uname}</a></div>
+                                                        
+                                                        <div style={{float:'left'}}><a style={{fontSize:'100%',color:'gray'}}>{data.utime}</a></div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                <div style={{float:'left',width:'90%',marginLeft:'5%',marginRight:'5%'}}>
+                                                    
+                                                        <div style={{textAlign:'center',color:'#000',fontSize:'150%',marginTop:'2%',marginBottom:'2%'}}>{data.atitle}</div>
+                                                        <div style={{height:'50px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'3%'}}>{data.acontent}</div>
+                                                        <a style={{display:'none'}}>{data.aid}</a>
+                                                    <div style={{color:'#000',fontSize:'120%',marginBottom:'3%'}}>{data.atag}</div>
+                                                </div>
+
+                                                
+                                        </div>
+                                        
+                                    </Link>
+                                </div>
+                                
+                    )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>当前还没有练笔哦~快来试试吧  </div>
+                }
                 </div>
             </div>
         )

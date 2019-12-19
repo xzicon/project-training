@@ -3,10 +3,10 @@ import {Icon,NavBar} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
 import Smcomment from './Smcomment';
 import Word from './material/Word';
-import Tword from './Tword';
 // import Rword from '../../Rword';
+import ReactToPrint from 'react-to-print';
 
-export default class Tdetails extends Component {
+export default class Sdetails extends Component {
     constructor(props){
         super(props);
         // this.handleClick = this.handleClick.bind(this);
@@ -17,9 +17,10 @@ export default class Tdetails extends Component {
     }
     
     componentDidMount(){
+        let uid=this.props.location.state
         let page = this.props.location.mtab2;
         console.log(page);
-        fetch('http://116.62.14.0:8402/material/xiangqing/'+page)
+        fetch('http://116.62.14.0:8402/material/xiang/'+page+'/'+uid)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -64,58 +65,106 @@ export default class Tdetails extends Component {
     }
     render() {
         let url = this.props.match.url;
+        // let arr=this.props.location.pathname.split('/');
+        // if(arr.length===4){
+        //     var data1='/composition/material/'+this.props.location.mtab1;
+        // }else if(arr.length===5){
+        //     var data1='/composition/composition';
+        // }else{
+        //     var data1='/composition/csearch';
+        // }
+        // console.log(data1);
         return (
             <div>
+                
                 {this.state.data.map(data=>(
-                <div>
-                    <NavBar
-                        icon={<Link to={{pathname:'/composition/tmaterial/'+data.msid,mtab1:data.msid,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    <div style={{float:'left'}}>
+                    {/* <NavBar
+                        icon={<Link to={{pathname:data1,mtab1:data.msid,state:this.props.location.state,mtab2:this.props.location.mtab2}}><Icon type="left" style={{color:'#000'}}/></Link>}
                         style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
-                        onLeftClick={() => console.log('onLeftClick')}></NavBar>     
-                    <div style={{top:'40px',position:'absolute',zIndex:'99',width:'100%'}}>
-                    
-                        <div>{data.mtitle}</div>
-                        
+                        onLeftClick={() => console.log('onLeftClick')}
+                        ></NavBar>   */}
+                    <div style={{position:'fixed',top:'0',width:'100%',height:'40px',backgroundColor:'#fff',paddingBottom:'2%'}}> 
+                        <Link to={{pathname:'/home/fopeople',mtab1:data.msid,state:this.props.location.state,mtab2:this.props.location.mtab2,state4:this.props.location.state4}}>
+                            <img src='/images/write/left.png' style={{width:'8%',height:'50%',position:'absolute',top:'25%',left:'2%',}} />
+                            
+                        </Link>
+                        <div style={{position:'absolute',right:'7%',bottom:'2%',zIndex:'9',color:'#000'}}><ReactToPrint trigger={() => <a>打印</a>} content={() => this.componentRef}  /> </div>
+                            <img src='/images/write/dy.png' style={{width:'8%',height:'60%',position:'absolute',right:'6%',top:'15%'}} />
                     </div>
-                </div>
-                ))}
-                <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}>
-                    <Link to={{pathname:url,mtab2:this.props.location.mtab2}}>练笔</Link>
-                    <Link to={{pathname:url+'/pinglun',mtab2:this.props.location.mtab2}}>评论</Link>
-                </div>
-                <div style={{marginTop:'100px'}}></div>
-                <div style={{width:'100%'}}>
-                    <div>
-                    <Route path={`${url}`} exact component={Tword}/>
-                    <Route path={`${url}/pinglun/`} component={Smcomment}/>
-                    </div>
-                </div>
-                <div style={{backgroundColor:'#fff',bottom:0,float:'left',width:'100%',position:'fixed'}}>
-                    <div style={{float:'left',width:'40%',textAlign:'center'}}>
-                        <div style={{height:'80%'}}>
-                            <img src='/images/write/collect1.png' style={{width:'15%',height:'15%'}}/>
+                    {data.mimage===''||'{}'?
+                        <div ref={el => (this.componentRef = el)} style={{marginTop:'14%',whiteSpace:"pre-wrap",float:'left',zIndex:'99',width:'94%',paddingBottom:'2%',marginLeft:'3%',marginRight:'3%',borderBottom:'1px dashed #000'}}>              
+                            {/* <ReactToPrint trigger={() => <a>点此打印</a>} content={() => this.componentRef}/>  */}
+                            <div style={{width:'100%',float:'left',fontWeight:'bold',textAlign:'center',fontSize:'150%',paddingLeft:'2%',paddingBottom:'2%'}}>{data.mtitle}</div>
+                            <div style={{width:'100%',float:'left',textAlign:'right',fontSize:'100%',paddingBottom:'2%',color:'gray',marginTop:'3%'}}>{data.mlocal}</div>   
+                            <div style={{width:'96%',float:'left',fontSize:'110%',paddingLeft:'2%',paddingRight:'2%',paddingBottom:'2%',marginTop:'3%'}}>{data.manalyse}</div>   
+                            <div style={{width:'96%',float:'left',fontSize:'130%',marginTop:'5%',paddingLeft:'2%',paddingRight:'2%',paddingBottom:'2%'}}>{data.mcontent}</div>   
+
                         </div>
-                        
-                        <a style={{}} onClick={(e)=>{this.fetchGood(e)}}>收藏</a>
+                    :(data.mimage.split('.')[1] === 'mp4'?
+                    <div style={{marginTop:'14%',whiteSpace:"pre-wrap",float:'left',zIndex:'99',width:'94%',paddingBottom:'2%',marginLeft:'3%',marginRight:'3%',borderBottom:'1px dashed #000'}}>              
+                        <video src={`http://116.62.14.0:8402/images/`+data.mimage} id="myPlayer" poster='' controls playsInline webkit-playsinline style={{width:'100%'}}></video>
+                        <div ref={el => (this.componentRef = el)}>
+                        <div style={{width:'100%',float:'left',fontWeight:'bold',textAlign:'center',fontSize:'150%',paddingLeft:'2%',paddingBottom:'2%',marginTop:'8%'}}>{data.mtitle}</div>
+                        <div style={{width:'100%',float:'left',textAlign:'right',fontSize:'100%',paddingBottom:'2%',color:'gray',marginTop:'3%'}}>{data.mlocal}</div>   
+                        <div style={{width:'96%',float:'left',fontSize:'110%',paddingLeft:'2%',paddingRight:'2%',paddingBottom:'2%',marginTop:'3%'}}>{data.manalyse}</div>   
+                        <div style={{width:'96%',float:'left',fontSize:'130%',marginTop:'5%',paddingLeft:'2%',paddingRight:'2%',paddingBottom:'2%'}}>{data.mcontent}</div>                                   
+                        </div>
+                    </div>  
+                     :      
+                        <div ref={el => (this.componentRef = el)} style={{marginTop:'14%',whiteSpace:"pre-wrap",float:'left',zIndex:'99',width:'94%',paddingBottom:'2%',marginLeft:'3%',marginRight:'3%',borderBottom:'1px dashed #000'}}>              
+                            <img src={'http://116.62.14.0:8402/images/'+data.mimage} style={{width:'100%',height:'200px'}} />
+                            <div style={{width:'100%',float:'left',fontWeight:'bold',textAlign:'center',fontSize:'150%',paddingLeft:'2%',paddingBottom:'2%',marginTop:'8%'}}>{data.mtitle}</div>
+                            <div style={{width:'100%',float:'left',textAlign:'right',fontSize:'100%',paddingBottom:'2%',color:'gray',marginTop:'3%'}}>{data.mlocal}</div>   
+                            <div style={{width:'96%',float:'left',fontSize:'110%',paddingLeft:'2%',paddingRight:'2%',paddingBottom:'2%',marginTop:'3%'}}>{data.manalyse}</div>   
+                            <div style={{width:'96%',float:'left',fontSize:'130%',marginTop:'5%',paddingLeft:'2%',paddingRight:'2%',paddingBottom:'2%'}}>{data.mcontent}</div>                           
+                                        
+                        </div>)
+                    }
+                            
+                    <div style={{zIndex:'100',float:'left',width:'96%',margin:'2% 2% auto'}}>
+                        <Link to={{pathname:url,mtab2:this.props.location.mtab2,state:this.props.location.state}} style={{color:'#000',marginRight:'5%',fontSize:'120%'}}>练笔</Link>
+                        <Link to={{pathname:url+'/pinglun',mtab2:this.props.location.mtab2,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>评论</Link>
                     </div>
-                    <div style={{float:'left',width:'40%',textAlign:'center'}}>
-                        <Link to={{pathname:'/composition/lwrite',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                    <div style={{width:'96%',float:'left',marginBottom:'14%'}}>
+                        <div>
+                        <Route path={`${url}`} exact component={Word}/>
+                        <Route path={`${url}/pinglun/`} component={Smcomment}/>
+                        </div>
+                    </div>
+                    <div style={{backgroundColor:'#fff',bottom:0,float:'left',width:'100%',position:'fixed',height:'50px',paddingTop:'1%'}}>
+                        <div style={{float:'left',width:'30%',textAlign:'center'}} onClick={(e)=>{this.fetchGood(e)}}>
                             <div style={{height:'80%'}}>
-                                <img src='/images/write/write.png' style={{width:'15%',height:'15%'}}/>
+                                {data.look===null?
+                                <img src='/images/home/shoucang.png' style={{width:'20%',height:'20%'}}/>:
+                                <img src='/images/home/shoucang1.png' style={{width:'20%',height:'20%'}}/>}
                             </div>
-                            <a style={{color:'#000'}}>练笔</a>
-                        </Link>      
-                    </div>         
-                    <div style={{float:'left',width:'40%',textAlign:'center'}}>
-                        <Link to={{pathname:'/composition/lcomment',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
-                            <div style={{height:'80%'}}>
-                                <img src='/images/write/write.png' style={{width:'15%',height:'15%'}}/>
-                            </div>
-                            <a style={{color:'#000'}}>评论</a>
-                        </Link>      
-                    </div>               
+                            
+                            {data.look===null?<a style={{}} >收藏&nbsp;&nbsp;{data.mcollect}</a>:<a style={{}}>已收藏&nbsp;&nbsp;{data.mcollect}</a>}
+                        </div>
+                        <div style={{float:'left',width:'30%',textAlign:'center'}}>
+                            <Link to={{pathname:'/composition/lwrite',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                                <div style={{height:'80%'}}>
+                                    <img src='/images/write/write.png' style={{width:'20%',height:'20%'}}/>
+                                </div>
+                                <a style={{color:'#000'}}>练笔</a>
+                            </Link>      
+                        </div>         
+                        <div style={{float:'left',width:'30%',textAlign:'center'}}>
+                            <Link to={{pathname:'/composition/lcomment',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                                <div style={{height:'80%'}}>
+                                    <img src='/images/write/write.png' style={{width:'20%',height:'20%'}}/>
+                                </div>
+                                <a style={{color:'#000'}}>评论&nbsp;&nbsp;{data.mcomment}</a>
+                            </Link>      
+                        </div>               
+                    </div>
                 </div>
+                
+                ))}
             </div>
+
+                
         )
     }
 }

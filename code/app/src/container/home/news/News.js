@@ -43,7 +43,7 @@ export default class News extends Component {
                             <div>
                                 <br/>{data.uname}<br/>
                             </div>
-                        )):<div>无消息</div>}
+                        )):<div>你还没有收到消息哦</div>}
                         </div>
                     </div>
                 </div>

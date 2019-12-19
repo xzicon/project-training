@@ -11,11 +11,16 @@ export default class Lwrite extends Component {
     constructor(){
         super();
         this.state={
-            data:[]
+            data:[],
+            data3:''
         }
     }
     handleClick = () => {
         this.inputRef.focus();
+    }
+    componentDidMount(){
+        document.getElementsByClassName('biaoqian')[0].value='#';
+        this.state.data3=''
     }
     fetchComposition=(e)=>{
         let data = {
@@ -25,7 +30,7 @@ export default class Lwrite extends Component {
             uid:this.props.location.state,
             utime:Y+M+D+h+m,
             mid:this.props.location.mtab2,
-            aimage:this.state.data
+            aimage:this.state.data3
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/aud/addarticle', {
@@ -57,7 +62,7 @@ export default class Lwrite extends Component {
         method: 'POST',
           body: formData,
         }).then(res=>res.json()).then(res=>
-            this.setState({data:res.data},console.log(res.data))
+            this.setState({data3:res.data},console.log(res.data))
         )
       };
     render() {
@@ -70,47 +75,51 @@ export default class Lwrite extends Component {
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={
-                        <input type='button' onClick={(e)=>{this.fetchComposition(e)}} style={{color:'#000'}} value='发布'/>
+                        <input type='button' onClick={(e)=>{this.fetchComposition(e)}} style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',border:'1px solid red',borderRadius:'15%'}} value='发布'/>
                     }
                 ></NavBar>
-                <div>
-                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',height:'300px',width:'96%'}}>
+                <div style={{width:'100%'}}>
+                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',width:'96%'}}>
                         <textarea
                             title="标题"
-                            placeholder="在此输入作文标题"
+                            placeholder="在此输入练笔标题"
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'2%'}}
                             className='biaoti'
                             type='text'
                         />
                         <textarea
                             title="标签"
-                            placeholder="在此输入作文标签"
+                            placeholder="在此输入练笔标签"
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'2.5%',marginLeft:'2%'}}
                             className='biaoqian'
                             type='text'
                         />
                         <textarea
                             title="内容"
-                            placeholder="在此输入作文内容"
+                            placeholder="在此输入练笔内容"
                             data-seed="logId"
                             autoHeight
                             ref={el => this.customFocusInst = el}
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'3%',marginLeft:'2%'}}
                             className='neirong'
                             type='text'
+                            rows={10}
                         />
-                    </List>
-                    <div className='upload-container' style={{marginTop:'400px'}}>
-                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
-                    {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
-                </div>
-                {this.state.data?<img src={`http://116.62.14.0:8402/images/`+this.state.data}/>:''}
+
+                        <div className='upload-container' style={{float:'left',width:'100%',marginTop:'3%'}}>
+                            <div style={{width:'100%',float:'right',position:'relative',height:'30px'}}><input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'70px',float:'right',marginRight:'3%',opacity:'0'}} /><img src='/images/home/pic.png' style={{width:'8%',height:'100%',position:'absolute',right:'8%'}} /></div>
+                            {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
+                            <div style={{width:'100%',float:'left',height:'200px'}}>
+                                {this.state.data3?<img src={`http://116.62.14.0:8402/images/`+this.state.data3} style={{height:'200px',width:'fixwidth'}}/>:''  }
+                            </div>
+                        </div>
+                    </List>  
                 </div>
             </div>
         )

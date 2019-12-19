@@ -27,25 +27,33 @@ export default class Lcomment extends Component {
           })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr.length);
+        if(arr.length===3){
+            var data1='/composition/sdetails/'+this.props.location.mtab2;
+        }else if(arr.length===4){
+            var data1='/composition/label/s/sdetails/'+this.props.location.mtab2;
+        }
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/composition/sdetails/'+this.props.location.mtab2,state:this.props.location.state,mtab2:this.props.location.mtab2}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:data1,state:this.props.location.state,mtab2:this.props.location.mtab2}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    rightContent={<Link to={{pathname:'/composition/sdetails/'+this.props.location.mtab2,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
-                        <input type='button' onClick={(e)=>{this.fetchComment(e)}} style={{color:'#000'}} value='发布'/>
+                    rightContent={<Link to={{pathname:data1,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                        <input type='button' onClick={(e)=>{this.fetchComment(e)}} style={{color:'#000'}} style={{width:'60px',height:'30px',backgroundColor:'#fff',color:'#000',borderRadius:'15%',outline:'none',border:'1px solid #da4036'}} value='发布'/>
                     </Link>}
                 >写评论</NavBar>
-                <div>
-                    <List style={{top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',height:'100px',width:'96%'}}>
+                <div style={{float:'left'}}>
+                    <List style={{top:'40px',position:'absolute',zIndex:'99',margin:'3% 2% auto',backgroundColor:'#fff',width:'96%',paddingTop:'2%',paddingBottom:'2%'}}>
                         <textarea
                             placeholder="在此输入评论"
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'3%',marginLeft:'1.5%'}}
                             className='pinglun'
+                            rows={5}
                         />
                     </List>
                 </div>

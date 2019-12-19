@@ -64,22 +64,22 @@ export default class Edit extends Component {
                 <NavBar
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    leftContent={<Link to={{pathname:'/mine/marticle',state:this.props.location.state}}>
+                    leftContent={<Link to={{pathname:'/mine/marticle',state:this.props.location.state,state3:this.props.location.state3}}>
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={
-                        <input type='button' onClick={(e)=>{this.fetchEdit(e)}} style={{color:'#000'}} value='修改'/>
+                        <input type='button' onClick={(e)=>{this.fetchEdit(e)}} style={{width:'60px',height:'30px',color:'#000',border:'none',backgroundColor:'#fff',border:'1px solid red',borderRadius:'15%'}} value='修改'/>
                     }
                 ></NavBar>
                 <div>
-                    <List style={{whiteSpace:"pre-wrap",top:'40px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',height:'300px',width:'96%'}}>
+                    <List style={{whiteSpace:"pre-wrap",top:'45px',position:'absolute',zIndex:'99',margin:'2% 2% auto',backgroundColor:'#fff',width:'96%',paddingBottom:'2%'}}>
                         <textarea
                             title="标题"
                             placeholder="在此输入作文标题"
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginTop:'2%',marginLeft:'1.5%'}}
                             className='biaoti'
                             type='text'
                         />
@@ -89,7 +89,7 @@ export default class Edit extends Component {
                             data-seed="logId"
                             ref={el => this.autoFocusInst = el}
                             autoHeight
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginLeft:'1.5%'}}
                             className='biaoqian'
                             type='text'
                         />
@@ -99,9 +99,10 @@ export default class Edit extends Component {
                             data-seed="logId"
                             autoHeight
                             ref={el => this.customFocusInst = el}
-                            style={{backgroundColor:'none',width:'100%'}}
+                            style={{backgroundColor:'none',width:'96%',marginLeft:'1.5%'}}
                             className='neirong'
                             type='text'
+                            rows={15}
                         />
                     </List>
                 </div>

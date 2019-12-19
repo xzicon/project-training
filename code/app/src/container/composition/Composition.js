@@ -9,7 +9,11 @@ export default class Composition extends Component {
         super(props);
         this.state = {
           selectedTab: '/composition/composition',
-          data:[]
+          data1:[],
+          data2:[],
+          data3:[],
+          data4:[],
+          data5:[],
         };
     }
     componentDidMount(){
@@ -18,14 +22,109 @@ export default class Composition extends Component {
         fetch('http://116.62.14.0:8402/usort/msid/'+state)
         .then((res)=>res.json())
         .then((res)=>{
-            this.setState({data:res.data});
+            this.setState({
+                data1:res.data[0],
+                data2:res.data[1],
+                data3:res.data[2],
+                data4:res.data[3],
+                data5:res.data[4],
+            });
             console.log(res.data);
         })
     }
+    Change1=(e)=>{
+        document.getElementById("A1").style.color="red"
+        document.getElementById("A1").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A2").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A3").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A4").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A5").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A6").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A2").style.color="#000"
+        document.getElementById("A3").style.color="#000"
+        document.getElementById("A4").style.color="#000"
+        document.getElementById("A5").style.color="#000"
+        document.getElementById("A6").style.color="#000"
+}
+Change2=(e)=>{
+        document.getElementById("A2").style.color="red"
+        document.getElementById("A1").style.color="#000"
+        document.getElementById("A3").style.color="#000"
+        document.getElementById("A4").style.color="#000"
+        document.getElementById("A5").style.color="#000"
+        document.getElementById("A6").style.color="#000"
+        document.getElementById("A2").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A1").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A3").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A4").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A5").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A6").style.borderBottom="0px solid #ffdf41"
+}
+Change3=(e)=>{
+
+        document.getElementById("A3").style.color="red"
+        document.getElementById("A2").style.color="#000"
+        document.getElementById("A1").style.color="#000"
+        document.getElementById("A4").style.color="#000"
+        document.getElementById("A5").style.color="#000"
+        document.getElementById("A6").style.color="#000"
+        document.getElementById("A3").style.borderBottom="4px solid #ffdf41"
+        document.getElementById("A2").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A1").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A4").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A5").style.borderBottom="0px solid #ffdf41"
+        document.getElementById("A6").style.borderBottom="0px solid #ffdf41"
+}
+Change4=(e)=>{
+
+    document.getElementById("A4").style.color="red"
+    document.getElementById("A2").style.color="#000"
+    document.getElementById("A3").style.color="#000"
+    document.getElementById("A1").style.color="#000"
+    document.getElementById("A5").style.color="#000"
+    document.getElementById("A6").style.color="#000"
+    document.getElementById("A4").style.borderBottom="4px solid #ffdf41"
+    document.getElementById("A2").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A3").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A1").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A5").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A6").style.borderBottom="0px solid #ffdf41"
+
+}
+Change5=(e)=>{
+
+    document.getElementById("A5").style.color="red"
+    document.getElementById("A2").style.color="#000"
+    document.getElementById("A3").style.color="#000"
+    document.getElementById("A4").style.color="#000"
+    document.getElementById("A1").style.color="#000"
+    document.getElementById("A6").style.color="#000"
+    document.getElementById("A5").style.borderBottom="4px solid #ffdf41"
+    document.getElementById("A2").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A3").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A4").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A1").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A6").style.borderBottom="0px solid #ffdf41"
+}
+Change6=(e)=>{
+    document.getElementById("A6").style.color="red"
+    document.getElementById("A2").style.color="#000"
+    document.getElementById("A3").style.color="#000"
+    document.getElementById("A4").style.color="#000"
+    document.getElementById("A5").style.color="#000"
+    document.getElementById("A1").style.color="#000"
+    document.getElementById("A6").style.borderBottom="4px solid #ffdf41"
+    document.getElementById("A2").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A3").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A4").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A5").style.borderBottom="0px solid #ffdf41"
+    document.getElementById("A1").style.borderBottom="0px solid #ffdf41"
+}
+
     render() {
         let url = this.props.match.url;
         console.log(url);
-        console.log(this.state.data.length);
+        // console.log(this.state.data.length);
         return (
             <div>
                 <div style={{
@@ -90,18 +189,35 @@ export default class Composition extends Component {
                         }}
                         >
                             <div >
-                                <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'96%',margin:'2% 2% auto',backgroundColor:'#f5f5f9'}}>
+                                <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'100%',backgroundColor:'#f5f5f9'}}>
+                                <div style={{float:'left',width:'100%',paddingBottom:'2%'}}>
                                     <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
-                                    <Link to={{pathname:'/composition/csearch',state:this.props.location.state}}><img src='/images/write/all.png' style={{float:'right',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
+                                    <Link to={{pathname:'/composition/csearch',state:this.props.location.state}}><SearchBar style={{width:'65%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索"/></Link>
+                                    <Link to={{pathname:'/gselect',state:this.props.location.state}} style={{color:'red'}}><div style={{width:'20%',marginTop:'2%',marginRight:'3%',float:'right',fontSize:'120%'}}>修改标签</div></Link>
                                 </div>
-                                <div>
-                                    <Link to={{pathname:url,state:this.props.location.state}}>推荐</Link>
-                                {this.state.data.map(data => (
-                                    <Link to={{pathname:url,search:`?msid=${data.msid}`,mtab3:data.msid,state:this.props.location.state}}><div>{data.msname}</div></Link>
-                                ))}
-                                <Link to={{pathname:'/gselect',state:this.props.location.state}}>修改标签</Link>
+                                <div style={{marginTop:'12%',backgroundColor:'#fff',fontSize:'130%',paddingBottom:'2%',}}>
+                                    <Link to={{pathname:url,state:this.props.location.state}} style={{color:'red',marginLeft:'5%',borderBottom:"4px solid #ffdf41"}} id='A1' onClick={(e)=>{this.Change1(e)}}>推荐</Link>
+                                {/* {this.state.data.map(data => ( */}
+                                    <Link to={{pathname:url,search:`?msid=${this.state.data1.msid}`,mtab3:this.state.data1.msid,state:this.props.location.state}}>
+                                                    <a style={{width:'15%',marginLeft:'3%',color:'#000'}} id='A2' onClick={(e)=>{this.Change2(e)}}>{this.state.data1.msname}</a>
+                                                </Link>
+                                                <Link to={{pathname:url,search:`?msid=${this.state.data2.msid}`,mtab3:this.state.data2.msid,state:this.props.location.state}}>
+                                                    <a style={{width:'15%',marginLeft:'3%',color:'#000'}} id='A3' onClick={(e)=>{this.Change3(e)}}>{this.state.data2.msname}</a>
+                                                </Link>
+                                                <Link to={{pathname:url,search:`?msid=${this.state.data3.msid}`,mtab3:this.state.data3.msid,state:this.props.location.state}}>
+                                                    <a style={{width:'15%',marginLeft:'3%',color:'#000'}} id='A4' onClick={(e)=>{this.Change4(e)}}>{this.state.data3.msname}</a>
+                                                </Link>
+                                                <Link to={{pathname:url,search:`?msid=${this.state.data4.msid}`,mtab3:this.state.data4.msid,state:this.props.location.state}}>
+                                                    <a style={{width:'15%',marginLeft:'3%',color:'#000'}} id='A5' onClick={(e)=>{this.Change5(e)}}>{this.state.data4.msname}</a>
+                                                </Link>
+                                                <Link to={{pathname:url,search:`?msid=${this.state.data5.msid}`,mtab3:this.state.data5.msid,state:this.props.location.state}}>
+                                                    <a style={{width:'15%',marginLeft:'3%',color:'#000'}} id='A6' onClick={(e)=>{this.Change6(e)}}>{this.state.data5.msname}</a>
+                                                </Link>
+
+                                {/* ))} */}
                                 </div>
-                                <div>
+                                </div>
+                                <div style={{width:'94%',marginLeft:'3%'}}>
                                     <Route path={`${url}`} exact component={Popular}/>
                                 </div>
                             </div>

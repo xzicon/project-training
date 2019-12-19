@@ -10,8 +10,9 @@ export default class Foguanzhu extends Component {
     }
     componentDidMount(){
         let page=this.props.location.state4;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/userconcern/'+page)
+        let page1=this.props.location.state;
+        console.log(page,page1);
+        fetch('http://116.62.14.0:8402/login/guanzhu/'+page+'/'+page1)
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -60,20 +61,24 @@ export default class Foguanzhu extends Component {
         return (
             <div>
                 
-                    <div>
-                <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>
-                {this.state.data.length!==0?this.state.data.map(data=>(
-                    <div style={{width:'96%',margin:'2% 2% auto',height:'60px',backgroundColor:'#fff',marginTop:'10px',padding:'4% 4%'}}>
-                        <Flex>
-                            <div style={{marginRight:'10%'}}><img src={`http://116.62.14.0:8402/images/${data.uimage}`} style={{height:'60px'}}/></div>
-                            <div style={{marginRight:'22%'}}>{data.uname}</div>
-                            <div><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='已关注' style={{width:'80px',height:'40px',borderRadius:'20%',backgroundColor:'#fff'}} /></div>
-                        </Flex>
-                    </div>
+                <div style={{width:'100%',fontSize:'16px'}}>
+                    {this.state.data.length!==0?this.state.data.map(data=>(
+                        <div>
+                            <div style={{width:'96%',height:'70px',backgroundColor:'#fff',padding:'2% 2%',marginBottom:'2%'}}>
+                                <div style={{width:'70%',float:'left',marginTop:'1%'}}>
+                                    <img src={`http://116.62.14.0:8402/images/${data.uimage}`} style={{width:'55px',height:'55px',borderRadius:'50%',float:'left'}}/>
+                                    <div style={{width:'70%',float:'left'}}>
+                                        <div style={{float:'left',fontSize:'110%',paddingTop:'3%',paddingLeft:'8%',width:'100%'}}>{data.uname}</div>
+                                        <div style={{float:'left',fontSize:'90%',paddingTop:'3%',paddingLeft:'5%',width:'100%'}}>简介：{data.udescribe}</div>
+                                    </div>
+                                   
+                                </div>
+                                {data.woid===null?<div style={{width:'20%',float:'left',marginTop:'3%',marginLeft:'5%'}}><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='关注' style={{width:'75px',height:'35px',borderRadius:'20%',backgroundColor:'#fff',outline:'none'}} /></div>:
+                                <div style={{width:'20%',float:'left',marginTop:'3%',marginLeft:'5%'}}><input type='button' onClick={(e)=>{this.fetchConcern(e)}} class='follow' value='已关注' style={{width:'75px',height:'35px',borderRadius:'20%',backgroundColor:'#fff',outline:'none'}} /></div>} 
+                            </div>
+                        </div>
                     )):<div>他还没有关注过任何人</div>}
                 </div>
-                </div>
-                
             </div>
         )
     }

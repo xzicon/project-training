@@ -74,7 +74,7 @@ export default class Gselect extends Component {
                     onLeftClick={() => console.log('onLeftClick')}>全部标签</NavBar>
                     <div style={{width:'100%',margin:'auto',position:'absolute',top:'70px'}}>
                     {this.state.data.map(data => (
-                        <li style={{width:'30%',fontSize:'140%',listStyle:'none',display:'inline-block',textAlign:'center',lineHeight:'180%'}}><input type="checkbox"  name="biaoqian" value={data.msid} onChange={this.handleChange}/>{data.msname}</li>
+                        <li style={{width:'30%',fontSize:'140%',listStyle:'none',display:'inline-block',textAlign:'center',lineHeight:'180%'}}><input type="checkbox"  name="biaoqian" value={data.msid} onChange={this.handleChange} style={{width:'18px',height:'18px'}} />{data.msname}</li>
                     ))}
                     </div>
             </div>

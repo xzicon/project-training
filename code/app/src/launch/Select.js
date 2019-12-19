@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Checkbox,List,Toast} from 'antd-mobile';
+import {Checkbox,List,Toast,NavBar,Icon} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 export default class Select extends Component {
     constructor(props){
@@ -66,11 +66,16 @@ export default class Select extends Component {
     render() {  
         return (
             <div>
-                <button className='biaoqian' type='text' onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>
-                <Link to={{pathname:'/composition/composition',state:this.props.location.state}}><button className='biaoqian2' type='text'>取消</button></Link>
-                {this.state.data.map(data => (
-                    <label><input type="checkbox" name="biaoqian" value={data.msid} onChange={this.handleChange}/>{data.msname}</label>
-                ))}
+                <NavBar
+                    leftContent={<Link to={{pathname:'/composition/composition',state:this.props.location.state}}><button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}}>跳过</button></Link>}
+                    rightContent={<button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>}
+                    style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
+                    onLeftClick={() => console.log('onLeftClick')}>全部标签</NavBar>
+                    <div style={{width:'100%',margin:'auto',position:'absolute',top:'70px'}}>
+                    {this.state.data.map(data => (
+                        <li style={{width:'30%',fontSize:'140%',listStyle:'none',display:'inline-block',textAlign:'center',lineHeight:'180%'}}><input type="checkbox"  name="biaoqian" value={data.msid} onChange={this.handleChange} style={{width:'18px',height:'18px'}} />{data.msname}</li>
+                    ))}
+                    </div>
             </div>
         )
     }
