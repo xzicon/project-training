@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import {Button} from 'antd-mobile';
 
 export default class AddMaterial extends Component {
     constructor(){
@@ -43,6 +42,13 @@ export default class AddMaterial extends Component {
             // console.log(data)
             switch(data.status){
                 case '0':
+                    if(msid==6 || msid==7){
+                        this.props.history.push(`/home/material/jifa/detail?msid=${msid}`);
+                    }else if(35<=msid<=39 || msid==5 ||msid==4){
+                        this.props.history.push(`/home/material/sucai/detail?msid=${msid}`);
+                    }else{
+                    this.props.history.push(`/home/material/jifa/detail?msid=${msid}`);
+                    }
                     alert('添加成功！');
                     break;
                 case '-1':
@@ -80,6 +86,11 @@ export default class AddMaterial extends Component {
             })
         })
     }
+    handleDelete = ()=>{
+        this.setState({
+            location:''
+        })
+    }
     render() {
         let msid = this.props.location.search.split('=')[1];
         let type = this.state.location.split('.')[1];
@@ -92,7 +103,8 @@ export default class AddMaterial extends Component {
                 <div className='upload-container'>
                     <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
                     <button type="primary" className='upload-button'>上传图片</button>
-                    <div style={{width:'212px',height:'140px',border:'1px solid gray'}}>
+                    <button className='delete-button' onClick={this.handleDelete} style={{marginLeft:'20px'}}>删除图片</button>
+                    <div style={{width:'214px',height:'142px',border:'1px solid gray'}}>
                     {
                         this.state.location==='' ? <p></p> : ( type === 'mp4' ? 
                             <video src={`http://116.62.14.0:8402/images/`+this.state.location} id="myPlayer" poster='' controls playsInline webkit-playsinline style={{width:'100%'}}>

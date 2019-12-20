@@ -56,11 +56,11 @@ export default class UserManage extends Component {
                   this.state.users.map((item,index)=>(
                     <ul className='user_title' key={index}>
                       <li style={{width:'100px'}}>{item.uid}</li>
-                      <li style={{width:'160px'}}>{item.uname}</li>
+                      <li style={{width:'160px',overflow:'hidden'}}>{item.uname}</li>
                       <li>
                         <img src={`http://116.62.14.0:8402/images/${item.uimage}`} style={{with:'60px',height:'40px',marginTop:'5px'}}/>
                       </li>
-                      <li style={{width:'160px'}}>{item.udescribe}</li>
+                      <li style={{width:'160px',overflow:'hidden'}}>{item.udescribe}</li>
                       <li>{item.ufans}</li>
                       <li style={{width:'160px'}}>{item.uemail}</li>
                       <li><button onClick={(e)=>{this.handleClick(e)}}>删除</button></li>

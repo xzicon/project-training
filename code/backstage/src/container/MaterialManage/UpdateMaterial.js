@@ -59,6 +59,13 @@ export default class UpdateMaterial extends Component {
             // console.log(data)
             switch(data.status){
                 case '0':
+                    if(msid1==6 || msid1==7){
+                        this.props.history.push(`/home/material/jifa/detail?msid=${msid1}`);
+                    }else if(35<=msid1<=39 || msid1==5 ||msid1==4){
+                        this.props.history.push(`/home/material/sucai/detail?msid=${msid1}`);
+                    }else{
+                        this.props.history.push(`/home/material/jifa/detail?msid=${msid1}`);
+                    }
                     alert('成功保存修改！');
                     break;
                 case '-1':
@@ -67,13 +74,6 @@ export default class UpdateMaterial extends Component {
                 default:break;
             }
         })
-        if(msid1==6 || msid1==7){
-            this.props.history.push(`/home/material/jifa/detail?msid=${msid1}`);
-        }else if(35<=msid1<=39 || msid1==5 ||msid1==4){
-            this.props.history.push(`/home/material/sucai/detail?msid=${msid1}`);
-        }else{
-            this.props.history.push(`/home/material/jifa/detail?msid=${msid1}`);
-        }
     }
     handleOver = ()=>{
         let msid0 = this.props.location.search.split('=')[1];
@@ -86,6 +86,7 @@ export default class UpdateMaterial extends Component {
             this.props.history.push(`/home/material/jifa/detail?msid=${msid}`);
         }
     }
+
     onChange = (e) => {
         // e.preventDefault();
         const file = e.target.files[0];
@@ -104,6 +105,11 @@ export default class UpdateMaterial extends Component {
             })
         })
     }
+    handleDelete = ()=>{
+        this.setState({
+            location:''
+        })
+    }
     render() {
         let msid = this.props.location.search.split('=')[1];
         let type = this.state.location.split('.')[1];
@@ -114,9 +120,10 @@ export default class UpdateMaterial extends Component {
                 <textarea id='analyse' type='text' placeholder='素材分析'></textarea>    
                 <textarea id='content' type='text' placeholder='素材内容' ></textarea>  
                 <div className='upload-container'>
-                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
+                    <input type="file" name="image" style={{width:'70px'}} className='upload-input' onChange={(e)=>this.onChange(e)} />
                     <button type="primary" className='upload-button'>上传图片</button>
-                    <div style={{width:'212px',height:'140px',border:'1px solid gray'}}>
+                    <button className='delete-button' onClick={this.handleDelete} style={{marginLeft:'20px'}}>删除图片</button>
+                    <div style={{width:'214px',height:'142px',border:'1px solid gray'}}>
                         {
                             this.state.location==='' ? <p></p> : (
                                 type === 'mp4' ? <video src={`http://116.62.14.0:8402/images/`+this.state.location} id="myPlayer" poster='' controls playsInline webkit-playsinline style={{width:'100%'}}>

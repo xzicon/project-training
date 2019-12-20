@@ -33,6 +33,13 @@ export default class Sucaicomment extends Component {
             // console.log(data)
             switch(data.status){
                 case '0':
+                    fetch('http://116.62.14.0:8402/comment/material')
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        this.setState({
+                            comments:res.data
+                        })
+                    })
                     alert('删除成功！');
                     break;
                 case '-1':
@@ -46,9 +53,9 @@ export default class Sucaicomment extends Component {
     render() {
         return (
             <div>
-                <div style={{width:'150px',height:'28px',fontSize:'15px',color:'black',margin:'15px 0 0 25px',lineHeight:'20px'}}>
-                <a href='/home/comment'  style={{color:'black'}}>
-                    <img src='/images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
+                <div style={{width:'150px',height:'28px',fontSize:'15px',color:'black',margin:'15px 0 0 20px',lineHeight:'20px'}}>
+                <a href='#/home/comment'  style={{color:'black'}}>
+                    <img src='./images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
                     返回上一页
                 </a>
                 </div>

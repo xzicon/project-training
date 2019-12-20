@@ -20,7 +20,7 @@ export default class SysManage extends Component {
       render() {
           return (
             <div>
-              <ul className='sys_title' style={{width:'600px',height:'200px',margin:'50px 0 0 100px'}}>
+              <ul className='sys_title' style={{width:'800px',height:'200px',margin:'30px 0 0 30px'}}>
                 <li style={{fontWeight:'bold'}}>用户名</li>
                 <li style={{fontWeight:'bold'}}>邮箱</li>
                 <li style={{fontWeight:'bold'}}>操作</li>
