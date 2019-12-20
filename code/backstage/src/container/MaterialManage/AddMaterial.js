@@ -101,7 +101,7 @@ export default class AddMaterial extends Component {
                 <textarea id='analyse' type='text' placeholder='素材分析'></textarea>    
                 <textarea id='content' type='text' placeholder='素材内容' ></textarea>   
                 <div className='upload-container'>
-                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} />
+                    <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'60px'}}/>
                     <button type="primary" className='upload-button'>上传图片</button>
                     <button className='delete-button' onClick={this.handleDelete} style={{marginLeft:'20px'}}>删除图片</button>
                     <div style={{width:'214px',height:'142px',border:'1px solid gray'}}>
