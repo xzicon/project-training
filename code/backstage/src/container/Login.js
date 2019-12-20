@@ -40,11 +40,11 @@ export default class Login extends Component {
                 <div className='login_form'>
                 <form>
                     <div className='item'>
-                        <img src='/images/user.png' alt=''/>
+                        <img src='./images/user.png' alt=''/>
                         <input type='text' placeholder='请输入用户名' id='username'/>
                     </div>
                     <div className='item'>
-                        <img src='/images/pwd.png' alt=''/>
+                        <img src='./images/pwd.png' alt=''/>
                         <input type='password' placeholder='请输入密码' id='pwd'/>
                     </div>
                     <Link to='/forgetpwd'>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import {HashRouter as Router,Route,Switch} from 'react-router-dom';
 import Leader from '../components/Leader';
 import SysManage from './SysManage';
 import ComManage from './ComManage';
@@ -14,6 +14,7 @@ import UpdateMaterial from './MaterialManage/UpdateMaterial';
 import MaterialManage from './MaterialManage/MaterialManage';
 import FeedBack from './FeedBack';
 import SearchDetail from './MaterialManage/SearchDetail';
+import WorksDetail from './WorksDetail';
 
 export default class Home extends Component {
     render() {
@@ -33,6 +34,7 @@ export default class Home extends Component {
                     <Route path='/home/material/:mtab' component={Sucai}/>
                     <Route path='/home/material' component={MaterialManage}/>
                     <Route path='/home/works' component={WorksManage}/>
+                    <Route path='/home/worksdetail' component={WorksDetail}/>
                     <Route path='/home/comment' component={ComManage}/>
                     <Route path='/home/system' component={SysManage}/>
                     <Route path='/home/feedback' component={FeedBack}/>

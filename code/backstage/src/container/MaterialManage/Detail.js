@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 export default class Detail extends Component {
     constructor(){
@@ -29,7 +29,7 @@ export default class Detail extends Component {
             fetch(`http://116.62.14.0:8402/material/fenlei/zuixin/?mtab=${url}&msid=${msid}`)
             .then((res)=>res.json())
             .then((res)=>{
-            // console.log(res.data)
+            console.log(res.data)
                 this.setState({
                     data:res.data
                 })
@@ -38,8 +38,8 @@ export default class Detail extends Component {
     }
     deleteItem =(e)=>{
         let newsearch = this.props.location.search;
-            let url = this.props.match.url.split('/')[3];
-            let msid = newsearch.split('=')[1];
+        let url = this.props.match.url.split('/')[3];
+        let msid = newsearch.split('=')[1];
         let item = e.target.parentNode.parentNode;
         // console.log(item);
         let mid = item.children[0].innerHTML;
@@ -56,7 +56,6 @@ export default class Detail extends Component {
             // console.log(data)
             switch(data.status){
                 case '0':
-                    alert('删除成功！');
                     fetch(`http://116.62.14.0:8402/material/fenlei/zuixin/?mtab=${url}&msid=${msid}`)
                     .then((res)=>res.json())
                     .then((res)=>{
@@ -64,6 +63,7 @@ export default class Detail extends Component {
                             data:res.data
                         })
                     })
+                    alert('删除成功！');
                     break;
                 case '-1':
                     alert('删除失败！');
@@ -80,21 +80,29 @@ export default class Detail extends Component {
                     <ul className='works_title' style={{width:'1000px',height:'50px'}}>
                         <li style={{fontWeight:'bold'}}>素材id</li>
                         <li style={{fontWeight:'bold'}}>素材标题</li>
-                        <li style={{fontWeight:'bold'}}>素材解析</li>
                         <li style={{fontWeight:'bold'}}>素材内容</li>
                         <li style={{fontWeight:'bold'}}>出处</li>
+                        <li style={{fontWeight:'bold'}}>图片</li>
                         <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
                         <li style={{fontWeight:'bold'}}>操作</li>
                     </ul>
-                    <div style={{width:'950px',height:'400px',float:'left',overflowY:'auto'}}>
+                    <div style={{width:'950px',height:'300px',float:'left',overflowY:'auto'}}>
                     {
                       this.state.data.map((item,index)=>(
                         <ul className='works_title' key={index}>
                             <li>{item.mid}</li>
                             <li style={{overflow:'hidden'}}>{item.mtitle}</li>
-                            <li style={{overflow:'hidden'}}>{item.manalyse}</li>
                             <li style={{overflow:'hidden'}}>{item.mcontent}</li>
                             <li style={{overflow:'hidden'}}>{item.mlocal}</li>
+                            <li style={{overflow:'hidden'}}>
+                                {
+                                    item.mimage === '' ? 
+                                <img src='./images/logo.png' style={{width:'60px',height:'40px'}}/> : (
+                                    item.mimage.split('.')[1]==='mp4' ? '[Video]' : 
+                                    <img src={`http://116.62.14.0:8402/images/${item.mimage}`} style={{width:'50px',height:'30px'}}/>
+                                )
+                                }
+                            </li>
                             <li style={{width:'160px'}}>{item.mtime}</li>
                             <li>
                                 <Link to={`/home/material/updatematerial${search}&mid=${item.mid}`}>

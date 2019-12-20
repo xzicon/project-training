@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 export default class WorksManage extends Component {
     constructor(){
@@ -73,17 +74,21 @@ export default class WorksManage extends Component {
                                 <li>{item.aid}</li>
                                 <li style={{width:'150px',overflow:'hidden'}}>{item.atitle}</li>
                                 <li style={{overflow:'hidden'}}>
-                                    {
-                                        item.aimage==='' ? 
-                                        <img src='/images/logo.png' style={{with:'60px',height:'40px',marginTop:'5px'}}/> :
-                                        <img src={`http://116.62.14.0:8402/images/${item.aimage}`} style={{with:'60px',height:'40px',marginTop:'5px'}}/>
-                                    }
+                                {
+                                    item.aimage==='' ? 
+                                    <img src='images/logo.png' style={{with:'60px',height:'40px',marginTop:'5px'}}/> :
+                                    <img src={`http://116.62.14.0:8402/images/${item.aimage}`} style={{with:'60px',height:'40px',marginTop:'5px'}}/>
+                                }
                                 </li>
-                                <li style={{width:'150px',overflow:'hidden'}}>{item.mtitle}</li>
+                                <li style={{width:'150px',overflow:'hidden'}}>
+                                {
+                                    item.mid===null ? '[自由创作]' : item.mtitle
+                                }
+                                </li>
                                 <li style={{width:'160px',overflow:'hidden'}}>{item.uname}</li>
                                 <li style={{width:'150px'}}>{item.utime}</li>
                                 <li>
-                                    <button>详情</button>
+                                    <Link to={{pathname:`/home/worksdetail`,search:`?aid=${item.aid}`}}><button style={{width:'50px',height:'25px'}}>详情</button></Link>
                                     <button onClick={(e)=>{this.deleteItem(e)}}>删除</button>
                                 </li>
                             </ul>

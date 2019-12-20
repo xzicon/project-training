@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link,Route} from 'react-router-dom'
 import Detail from './Detail';
-import Collapse from '../../components/Collapse';
 
 export default class Sucai extends Component {
     constructor(){
@@ -28,9 +27,9 @@ export default class Sucai extends Component {
         let url = this.props.match.url;
         return (
             <div>
-                <div style={{width:'150px',height:'28px',fontSize:'15px',margin:'15px 0 0 25px',lineHeight:'20px'}}>
-                <a href='/home/material' style={{color:'black'}}>
-                    <img src='/images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
+                <div style={{width:'150px',height:'28px',fontSize:'15px',margin:'15px 0 0 20px',lineHeight:'20px'}}>
+                <a href='#/home/material' style={{color:'black'}}>
+                    <img src='./images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
                     返回上一页
                 </a>
                 </div>

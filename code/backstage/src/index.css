@@ -58,7 +58,7 @@ form{
 .leaderwrap{
   width:290px;
   height:600px;
-  padding-top: 20px;
+  padding-top: 10px;
   margin-left:10px;
   font-size: 17px;
   border-right: 1px solid #000;
@@ -114,7 +114,7 @@ form{
 /* sysManage */
 .sys_title > li{
   float:left;
-  width:200px;
+  width:250px;
   height:50px;
   text-align: center;
   line-height: 50px;
@@ -214,7 +214,10 @@ form{
 .add_material > button{
   margin-left:100px;
 }
-
+.add_material > p{
+  margin-bottom: 5px;
+  font-size: 15px;
+}
 /* reset_pwd */
 .reset_pwd{
   width:400px;
