@@ -20,9 +20,9 @@ export default class FeedBack extends Component {
     render() {
         return (
             <div>
-              <ul className='user_title' style={{width:'900px',height:'200px',margin:'30px 0 0 30px'}}>
+              <ul className='user_title' style={{width:'1000px',height:'200px',margin:'30px 0 0 30px'}}>
                 <li style={{fontWeight:'bold'}}>反馈ID</li>
-                <li style={{fontWeight:'bold'}}>反馈内容</li>
+                <li style={{width:'160px',fontWeight:'bold'}}>反馈内容</li>
                 <li style={{fontWeight:'bold'}}>用户ID</li>
                 <li style={{fontWeight:'bold'}}>用户名</li>
                 <li style={{width:'160px',fontWeight:'bold'}}>用户邮箱</li>
@@ -32,7 +32,7 @@ export default class FeedBack extends Component {
                   this.state.data.map((item,index)=>(
                     <ul className='user_title' key={index}>
                       <li>{item.fid}</li>
-                      <li>{item.fcontent}</li>
+                      <li style={{width:'160px',overflow:'hidden'}}>{item.fcontent}</li>
                       <li>{item.uid}</li>
                       <li>{item.uname}</li>
                       <li style={{width:'160px'}}>{item.uemail}</li>

@@ -53,13 +53,14 @@ export default class Sucaicomment extends Component {
     render() {
         return (
             <div>
+                <div style={{width:'1000px',height:'500px',margin:'30px 0 0 30px'}}>
                 <div style={{width:'150px',height:'28px',fontSize:'15px',color:'black',margin:'15px 0 0 20px',lineHeight:'20px'}}>
                 <a href='#/home/comment'  style={{color:'black'}}>
                     <img src='./images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
                     返回上一页
                 </a>
                 </div>
-                <ul className='comments_title' style={{width:'1000px',height:'200px',margin:'0 30px'}}>
+                <ul className='comments_title' style={{width:'1000px',height:'50px',float:'left'}}>
                     <li style={{fontWeight:'bold'}}>评论ID</li>
                     <li style={{fontWeight:'bold'}}>评论内容</li>
                     <li style={{fontWeight:'bold'}}>获赞数</li>
@@ -68,6 +69,8 @@ export default class Sucaicomment extends Component {
                     <li style={{fontWeight:'bold'}}>用户ID</li>
                     <li style={{width:'160px',fontWeight:'bold'}}>发布时间</li>
                     <li style={{fontWeight:'bold'}}>操作</li>
+                </ul>
+                <div style={{width:'1000px',height:'500px',float:'left',overflowY:'auto'}}>
                 {
                     this.state.comments.map((item,index)=>(
                         <ul className='comments_title' key={index}>
@@ -82,7 +85,8 @@ export default class Sucaicomment extends Component {
                         </ul>
                     ))
                 }
-                </ul>
+                </div>
+                </div>
             </div>
         )
     }

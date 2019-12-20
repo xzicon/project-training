@@ -20,7 +20,7 @@ export default class SearchDetail extends Component {
             body:JSON.stringify(obj)
             }).then((res)=>res.json())
             .then((res)=>{
-                // console.log(res.data)
+                console.log(res.data)
                 this.setState({
                     data:res.data
                 })
@@ -54,7 +54,7 @@ export default class SearchDetail extends Component {
                     this.state.data.map((item,index)=>(
                         <ul className='works_title' key={index} style={{width:'1000px',height:'50px'}}>
                             <li>{item.mid}</li>
-                            <li style={{overflow:'hidden'}}>{item.msid}</li>
+                            <li style={{overflow:'hidden'}}>{item.msname}</li>
                             <li style={{overflow:'hidden'}}>{item.mtitle}</li>
                             <li style={{overflow:'hidden'}}>{item.manalyse}</li>
                             <li style={{overflow:'hidden'}}>{item.mcontent}</li>

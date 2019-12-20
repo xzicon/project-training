@@ -26,7 +26,7 @@ export default class WorksDetail extends Component {
                 <p>所属素材:</p>
                 <input id='local' type='text' placeholder='所属素材'/>
                 <p>作文内容:</p>
-                <textarea id='content' type='text' placeholder='作文内容' ></textarea>
+                <textarea id='content' type='text' placeholder='作文内容' style={{height:'300px'}}></textarea>
             </div>
             </div>
         )

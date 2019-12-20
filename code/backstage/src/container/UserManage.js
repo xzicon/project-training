@@ -44,14 +44,17 @@ export default class UserManage extends Component {
     render() {
         return (
             <div>
-              <ul className='user_title' style={{width:'1000px',height:'200px',margin:'30px 0 0 30px'}}>
-                <li style={{width:'100px',fontWeight:'bold'}}>用户ID</li>
-                <li style={{width:'160px',fontWeight:'bold'}}>用户名</li>
-                <li style={{fontWeight:'bold'}}>头像</li>
-                <li style={{width:'160px',fontWeight:'bold'}}>简介</li>
-                <li style={{fontWeight:'bold'}}>粉丝数</li>
-                <li style={{width:'160px',fontWeight:'bold'}}>邮箱</li>
-                <li style={{fontWeight:'bold'}}>操作</li>
+              <div style={{width:'1000px',height:'600px',margin:'30px 0 0 30px'}}>
+                <ul className='user_title' style={{width:'1000px',height:'50px',float:'left'}}>
+                  <li style={{width:'100px',fontWeight:'bold'}}>用户ID</li>
+                  <li style={{width:'160px',fontWeight:'bold'}}>用户名</li>
+                  <li style={{fontWeight:'bold'}}>头像</li>
+                  <li style={{width:'160px',fontWeight:'bold'}}>简介</li>
+                  <li style={{fontWeight:'bold'}}>粉丝数</li>
+                  <li style={{width:'160px',fontWeight:'bold'}}>邮箱</li>
+                  <li style={{fontWeight:'bold'}}>操作</li>
+                </ul>
+                <div style={{width:'980px',height:'500px',float:'left',overflowY:'auto'}}>
                 {
                   this.state.users.map((item,index)=>(
                     <ul className='user_title' key={index}>
@@ -67,7 +70,8 @@ export default class UserManage extends Component {
                     </ul>
                   ))
                 }
-              </ul>
+                </div>
+              </div>
             </div>
         )
     }
