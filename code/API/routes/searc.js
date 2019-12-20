@@ -13,8 +13,8 @@ router.post('/article',(req,res,next)=>{
 	let data = req.body;
 	res.setHeader('Content-Type','text/html;charset=utf-8');
 	let like = `%${data.search}%`+'';	
-	let sql = `SELECT * FROM article WHERE atitle LIKE $1`;
-	console.log(like);
+	let sql = `SELECT * FROM article WHERE atitle LIKE $1 OR atag LIKE $1`;
+	//console.log(like);
 	pgdb.query(sql,[like],(err,val)=>{
 		if(err || val.rowCount<0){
 			console.log(err);
@@ -32,7 +32,7 @@ router.post('/material',(req,res,next)=>{
         let data = req.body;
 	res.setHeader('Content-Type','text/html;charset=utf-8');
         let like = `%${data.search}%`+'';
-	let sql = `SELECT * FROM material WHERE mtitle LIKE $1`;
+	let sql = `SELECT a.*,b.* FROM material as a LEFT JOIN msort as b ON a.msid=b.msid WHERE a.mtitle LIKE $1 OR a.mlocal LIKE $1`;
         pgdb.query(sql,[like],(err,val)=>{
                 if(err || val.rowCount<0){
                         res.json({status:'-1',data:'error'});

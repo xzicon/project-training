@@ -89,8 +89,8 @@ router.post('/updatearticle',(req,res,next)=>{
     let data = req.body;
     console.log(data);
     res.setHeader('Content-Type','text/html;charset=utf-8');
-	let sql = `UPDATE article SET atitle=$2,acontent=$3,atag=$4,utime=$5 WHERE aid=$1`;
-	pgdb.query(sql,[data.aid,data.atitle,data.acontent,data.atag,data.utime],(err,val)=>{
+	let sql = `UPDATE article SET atitle=$2,acontent=$3,atag=$4,utime=$5,aimage=$6 WHERE aid=$1`;
+	pgdb.query(sql,[data.aid,data.atitle,data.acontent,data.atag,data.utime,data.aimage],(err,val)=>{
 		if(err){
 			console.log(err);
 			res.json({status:'-1',data:'error'})

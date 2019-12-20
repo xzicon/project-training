@@ -63,13 +63,15 @@ router.post('/delmaterial',(req,res,next)=>{
 			console.log(err);
 			res.json({status:'-1',data:'error'})
 		}else{
-			let sql_col = `SELECT COUNT(mid) FROM materialcollection`;
-            pgdb.query(sql_col,[],(err,val1)=>{
+	let sql_col = `SELECT COUNT(mid) FROM materialcollection WHERE mid=$1`;
+		console.log(data.mid)
+            pgdb.query(sql_col,[data.mid],(err,val1)=>{
                 if(err || val.rowCount < 0){
                     console.log(err);
                     res.json({status:'-2',data:'error'});
                 }else{
-                    let sql_mcol = `UPDATE material SET mcomment=$1 WHERE mid=$2`
+			console.log(val1.rows[0].count);
+                    let sql_mcol = `UPDATE material SET mcollect=$1 WHERE mid=$2`
                     pgdb.query(sql_mcol,[val1.rows[0].count,data.mid],(err,val2)=>{
                         if(err || val.rowCount < 0){
                             console.log(err);

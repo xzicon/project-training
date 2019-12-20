@@ -23,6 +23,37 @@ router.get('',(req,res,next)=>{
 		}
 	})
 })
+router.post('/video', function(req, res) {
+                var form = new formidable.IncomingForm();
+                form.uploadDir = "./public/video/temp/";
+                form.parse(req, function(error, fields, files) {
+                    for (var key in files) {
+                        var file = files[key];
+                        var fName = (new Date()).getTime();
+                        switch (file.type) {
+                            case "video/mp4":
+                                fName = fName + ".mp4";
+                                break;
+                            default:
+                                fName = fName + ".mp4";
+                                break;
+                        }
+                        console.log(file, file.size);
+                        var uploadDir = "./public/video/" + fName;
+                        fs.rename(file.path, uploadDir, function(err) {
+                            if (err) {
+                                console.log(err);
+                                res.json({status:'-1',data:'error'})
+                            }else{
+                                res.json({status:'0',data:fName})
+                                }
+
+                        })
+
+               }
+       });
+});
+
 /*router.post('/mk',(req,res,next)=>{
 	let userDirPath = cacheFolder+"temp";
 	let form = new formidable.IncomingForm();
@@ -71,7 +102,7 @@ router.get('',(req,res,next)=>{
 	})
 
 });*/
-router.post('/', function(req, res) {
+/*router.post('/', function(req, res) {
                 var form = new formidable.IncomingForm();
                 form.uploadDir = "./public/images/temp/"; 
                 form.parse(req, function(error, fields, files) {
@@ -94,8 +125,6 @@ router.post('/', function(req, res) {
                         fs.rename(file.path, uploadDir, function(err) {
                             if (err) {
 				console.log(err);
-                                //res.write(err + "\n");
-                                //res.end();
                                 res.json({status:'-1',data:'error'})
                             }else{
 				res.json({status:'0',data:fName})
@@ -103,7 +132,44 @@ router.post('/', function(req, res) {
             
                         })
             
-                    }
-                });
-            });
+               }
+       });
+});*/
+router.post('/', function(req, res) {
+    var form = new formidable.IncomingForm();
+    form.uploadDir = "./public/images/temp/"; 
+    form.parse(req, function(error, fields, files) {
+        for (var key in files) {
+            var file = files[key];
+            var fName = (new Date()).getTime();
+            switch (file.type) {
+                case "image/jpeg":
+                    fName = fName + ".jpg";
+                    break;
+                case "image/png":
+                    fName = fName + ".png";
+                    break;
+                case "video/mp4":
+                    fName = fName + ".mp4";
+                    break;
+                case "video/avi":
+                    fName = fName + ".avi";
+                        break;
+                default:
+                    fName = fName + ".png";
+                    break;
+            }
+            console.log(file, file.size);
+            var uploadDir = "./public/images/" + fName;
+            fs.rename(file.path, uploadDir, function(err) {
+                if (err) {
+                    console.log(err);
+                    res.json({status:'-1',data:'error'})
+                }else{
+                    res.json({status:'0',data:fName})
+                }
+            })
+        }
+    });
+});
 module.exports = router;

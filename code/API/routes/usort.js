@@ -71,9 +71,10 @@ router.get('/msid/:uid',(req,res,next)=>{
 })
 router.get('/tab/:msid',(req,res,next)=>{
 	let msid  = req.params.msid;
-	let sql = `SELECT * FROM material WHERE msid=$1 ORDER BY mtime DESC LIMIT 10`;
+	let sql = `SELECT a.*,b.* FROM material as a LEFT JOIN msort as b ON a.msid=b.msid  WHERE a.msid=$1 ORDER BY a.mtime DESC LIMIT 10`;
 	pgdb.query(sql,[msid],(err,val)=>{
 		if(err || val.rowCount<0){
+			console.log(err)
 			res.json({status:'-1',data:'error'})
 		}else{
 			//if(val.rowCount=0){

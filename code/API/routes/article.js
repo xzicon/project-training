@@ -74,6 +74,23 @@ router.get('/xiangqing/:aid',(req,res,next)=>{
 		}
 	})
 })
+//作文详情页优化
+router.get('/xiang/:aid/:look',(req,res,next)=>{
+        let aid = req.params.aid;
+	let uid = req.params.look;
+	
+        console.log('文章id',aid);
+        let sql = `SELECT d.*,g.look FROM (SELECT a.aid,a.atitle,a.acontent,a.aimage,a.atag,a.utime,a.acomment,a.alikes,b.mid,b.mtitle,c.uid,c.uname,c.uimage FROM article as a LEFT JOIN material b ON a.mid = b.mid LEFT JOIN users c ON a.uid = c.uid WHERE a.aid = $1) as d LEFT JOIN (select e.aid,e.uid as look from articlelikes as e WHERE e.uid=$2) as g ON d.aid=g.aid`;
+        pgdb.query(sql,[aid,uid],(err,val)=>{
+                if(err || val.rowCount < 0){
+                        console.log(err);
+                        res.json({status:'1',data:'error'})
+                }else{
+
+                        res.json({status:'0',data:val.rows})
+                }
+        })
+})
 /*router.get('/test/:aid/:uid',(req,res,next)=>{
         let aid = req.params.aid;
 	let uid = req.params.uid;

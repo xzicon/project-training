@@ -231,19 +231,19 @@ router.get('/xiangqing/:mid',(req,res,next)=>{
 router.get('/xiang/:mid/:look',(req,res,next)=>{
     let mid = req.params.mid;
     let uid = req.params.look;
-	let sql_add = `SELECT COUNT(mid) FROM materialcollection WHERE mid=$1`;
+	/*let sql_add = `SELECT COUNT(mid) FROM materialcollection WHERE mid=$1`;
 	pgdb.query(sql_add,[mid],(err,val1)=>{
 	    if(err || val1.rowCount < 0){
                 console.log(err);
                 res.json({status:'-1',data:'error'});
             }else{
-                let sql_mcol = `UPDATE material SET mcollect=$1 WHERE mid=$2`
+             let sql_mcol = `UPDATE material SET mcollect=$1 WHERE mid=$2`
                 pgdb.query(sql_mcol,[val1.rows[0].count,mid],(err,val2)=>{
                     if(err || val2.rowCount < 0){
                         console.log(err);
                         res.json({status:'-2',data:'error'});
-                    }else{
-                        let sql = `SELECT d.*,c.uid as look FROM (SELECT a.* FROM material as a WHERE a.mid = $1) as d LEFT JOIN (SELECT * FROM materialcollection as b WHERE b.uid=$2) as c
+                    }else{*/
+                        let sql = `SELECT d.*,c.uid as look FROM (SELECT a.*,e.* FROM material as a LEFT JOIN msort as e ON a.msid=e.msid WHERE a.mid = $1) as d LEFT JOIN (SELECT * FROM materialcollection as b WHERE b.uid=$2) as c
 ON d.mid=c.mid`;
     			pgdb.query(sql,[mid,uid],(err,val)=>{
             			if(err || val.rowCount < 0){
@@ -251,14 +251,14 @@ ON d.mid=c.mid`;
                     			res.json({status:'1',data:'error'});
             			}else{
                     			res.json({status:'0',data:val.rows});
-            			}
+            		}
 
-    			})
-
+ 			})
+/*
                     }
                 })
             }	
-	})
+	})*/
     /*let sql = `SELECT d.*,c.uid as look FROM (SELECT a.* FROM material as a WHERE a.mid = $1) as d LEFT JOIN (SELECT * FROM materialcollection as b WHERE b.uid=$2) as c
 ON d.mid=c.mid`;
     pgdb.query(sql,[mid,uid],(err,val)=>{

@@ -27,26 +27,39 @@ function lend(sqlStr,res){
     });
 }
 //用户我的页面
-router.get('/me/:uid',(req,res,next)=>{
+router.get('/me/:uid/:look',(req,res,next)=>{
     let uid = req.params.uid;
+    let look = req.params.look;
+		
     let sql_ufans = 'SELECT COUNT(uid) FROM userconcern WHERE upid = $1';
     pgdb.query(sql_ufans,[uid],(err,val)=>{
-        if(err){
+        if(err || val.rowCount<0){
                 res.json({status:'-1',data:'error'});
         }else{
                 let sql_users = 'UPDATE users SET ufans=$1 WHERE uid=$2';
-                pgdb.query(sql_users,[val.rows[0].count,uid],(err,val)=>{
-                    if(err){
+                pgdb.query(sql_users,[val.rows[0].count,uid],(err,val1)=>{
+                    if(err || val1.rowCount<0){
                             res.json({status:'-2',data:'error'})
                     }else{
-                        let sql = `SELECT uid,uname,uemail,uimage,udescribe,ufans FROM users WHERE uid=$1`;
-                        pgdb.query(sql,[uid],(err,val)=>{
-                            if(err || val.rowCount<=0){
+			if(uid===look){
+				let sql = `select a.*,a.uid as look from (select * from users where uid=$1) as a`;
+				pgdb.query(sql,[uid],(err,val2)=>{
+                            	if(err || val2.rowCount<=0){
+                                	res.json({status:'-3',data:'error'});
+                            	}else{
+                                	res.json({status:'0',data:val2.rows[0]})
+                          	}
+                        	})
+			}else{
+                       // let sql = `SELECT uid,uname,uemail,uimage,udescribe,ufans FROM users WHERE uid=$1`;
+                        let sql = `select a.*,b.uid as look from (select * from users where uid=$1) as a LEFT JOIN (select * FROM userconcern WHERE uid=$2 AND upid=$1) as b ON a.uid=b.upid`
+			pgdb.query(sql,[uid,look],(err,val2)=>{
+                            if(err || val2.rowCount<=0){
                                 res.json({status:'-3',data:'error'});
                             }else{
-                                res.json({status:'0',data:val.rows[0]})
+                                res.json({status:'0',data:val2.rows[0]})
                             }
-                        })
+                        })}
                     }
                 })
             }
@@ -117,7 +130,7 @@ router.get('/guanzhu/:uid/:look',(req,res,next)=>{
                 }
         })
 	}else{*/
-		let sql = `select * from (select a.upid as taid,c.uname,c.udescribe  from userconcern as a LEFT JOIN users as c ON c.uid=a.upid WHERE a.uid=$1) as b LEFT JOIN (select d.upid as woid from userconcern as d where d.uid=$2) as e ON b.taid=e.woid`;
+		let sql = `select * from (select a.upid as taid,c.uname,c.uimage,c.udescribe  from userconcern as a LEFT JOIN users as c ON c.uid=a.upid WHERE a.uid=$1) as b LEFT JOIN (select d.upid as woid from userconcern as d where d.uid=$2) as e ON b.taid=e.woid`;
 		pgdb.query(sql,[uid,look],(err,val)=>{
 			if(err || val.rowCount<0){
 				res.json({status:'-2',data:'error'})
@@ -184,7 +197,7 @@ router.get('/marticlelikes/:uid',(req,res,next)=>{
 })
 router.get('/mcomment/:uid',(req,res,next)=>{
 	let uid = req.params.uid;
-	let sql = `SELECT * FROM materialcomment WHERE uid=$1`;
+	let sql = `SELECT a.*,b.* FROM materialcomment as a LEFT JOIN material as b ON a.mid=b.mid WHERE a.uid=$1`;
 	pgdb.query(sql,[uid],(err,val)=>{
 		if(err || val.rowCount<0){
 			res.json({status:'-1',data:'error'});
@@ -195,9 +208,10 @@ router.get('/mcomment/:uid',(req,res,next)=>{
 })
 router.get('/acomment/:uid',(req,res,next)=>{
         let uid = req.params.uid;
-        let sql = `SELECT * FROM articlecomment WHERE uid=$1`;
+        let sql = `SELECT a.*,b.* FROM articlecomment as a LEFT JOIN article as b ON a.aid=b.aid WHERE a.uid=$1`;
         pgdb.query(sql,[uid],(err,val)=>{
                 if(err || val.rowCount<0){
+			console.log(err);
                         res.json({status:'-1',data:'error'});
                 }else{
                         res.json({status:'0',data:val.rows});
