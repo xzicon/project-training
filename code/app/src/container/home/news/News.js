@@ -36,7 +36,7 @@ export default class News extends Component {
                     </List>
                     </Link>
                     <div style={{backgroundColor:'#fff',width:'100%',fontSize:'17px',margin:'2% 0% auto',float:'left'}}>
-                        <img src="/images/home/pinglun1.png" />  回复列表
+                        <img src="/images/home/pinglun1.png" style={{marginLeft:'4%',marginTop:'3%'}} />  回复列表
                         <br/>
                         <div style={{margin:'2%',width:'96%',textAlign:'center',float:'left',backgroundColor:'#fff'}}>
                         {this.state.data.length!==0?this.state.data.map(data=>(
@@ -56,7 +56,7 @@ export default class News extends Component {
                             
                             
                         </div>
-                        )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有收到消息哦~  </div>}
+                        )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'110%',marginLeft:'3%'}}>你还没有收到消息哦~  </div>}
                         </div>
                     </div>
                 </div>

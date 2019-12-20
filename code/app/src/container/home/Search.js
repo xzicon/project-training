@@ -84,7 +84,7 @@ export default class Search extends Component {
                                 <div style={{float:'left',width:'90%',marginLeft:'5%',marginRight:'5%'}}>
                                     <Link to={{pathname:'/home/home/search/search/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state,state2:data.uid,mtab2:data.mid}} style={{}}>  
                                     <div style={{textAlign:'center',color:'#000',fontSize:'150%',marginTop:'3%',marginBottom:'3%'}}><a href="#" dangerouslySetInnerHTML={{__html: this.warpTag(data.atitle, this.state.search , "span")}}></a></div>
-                                    <div style={{height:'70px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'5%'}}>{data.acontent}</div>
+                                    <div style={{height:'75px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'5%'}}>{data.acontent}</div>
                                     <div style={{color:'#000',fontSize:'120%',marginBottom:'3%'}}>#{data.atag}</div>
                                     
                                         <a style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</a>

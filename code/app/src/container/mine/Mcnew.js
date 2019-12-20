@@ -77,15 +77,18 @@ export default class Mcnew extends Component {
                         <div style={{width:'94%',float:'left',zIndex:'99',backgroundColor:'#fff',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',paddingBottom:'2%'}}>
                             <div style={{display:'none'}}>{data.aid}</div>
                             <div style={{display:'none'}}>{data.acid}</div>
-                            <div style={{width:'100%',backgroundColor:'#fff',paddingTop:'2%',paddingBottom:'2%'}}>
-                                <div style={{fontSize:'115%',marginBottom:'3%',marginLeft:'3%'}}>{data.accontent}</div>
-                                <div style={{fontSize:'90%',color:'gray',marginLeft:'3%',marginTop:'3%'}}>{data.actime}</div>
-                            </div>
+                            <Link to={{pathname:'/mine/mcn/mcn/mcn/mcn/mcn/prise/prise/fopeople/fowrite/fowrite/article/'+data.aid+'/'+this.props.location.state,state1:data.aid,state:this.props.location.state}}>
+                                <div style={{width:'100%',backgroundColor:'#fff',paddingTop:'2%',paddingBottom:'2%'}}>
+                                    <div style={{fontSize:'115%',marginBottom:'3%',marginLeft:'3%'}}>{data.accontent}</div>
+                                    <div style={{fontSize:'90%',color:'gray',marginLeft:'3%',marginTop:'3%'}}>{data.actime}</div>
+                                </div>
+                            </Link>
+
                             <div style={{float:'left',marginTop:'1%',width:'100%'}}>
                                 <input type='button' className='delete' value='删除' onClick={(e)=>{this.fetchDelete(e)}}  style={{width:'80px',backgroundColor:'red',color:'#fff',border:'none',borderRadius:'15%',border:'1px solid #fff',float:'right',marginRight:'5%',fontSize:'120%',padding:'1% 2% '}} />
                             </div>
                         </div>
-                    )):<div style={{position:'absolute',height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有评论文章哦~  </div>}
+                    )):<div style={{position:'absolute',top:'70px',height:'35px',lineHeight:'35px',marginTop:'5%',fontSize:'120%',marginLeft:'3%'}}>你还没有评论文章哦~  </div>}
                     
                 </div>
             </div>

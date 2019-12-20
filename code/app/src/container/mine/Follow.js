@@ -53,12 +53,6 @@ export default class Follow extends Component {
             console.log(data);
             switch (data.status) {
                 case "0":{
-                    Toast.success('关注成功', 1);
-                    console.log(data.data);
-                    break;
-                }
-                case "0":{
-                    Toast.success('取消关注成功', 1);
                     console.log(data.data);
                     break;
                 }

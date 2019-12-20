@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Icon,NavBar} from 'antd-mobile';
+import {Icon,NavBar, Toast} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
 import Smcomment from './Smcomment';
 import Word from './material/Word';
@@ -69,6 +69,7 @@ export default class Sdetails extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
+                    Toast.success('收藏成功',1);
                     break;
                 }
                 default:{

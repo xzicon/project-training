@@ -80,7 +80,7 @@ export default class Collect extends Component {
                                 <input type='button' className='delete' value='删除' onClick={(e)=>{this.fetchDelete(e)}}  style={{width:'80px',backgroundColor:'red',color:'#fff',border:'none',borderRadius:'15%',border:'1px solid #fff',float:'right',marginRight:'5%',fontSize:'120%',padding:'1% 2% '}} />
                             </div>
                     </div>
-                )):<div style={{height:'35px',lineHeight:'35px',marginTop:'3%',fontSize:'120%',marginLeft:'3%'}}>你还没有收藏哦~  </div>
+                )):<div style={{height:'35px',lineHeight:'35px',marginTop:'5%',fontSize:'120%',marginLeft:'3%'}}>你还没有收藏哦~  </div>
             }
                 
             </div>

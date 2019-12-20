@@ -107,7 +107,7 @@ export default class Crnew extends Component {
                                     <div style={{textAlign:'center',color:'#000',fontSize:'150%',marginTop:'3%',marginBottom:'3%'}}>{data.atitle}</div>
                                     <div style={{height:'75px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'5%'}}>{data.acontent}</div>
                                 </Link>
-                                <div style={{color:'#000',fontSize:'120%',marginBottom:'3%'}}>#{data.atag}</div>
+                                <div style={{color:'#000',fontSize:'110%',marginBottom:'3%'}}>#{data.atag}</div>
                                 
                                 <Link to={{pathname:'/home/home/crnew/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state,state2:data.uid}}>
                                     <a style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</a>
@@ -118,7 +118,7 @@ export default class Crnew extends Component {
                 ))}
                 </div>
                                 <Link to={{pathname:'/home/home/crnew/write',state:this.props.location.state}}>
-                                <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'10%',top:'70%'}}>
+                                <div style={{width:'50px',height:'50px',color:'#fff',fontSize:'58px',textAlign:'center',lineHeight:'36px',borderRadius:'50%',backgroundColor:'#d83e34',position:'fixed',zIndex:'10000',right:'8%',top:'80%'}}>
                                         +
                                     </div>
                                 </Link>

@@ -68,6 +68,7 @@ export default class App extends Component {
                     <Route path='/gselect' component={Gselect}/>
 
                     {/* 作文 */}
+                    <Route path='/mine/mcn/mcn/mcn/mcn/mcn/prise/prise/fopeople/fowrite/fowrite/article/:page' component={Article}/>
                     <Route path='/home' exact component={Home}/>
                     <Route path='/home/follow' component={Follow}/>
                     <Route path='/home/write' exact component={Write}/>

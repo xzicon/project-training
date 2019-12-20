@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Icon,NavBar} from 'antd-mobile';
+import {Icon,NavBar,Toast} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
 import Lcommentzuire from '../Lcommentzuire';
 export default class Writing extends Component {
@@ -81,7 +81,27 @@ export default class Writing extends Component {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
+            switch (data.status) {
+                case "0":{
+                    console.log(data.data);
+                    Toast.success('点赞成功',1)
+                    
+                    // imgObj.src=Flag?"/images/zan1.png":"/images/home/zan.png";
+                    break;
+                }
+                case "1":{
+                    console.log(data.data);
+                    Toast.success('取消点赞成功',1)
+                    
+                    // imgObj.src=Flag?"/images/zan1.png":"/images/home/zan.png";
+                    break;
+                }
+                default:{
+                    console.log(data.data);
+                    break;
+                }}
         })
+        
         var imgObj = document.getElementById(e.target.id);
         var Flag=(imgObj.getAttribute("src",2)=="/images/home/zan.png");
         imgObj.src=Flag?"/images/home/zan1.png":"/images/home/zan.png";
@@ -97,24 +117,24 @@ export default class Writing extends Component {
             <div>
                 {this.state.data.map(data=>(
                     <div>
-    <div style={{position:'relative',top:'0',width:'100%',height:'50px',backgroundColor:'#fff'}}> 
+                        <div style={{position:'relative',top:'0',position:'fixed',width:'100%',height:'50px',backgroundColor:'#fff'}}> 
                             <Link to={{pathname:'/composition/label/s/sdetails/'+this.props.location.mtab2,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
                                 <img src='/images/write/left.png' style={{width:'8%',height:'45%',position:'absolute',top:'27%',left:'2%',}} />
                                 
                             </Link>
                             <div style={{width:'80%',zIndex:'9',color:'#000',height:'100%',textAlign:'center',float:'right',marginRight:'10%'}}>
                                 <Link to={{pathname:'/com/w/w/w/w/com/com/com/writing/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1,mtab2:this.props.location.mtab2}} style={{width:'100%',height:'100%',color:'#000'}}>
-                                <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'80%',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
+                                <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'40px',width:'40px',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
                                 </Link>
                                 <div style={{fontSize:'120%',float:'left',marginTop:'5%',textAlign:'center',}}>{data.uname}</div>
                             </div>
                             
                         </div>
-                <div style={{float:'left',zIndex:'99',width:'100%',marginTop:'3%'}}>
+                <div style={{float:'left',zIndex:'99',width:'100%',marginTop:'15%'}}>
                             {data.mid===null?
                                 <div style={{margin:'3% 3% auto',backgroundColor:'#fff',whiteSpace:"pre-wrap",float:'left',width:'94%'}}>
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%',color:'gray'}}>{data.utime}</div>
-                                    <div style={{textAlign:'center',float:'left'}}>{data.atitle}</div>
+                                    <div style={{textAlign:'center',float:'left',fontSize:'150%',fontWeight:'600',width:'100%',marginTop:'3%',marginBottom:'3%'}}>{data.atitle}</div>
                                     <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',width:'90%'}}>{data.acontent}</div>
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}>{data.atag}</div><br/>
                                     {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}
@@ -122,7 +142,7 @@ export default class Writing extends Component {
                             :
                                 <div style={{margin:'3% 3% auto',backgroundColor:'#fff',whiteSpace:"pre-wrap",float:'left',width:'94%'}}>
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%',color:'gray'}}>{data.utime}</div>
-                                    <div style={{textAlign:'center',float:'left',width:'100%'}}>{data.atitle}</div>
+                                    <div style={{textAlign:'center',float:'left',fontSize:'150%',fontWeight:'600',width:'100%',marginTop:'3%',marginBottom:'3%'}}>{data.atitle}</div>
                                     <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',width:'94%'}}>{data.acontent}</div>
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%'}}>{data.atag}</div><br/>
                                     {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}

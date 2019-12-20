@@ -71,7 +71,8 @@ export default class Select extends Component {
                     rightContent={<button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>全部标签</NavBar>
-                    <div style={{width:'100%',margin:'auto',position:'absolute',top:'70px'}}>
+                    <div style={{marginLeft:'5%',position:'absolute',top:'60px',fontSize:'130%'}}>请选择你喜欢的5个标签:</div>
+                    <div style={{width:'100%',margin:'auto',position:'absolute',top:'90px'}}>
                     {this.state.data.map(data => (
                         <li style={{width:'30%',fontSize:'140%',listStyle:'none',display:'inline-block',textAlign:'center',lineHeight:'180%'}}><input type="checkbox"  name="biaoqian" value={data.msid} onChange={this.handleChange} style={{width:'18px',height:'18px'}} />{data.msname}</li>
                     ))}

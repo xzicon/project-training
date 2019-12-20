@@ -191,7 +191,7 @@ Change6=(e)=>{
                             <div >
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'100%',backgroundColor:'#f5f5f9'}}>
                                 <div style={{float:'left',width:'100%',paddingBottom:'2%'}}>
-                                    <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'8%',height:'8%',marginTop:'2%',marginLeft:'2%'}} /></Link>
+                                    <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'7%',height:'7%',marginTop:'2%',marginLeft:'2%'}} /></Link>
                                     <Link to={{pathname:'/composition/csearch',state:this.props.location.state}}><SearchBar style={{width:'65%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索"/></Link>
                                     <Link to={{pathname:'/gselect',state:this.props.location.state}} style={{color:'red'}}><div style={{width:'20%',marginTop:'3%',marginRight:'3%',float:'right',fontSize:'120%'}}>修改标签</div></Link>
                                 </div>

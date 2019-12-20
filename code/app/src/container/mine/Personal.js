@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
-import {NavBar, Icon} from 'antd-mobile';
+import {NavBar, Icon,Toast} from 'antd-mobile';
 export default class Personal extends Component {
     constructor(){
         super();
@@ -47,6 +47,7 @@ export default class Personal extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
+                    Toast.success('修改资料成功',1);
                     this.props.history.push({pathname:'/mine',state:this.props.location.state})
                     break;
                 }

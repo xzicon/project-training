@@ -10,7 +10,7 @@ export default class Xselect extends Component {
     } 
     componentDidMount(){
         let state = this.props.location.state;
-        console.log(state);
+        
         fetch('http://116.62.14.0:8402/usort/msid/'+state)
         .then((res)=>res.json())
         .then((res)=>{
@@ -21,6 +21,8 @@ export default class Xselect extends Component {
                 this.props.history.push({pathname:'/select',state:this.props.location.state});
                 console.log(1);
             }else{
+                // let mtab2 ={mtab2: document.getElementsByClassName('q')[0].value};
+                // console.log(mtab2);
                 this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
                 console.log(2);
             }
@@ -30,7 +32,14 @@ export default class Xselect extends Component {
     render() {
         console.log(this.state.data);
         return (
-            <div></div>
+            <div>
+                {this.state.data.map(data=>(
+                    <div style={{display:'none'}}>
+                        <input type='text' value={data.msid} className='q' />
+                    </div>
+                    
+                ))}
+            </div>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Icon,NavBar} from 'antd-mobile';
+import {Icon,NavBar, Toast} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
 import Commentzuire from './Commentzuire';
 export default class Article extends Component {
@@ -89,7 +89,14 @@ export default class Article extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
+                    Toast.success('点赞成功',1)
                     
+                    // imgObj.src=Flag?"/images/zan1.png":"/images/home/zan.png";
+                    break;
+                }
+                case "1":{
+                    console.log(data.data);
+                    Toast.success('取消点赞成功',1)
                     
                     // imgObj.src=Flag?"/images/zan1.png":"/images/home/zan.png";
                     break;
@@ -122,9 +129,12 @@ export default class Article extends Component {
             var data1='/home/search';
         }else if(arr.length===9){
             var data1='/home/fopeople';
-        }else{
+        }else if(arr.length===10){
             var data1='/mine/praise'
+        }else{
+            var data1='/mine/mcnew'
         }
+
         console.log(data1);
         return (
             <div>
@@ -138,20 +148,20 @@ export default class Article extends Component {
                     //     <input type='button' onClick={(e)=>{this.fetchConcern(e)}} style={{backgroundColor:'#fff',fontSize:'90',color:'#da4036',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} value='关注' class='concern'/>
                     // }
     ><Link to={{pathname:'/home/home/home/article/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1}} style={{width:'100%',height:'100%',color:'#000'}}><img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'80%',marginLeft:'2%',marginTop:'5%',marginRight:'5%',borderRadius:'50%',float:'left'}} /><div style={{float:'left',marginTop:'15%',fontSize:'90%'}}>{data.uname}</div></Link></NavBar>      */}
-    <div style={{position:'relative',top:'0',width:'100%',height:'50px',backgroundColor:'#fff'}}> 
+    <div style={{position:'relative',position:'fixed',top:'0',width:'100%',height:'50px',backgroundColor:'#fff'}}> 
                             <Link to={{pathname:data1,state1:this.props.location.state1,state:this.props.location.state,state2:this.props.location.state2,state4:this.props.location.state4}}>
                                 <img src='/images/write/left.png' style={{width:'8%',height:'45%',position:'absolute',top:'27%',left:'2%',}} />
                                 
                             </Link>
                             <div style={{width:'80%',zIndex:'9',color:'#000',height:'100%',textAlign:'center',float:'right',marginRight:'10%'}}>
                                 <Link to={{pathname:'/home/a/a/a/home/home/article/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1}} style={{width:'100%',height:'100%',color:'#000'}}>
-                                    <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'80%',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
+                                    <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{width:'40px',height:'40px',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
                                 </Link>
                                 <div style={{fontSize:'120%',float:'left',marginTop:'5%',textAlign:'center',}}>{data.uname}</div>
                             </div>
                             
                         </div>
-                <div style={{float:'left',zIndex:'99',width:'100%',marginTop:'3%'}}>
+                <div style={{float:'left',zIndex:'99',width:'100%',marginTop:'15%'}}>
                             {data.mid===null?
                                 <div style={{margin:'3% 3% auto',backgroundColor:'#fff',whiteSpace:"pre-wrap",float:'left',width:'94%'}}>
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'90%',color:'gray'}}>{data.utime}</div>
@@ -169,7 +179,7 @@ export default class Article extends Component {
                                     {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}
                                     
                                     <Link to={{pathname:'/composition/article/sucai/s/s/s/s/s/sdetails/'+data.mid,state1:this.props.location.state1,state2:this.props.location.state2,mtab2:data.mid,state:this.props.location.state}}>
-                                    <div style={{float:'left',marginLeft:'3%',marginRight:'3%',fontSize:'120%',lineHeight:'150%',paddingTop:'3%',paddingBottom:'3%',borderTop:'1px dashed gray',width:'90%',color:'#000'}}>
+                                    <div style={{float:'left',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',fontSize:'120%',lineHeight:'150%',paddingTop:'3%',paddingBottom:'3%',borderTop:'1px dashed gray',width:'94%',color:'#000',backgroundColor:'#bcc2d7'}}>
                                         <div style={{display:'none'}}>{data.mid}</div>
                                         <div>{data.mtitle}</div>
                                     </div>

@@ -54,9 +54,9 @@ export default class All extends Component {
                     onLeftClick={() => console.log('onLeftClick')}>分类</NavBar>
                 <div style={{width:'100%',position:'absolute',top:'50px'}}>
                 <div style={{zIndex:'100',top: '7%',position:'absolute',width:'96%',margin:'4% 2% auto'}}  style={{backgroundColor:'#fff',height:'35px',lineHeight:'35px'}}>
-                    <Link to={{pathname:url,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'red',fontSize:'130%',marginRight:'5%',borderBottom:"4px solid #ffdf41"}} id='A1' onClick={(e)=>{this.Change1(e)}}>素材</Link>
-                    <Link to={{pathname:url+'/fanwen',state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginRight:'5%'}} id='A2' onClick={(e)=>{this.Change2(e)}}>范文</Link>
-                    <Link to={{pathname:url+'/jifa',state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginRight:'5%'}} id='A3' onClick={(e)=>{this.Change3(e)}}>技法</Link>
+                    <Link to={{pathname:url,state:this.props.location.state,state1:this.props.location.state1}} style={{color:'red',fontSize:'130%',marginLeft:'8%',marginRight:'8%',borderBottom:"4px solid #ffdf41"}} id='A1' onClick={(e)=>{this.Change1(e)}}>素材</Link>
+                    <Link to={{pathname:url+'/fanwen',state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginRight:'8%'}} id='A2' onClick={(e)=>{this.Change2(e)}}>范文</Link>
+                    <Link to={{pathname:url+'/jifa',state:this.props.location.state,state1:this.props.location.state1}} style={{color:'#000',fontSize:'130%',marginRight:'8%'}} id='A3' onClick={(e)=>{this.Change3(e)}}>技法</Link>
                 </div>
                 <div style={{width:'100%',marginTop:'2%'}}>
                     <div>

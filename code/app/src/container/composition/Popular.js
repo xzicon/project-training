@@ -76,7 +76,7 @@ export default class Popular extends Component {
                             </Link>
                         </div>
                         :      
-                        <div style={{marginBottom:'4%',paddingBottom:'2%',height:'300px',backgroundColor:'#fff'}}>
+                        <div style={{marginBottom:'4%',paddingBottom:'2%',height:'270px',backgroundColor:'#fff'}}>
                             <Link to={{pathname:'/composition/label/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,mtab:data.mtab}} style={{color:'#000',fontSize:'110%'}}>
                                 <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundPosition:'center',zIndex:'99'}}>
                                     <div style={{float:'left' ,position:'absolute',top:'5%',left:'3%',color:'#000',fontSize:'90%'}}>素材--{data.msname}</div>
@@ -98,7 +98,7 @@ export default class Popular extends Component {
                                 <div style={{width:'100%',float:'left',height:'80%',float:'left',fontWeight:'600',textAlign:'left',paddingTop:'10%',fontSize:'120%',paddingLeft:'2%',paddingBottom:'2%'}}>{data.mtitle}</div>
                             </Link>
                         </div> : 
-                        <div style={{marginBottom:'4%',paddingBottom:'2%',height:'300px',backgroundColor:'#fff'}}>
+                        <div style={{marginBottom:'4%',paddingBottom:'2%',height:'270px',backgroundColor:'#fff'}}>
                             <Link to={{pathname:'/composition/label/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,mtab:data.mtab}} style={{color:'#000',fontSize:'110%'}}>
                                 <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundRepeat:'no-repeat',backgroundPosition:'center',zIndex:'99'}}>
                                     <div style={{float:'left' ,position:'absolute',top:'5%',left:'3%',color:'#000',fontSize:'90%'}}>范文--{data.msname}</div>
@@ -118,7 +118,7 @@ export default class Popular extends Component {
                             <div style={{width:'100%',float:'left',height:'80%',float:'left',fontWeight:'600',textAlign:'left',paddingTop:'10%',fontSize:'120%',paddingLeft:'2%',paddingBottom:'2%'}}>{data.mtitle}</div>
                         </Link>
                     </div> : 
-                    <div style={{marginBottom:'4%',paddingBottom:'2%',height:'300px',backgroundColor:'#fff'}}>
+                    <div style={{marginBottom:'4%',paddingBottom:'2%',height:'270px',backgroundColor:'#fff'}}>
                         <Link to={{pathname:'/composition/label/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,mtab:data.mtab}} style={{color:'#000',fontSize:'110%'}}>
                             <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundRepeat:'no-repeat',backgroundPosition:'center',zIndex:'99'}}>
                                 <div style={{float:'left' ,position:'absolute',top:'5%',left:'3%',color:'#000',fontSize:'90%'}}>技法--{data.msname}</div>

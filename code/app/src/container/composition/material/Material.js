@@ -72,7 +72,8 @@ export default class Material extends Component {
                                 <div style={{backgroundColor:'#fff',margin:'3%',width:'94%',height:'180px'}}>
                                     <Link to={{pathname:'/composition/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,state1:this.props.location.state1,mtab1:this.props.location.mtab1}} style={{color:'#000',fontSize:'120%'}}>
                                         
-                                        <div style={{width:'94%',float:'left',height:'60%',float:'left',fontWeight:'500',textAlign:'left',fontSize:'120%',marginTop:'15%',marginLeft:'3%',marginRight:'3%'}}>{data.mtitle}</div>
+                                        <div style={{width:'94%',float:'left',height:'45%',float:'left',fontWeight:'500',textAlign:'left',fontSize:'120%',marginTop:'12%',marginLeft:'3%',marginRight:'3%'}}>{data.mtitle}</div>
+                                        <div style={{width:'94%',float:'left',color:'gray',textAlign:'right',fontSize:'90%',margin:'3%'}}>{data.mlocal}</div>
                                     </Link>
                                 </div>
                                 :(data.mimage.split('.')[1] === 'mp4'?
@@ -95,10 +96,10 @@ export default class Material extends Component {
                                     </div>
                                     : 
                                 
-                                    <div style={{height:'300px',width:'94%',margin:'3%'}}>
+                                    <div style={{height:'270px',width:'94%',margin:'3%'}}>
                                         <Link to={{pathname:'/composition/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,state1:this.props.location.state1,mtab1:this.props.location.mtab1}} style={{color:'#000',fontSize:'120%'}}>
                                             <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundRepeat:'no-repeat',backgroundPosition:'center',backgroundSize:'cover',zIndex:'99'}}></div>
-                                            <div style={{width:'94%',height:'22%',float:'left',fontWeight:'600',fontSize:'120%',paddingTop:'3%',paddingLeft:'3%',paddingRight:'3%',backgroundColor:'#fff'}}>                       
+                                            <div style={{width:'94%',height:'22%',float:'left',fontWeight:'600',fontSize:'110%',paddingTop:'3%',paddingLeft:'3%',paddingRight:'3%',backgroundColor:'#fff'}}>                       
                                                 {data.mtitle}
                                             </div>
                                     

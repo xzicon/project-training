@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Icon,NavBar} from 'antd-mobile';
+import {Icon,NavBar,Toast} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom';
 import Smcomment from './Smcomment';
 import Mword from './Mword';
@@ -55,6 +55,7 @@ export default class Mdetails extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
+                    Toast.success('收藏成功',1);
                     this.props.history.push({pathname:'/mine/collect',state:this.props.location.state});
                     break;
                 }
@@ -89,10 +90,10 @@ export default class Mdetails extends Component {
                             <img src='/images/write/left.png' style={{width:'8%',height:'50%',position:'absolute',top:'25%',left:'2%',}} />
                             
                         </Link>
-                        <div style={{position:'absolute',right:'7%',bottom:'2%',zIndex:'9',color:'#000'}}><ReactToPrint trigger={() => <a>打印</a>} content={() => this.componentRef}  /> </div>
+                        <div style={{position:'absolute',right:'7%',bottom:'2%',zIndex:'9',color:'#000'}}><ReactToPrint trigger={() => <a style={{color:'#fff'}}>打印</a>} content={() => this.componentRef}  /> </div>
                             <img src='/images/write/dy.png' style={{width:'8%',height:'60%',position:'absolute',right:'6%',top:'15%'}} />
                     </div>
-                    {data.mimage===''||'{}'?
+                    {data.mimage===''?
                         <div ref={el => (this.componentRef = el)} style={{marginTop:'14%',whiteSpace:"pre-wrap",float:'left',zIndex:'99',width:'94%',paddingBottom:'2%',marginLeft:'3%',marginRight:'3%',borderBottom:'1px dashed #000'}}>              
                             {/* <ReactToPrint trigger={() => <a>点此打印</a>} content={() => this.componentRef}/>  */}
                             <div style={{width:'100%',float:'left',fontWeight:'bold',textAlign:'center',fontSize:'150%',paddingLeft:'2%',paddingBottom:'2%'}}>{data.mtitle}</div>

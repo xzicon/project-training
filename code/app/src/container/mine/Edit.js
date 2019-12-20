@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {NavBar,List,TextareaItem} from 'antd-mobile';
+import {NavBar,List,TextareaItem, Toast} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 var date = new Date();
 var Y = date.getFullYear() + '-';
@@ -26,15 +26,18 @@ export default class Edit extends Component {
         .then((res)=>{
             this.setState({
                 data:res.data[0],
+                data3:res.data[0].aimage
             });
             document.getElementsByClassName('biaoti')[0].value=res.data[0].atitle;
             document.getElementsByClassName('neirong')[0].value=res.data[0].acontent;
             document.getElementsByClassName('biaoqian')[0].value=res.data[0].atag;
-            this.state.data3=res.data[0].aimage;
-            document.getElementById('s').src='http://116.62.14.0:8402/images/'+this.state.data3;
-            console.log(res.data);
-            console.log(this.state.data3)
-            console.log(res.data[0].aimage);
+            // this.state.data3=res.data[0].aimage;
+            // res.data[0].aimage===''?this.state.data3=res.data[0].aimage:
+            // document.getElementById('s').src='http://116.62.14.0:8402/images/'+this.state.data3
+            // document.getElementById('s').src='http://116.62.14.0:8402/images/'+this.state.data3;
+            // console.log(res.data);
+            // console.log(this.state.data3)
+            // console.log(res.data[0].aimage);
         })
     }
     fetchEdit = (e)=>{
@@ -60,6 +63,7 @@ export default class Edit extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
+                    Toast.success('修改文章成功',1);
                     this.props.history.push({pathname:'/mine/marticle',state:this.props.location.state,state3:this.props.location.state3})
                     break;
                 }
@@ -129,16 +133,15 @@ export default class Edit extends Component {
                             type='text'
                             rows={15}
                         />
-                        {this.state.data.aimage===undefined?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}>
-                            {/* <img src={'http://116.62.14.0:8402/images/'+this.state.data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /> */}</div>}
-                        <div className='upload-container' style={{float:'left',width:'100%',marginTop:'3%'}}>
-                            <div style={{width:'100%',float:'right',position:'relative',height:'30px'}}><input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'70px',float:'right',marginRight:'3%',opacity:'0'}} /><img src='/images/home/pic.png' style={{width:'8%',height:'100%',position:'absolute',right:'8%'}} /></div>
-                            {/* <Button type="primary" className='upload-button'>上传图片</Button> */}
-                            
+                        <div style={{width:'100%',float:'right',position:'relative',height:'30px'}}>
+                                <input type="file" name="image" className='upload-input' onChange={(e)=>this.onChange(e)} style={{width:'70px',float:'right',marginRight:'3%',opacity:'0'}} /><img src='/images/home/pic.png' style={{width:'8%',height:'100%',position:'absolute',right:'8%'}} /></div>
+                        {this.state.data3===''?
+                            (<div></div>):
+                        (<div className='upload-container' style={{float:'left',width:'100%',marginTop:'3%'}}>
                             <div style={{width:'100%',float:'left'}}>
                                 <img src={'http://116.62.14.0:8402/images/'+this.state.data3} id='s' style={{height:'200px',width:'fixwidth'}}/>
                             </div>
-                        </div>
+                        </div>)}
                     </List>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {NavBar,Icon,TextareaItem,List} from 'antd-mobile';
+import {NavBar,Icon,TextareaItem,List, Toast} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 var date = new Date();
 var Y = date.getFullYear() + '-';
@@ -28,6 +28,7 @@ export default class Feedback extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
+                    Toast('反馈成功');
                     this.props.history.push({pathname:'/mine',state:this.props.location.state})
                     break;
                 }
