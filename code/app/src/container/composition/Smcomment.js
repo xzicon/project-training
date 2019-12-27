@@ -26,7 +26,7 @@ export default class Smcomment extends Component {
                     this.state.data.length!==0?this.state.data.map(data=>(
                         <div style={{float:'left',backgroundColor:'#cfc5bb',marginBottom:'2%',width:'100%'}}>
                             <div style={{float:'left',width:'100%',color:'#000',float:'left'}}>
-                                <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{width:'10%',height:'10%',marginLeft:'2%',marginTop:'1%',marginRight:'3%',borderRadius:'50%',float:'left'}} />
+                                <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{width:'40px',height:'40px',marginLeft:'2%',marginTop:'1%',marginRight:'3%',borderRadius:'50%',float:'left'}} />
                                 <div style={{float:'left',paddingTop:'2%',width:'80%'}}>
                                     <div style={{float:'left',width:'100%',marginBottom:'2%'}}><a style={{fontSize:'110%'}}>{data.uname}</a></div>
                                     <div style={{float:'left',width:'100%',fontSize:'90%',color:'gray'}}>{data.mctime}</div>                  

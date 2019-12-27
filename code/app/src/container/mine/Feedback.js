@@ -28,7 +28,7 @@ export default class Feedback extends Component {
             switch (data.status) {
                 case "0":{
                     console.log(data.data);
-                    Toast('反馈成功');
+                    Toast.success('反馈成功');
                     this.props.history.push({pathname:'/mine',state:this.props.location.state})
                     break;
                 }
