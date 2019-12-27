@@ -112,11 +112,11 @@
 # 设计技术
 
 -|-
-   | 注册功能 | nodemailer 邮箱验证
-   | 密码加密 | MD5加密
-   | 数据库   | postgresql
-   | 后端	    | express nodejs
-   | 前端     | react
+    注册功能 | nodemailer 邮箱验证
+    密码加密 | MD5加密
+    数据库   | postgresql
+    后端	   | express nodejs
+    前端     | react
 
 ----
 # 项目反思
