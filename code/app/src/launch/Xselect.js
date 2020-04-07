@@ -9,21 +9,25 @@ export default class Xselect extends Component {
         
     } 
     componentDidMount(){
-        let state = this.props.location.state;
-        
-        fetch('http://116.62.14.0:8402/usort/msid/'+state)
+        // let state = this.props.location.state;
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr[1]);
+        console.log(arr);
+        fetch('http://116.62.14.0:8402/usort/msid/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
             console.log(res.data);
             console.log(this.state.data);
             if(res.data.length === 0){
-                this.props.history.push({pathname:'/select',state:this.props.location.state});
+                this.props.history.push({pathname:'/'+arr[1]+'/select'});
+                // this.props.history.push({pathname:'/select',state:this.props.location.state});
                 console.log(1);
             }else{
                 // let mtab2 ={mtab2: document.getElementsByClassName('q')[0].value};
                 // console.log(mtab2);
-                this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
+                this.props.history.push({pathname:'/'+arr[1]+'/composition/composition'});
+                // this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
                 console.log(2);
             }
         })

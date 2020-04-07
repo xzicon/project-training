@@ -19,9 +19,10 @@ export default class Edit extends Component {
         this.inputRef.focus();
     }
     componentDidMount(){
+        let arr=this.props.location.pathname.split('/');
         let page = this.props.location.state3;
         console.log(page);
-        fetch('http://116.62.14.0:8402/article/xiangqing/'+page)
+        fetch('http://116.62.14.0:8402/article/xiangqing/'+arr[4])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({
@@ -41,8 +42,9 @@ export default class Edit extends Component {
         })
     }
     fetchEdit = (e)=>{
+        let arr=this.props.location.pathname.split('/');
         let data = {
-            aid:this.props.location.state3,
+            aid:arr[4],
             atitle:document.getElementsByClassName('biaoti')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
@@ -64,7 +66,7 @@ export default class Edit extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('修改文章成功',1);
-                    this.props.history.push({pathname:'/mine/marticle',state:this.props.location.state,state3:this.props.location.state3})
+                    this.props.history.push({pathname:'/'+arr[1]+'/mine/marticle/'+arr[4],state:this.props.location.state,state3:this.props.location.state3})
                     break;
                 }
                 default:{
@@ -86,6 +88,7 @@ export default class Edit extends Component {
         )
       };
     render() {
+        let arr=this.props.location.pathname.split('/');
         console.log(this.state.data.aimage);
         console.log(this.state.data3);
         return (
@@ -93,7 +96,7 @@ export default class Edit extends Component {
                 <NavBar
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    leftContent={<Link to={{pathname:'/mine/marticle',state:this.props.location.state,state3:this.props.location.state3}}>
+                    leftContent={<Link to={{pathname:'/'+arr[1]+'/mine/marticle/'+arr[4],state:this.props.location.state,state3:this.props.location.state3}}>
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={

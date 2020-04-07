@@ -63,77 +63,79 @@ export default class App extends Component {
                     <Route path='/register' component={Register}/>
                     <Route path='/forgetpwd' component={Forgetpwd}/>
                     <Route path='/modify' component={Modify}/>
-                    <Route path='/select' component={Select}/>
-                    <Route path='/xselect' component={Xselect}/>
-                    <Route path='/gselect' component={Gselect}/>
+                    <Route path='/:page/select' component={Select}/>
+                    <Route path='/:page/xselect' component={Xselect}/>
+                    <Route path='/:page/gselect' component={Gselect}/>
 
                     {/* 作文 */}
-                    <Route path='/mine/mcn/mcn/mcn/mcn/mcn/prise/prise/fopeople/fowrite/fowrite/article/:page' component={Article}/>
-                    <Route path='/home' exact component={Home}/>
-                    <Route path='/home/follow' component={Follow}/>
-                    <Route path='/home/write' exact component={Write}/>
-                    <Route path='/home/write/follow' exact component={Write}/>
-                    <Route path='/home/home/crnew/write' component={Write}/>
-                    <Route path='/home/article/:page/:page1' component={Article}/>
-                    <Route path='/home/article/home/:page' component={Article}/>
-                    <Route path='/home/home/crnew/article/:page' component={Article}/>
-                    <Route path='/home/home/search/search/article/:page' component={Article}/>
-                    <Route path='/home/h/fopeople/fowrite/fowrite/article/:page' component={Article}/>
-                    <Route path='/home/mine/p/fopeople/fowrite/fowrite/article/:page' component={Article}/>
-                    <Route path='/home/mine/prise/prise/fopeople/fowrite/fowrite/article/:page' component={Article}/>
-                    <Route path='/home/news' component={News}/>
-                    <Route path='/home/praise' component={Praise}/>
-                    <Route path='/home/manage' component={Manage}/>
-                    <Route path='/home/comment' component={Comment}/>
-                    <Route path='/composition/writin/comment' component={Comment}/>
-                    <Route path='/home/crnew' component={Crnew}/>
-                    <Route path='/home/search' exact component={Search}/>
-                    <Route path='/home/search/follow' exact component={Search}/>
-                    <Route path='/home/home/crnew/search' component={Search}/>
-                    <Route path='/home/fopeople' component={Fopeople}/>
-                    <Route path='/home/f/fopeople/follow' component={Fopeople}/>
-                    <Route path='/home/c/c/home/crnew/fopeople' component={Fopeople}/>
-                    <Route path='/home/a/a/a/home/home/article/fopeople' component={Fopeople}/>
-                    <Route path='/com/w/w/w/w/com/com/com/writing/fopeople' component={Fopeople}/>
-                    <Route path='/mine/m/m/m/m/m/mine/com/com/com/mine/fopeople' component={Fopeople}/>
+                    <Route path='/:page/mine/mcn/mcn/mcn/mcn/mcn/prise/prise/fopeople/fowrite/fowrite/article/:page/:page' component={Article}/>
+                    <Route path='/:page/home' exact component={Home}/>
+                    <Route path='/:page/home/follow' exact component={Follow}/>
+                    <Route path='/:page/home/write' exact component={Write}/>
+                    <Route path='/:page/home/write/follow' exact component={Write}/>
+                    <Route path='/:page/home/home/crnew/write' component={Write}/>
+                    <Route path='/:page/home/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/follow/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/home/crnew/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/home/search/search/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/h/fopeople/fowrite/fowrite/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/mine/p/fopeople/fowrite/fowrite/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/mine/prise/prise/fopeople/fowrite/fowrite/article/:page/:page1' component={Article}/>
+                    <Route path='/:page/home/news' component={News}/>
+                    <Route path='/:page/home/praise' component={Praise}/>
+                    <Route path='/:page/home/manage' component={Manage}/>
+                    <Route path='/:page/:page/:page/home/comment' component={Comment}/>
+                    <Route path='/:page/:page/:page/composition/writin/comment' component={Comment}/>
+                    <Route path='/:page/home/crnew' component={Crnew}/>
+                    <Route path='/:page/home/search' exact component={Search}/>
+                    <Route path='/:page/home/search/follow' exact component={Search}/>
+                    <Route path='/:page/home/home/crnew/search' component={Search}/>
+                    <Route path='/:page/:page/:page/home/fopeople' component={Fopeople}/>
+                    <Route path='/:page/:page/:page/home/f/fopeople/follow' component={Fopeople}/>
+                    <Route path='/:page/:page/:page/home/c/c/home/crnew/fopeople' component={Fopeople}/>
+                    <Route path='/:page/:page/:page/home/a/a/a/home/home/article/fopeople' component={Fopeople}/>
+                    <Route path='/:page/:page/:page/com/w/w/w/w/com/com/com/writing/fopeople' component={Fopeople}/>
+                    <Route path='/:page/:page/:page/mine/m/m/m/m/m/mine/com/com/com/mine/fopeople' component={Fopeople}/>
 
                     {/* 素材 */}
-                    <Route path='/composition/composition' component={Composition}/>
-                    <Route path='/composition/material' component={Material}/>
-                    <Route path='/composition/mmaterial' component={Mmaterial}/>
-                    <Route path='/composition/all' component={All}/>
-                    <Route path='/composition/sdetails/:page' component={Sdetails}/>
-                    <Route path='/composition/label/s/sdetails/:page' component={Sdetails}/>
-                    <Route path='/composition/search/sucai/s/s/s/sdetails/:page' component={Sdetails}/>
-                    <Route path='/composition/article/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
-                    <Route path='/mine/mn/mn/mn/mn/mn/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/:page/composition/composition' component={Composition}/>
+                    <Route path='/:page/composition/material/:page' component={Material}/>
+                    <Route path='/:page/composition/mmaterial' component={Mmaterial}/>
+                    <Route path='/:page/composition/all' component={All}/>
+                    <Route path='/:page/:page/composition/sdetails/:page' component={Sdetails}/>
+                    <Route path='/:page/:page/composition/label/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/:page/:page/composition/search/sucai/s/s/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/:page/:page/composition/article/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
+                    <Route path='/:page/:page/mine/mn/mn/mn/mn/mn/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/>
                     {/* <Route path='/composition/w/a/w/sucai/s/s/s/s/s/sdetails/:page' component={Sdetails}/> */}
-                    <Route path='/composition/mdetails/:page' component={Mdetails}/>
-                    <Route path='/home/composition/mdetails/:page' component={Mdetails}/>
-                    <Route path='/home/f/s/tdetails/:page' component={Tdetails}/>
-                    <Route path='/composition/lwrite' component={Lwrite}/>
-                    <Route path='/composition/c/c/c/c/c/lwrite' component={Lwrite}/>
-                    <Route path='/composition/mat' component={Lcomment}/>
-                    <Route path='/composition/com/mat' component={Lcomment}/>
-                    <Route path='/composition/csearch' component={Csearch}/>
-                    <Route path='/composition/writing/:page/:page1' component={Writing}/>
+                    <Route path='/:page/:page/composition/mdetails/:page' component={Mdetails}/>
+                    <Route path='/:page/:page/home/composition/mdetails/:page' component={Mdetails}/>
+                    <Route path='/:page/home/f/s/tdetails/:page' component={Tdetails}/>
+                    <Route path='/:page/:page/lwrite' component={Lwrite}/>
+                    <Route path='/:page/:page/c/c/c/c/c/lwrite' component={Lwrite}/>
+                    <Route path='/:page/:page/m/m/c/c/c/c/c/lwrite' component={Lwrite}/>
+                    <Route path='/:page/:page/mat' component={Lcomment}/>
+                    <Route path='/:page/:page/com/mat' component={Lcomment}/>
+                    <Route path='/:page/:page/comm/mat/mat' component={Lcomment}/>
+                    <Route path='/:page/composition/csearch' component={Csearch}/>
+                    <Route path='/:page/composition/writing/:page/:page1' component={Writing}/>
 
                     {/* 我的 */}
-                    <Route path='/mine' exact component={Mine}/>
-                    <Route path='/mine/write' component={Write2}/>
-                    <Route path='/mine/collect' component={Collect2}/>
-                    <Route path='/mine/praise' component={Praise2}/>
-                    <Route path='/mine/follow/:page' component={Follow2}/>
-                    <Route path='/mine/fans/:page' component={Fans}/>
-                    <Route path='/mine/mnew' exact component={Mnew}/>
-                    <Route path='/mine/mpraise' component={Mpraise}/>
-                    <Route path='/mine/marticle' component={Marticle}/>
-                    <Route path='/mine/mcnew' component={Mcnew}/>
-                    <Route path='/mine/edit' component={Edit}/>
-                    <Route path='/mine/feedback' component={Feedback}/>
-                    <Route path='/mine/personal' component={Personal}/>
-                    <Route path='/mine/myset' component={Myset}/>
-                    <Route path='/mine/question' component={Question}/>
+                    <Route path='/:page/mine' exact component={Mine}/>
+                    <Route path='/:page/mine/write' component={Write2}/>
+                    <Route path='/:page/mine/collect' component={Collect2}/>
+                    <Route path='/:page/mine/praise' component={Praise2}/>
+                    <Route path='/:page/mine/follow/:page' component={Follow2}/>
+                    <Route path='/:page/mine/fans/:page' component={Fans}/>
+                    <Route path='/:page/mine/mnew' exact component={Mnew}/>
+                    <Route path='/:page/mine/mpraise' component={Mpraise}/>
+                    <Route path='/:page/mine/marticle/:page' component={Marticle}/>
+                    <Route path='/:page/mine/mcnew' component={Mcnew}/>
+                    <Route path='/:page/mine/edit/:page' component={Edit}/>
+                    <Route path='/:page/mine/feedback' component={Feedback}/>
+                    <Route path='/:page/mine/personal' component={Personal}/>
+                    <Route path='/:page/mine/myset' component={Myset}/>
+                    <Route path='/:page/mine/question' component={Question}/>
                 </div>
             </Router>
         )

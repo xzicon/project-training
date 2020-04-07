@@ -10,9 +10,10 @@ export default class Personal extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/me/'+uid+'/'+uid)
+        let arr=this.props.location.pathname.split('/');
+        // let uid=this.props.location.state;
+        // console.log(uid);
+        fetch('http://116.62.14.0:8402/login/me/'+arr[1]+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -26,8 +27,9 @@ export default class Personal extends Component {
         })
     }
     fetchFeedback = (e)=>{
+        let arr=this.props.location.pathname.split('/');
         let data = {
-            uid:this.props.location.state,
+            uid:arr[1],
             uname:document.getElementsByClassName('nicheng')[0].value,
             udescribe:document.getElementsByClassName('jianjie')[0].value,
             uimage:this.state.data3
@@ -48,7 +50,7 @@ export default class Personal extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('修改资料成功',1);
-                    this.props.history.push({pathname:'/mine',state:this.props.location.state})
+                    this.props.history.push({pathname:'/'+arr[1]+'/mine',state:this.props.location.state})
                     break;
                 }
                 default:{
@@ -72,11 +74,12 @@ export default class Personal extends Component {
         )
       };
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div style={{overflow:'hidden'}}>
             <div>
             <NavBar
-                icon={<Link to={{pathname:'/mine',state:this.props.location.state}}><Icon  type="left" /></Link>}
+                icon={<Link to={{pathname:'/'+arr[1]+'/mine',state:this.props.location.state}}><Icon  type="left" /></Link>}
                 style={{backgroundColor:'#fff',color:'black'}}
                 onLeftClick={() => console.log('onLeftClick')}
                 rightContent={

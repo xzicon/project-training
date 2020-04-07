@@ -17,10 +17,12 @@ export default class Sdetails extends Component {
     }
     
     componentDidMount(){
-        let page = this.props.location.mtab2;
-        let state = this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/material/xiang/'+page+'/'+state)
+        // let page = this.props.location.mtab2;
+        // let state = this.props.location.state;
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
+        fetch('http://116.62.14.0:8402/material/xiang/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -42,8 +44,10 @@ export default class Sdetails extends Component {
     componentDidUpdate(){
         let page = this.props.location.mtab2;
         let state = this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/material/xiang/'+page+'/'+state)
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
+        fetch('http://116.62.14.0:8402/material/xiang/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -51,9 +55,12 @@ export default class Sdetails extends Component {
         })
     }
     fetchGood = (e)=>{
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
         let data = {
-            uid:this.props.location.state,
-            mid:this.props.location.mtab2
+            uid:arr[1],
+            mid:page1['page']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/likes/material', {
@@ -83,24 +90,26 @@ export default class Sdetails extends Component {
         imgObj.src=Flag?"/images/home/shoucang1.png":"/images/home/shoucang.png";
     }
     render() {
+        let page1 = this.props.match.params;
+        console.log(page1);
         let url = this.props.match.url;
         let arr=this.props.location.pathname.split('/');
         console.log(arr.length);
-        if(arr.length===4 || arr.length===5){
-            var data1='/composition/material';
-            var data2='/composition/mat'
-            var data3='/composition/lwrite'
-        }else if(arr.length===6 || arr.length===7){
-            var data1='/composition/composition';
-            var data2='/composition/com/mat'
-            var data3='/composition/c/c/c/c/c/lwrite'
+        if(arr.length===5 || arr.length===6){
+            var data1='/'+arr[1]+'/composition/material/'+arr[2];
+            var data2='/'+arr[1]+'/'+page1['page']+'/mat';
+            var data3='/'+arr[1]+'/'+page1['page']+'/lwrite';
+        }else if(arr.length===7 || arr.length===8 || arr.length===9){
+            var data1='/'+arr[1]+'/composition/composition';
+            var data2='/'+arr[1]+'/'+page1['page']+'/com/mat';
+            var data3='/'+arr[1]+'/'+page1['page']+'/c/c/c/c/c/lwrite';
         }
-        else if(arr.length===9 || arr.length===10){
-            var data1='/composition/csearch';
-        }else if(arr.length===11 || arr.length===12){
-            var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state2;
+        else if(arr.length===10 || arr.length===11){
+            var data1='/'+arr[1]+'/composition/csearch';
+        }else if(arr.length===12 || arr.length===13){
+            var data1='/'+arr[1]+'/home/article/'+this.props.location.state1+'/'+this.props.location.state2;
         }else{
-            var data1='/mine/mnew';
+            var data1='/'+arr[1]+'/mine/mnew';
         }
         console.log(data1);
         return (

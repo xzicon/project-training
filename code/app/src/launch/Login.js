@@ -24,7 +24,8 @@ export default class Login extends Component {
                     console.log(data.data);
                     //登录成功
                     Toast.success('登录成功', 1);
-                    this.props.history.push({pathname:'/xselect',state:data.data});
+                    // this.props.history.push({pathname:'/xselect',state:data.data});
+                    this.props.history.push({pathname:'/'+data.data+'/xselect'});
                     break;
                 }
                 case "1":{

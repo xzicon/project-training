@@ -9,9 +9,10 @@ export default class Fans extends Component {
         }
     }
     componentDidMount(){
-        let page=this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/fans/'+page)
+        // let page=this.props.location.state;
+        // console.log(page);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/fans/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -19,9 +20,10 @@ export default class Fans extends Component {
         })
     }
     componentDidUpdate(){
-        let page=this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/fans/'+page)
+        // let page=this.props.location.state;
+        // console.log(page);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/fans/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -29,6 +31,7 @@ export default class Fans extends Component {
         })
     }
     fetchConcern = (e)=>{
+        let arr=this.props.location.pathname.split('/');
         let item = e.target.parentNode.parentNode;
         console.log(item);
         console.log(item.children[0].innerHTML);
@@ -36,7 +39,7 @@ export default class Fans extends Component {
         console.log(item.children[1].innerHTML);
         let obj1 = {guanzhu:item.children[1].innerHTML}
         let data = {
-            uid:this.props.location.state,
+            uid:arr[1],
             upid:obj.upid
         }
         console.log(data);
@@ -64,11 +67,12 @@ export default class Fans extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         console.log(this.state.data.length);
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>我的粉丝</NavBar>
                     

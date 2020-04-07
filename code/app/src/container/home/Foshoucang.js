@@ -9,9 +9,12 @@ export default class Foshoucang extends Component {
         }
     }
     componentDidMount(){
+        let page1 = this.props.match.params;
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr,page1);
         let uid=this.props.location.state4;
         console.log(uid);
-        fetch('http://116.62.14.0:8402/login/materialcollection/'+uid)
+        fetch('http://116.62.14.0:8402/login/materialcollection/'+arr[3])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -29,12 +32,13 @@ export default class Foshoucang extends Component {
     //     })
     // }
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <div style={{width:'100%'}}>
                     
                     {this.state.data.length!==0?this.state.data.map(data=>(
-                        <Link to={{pathname:'/home/f/s/tdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,state4:this.props.location.state4}}>
+                        <Link to={{pathname:'/'+arr[1]+'/home/f/s/tdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state,state4:this.props.location.state4}}>
                         <div style={{width:'93%',marginBottom:'2%',backgroundColor:'#fff',padding:'3%',float:'left'}}>                      
                                 <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                     {data.mtime}

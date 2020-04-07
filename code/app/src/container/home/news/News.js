@@ -10,9 +10,10 @@ export default class News extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/message/pinglun/'+uid)
+        // let uid=this.props.location.state;
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr);
+        fetch('http://116.62.14.0:8402/message/pinglun/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -20,15 +21,16 @@ export default class News extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/mine',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
                 >消息通知</NavBar>
                 <div style={{top:'40px',position:'absolute',zIndex:'99',margin:'2% 0% auto',width:'100%'}}>
-                    <Link to={{pathname:'/home/praise',state:this.props.location.state}}>
+                    <Link to={{pathname:'/'+arr[1]+'/home/praise',state:this.props.location.state}}>
                     <List>
                         <Item arrow="horizontal" multipleLine>
                             <img src="/images/home/zan1.png" />    点赞

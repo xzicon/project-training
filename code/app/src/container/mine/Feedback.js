@@ -9,10 +9,11 @@ var h = date.getHours() + ':';
 var m = date.getMinutes();
 export default class Feedback extends Component {
     fetchFeedback = (e)=>{
+        let arr=this.props.location.pathname.split('/');
         let data = {
             fcontent:document.getElementsByClassName('fankui')[0].value,
             ftime:Y+M+D+h+m,
-            uid:this.props.location.state
+            uid:arr[1]
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/feedback', {
@@ -29,7 +30,7 @@ export default class Feedback extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('反馈成功');
-                    this.props.history.push({pathname:'/mine',state:this.props.location.state})
+                    this.props.history.push({pathname:'/'+arr[1]+'/mine',state:this.props.location.state})
                     break;
                 }
                 default:{
@@ -40,12 +41,13 @@ export default class Feedback extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <NavBar
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}
-                    leftContent={<Link to={{pathname:'/mine',state:this.props.location.state}}>
+                    leftContent={<Link to={{pathname:'/'+arr[1]+'/mine',state:this.props.location.state}}>
                         <p style={{color:'#000'}}>取消</p>
                     </Link>}
                     rightContent={

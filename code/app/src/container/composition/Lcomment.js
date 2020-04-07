@@ -9,10 +9,11 @@ var h = (date.getHours()<10 ? '0'+(date.getHours()) : date.getHours()) + ':';
 var m = (date.getMinutes()<10 ? '0'+(date.getMinutes()) : date.getMinutes());
 export default class Lcomment extends Component {
     fetchComment=(e)=>{
+        let arr=this.props.location.pathname.split('/');
         let data = {
             mccontent:document.getElementsByClassName('pinglun')[0].value,
-            uid:this.props.location.state,
-            mid:this.props.location.mtab2,
+            uid:arr[1],
+            mid:arr[2],
             mctime:Y+M+D+h+m
         }
         console.log(data);
@@ -29,10 +30,13 @@ export default class Lcomment extends Component {
     render() {
         let arr=this.props.location.pathname.split('/');
         console.log(arr.length);
-        if(arr.length===3){
-            var data1='/composition/sdetails/'+this.props.location.mtab2;
-        }else if(arr.length===4){
-            var data1='/composition/label/s/sdetails/'+this.props.location.mtab2;
+        if(arr.length===4){
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/sdetails/'+arr[2];
+        }else if(arr.length===5){
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/label/s/sdetails/'+arr[2];
+        }
+        else{
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/mdetails/'+arr[2];
         }
         return (
             <div>

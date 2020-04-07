@@ -9,10 +9,12 @@ export default class Foguanzhu extends Component {
         }
     }
     componentDidMount(){
-        let page=this.props.location.state4;
-        let page1=this.props.location.state;
-        console.log(page,page1);
-        fetch('http://116.62.14.0:8402/login/guanzhu/'+page+'/'+page1)
+        // let page=this.props.location.state4;
+        // let page1=this.props.location.state;
+        let page1 = this.props.match.params;
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr,page1);
+        fetch('http://116.62.14.0:8402/login/guanzhu/'+arr[3]+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -20,10 +22,10 @@ export default class Foguanzhu extends Component {
         })
     }
     componentDidUpdate(){
-        let page=this.props.location.state4;
-        let page1=this.props.location.state;
-        console.log(page,page1);
-        fetch('http://116.62.14.0:8402/login/guanzhu/'+page+'/'+page1)
+        let page1 = this.props.match.params;
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr,page1);
+        fetch('http://116.62.14.0:8402/login/guanzhu/'+arr[3]+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -31,9 +33,12 @@ export default class Foguanzhu extends Component {
         })
     }
     fetchConcern = (e)=>{
+        let page1 = this.props.match.params;
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr,page1);
         let data = {
-            uid:this.props.location.state,
-            upid:this.props.location.state4
+            uid:arr[1],
+            upid:page1['page']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/login/userconcern', {

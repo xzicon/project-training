@@ -10,9 +10,12 @@ export default class Commentzuire extends Component {
     }
     
     componentDidMount(){
-        let page = this.props.location.state1;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/article/zuixin/'+page)
+        // let page = this.props.location.state1;
+        // console.log(page);
+        let arr=this.props.location.pathname.split('/');
+        let arr1 = arr.reverse();
+        console.log(arr1);
+        fetch('http://116.62.14.0:8402/article/zuixin/'+arr1[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});

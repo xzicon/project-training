@@ -9,9 +9,10 @@ export default class Collect extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/materialcollection/'+uid)
+        // let uid=this.props.location.state;
+        // console.log(uid);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/materialcollection/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -23,9 +24,9 @@ export default class Collect extends Component {
         console.log(item);
         console.log(item.children[0].innerHTML);
         let obj = {mid:item.children[0].innerHTML}
-        
+        let arr=this.props.location.pathname.split('/');
         let data = {
-            uid:this.props.location.state,
+            uid:arr[1],
             mid:obj.mid
         }
         console.log(data);
@@ -54,10 +55,11 @@ export default class Collect extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
             <NavBar
-                icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                icon={<Link to={{pathname:'/'+arr[1]+'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                 style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                 onLeftClick={() => console.log('onLeftClick')}>收藏</NavBar>
             
@@ -66,7 +68,7 @@ export default class Collect extends Component {
                 {this.state.data.length!==0?this.state.data.map(data=>(
                     <div style={{width:'94%',float:'left',marginTop:'2%',marginLeft:'3%',marginRight:'3%',backgroundColor:'#fff',paddingBottom:'2%'}}>
                         <div style={{color:'#fff',width:'99%'}}>{data.mid}</div>
-                        <Link to={{pathname:'/composition/mdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>
+                        <Link to={{pathname:'/'+arr[1]+'/'+data.mid+'/home/composition/mdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}}>
                             <div style={{width:'93%',backgroundColor:'#fff',paddingLeft:'3%',paddingRight:'3%',float:'left',paddingBottom:'3%'}}>                      
                                 <div style={{height:'26px',fontSize:'14px',float:'left',width:'100%',color:'#000'}}>
                                     {data.mtime}

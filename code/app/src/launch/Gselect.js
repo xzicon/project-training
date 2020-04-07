@@ -22,8 +22,9 @@ export default class Gselect extends Component {
         })
     }
     fetchBiaoqian = (e)=>{
+        let arr=this.props.location.pathname.split('/');
         let data = {
-            uid:this.props.location.state,
+            uid:arr[1],
             msid1:this.state.value[0],
             msid2:this.state.value[1],
             msid3:this.state.value[2],
@@ -46,7 +47,7 @@ export default class Gselect extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('修改成功', 1);
-                    this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
+                    this.props.history.push({pathname:'/'+arr[1]+'/composition/composition',state:this.props.location.state});
                     break;
                 }
                 default:{
@@ -67,10 +68,11 @@ export default class Gselect extends Component {
         console.log(this.state.value);
     }
     render() {  
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <NavBar
-                icon={<Link to={{pathname:'/composition/composition',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                icon={<Link to={{pathname:'/'+arr[1]+'/composition/composition',state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     rightContent={<button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>全部标签</NavBar>

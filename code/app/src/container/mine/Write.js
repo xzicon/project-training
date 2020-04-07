@@ -9,9 +9,10 @@ export default class Write extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/article/'+uid)
+        // let uid=this.props.location.state;
+        // console.log(uid);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/article/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -19,10 +20,11 @@ export default class Write extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>我创作的</NavBar>
                 <div style={{width:'100%',marginTop:'13%'}}>
@@ -37,7 +39,7 @@ export default class Write extends Component {
                                     <div style={{width:'100%',height:'55px',overflow:'hidden',paddingLeft:'3%',paddingRight:'3%',color:'#000',fontSize:'120%',float:'left'}}>{data.acontent}</div>
                                     <div style={{padding:'2%',float:'left',width:'100%'}}>{data.atag}</div><br/>
 
-                                    <Link to={{pathname:'/mine/marticle/'+data.aid,state3:data.aid,state:this.props.location.state}} style={{}}>
+                                    <Link to={{pathname:'/'+arr[1]+'/mine/marticle/'+data.aid,state3:data.aid,state:this.props.location.state}} style={{}}>
                                         <a style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</a>
                                     </Link>
                                 </div>

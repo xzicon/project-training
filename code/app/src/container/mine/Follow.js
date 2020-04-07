@@ -10,34 +10,37 @@ export default class Follow extends Component {
         }
     }
     componentDidMount(){
-        let page=this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/userconcern/'+page)
+        // let page=this.props.location.state;
+        let arr=this.props.location.pathname.split('/');
+        // console.log(page);
+        fetch('http://116.62.14.0:8402/login/userconcern/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
             console.log(res.data);
         })
-        console.log(this.state.data.uid);
+        // console.log(this.state.data.uid);
     }
     componentDidUpdate(){
-        let page=this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/login/userconcern/'+page)
+        // let page=this.props.location.state;
+        // console.log(page);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/userconcern/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
             console.log(res.data);
         })
-        console.log(this.state.data.uid);
+        // console.log(this.state.data.uid);
     }
     fetchConcern = (e)=>{
+        let arr=this.props.location.pathname.split('/');
         let item = e.target.parentNode.parentNode;
         console.log(item);
         console.log(item.children[0].innerHTML);
         let obj = {upid:item.children[0].innerHTML}
         let data = {
-            uid:this.props.location.state,
+            uid:arr[1],
             upid:obj.upid
         }
         console.log(data.upid);
@@ -64,12 +67,13 @@ export default class Follow extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         console.log(this.state.data);
         return (
             <div>
                 <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>我的关注</NavBar>
                 <div style={{width:'100%',position:'absolute',top:'50px',fontSize:'16px'}}>

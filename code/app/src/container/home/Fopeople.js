@@ -12,10 +12,12 @@ export default class Fopeople extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state4;
-        let look=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/me/'+uid+'/'+look)
+        // let uid=this.props.location.state4;
+        // let look=this.props.location.state;
+        let page1 = this.props.match.params;
+        console.log(page1['page']);
+        let arr = this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/me/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -23,10 +25,13 @@ export default class Fopeople extends Component {
         })
     }
     componentDidUpdate(){
-        let uid=this.props.location.state4;
-        let look=this.props.location.state;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/me/'+uid+'/'+look)
+        // let uid=this.props.location.state4;
+        // let look=this.props.location.state;
+        // console.log(uid);
+        let page1 = this.props.match.params;
+        console.log(page1);
+        let arr = this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/me/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -34,9 +39,12 @@ export default class Fopeople extends Component {
         })
     }
     fetchConcern = (e)=>{
+        let page1 = this.props.match.params;
+        console.log(page1);
+        let arr = this.props.location.pathname.split('/');
         let data = {
-            uid:this.props.location.state,
-            upid:this.props.location.state4
+            uid:arr[1],
+            upid:page1['page']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/login/userconcern', {
@@ -91,22 +99,23 @@ export default class Fopeople extends Component {
         document.getElementById("A10").style.color="#000"
     }
     render() {
+        let page1 = this.props.match.params;
         let url = this.props.match.url;
         console.log(url);
         let arr=this.props.location.pathname.split('/');
         console.log(arr.length);
-        if(arr.length===3 || arr.length===4){
-            var data1='/home';
-        }else if(arr.length===5 || arr.length===6){
-            var data1='/home/follow/'+this.props.location.state;
-        }else if(arr.length===7 || arr.length===8){
-            var data1='/home/crnew';
-        }else if(arr.length===9 || arr.length===10){
-            var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state;
-        }else if(arr.length===11 || arr.length===12){
-            var data1='/composition/writing/'+this.props.location.state1+'/'+this.props.location.state;
+        if(arr.length===6 || arr.length===7){
+            var data1='/'+arr[1]+'/home';
+        }else if(arr.length===8 || arr.length===9){
+            var data1='/'+arr[1]+'/home/follow';
+        }else if(arr.length===10 || arr.length===11){
+            var data1='/'+arr[1]+'/home/crnew';
+        }else if(arr.length===12 || arr.length===13){
+            var data1='/'+arr[1]+'/home/article/'+arr[2]+'/'+page1['page'];
+        }else if(arr.length===14 || arr.length===15){
+            var data1='/'+arr[1]+'/composition/writing/'+arr[2]+'/'+page1['page'];
         }else{
-            var data1='/mine'
+            var data1='/'+arr[1]+'/mine';
         }
         console.log(data1);
         return (

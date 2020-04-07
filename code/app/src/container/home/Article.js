@@ -13,11 +13,15 @@ export default class Article extends Component {
     }
     
     componentDidMount(){
-        let page = this.props.location.state1;
+        // let page = this.props.location.state1;
         let state = this.props.location.state;
-        console.log(page);
-        console.log(this.props.match.params);
-        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state)
+        let arr=this.props.location.pathname.split('/');
+        let arr1 = arr.reverse();
+        console.log(arr1);
+        // console.log(page);
+        let page1 = this.props.match.params;
+        console.log(page1['page1']);
+        fetch('http://116.62.14.0:8402/article/xiang/'+arr1[1]+'/'+arr1[0])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -25,11 +29,15 @@ export default class Article extends Component {
         })
     }
     componentDidUpdate(){
-        let page = this.props.location.state1;
+        // let page = this.props.location.state1;
         let state = this.props.location.state;
-        console.log(page);
+        let arr=this.props.location.pathname.split('/');
+        let arr1 = arr.reverse();
+        // console.log(page);
+        let page1 = this.props.match.params;
+        console.log(page1.page1);
         console.log(this.props.match.params);
-        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state)
+        fetch('http://116.62.14.0:8402/article/xiang/'+arr1[1]+'/'+arr1[0])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -37,9 +45,14 @@ export default class Article extends Component {
         })
     }
     fetchGood = (e)=>{
+        let arr=this.props.location.pathname.split('/');
+        // let arr1 = arr.reverse();
+        let page1 = this.props.match.params;
+        console.log(page1);
         let data = {
-            uid:this.props.location.state,
-            aid:this.props.location.state1
+            uid:arr[1],
+            // aid:this.props.location.state1
+            aid: page1['page']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/likes/article', {
@@ -71,9 +84,13 @@ export default class Article extends Component {
         imgObj.src=Flag?"/images/home/zan1.png":"/images/home/zan.png";
     }
     fetchConcern = (e)=>{
+        let arr=this.props.location.pathname.split('/');
+        // let arr1 = arr.reverse();
+        let page1 = this.props.match.params;
         let data = {
-            uid:this.props.location.state,
-            upid:this.props.location.state2
+            uid:arr[1],
+            // upid:this.props.location.state2
+            upid:page1['page1']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/login/userconcern', {
@@ -118,21 +135,25 @@ export default class Article extends Component {
     }
     render() {
         let url = this.props.match.url;
+        console.log(url);
         let arr=this.props.location.pathname.split('/');
-        if(arr.length===5){
-            var data1='/home';
-        }else if(arr.length===6){
-            var data1='/home/follow/'+this.props.location.state;
+        // let arr1 = arr.reverse();
+        let page1 = this.props.match.params;
+        console.log(page1);
+        if(arr.length===6){
+            var data1='/'+arr[1]+'/home';
         }else if(arr.length===7){
-            var data1='/home/crnew';
+            var data1='/'+arr[1]+'/home/follow';
         }else if(arr.length===8){
-            var data1='/home/search';
+            var data1='/'+arr[1]+'/home/crnew';
         }else if(arr.length===9){
-            var data1='/home/fopeople';
+            var data1='/'+arr[1]+'/home/search';
         }else if(arr.length===10){
-            var data1='/mine/praise'
+            var data1='/'+arr[1]+'/'+page1['page']+'/'+page1['page1']+'/home/fopeople';
+        }else if(arr.length===11){
+            var data1='/'+arr[1]+'/mine/praise'
         }else{
-            var data1='/mine/mcnew'
+            var data1='/'+arr[1]+'/mine/mcnew'
         }
 
         console.log(data1);
@@ -154,7 +175,7 @@ export default class Article extends Component {
                                 
                             </Link>
                             <div style={{width:'80%',zIndex:'9',color:'#000',height:'100%',textAlign:'center',float:'right',marginRight:'10%'}}>
-                                <Link to={{pathname:'/home/a/a/a/home/home/article/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1}} style={{width:'100%',height:'100%',color:'#000'}}>
+                                <Link to={{pathname:'/'+arr[1]+'/'+page1['page']+'/'+page1['page1']+'/home/a/a/a/home/home/article/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1}} style={{width:'100%',height:'100%',color:'#000'}}>
                                     <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{width:'40px',height:'40px',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
                                 </Link>
                                 <div style={{fontSize:'120%',float:'left',marginTop:'5%',textAlign:'center',}}>{data.uname}</div>
@@ -178,7 +199,7 @@ export default class Article extends Component {
                                     <div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}>#{data.atag}</div><br/>
                                     {data.aimage===''?<div></div>:<div style={{marginLeft:'3%',marginRight:'3%',paddingTop:'2%',paddingBottom:'2%',float:'left',width:'94%'}}><img src={'http://116.62.14.0:8402/images/'+data.aimage} style={{width:'100%',height:'150px',marginTop:'1%',float:'left',backgroundPosition:'cover'}} /></div>}
                                     
-                                    <Link to={{pathname:'/composition/article/sucai/s/s/s/s/s/sdetails/'+data.mid,state1:this.props.location.state1,state2:this.props.location.state2,mtab2:data.mid,state:this.props.location.state}}>
+                                    <Link to={{pathname:'/'+arr[1]+'/'+data.mid+'/composition/article/sucai/s/s/s/s/s/sdetails/'+data.mid,state1:this.props.location.state1,state2:this.props.location.state2,mtab2:data.mid,state:this.props.location.state}}>
                                     <div style={{float:'left',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',fontSize:'120%',lineHeight:'150%',paddingTop:'3%',paddingBottom:'3%',borderTop:'1px dashed gray',width:'94%',color:'#000',backgroundColor:'#bcc2d7'}}>
                                         <div style={{display:'none'}}>{data.mid}</div>
                                         <div>{data.mtitle}</div>
@@ -190,7 +211,7 @@ export default class Article extends Component {
 
                         <div style={{marginTop:'2% ',marginLeft:'2%',marginRight:'2%',width:'96%',float:'left',marginBottom:'15%'}}>
                             <hr/>
-                            <Link to={{pathname:url,state1:this.props.location.state1,state:this.props.location.state}}><span style={{fontSize:'18px',color:'#000'}}>精彩评论</span></Link>
+                            <Link to={{pathname:url,state1:page1['page'],state:this.props.location.state}}><span style={{fontSize:'18px',color:'#000'}}>精彩评论</span></Link>
                             <Route path={`${url}`} component={Commentzuire} />
                         </div>
                     
@@ -205,7 +226,7 @@ export default class Article extends Component {
                             </div>
                                     
                             <div style={{float:'left',width:'40%',textAlign:'center'}}>
-                                <Link to={{pathname:'/home/comment',state1:this.props.location.state1,state2:this.props.location.state2,state:this.props.location.state}}>
+                                <Link to={{pathname:'/'+arr[1]+'/'+page1['page']+'/'+page1['page1']+'/home/comment',state1:this.props.location.state1,state2:this.props.location.state2,state:this.props.location.state}}>
                                     <div style={{height:'60%'}}>
                                         <img src='/images/write/say.png' style={{width:'15%',height:'15%'}}/>
                                     </div>

@@ -10,10 +10,13 @@ export default class Writing extends Component {
         }
     }
     componentDidMount(){
-        let page = this.props.location.state1;
-        let state = this.props.location.state;
-        console.log(page,state);
-        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state)
+        let arr=this.props.location.pathname.split('/');
+        // let page = this.props.location.state1;
+        // let state = this.props.location.state;
+        let page1 = this.props.match.params;
+        console.log(page1);
+        // console.log(page,state);
+        fetch('http://116.62.14.0:8402/article/xiang/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -21,9 +24,12 @@ export default class Writing extends Component {
         })
     }
     fetchConcern = (e)=>{
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
         let data = {
-            uid:this.props.location.state,
-            upid:this.props.location.state2
+            uid:arr[1],
+            upid:page1['page']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/login/userconcern', {
@@ -55,10 +61,13 @@ export default class Writing extends Component {
         Obj.value=Flag?"已关注":"关注";
     }
     componentDidUpdate(){
-        let page = this.props.location.state1;
-        let state = this.props.location.state;
-        console.log(page,state);
-        fetch('http://116.62.14.0:8402/article/xiang/'+page+'/'+state)
+        let arr=this.props.location.pathname.split('/');
+        // let page = this.props.location.state1;
+        // let state = this.props.location.state;
+        let page1 = this.props.match.params;
+        console.log(page1);
+        // console.log(page,state);
+        fetch('http://116.62.14.0:8402/article/xiang/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -66,9 +75,12 @@ export default class Writing extends Component {
         })
     }
     fetchGood = (e)=>{
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
         let data = {
-            uid:this.props.location.state,
-            aid:this.props.location.state1
+            uid:arr[1],
+            aid:page1['page']
         }
         console.log(data);
         fetch('http://116.62.14.0:8402/likes/article', {
@@ -113,17 +125,20 @@ export default class Writing extends Component {
     }
     render() {
         let url = this.props.match.url;
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
         return (
             <div>
                 {this.state.data.map(data=>(
                     <div>
                         <div style={{position:'relative',top:'0',position:'fixed',width:'100%',height:'50px',backgroundColor:'#fff'}}> 
-                            <Link to={{pathname:'/composition/label/s/sdetails/'+this.props.location.mtab2,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+data.mid+'/composition/label/s/sdetails/'+data.mid,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
                                 <img src='/images/write/left.png' style={{width:'8%',height:'45%',position:'absolute',top:'27%',left:'2%',}} />
                                 
                             </Link>
                             <div style={{width:'80%',zIndex:'9',color:'#000',height:'100%',textAlign:'center',float:'right',marginRight:'10%'}}>
-                                <Link to={{pathname:'/com/w/w/w/w/com/com/com/writing/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1,mtab2:this.props.location.mtab2}} style={{width:'100%',height:'100%',color:'#000'}}>
+                                <Link to={{pathname:'/'+arr[1]+'/'+data.aid+'/'+data.uid+'/com/w/w/w/w/com/com/com/writing/fopeople',state:this.props.location.state,state4:data.uid,state1:this.props.location.state1,mtab2:this.props.location.mtab2}} style={{width:'100%',height:'100%',color:'#000'}}>
                                 <img src={'http://116.62.14.0:8402/images/'+data.uimage} style={{height:'40px',width:'40px',marginLeft:'2%',marginTop:'2%',marginRight:'5%',borderRadius:'50%',float:'left',textAlign:'center',}} />
                                 </Link>
                                 <div style={{fontSize:'120%',float:'left',marginTop:'5%',textAlign:'center',}}>{data.uname}</div>
@@ -172,7 +187,7 @@ export default class Writing extends Component {
                             </div>
                                     
                             <div style={{float:'left',width:'40%',textAlign:'center'}}>
-                                <Link to={{pathname:'/composition/writin/comment',state1:this.props.location.state1,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                                <Link to={{pathname:'/'+arr[1]+'/'+page1['page']+'/'+page1['page1']+'/composition/writin/comment',state1:this.props.location.state1,state:this.props.location.state,mtab2:this.props.location.mtab2}}>
                                     <div style={{height:'60%'}}>
                                         <img src='/images/write/say.png' style={{width:'15%',height:'15%'}}/>
                                     </div>

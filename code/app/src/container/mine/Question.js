@@ -4,10 +4,11 @@ import { NavBar,Icon,Tabs,WhiteSpace } from 'antd-mobile';
 
 export default class Question extends Component {
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div style={{overflow:'hidden'}}>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>常见问题</NavBar>
 

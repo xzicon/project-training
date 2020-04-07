@@ -17,9 +17,10 @@ export default class Mcnew extends Component {
         }
     }
     componentDidMount(){
-        let state=this.props.location.state;
-        console.log(state);
-        fetch('http://116.62.14.0:8402/login/acomment/'+state)
+        // let state=this.props.location.state;
+        // console.log(state);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/acomment/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -62,22 +63,23 @@ export default class Mcnew extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/mine',state1:this.props.location.state1,state:this.props.location.state}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>评论</NavBar>
                 <div style={{width:'100%',position:'absolute',top:'55px',zIndex:'99'}}>
-                    <Link to={{pathname:'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{color:this.state.selectM.color,borderBottom:this.state.selectM.borderBottom,fontSize:'14px',color:'#000',marginLeft:'5%'}}>素材评论</span></Link>
-                    <Link to={{pathname:'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{color:this.state.selectA.color,borderBottom:this.state.selectA.borderBottom,fontSize:'18px',color:'#000',marginLeft:'5%'}}>文章评论</span></Link>
+                    <Link to={{pathname:'/'+arr[1]+'/mine/mnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{color:this.state.selectM.color,borderBottom:this.state.selectM.borderBottom,fontSize:'14px',color:'#000',marginLeft:'5%'}}>素材评论</span></Link>
+                    <Link to={{pathname:'/'+arr[1]+'/mine/mcnew',state1:this.props.location.state1,state:this.props.location.state}}><span style={{color:this.state.selectA.color,borderBottom:this.state.selectA.borderBottom,fontSize:'18px',color:'#000',marginLeft:'5%'}}>文章评论</span></Link>
                 </div>
                 <div  style={{marginTop:'26%',float:'left',width:'100%'}}>
                     {this.state.data.length!==0?this.state.data.map(data=>(
                         <div style={{width:'94%',float:'left',zIndex:'99',backgroundColor:'#fff',marginLeft:'3%',marginRight:'3%',marginBottom:'3%',paddingBottom:'2%'}}>
                             <div style={{display:'none'}}>{data.aid}</div>
                             <div style={{display:'none'}}>{data.acid}</div>
-                            <Link to={{pathname:'/mine/mcn/mcn/mcn/mcn/mcn/prise/prise/fopeople/fowrite/fowrite/article/'+data.aid+'/'+this.props.location.state,state1:data.aid,state:this.props.location.state}}>
+                            <Link to={{pathname:'/'+arr[1]+'/mine/mcn/mcn/mcn/mcn/mcn/prise/prise/fopeople/fowrite/fowrite/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state}}>
                                 <div style={{width:'100%',backgroundColor:'#fff',paddingTop:'2%',paddingBottom:'2%'}}>
                                     <div style={{fontSize:'115%',marginBottom:'3%',marginLeft:'3%'}}>{data.accontent}</div>
                                     <div style={{fontSize:'90%',color:'gray',marginLeft:'3%',marginTop:'3%'}}>{data.actime}</div>

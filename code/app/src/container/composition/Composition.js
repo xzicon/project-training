@@ -6,9 +6,10 @@ import Popular from './Popular';
 import Label from './Label';
 export default class Composition extends Component {
     constructor(props) {
+        let arr=props.location.pathname.split('/');
         super(props);
-        this.state = {
-          selectedTab: '/composition/composition',
+        this.state = {   
+          selectedTab: '/'+arr[1]+'/composition/composition',
           data1:[],
           data2:[],
           data3:[],
@@ -17,9 +18,12 @@ export default class Composition extends Component {
         };
     }
     componentDidMount(){
-        let state = this.props.location.state;
-        console.log(state);
-        fetch('http://116.62.14.0:8402/usort/msid/'+state)
+        // let state = this.props.location.state;
+        // console.log(state);
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr[1]);
+        // fetch('http://116.62.14.0:8402/usort/msid/'+state)
+        fetch('http://116.62.14.0:8402/usort/msid/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({
@@ -124,6 +128,8 @@ Change6=(e)=>{
     render() {
         let url = this.props.match.url;
         console.log(url);
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr[1]);
         // console.log(this.state.data.length);
         return (
             <div>
@@ -153,12 +159,12 @@ Change6=(e)=>{
                             background: 'url(images/apptab/home1.png) center center /  21px 21px no-repeat' }}
                         />
                         }
-                        selected={this.state.selectedTab === '/home'}
+                        selected={this.state.selectedTab === '/'+arr[1]+'/home'}
                         onPress={() => {
                             this.setState({
-                            selectedTab: '/home',
+                            selectedTab: '/'+arr[1]+'/home',
                             });
-                            this.props.history.push({pathname:'/home',state:this.props.location.state})
+                            this.props.history.push({pathname:'/'+arr[1]+'/home'})
                         }}
                         >
                             {/* <Home/> */}
@@ -180,10 +186,10 @@ Change6=(e)=>{
                         }
                         title="素材"
                         key="Composition"
-                        selected={this.state.selectedTab === '/composition/composition'}
+                        selected={this.state.selectedTab === '/'+arr[1]+'/composition/composition'}
                         onPress={() => {
                             this.setState({
-                            selectedTab: '/composition/composition',
+                            selectedTab: '/'+arr[1]+'/composition/composition',
                             });
                             
                         }}
@@ -191,9 +197,9 @@ Change6=(e)=>{
                             <div >
                                 <div style={{position: 'fixed',top: '0',zIndex:'100000',width:'100%',backgroundColor:'#f5f5f9'}}>
                                 <div style={{float:'left',width:'100%',paddingBottom:'2%'}}>
-                                    <Link to={{pathname:'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'7%',height:'7%',marginTop:'2%',marginLeft:'2%'}} /></Link>
-                                    <Link to={{pathname:'/composition/csearch',state:this.props.location.state}}><SearchBar style={{width:'65%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索"/></Link>
-                                    <Link to={{pathname:'/gselect',state:this.props.location.state}} style={{color:'red'}}><div style={{width:'20%',marginTop:'3%',marginRight:'3%',float:'right',fontSize:'120%'}}>修改标签</div></Link>
+                                    <Link to={{pathname:'/'+arr[1]+'/composition/all',state:this.props.location.state,state1:this.props.location.state1}}><img src='/images/write/all.png' style={{float:'left',width:'7%',height:'7%',marginTop:'2%',marginLeft:'2%'}} /></Link>
+                                    <Link to={{pathname:'/'+arr[1]+'/composition/csearch',state:this.props.location.state}}><SearchBar style={{width:'65%',backgroundColor:'#f5f5f9',float:'left'}} placeholder="输入关键字搜索"/></Link>
+                                    <Link to={{pathname:'/'+arr[1]+'/gselect',state:this.props.location.state}} style={{color:'red'}}><div style={{width:'20%',marginTop:'3%',marginRight:'3%',float:'right',fontSize:'120%'}}>修改标签</div></Link>
                                 </div>
                                 <div style={{marginTop:'12%',backgroundColor:'#fff',fontSize:'130%',paddingBottom:'2%',}}>
                                     <Link to={{pathname:url,state:this.props.location.state}} style={{color:'red',marginLeft:'5%',borderBottom:"4px solid #ffdf41"}} id='A1' onClick={(e)=>{this.Change1(e)}}>推荐</Link>
@@ -227,12 +233,12 @@ Change6=(e)=>{
                         selectedIcon={{ uri: 'images/apptab/mine1.png' }}
                         title="我的"
                         key="Mine"
-                        selected={this.state.selectedTab === '/mine'}
+                        selected={this.state.selectedTab === '/'+arr[1]+'/mine'}
                         onPress={() => {
                             this.setState({
-                            selectedTab: '/mine',
+                            selectedTab: '/'+arr[1]+'/mine',
                             });
-                            this.props.history.push({pathname:'/mine',state:this.props.location.state})
+                            this.props.history.push({pathname:'/'+arr[1]+'/mine',state:this.props.location.state})
                         }}
                         >
                         </TabBar.Item>

@@ -23,11 +23,12 @@ export default class Write extends Component {
         this.state.data3=''
     }
     fetchComposition=(e)=>{
+        let arr = this.props.location.pathname.split('/');
         let data = {
             atitle:document.getElementsByClassName('biaoti')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
-            uid:this.props.location.state,
+            uid:arr[1],
             utime:Y+M+D+h+m,
             aimage:this.state.data3
         }
@@ -44,7 +45,7 @@ export default class Write extends Component {
               switch (data.status) {
                 case "0":{
                     console.log(data.data);
-                    this.props.history.push({pathname:'/home',state:this.props.location.state});
+                    this.props.history.push({pathname:'/'+arr[1]+'/home',state:this.props.location.state});
                     // history.back(-1);
                     // window.location.reload();
                     // window.location.href=document.referrer
@@ -70,12 +71,12 @@ export default class Write extends Component {
       };
     render() {
         let arr=this.props.location.pathname.split('/');
-        if(arr.length===3){
-            var data1='/home';
-        }else if(arr.length===4){
-            var data1='/home/follow/'+this.props.location.state;
+        if(arr.length===4){
+            var data1='/'+arr[1]+'/home';
+        }else if(arr.length===5){
+            var data1='/'+arr[1]+'/home/follow';
         }else{
-            var data1='/home/crnew';
+            var data1='/'+arr[1]+'/home/crnew';
         }
         console.log(data1);
         return (

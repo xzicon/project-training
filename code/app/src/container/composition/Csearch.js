@@ -59,10 +59,11 @@ export default class Csearch extends Component {
     }
     render() {
         let item = this.state.search;
+        let arr=this.props.location.pathname.split('/');
         console.log(item);
         return (
             <div style={{backgroundColor:'#f5f5f9',padding:'3%',position:'relative',top:'0',}}>
-                <Link to={{pathname:'/composition/composition',state:this.props.location.state}}><img src='/images/write/left.png' style={{width:'6%',float:'left',marginTop:'2.5%'}} /></Link>
+                <Link to={{pathname:'/'+arr[1]+'/composition/composition',state:this.props.location.state}}><img src='/images/write/left.png' style={{width:'6%',float:'left',marginTop:'2.5%'}} /></Link>
                 <input className='sousuo' type='text' placeholder="输入关键字搜索" style={{border:'none',width:'75%',height:'35px',marginLeft:'3%',marginRight:'3%'}}/>
                 <input onClick={(e)=>{this.fetchSousuo(e)}} type='button' value='搜索'  style={{marginTop:'2%',backgroundColor:'#fff',color:'#da4036',borderRadius:'15%',outline:'none',border:'1px solid #da4036',width:'45px',height:'30px'}}/>
                 
@@ -79,7 +80,7 @@ export default class Csearch extends Component {
                     data.mtab==='sucai'?
                         (data.mimage===''?
                         <div style={{backgroundColor:'#fff',marginBottom:'4%',padding:'2%',height:'200px',width:'96%'}}>
-                            <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
 
                                 <div style={{width:'100%',float:'left',fontSize:'90%',padding:'2%'}}>素材--{data.msname}</div>
                                 <div style={{width:'100%',float:'left',height:'40%',float:'left',fontWeight:'500',textAlign:'left',paddingTop:'8%',fontSize:'120%',paddingLeft:'2%',paddingBottom:'2%'}}><a href="#" dangerouslySetInnerHTML={{__html: this.warpTag(data.mtitle, this.state.search , "span")}}></a></div>
@@ -90,7 +91,7 @@ export default class Csearch extends Component {
                         (data.mimage.split('.')[1] === 'mp4'?
 
                         <div style={{marginBottom:'4%',paddingBottom:'2%',height:'270px',backgroundColor:'#fff'}}>
-                            <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
 
                                 <video src={`http://116.62.14.0:8402/images/`+data.mimage} id="myPlayer" poster='' controls playsInline webkit-playsinline style={{width:'100%'}}></video>
                                 <div ref={el => (this.componentRef = el)}></div>
@@ -103,7 +104,7 @@ export default class Csearch extends Component {
                         </div>
                         :      
                         <div style={{marginBottom:'4%',paddingBottom:'2%',height:'300px',backgroundColor:'#fff'}}>
-                            <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
 
                                 <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundPosition:'center',zIndex:'99'}}>
                                     <div style={{float:'left' ,position:'absolute',top:'5%',left:'3%',color:'#000',fontSize:'90%'}}>素材--{data.msname}</div>
@@ -120,13 +121,13 @@ export default class Csearch extends Component {
                 ):(data.mtab==='fanwen'?
                     (data.mimage===''?
                         <div style={{backgroundColor:'#fff',marginBottom:'4%',padding:'2%',height:'200px'}}>
-                            <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
                                 <div style={{width:'100%',float:'left',fontSize:'90%',padding:'2%'}}>范文--{data.msname}</div>
                                 <div style={{width:'100%',float:'left',height:'80%',float:'left',fontWeight:'600',textAlign:'left',paddingTop:'10%',fontSize:'120%',paddingLeft:'2%',paddingBottom:'2%'}}><a href="#" dangerouslySetInnerHTML={{__html: this.warpTag(data.mtitle, this.state.search , "span")}}></a></div>
                             </Link>
                         </div> : 
                         <div style={{marginBottom:'4%',paddingBottom:'2%',height:'300px',backgroundColor:'#fff'}}>
-                            <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
                                 <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundRepeat:'no-repeat',backgroundPosition:'center',zIndex:'99'}}>
                                     <div style={{float:'left' ,position:'absolute',top:'5%',left:'3%',color:'#000',fontSize:'90%'}}>范文--{data.msname}</div>
                                 </div>
@@ -140,13 +141,13 @@ export default class Csearch extends Component {
                     )
                     :(data.mimage===''?
                     <div style={{backgroundColor:'#fff',marginBottom:'4%',padding:'2%',height:'200px'}}>
-                        <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                        <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
                             <div style={{width:'100%',float:'left',fontSize:'90%',padding:'2%'}}>技法--{data.msname}</div>
                             <div style={{width:'100%',float:'left',height:'80%',float:'left',fontWeight:'600',textAlign:'left',paddingTop:'10%',fontSize:'120%',paddingLeft:'2%',paddingBottom:'2%'}}><a href="#" dangerouslySetInnerHTML={{__html: this.warpTag(data.mtitle, this.state.search , "span")}}></a></div>
                         </Link>
                     </div> : 
                     <div style={{marginBottom:'4%',paddingBottom:'2%',height:'300px',backgroundColor:'#fff'}}>
-                        <Link to={{pathname:'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
+                        <Link to={{pathname:'/'+arr[1]+'/'+data.msid+'/composition/search/sucai/s/s/s/sdetails/'+data.mid,mtab2:data.mid,state:this.props.location.state}} style={{color:'#000',fontSize:'120%'}}>
                             <div style={{width:'100%',height:'75%',position:'relative',float:'left',backgroundImage:'url(http://116.62.14.0:8402/images/'+data.mimage+')',backgroundRepeat:'no-repeat',backgroundPosition:'center',zIndex:'99'}}>
                                 <div style={{float:'left' ,position:'absolute',top:'5%',left:'3%',color:'#000',fontSize:'90%'}}>技法--{data.msname}</div>
                             </div>

@@ -24,19 +24,22 @@ export default class Lwrite extends Component {
     }
     fetchComposition=(e)=>{
         let arr=this.props.location.pathname.split('/');
-        console.log(arr.length);
-        if(arr.length===8){
-            var data1='/composition/label/s/sdetails/'+this.props.location.mtab2;
-        }else if(arr.length===3){
-            var data1='/composition/sdetails/'+this.props.location.mtab2;
+        console.log(arr);
+        if(arr.length===9){
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/label/s/sdetails/'+arr[2];
+        }else if(arr.length===4){
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/sdetails/'+arr[2];
+        }
+        else{
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/mdetails/'+arr[2];
         }
         let data = {
             atitle:document.getElementsByClassName('biaoti')[0].value,
             atag:document.getElementsByClassName('biaoqian')[0].value,
             acontent:document.getElementsByClassName('neirong')[0].value,
-            uid:this.props.location.state,
+            uid:arr[1],
             utime:Y+M+D+h+m,
-            mid:this.props.location.mtab2,
+            mid:arr[2],
             aimage:this.state.data3
         }
         console.log(data);
@@ -75,10 +78,13 @@ export default class Lwrite extends Component {
     render() {
         let arr=this.props.location.pathname.split('/');
         console.log(arr.length);
-        if(arr.length===8){
-            var data1='/composition/label/s/sdetails/'+this.props.location.mtab2;
-        }else if(arr.length===3){
-            var data1='/composition/sdetails/'+this.props.location.mtab2;
+        if(arr.length===9){
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/label/s/sdetails/'+arr[2];
+        }else if(arr.length===4){
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/sdetails/'+arr[2];
+        }
+        else{
+            var data1='/'+arr[1]+'/'+arr[2]+'/composition/mdetails/'+arr[2];
         }
         return (
             <div>

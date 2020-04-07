@@ -10,9 +10,12 @@ export default class Smcomment extends Component {
     }
     
     componentDidMount(){
-        let page = this.props.location.mtab2;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/material/xiangqing/pinglun/'+page)
+        let arr=this.props.location.pathname.split('/');
+        var arr1=arr.reverse();
+        console.log(arr1);
+        // let page = this.props.location.mtab2;
+        // console.log(page);
+        fetch('http://116.62.14.0:8402/material/xiangqing/pinglun/'+arr1[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});

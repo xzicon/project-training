@@ -59,13 +59,14 @@ export default class Search extends Component {
     }
     render() {
         let arr=this.props.location.pathname.split('/');
-        if(arr.length===3){
-            var data1='/home';
-        }else if(arr.length===4){
-            var data1='/home/follow/'+this.props.location.state;
+        if(arr.length===4){
+            var data1='/'+arr[1]+'/home';
+        }else if(arr.length===5){
+            var data1='/'+arr[1]+'/home/follow/'+arr[1];
         }else{
-            var data1='/home/crnew';
+            var data1='/'+arr[1]+'/home/crnew';
         }
+        console.log(arr);
         console.log(data1);
         let item = this.state.search;
         console.log(item);
@@ -82,7 +83,7 @@ export default class Search extends Component {
                                             
                                                 
                                 <div style={{float:'left',width:'90%',marginLeft:'5%',marginRight:'5%'}}>
-                                    <Link to={{pathname:'/home/home/search/search/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state,state2:data.uid,mtab2:data.mid}} style={{}}>  
+                                    <Link to={{pathname:'/'+arr[1]+'/home/home/search/search/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state,state2:data.uid,mtab2:data.mid}} style={{}}>  
                                     <div style={{textAlign:'center',color:'#000',fontSize:'150%',marginTop:'3%',marginBottom:'3%'}}><a href="#" dangerouslySetInnerHTML={{__html: this.warpTag(data.atitle, this.state.search , "span")}}></a></div>
                                     <div style={{height:'75px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'5%'}}>{data.acontent}</div>
                                     <div style={{color:'#000',fontSize:'120%',marginBottom:'3%'}}>#{data.atag}</div>

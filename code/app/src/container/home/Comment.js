@@ -9,10 +9,14 @@ var h = (date.getHours()<10 ? '0'+(date.getHours()) : date.getHours()) + ':';
 var m = (date.getMinutes()<10 ? '0'+(date.getMinutes()) : date.getMinutes());
 export default class Comment extends Component {
     fetchComment=(e)=>{
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(arr);
+        console.log(page1['page']);
         let data = {
             accontent:document.getElementsByClassName('pinglun')[0].value,
-            uid:this.props.location.state,
-            aid:this.props.location.state1,
+            uid:arr[1],
+            aid:arr[2],
             actime:Y+M+D+h+m
         }
         console.log(data);
@@ -28,10 +32,10 @@ export default class Comment extends Component {
     }
     render() {
         let arr=this.props.location.pathname.split('/');
-        if(arr.length===3){
-            var data1='/home/article/'+this.props.location.state1+'/'+this.props.location.state;
+        if(arr.length===6){
+            var data1='/'+arr[1]+'/home/article/'+arr[2]+'/'+arr[3];
         }else{
-            var data1='/composition/writing/'+this.props.location.state1+'/'+this.props.location.state;
+            var data1='/'+arr[1]+'/composition/writing/'+arr[2]+'/'+arr[3];
         }
         console.log(data1);
         return (

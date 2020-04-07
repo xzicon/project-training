@@ -16,9 +16,10 @@ export default class Mdetails extends Component {
     }
     
     componentDidMount(){
-        let page = this.props.location.mtab2;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/material/xiangqing/'+page)
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
+        fetch('http://116.62.14.0:8402/material/xiang/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -26,10 +27,10 @@ export default class Mdetails extends Component {
         })
     }
     componentDidUpdate(){
-        let page = this.props.location.mtab2;
-        let state = this.props.location.state;
-        console.log(page);
-        fetch('http://116.62.14.0:8402/material/xiang/'+page+'/'+state)
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
+        console.log(page1);
+        fetch('http://116.62.14.0:8402/material/xiang/'+page1['page']+'/'+arr[1])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -37,8 +38,10 @@ export default class Mdetails extends Component {
         })
     }
     fetchDelete = (e)=>{
+        let arr=this.props.location.pathname.split('/');
+        let page1 = this.props.match.params;
         let data = {
-            uid:this.props.location.state,
+            uid:arr[1],
             mid:this.props.location.mtab2
         }
         console.log(data);
@@ -56,7 +59,7 @@ export default class Mdetails extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('收藏成功',1);
-                    this.props.history.push({pathname:'/mine/collect',state:this.props.location.state});
+                    this.props.history.push({pathname:'/'+arr[1]+'/mine/collect',state:this.props.location.state});
                     break;
                 }
                 default:{
@@ -69,11 +72,13 @@ export default class Mdetails extends Component {
     render() {
         let url = this.props.match.url;
         let arr=this.props.location.pathname.split('/');
-        if(arr.length===4){
-            var data1='/mine/collect';
-        }else{
-            var data1='/home/fopeople';
-        }
+        let page1 = this.props.match.params;
+        // if(arr.length===4){
+        //     var data1='/'+arr[1]+'/mine/collect';
+        // }else{
+        //     var data1='/'+arr[1]+'/home/fopeople';
+        // }
+        var data1='/'+arr[1]+'/mine/collect';
         console.log(data1);
         return (
             <div>
@@ -144,7 +149,7 @@ export default class Mdetails extends Component {
                             {data.look===null?<a style={{}} >收藏&nbsp;&nbsp;{data.mcollect}</a>:<a style={{}}>已收藏&nbsp;&nbsp;{data.mcollect}</a>}
                         </div>
                         <div style={{float:'left',width:'30%',textAlign:'center'}}>
-                            <Link to={{pathname:'/composition/lwrite',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+page1['page']+'/m/m/c/c/c/c/c/lwrite',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
                                 <div style={{height:'80%'}}>
                                     <img src='/images/write/write.png' style={{width:'20%',height:'20%'}}/>
                                 </div>
@@ -152,7 +157,7 @@ export default class Mdetails extends Component {
                             </Link>      
                         </div>         
                         <div style={{float:'left',width:'30%',textAlign:'center'}}>
-                            <Link to={{pathname:'/composition/lcomment',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
+                            <Link to={{pathname:'/'+arr[1]+'/'+page1['page']+'/comm/mat/mat',state:this.props.location.state,mtab2:this.props.location.mtab2}}>
                                 <div style={{height:'80%'}}>
                                     <img src='/images/write/write.png' style={{width:'20%',height:'20%'}}/>
                                 </div>

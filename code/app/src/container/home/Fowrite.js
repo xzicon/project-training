@@ -9,9 +9,12 @@ export default class Fowrite extends Component {
         }
     }
     componentDidMount(){
-        let uid=this.props.location.state4;
-        console.log(uid);
-        fetch('http://116.62.14.0:8402/login/article/'+uid)
+        // let page1 = this.props.match.params;
+        // let uid=this.props.location.state4;
+        // console.log(page1);
+        // console.log(uid);
+        let arr=this.props.location.pathname.split('/');
+        fetch('http://116.62.14.0:8402/login/article/'+arr[3])
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({data:res.data});
@@ -19,6 +22,8 @@ export default class Fowrite extends Component {
         })
     }
     render() {
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr);
         return (
             <div>
                         <div style={{width:'100%',backgroundColor:'#f1edea'}}>
@@ -29,7 +34,7 @@ export default class Fowrite extends Component {
                                        <div style={{textAlign:'center',color:'#000',fontSize:'150%',marginTop:'3%',marginBottom:'3%'}}>{data.atitle}</div>
                                        <div style={{height:'75px',overflow:'hidden',color:'#000',fontSize:'120%',marginBottom:'5%'}}>{data.acontent}</div>
                                        <div style={{color:'#000',fontSize:'110%',marginBottom:'5%'}}>#{data.atag}</div>
-                                       <Link to={{pathname:'/home/h/fopeople/fowrite/fowrite/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state,state2:data.uid,mtab2:data.mid,state4:this.props.location.state4}} style={{}}>
+                                       <Link to={{pathname:'/'+arr[1]+'/home/h/fopeople/fowrite/fowrite/article/'+data.aid+'/'+data.uid,state1:data.aid,state:this.props.location.state,state2:data.uid,mtab2:data.mid,state4:this.props.location.state4}} style={{}}>
                                            <a style={{fontSize:'16px',color:'#5a6d95'}}>...查看全文</a>
                                        </Link>
                                    </div>

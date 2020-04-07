@@ -46,10 +46,11 @@ export default class All extends Component {
 
     render() {
         let url = this.props.match.url;
+        let arr=this.props.location.pathname.split('/');
         return (
             <div>
                 <NavBar
-                    icon={<Link to={{pathname:'/composition/composition',state1:this.props.location.state1,state:this.props.location.state,state2:this.props.location.state2}}><Icon type="left" style={{color:'#000'}}/></Link>}
+                    icon={<Link to={{pathname:'/'+arr[1]+'/composition/composition',state1:this.props.location.state1,state:this.props.location.state,state2:this.props.location.state2}}><Icon type="left" style={{color:'#000'}}/></Link>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>分类</NavBar>
                 <div style={{width:'100%',position:'absolute',top:'50px'}}>

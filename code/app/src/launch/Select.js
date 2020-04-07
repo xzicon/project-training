@@ -30,6 +30,8 @@ export default class Select extends Component {
             msid4:this.state.value[3],
             msid5:this.state.value[4]
         }
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr[1]);
         console.log(data);
         fetch('http://116.62.14.0:8402/usort', {
             method: 'POST',
@@ -45,7 +47,7 @@ export default class Select extends Component {
                 case "0":{
                     console.log(data.data);
                     Toast.success('选择标签成功', 1);
-                    this.props.history.push({pathname:'/composition/composition',state:this.props.location.state});
+                    this.props.history.push({pathname:'/'+arr[1]+'/composition/composition',state:this.props.location.state});
                     break;
                 }
                 default:{
@@ -64,10 +66,12 @@ export default class Select extends Component {
         this.setState({value: items});
     }
     render() {  
+        let arr=this.props.location.pathname.split('/');
+        console.log(arr[1]);
         return (
             <div>
                 <NavBar
-                    leftContent={<Link to={{pathname:'/composition/composition',state:this.props.location.state}}><button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}}>跳过</button></Link>}
+                    leftContent={<Link to={{pathname:'/'+arr[1]+'/composition/composition',state:this.props.location.state}}><button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}}>跳过</button></Link>}
                     rightContent={<button className='biaoqian' type='text' style={{backgroundColor:'#fff',color:'#000',outline:'none',border:'1px solid #da4036',width:'70px',height:'30px',borderRadius:'15%'}} onClick={(e)=>{this.fetchBiaoqian(e)}}>保存</button>}
                     style={{backgroundColor:'#fff',color:'#000',position:'fixed',top:'0',width:'100%',zIndex:'999'}}
                     onLeftClick={() => console.log('onLeftClick')}>全部标签</NavBar>
