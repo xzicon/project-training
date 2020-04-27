@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Dimensions, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, StatusBar, AsyncStorage, } from 'react-native';
+import { View, Text, FlatList, Dimensions, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, StatusBar, AsyncStorage,ToastAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
 
@@ -37,7 +37,7 @@ export default class Mine extends Component {
             data: [],
             tid: '',
             flag: '1',
-            imageUrl:''
+
         }
     }
     componentDidMount() {
@@ -55,17 +55,18 @@ export default class Mine extends Component {
                         console.log(res.data);
                     })
             })
-        AsyncStorage.getItem('imgurl').then((res) => {
-            if (res !== null) {
-                this.setState({
-                    imageUrl: JSON.parse(res),
-                    flag: '2'
-                });
-            }
-        });
+        // AsyncStorage.getItem('imgurl').then((res) => {
+        //     if (res !== null) {
+        //         this.setState({
+        //             imageUrl: JSON.parse(res),
+        //             flag: '2'
+        //         });
+        //     }
+        // });
 
     }
     render() {
+        console.log(this.state.data);
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', justifyContent: 'center' }}>
@@ -78,16 +79,16 @@ export default class Mine extends Component {
                         <View style={{ width: width * 0.96, height: 175 * s, justifyContent: 'center' }}>
                             <View style={{ width: width * 0.96, flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity  style={{ alignItems: 'center', width: 90 * s }}>
-                                {this.state.flag === '1' ?
+                                
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.data.timage }} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s, }} />
-                                    :<Image source={this.state.imageUrl} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s, }} />}
+                                    
                                 </TouchableOpacity>
                                 <View style={{ width: width * 0.5, justifyContent: 'center', paddingLeft: 20 * s }}>
                                     <Text style={{ fontSize: 28 * s, }}>{this.state.data.tname}</Text>
-                                    <Text style={{ fontSize: 20 * s, color: 'grey' }}>{this.state.data.tyear}</Text>
+                                    <Text style={{ fontSize: 20 * s, color: 'grey' }}>学校:{this.state.data.tschool}</Text>
                                 </View>
                                 {/* 编辑资料 */}
-                                <TouchableOpacity onPress={() => { Actions.ziliao() }} style={{ width: 130 * s, justifyContent: 'center' }}  >
+                                <TouchableOpacity onPress={() => { Actions.editor() }} style={{ width: 130 * s, justifyContent: 'center' }}  >
                                     <View style={{ width: 130 * s, borderWidth: 1, justifyContent: 'center', alignItems: 'center', padding: 10 * s }}>
                                         <Text style={{ color: '#000', fontSize: 24 * s, }}>编辑资料</Text>
                                     </View>
@@ -158,7 +159,7 @@ export default class Mine extends Component {
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[2].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Actions.feedback({ uid: this.state.uid })} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity onPress={() => Actions.tfeedback({ tid: this.state.tid })} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[3].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
@@ -166,7 +167,7 @@ export default class Mine extends Component {
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[4].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Actions.myset()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity onPress={() => Actions.tset()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[5].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>

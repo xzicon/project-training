@@ -22,25 +22,28 @@ export default class Remark extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            uid: '',
             data: [],
+            tid: '',
         }
     }
     componentDidMount() {
-        AsyncStorage.getItem('uid')
+        AsyncStorage.getItem('tid')
             .then((res) => {
                 res === null ?
-                    this.setState({ uid: '' })
+                    this.setState({ tid: '' })
                     :
-                    this.setState({ uid: res })
-                fetch('http://116.62.14.0:8402/login/article/' + this.state.uid)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ data: res.data });
-                        console.log(res.data);
-                    })
+                    this.setState({ tid: res })
+                    console.log(this.state.tid)
+                    fetch('http://116.62.14.0:8402/grade/teacher/' + this.state.tid)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            this.setState({ data: res.data });
+                            console.log(res.data);
+                        })
+                    
             })
     }
+    
     render() {
         return (
             <View>
@@ -56,21 +59,26 @@ export default class Remark extends Component {
                                         data={this.state.data}
                                         numColumns={1}
                                         renderItem={({ item }) => (
+                                            item.isgrade === 1 ?
                                             <View style={{ width: width * 0.96, height:  220 * s, backgroundColor: 'white', marginLeft: 0.02 * width, marginBottom: 0.02 * width, }}>
-                                                <TouchableOpacity onPress={() => Actions.rarticle({ aid: item.aid, })} >
+                                                <TouchableOpacity onPress={() => Actions.rarticle({ gid: item.gid, })} >
                                                     
-                                                    <View style={{ width: width * 0.94, height: '10%', marginTop: '2%', marginLeft: width * 0.02, marginRight: 0.02 * width,}}><Text style={{ fontSize: 26 * s, fontWeight: 'bold', color: '#333' }} >{item.atitle}</Text></View>
-                                                    <View style={{ width: width * 0.94, height: '45%', marginTop: '3%', marginLeft: width * 0.02, marginRight: 0.02 * width,overflow:"hidden"}}><Text style={{ fontSize: 20 * s, color: '#333' }} >{item.acontent}</Text></View>
+                                                    <View style={{ width: width * 0.94, height: '15%', marginTop: '2%', marginLeft: width * 0.02, marginRight: 0.02 * width,flexDirection:'row',justifyContent:'space-between'}}>
+                                                        <Text style={{widht:'50%',height:'100%', fontSize: 26 * s, fontWeight: 'bold', color: '#333',}} >{item.atitle}</Text>
+                                                        <Text style={{widht:'20%',height:'100%', fontSize: 26 * s, fontWeight: 'bold', color:'red',marginRight:'5%',fontFamily:'华文彩云',fontStyle:'italic',textDecorationLine:'underline',borderBottomWidth:1,borderBottomColor:'red'}}>&nbsp;{item.score}</Text>
+                                                    </View>
+                                                    <View style={{ width: width * 0.94, height: '45%', marginTop: '1%', marginLeft: width * 0.02, marginRight: 0.02 * width,overflow:"hidden",}}><Text style={{ fontSize: 20 * s, color: '#333' }} >{item.acontent}</Text></View>
                                                     <View style={{ width: width * 0.94, height: '10%', marginTop: '2%', marginLeft: 0.02 * width,}}>
                                                         <Text style={{ fontSize: 18 * s, color: 'gray' }} >{item.uname}</Text>
                                                         
                                                     </View>
                                                     <View style={{ width: width * 0.94, height: '10%', marginLeft: 0.02 * width, marginBottom: '2%'}}>
-                                                        <Text style={{ fontSize: 18 * s, color: 'gray' }} >{item.utime}</Text>
+                                                        <Text style={{ fontSize: 18 * s, color: 'gray' }} >{item.invitetime}</Text>
                                                     </View>
                                                     
                                                 </TouchableOpacity>
                                             </View>
+                                            :<View></View>
                                         )}
                                     />
                                 </View>
