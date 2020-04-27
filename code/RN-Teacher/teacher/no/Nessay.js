@@ -10,24 +10,24 @@ export default class Nessay extends Component {
         super();
         this.state = ({
             data: [],
-            uid: '',
+            tid: '',
         })
     }
     componentDidMount() {
-        AsyncStorage.getItem('uid')
+        AsyncStorage.getItem('tid')
             .then((res) => {
                 res === null ?
-                    this.setState({ uid: 6 })
+                    this.setState({ tid: '' })
                     :
-                    this.setState({ uid: res })
+                    this.setState({ tid: res })
+                    this.all()
             })
-        this.all()
     }
     all = () => {
-        fetch('http://116.62.14.0:8402/article/all')
+        fetch('http://116.62.14.0:8402/grade/teacher/1')
             .then((res) => res.json())
             .then((res) => {
-                console.log(res.data[0])
+                console.log(res.data)
                 this.setState({
                     data: res.data,
                 })
@@ -41,18 +41,20 @@ export default class Nessay extends Component {
                     data={this.state.data}
                     numColumns={1}
                     renderItem={({ item }) => (
+                        item.isgrade === 1 ?
                         <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
                             <View style={{ width: '100%', height: 160 * s}}>
-                                <TouchableOpacity onPress={()=>{Actions.nessaydetail({aid:item.aid})}}>
+                                <TouchableOpacity onPress={()=>{Actions.nessaydetail({gid:item.gid})}}>
                                     <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom:10*s }}>{item.atitle}</Text>
                                     <Text numberOfLines={3} style={{fontSize: 20 * s}}>{item.acontent}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
                                 <Text style={{fontSize: 18 * s, color:'gray'}}>{item.uname}</Text>
-                                <Text style={{fontSize: 18 * s, color:'gray'}}>{item.utime}</Text>
+                                <Text style={{fontSize: 18 * s, color:'gray'}}>{item.invitetime}</Text>
                             </View>
-                        </View>
+                        </View>:
+                        <View></View>
                     )}
                 />
             </View>
