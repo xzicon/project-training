@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, NavigationBar, ToastAndroid, FlatList, TextInput } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity,AsyncStorage, StyleSheet, Dimensions, NavigationBar, ToastAndroid, FlatList, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
 import { Actions } from 'react-native-router-flux';
 // import {CheckBox} from 'react-native-elements';
@@ -19,6 +19,17 @@ export default class Seleced extends Component {
         }
     } 
     componentDidMount(){
+        AsyncStorage.getItem('uid')
+        .then((res)=>{
+            res===null?
+            this.setState({uid:''})
+            :
+            this.setState({uid:res})
+            this._usort();
+        })
+        
+    }
+    _usort=()=>{
         fetch('http://116.62.14.0:8402/material/mtab/sucai')
         .then((res)=>res.json())
         .then((res)=>{
@@ -28,7 +39,7 @@ export default class Seleced extends Component {
     }
     fetchBiaoqian = (e)=>{
         let data = {
-            uid:15,
+            uid:this.state.uid,
             msid1:this.state.value[0],
             msid2:this.state.value[1],
             msid3:this.state.value[2],

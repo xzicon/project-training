@@ -79,6 +79,19 @@ export default class Ziliao extends Component {
       }
     });
   }
+  // onChange = (e) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('image', file);
+  //   fetch('http://116.62.14.0:8402/upload', {
+  //   method: 'POST',
+  //     body: formData,
+  //   }).then(res=>res.json()).then(res=>
+  //       this.setState({
+  //           data3:res.data
+  //       },console.log(res.data))
+  //   )
+  // };
   fetchFeedback = () => {
     let data = {
       uid: this.state.uid,

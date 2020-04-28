@@ -187,7 +187,7 @@ export default class HomePage extends Component {
                             // 关注页面
                             <View style={{flex:1}}>
                                 <View style={{alignItems:'center',flexDirection:'row',height:60*s,backgroundColor:'#fff',paddingLeft:10*s}}>
-                                    <TouchableOpacity><Text style={{color: 'rgb(216, 62, 52)',fontSize:24}}>关注</Text></TouchableOpacity>
+                                    <TouchableOpacity><Text style={{color: 'rgb(216, 62, 52)',fontSize:24,marginRight:10*s}}>关注</Text></TouchableOpacity>
                                     <TouchableOpacity  onPress={this.change}><Text>推荐</Text></TouchableOpacity>
                                 </View>
                                 <FlatList
@@ -209,21 +209,28 @@ export default class HomePage extends Component {
                             // 推荐页面
                             <View style={{flex:1}}>
                                 <View style={{alignItems:'center',flexDirection:'row',height:60*s,backgroundColor:'#fff',paddingLeft:10*s}}>
-                                    <TouchableOpacity onPress={this.change}><Text>关注</Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={this.change} style={{marginRight:10*s}}><Text>关注</Text></TouchableOpacity>
                                     <TouchableOpacity><Text style={{color: 'rgb(216, 62, 52)',fontSize:24}}>推荐</Text></TouchableOpacity>
                                 </View>
                                 {/* 最新最热 */}
                                 {this.state.new===1?
                                 // 最新
                                 <View style={{flex:1}}>
-                                    <View style={{alignItems:'center',flexDirection:'row',height:60*s,backgroundColor:'#fff',paddingLeft:10*s}}>
-                                        <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)'}}>最新</Text></TouchableOpacity>
-                                        <TouchableOpacity onPress={this.change_new}><Text>最热</Text></TouchableOpacity>
+                                    <ScrollView>
+                                    <View style={{alignItems:'center',flexDirection:'row',height:40*s,paddingLeft:10*s,justifyContent:'flex-end',paddingRight:20*s}}>
+                                        {/* <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)'}}>最新</Text></TouchableOpacity>
+                                        <TouchableOpacity onPress={this.change_new}><Text>最热</Text></TouchableOpacity> */}
+                                        <TouchableOpacity onPress={this.change_new} style={{flexDirection:'row',alignItems:'center'}}>
+                                            {/* <Icon name='list' size={20*s} color='#5482b4'/> */}
+                                            <Image style={{ width: 30 * s, height: 30 * s }} source={require('../../assets/composition/composition/sort.png')} />
+
+                                            <Text style={{color:'#5482b4',fontSize:20*s}}>按时间</Text>
+                                        </TouchableOpacity>
                                     </View> 
                                     {/* 作文 */}
                                     <View></View>
                                     <FlatList
-                                        style={{backgroundColor: '#F4F4F4'}}
+                                        style={{paddingBottom:10*s}}
                                         data={this.state.recommend_data_new}
                                         numColumns={1}
                                         ListFooterComponent={ this._renderFooter }
@@ -236,6 +243,7 @@ export default class HomePage extends Component {
 
                                         )}
                                     />
+                                    </ScrollView>
                                     </View>
                                     :(
                                         // 最热
@@ -247,13 +255,20 @@ export default class HomePage extends Component {
                                             <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)',fontSize:20*s}}>最热</Text></TouchableOpacity>
                                             </View>
                                         </View>  */}
-                                    <View style={{alignItems:'center',flexDirection:'row',height:60*s,backgroundColor:'#fff',paddingLeft:10*s}}>
-                                        <TouchableOpacity onPress={this.change_new}><Text >最新</Text></TouchableOpacity>
-                                        <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)'}}>最热</Text></TouchableOpacity>
+                                    <ScrollView>
+                                    <View style={{alignItems:'center',flexDirection:'row',height:40*s,paddingLeft:10*s,justifyContent:'flex-end',paddingRight:20*s}}>
+                                        {/* <TouchableOpacity onPress={this.change_new}><Text >最新</Text></TouchableOpacity>
+                                        <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)'}}>最热</Text></TouchableOpacity> */}
+                                        <TouchableOpacity onPress={this.change_new} style={{flexDirection:'row',alignItems:'center'}}>
+                                            {/* <Icon name='list' size={20*s} color='#5482b4'/> */}
+                                            <Image style={{ width: 30 * s, height: 30 * s }} source={require('../../assets/composition/composition/sort2.png')} />
+
+                                            <Text style={{color:'#5482b4',fontSize:20*s}}>按热度</Text>
+                                        </TouchableOpacity>
                                     </View> 
                                     {/* 作文 */}
                                     <FlatList
-                                    style={{paddingTop:10*s,paddingBottom:10*s}}
+                                    style={{paddingBottom:10*s}}
                                     data={this.state.recommend_data}
                                     numColumns={1}
                                     // ListFooterComponent={ this._renderFooter }
@@ -265,6 +280,7 @@ export default class HomePage extends Component {
                                         this._container(item)
                                     )}
                                 />
+                                </ScrollView>
                             </View>
                         )}
                                 
@@ -276,14 +292,14 @@ export default class HomePage extends Component {
                     </View>
                 )}
                 {/* 添加作文 */}
-                <View style={{width:90*s,height:90*s,position:'absolute',top:900*s,right:30*s}}>
+                {/* <View style={{width:90*s,height:90*s,position:'absolute',top:900*s,right:30*s}}>
                     <TouchableOpacity 
                         style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',backgroundColor:'#d83e34',borderRadius:45*s}}
                         onPress={()=>Actions.addEssay()}
                     >
                         <Text style={{color:'#fff',fontSize:58*s}}>+</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
         )
     }

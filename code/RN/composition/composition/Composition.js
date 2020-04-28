@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, StyleSheet, TextInput, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
+import { Text, View, Dimensions, StyleSheet, TextInput,AsyncStorage, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from "react-native-vector-icons//AntDesign";
 import { Scene, Actions, Tabs } from 'react-native-router-flux';
@@ -19,6 +19,7 @@ export default class Composition extends Component {
             data3: [],
             data4: [],
             data5: [],
+            usort_false:false,
             onecolor: 'red',
             oneborderBottomColor: '#ffdf41',
             twocolor: '#000',
@@ -35,16 +36,32 @@ export default class Composition extends Component {
         };
     }
     componentDidMount() {
-        fetch('http://116.62.14.0:8402/usort/msid/15')
+        AsyncStorage.getItem('uid')
+        .then((res)=>{
+            res===null?
+            this.setState({uid:''})
+            :
+            this.setState({uid:res})
+            this._usort();
+        })
+        
+    }
+    _usort=()=>{
+        fetch('http://116.62.14.0:8402/usort/msid/'+this.state.uid)
             .then((res) => res.json())
             .then((res) => {
+                res.data.length>0?
                 this.setState({
                     data1: res.data[0],
                     data2: res.data[1],
                     data3: res.data[2],
                     data4: res.data[3],
                     data5: res.data[4]
-                });
+                })
+                :
+                this.setState({
+                    usort_false:true
+                })
                 //console.log(res.data);
             })
     }
@@ -181,10 +198,21 @@ export default class Composition extends Component {
                     </View>
                 </View>
                 {/* label 标签页*/}
+                {
+                        this.state.usort_false?
+                        <View style={styles.label1}>
+                        <TouchableOpacity>
+                            <Text style={[styles.onelabel, { color: this.state.onecolor }, { borderBottomColor: this.state.oneborderBottomColor }]} onPress={this.Change1}>推荐</Text>
+                        </TouchableOpacity>
+                        </View>
+                        :
+
+                    
                 <View style={styles.label}>
                     <TouchableOpacity>
                         <Text style={[styles.onelabel, { color: this.state.onecolor }, { borderBottomColor: this.state.oneborderBottomColor }]} onPress={this.Change1}>推荐</Text>
                     </TouchableOpacity>
+                    
                     <TouchableOpacity>
                         <Text style={[styles.twolabel, { color: this.state.twocolor }, { borderBottomColor: this.state.twoborderBottomColor }]} onPress={this.Change2}>{this.state.data1.msname}</Text>
                     </TouchableOpacity>
@@ -201,6 +229,7 @@ export default class Composition extends Component {
                         <Text style={[styles.sixlabel, { color: this.state.sixcolor }, { borderBottomColor: this.state.sixborderBottomColor }]} onPress={this.Change6}>{this.state.data5.msname}</Text>
                     </TouchableOpacity>
                 </View>
+                }
                 {/* container */}
                 <View>
                     <Container flag={this.state.flag} msid={[this.state.data1.msid,this.state.data2.msid,this.state.data3.msid,this.state.data4.msid,this.state.data5.msid]} />
@@ -233,6 +262,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'
+    },
+    label1: {
+        width: width,
+        height: 60 * s,
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     onelabel: {
         borderBottomWidth: 4,

@@ -56,7 +56,7 @@ export default class Word extends Component {
                 this.setState({ 
                     data: res.data 
                 });
-                console.log(res.data);
+                // console.log(res.data);
             })
     }
     render() {

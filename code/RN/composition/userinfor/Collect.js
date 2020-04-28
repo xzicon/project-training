@@ -1,6 +1,8 @@
 import React, { Component, useEffect } from 'react';
 import { View, Text, TextInput, StatusBar, FlatList, AsyncStorage, Dimensions, ScrollView, Image, ToastAndroid, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Icon1 from 'react-native-vector-icons/Feather';
+
 import { Actions } from 'react-native-router-flux';
 
 const { width } = Dimensions.get('window');
@@ -11,7 +13,7 @@ export default class Collect extends Component {
         super(props);
         this.state = {
             uid: '',
-            data: [],
+            collectlist_data: [],
         }
     }
     componentDidMount() {
@@ -21,8 +23,18 @@ export default class Collect extends Component {
                     this.setState({ uid: '' })
                     :
                     this.setState({ uid: res })
-                this.getcollect();
+                this._collectlist();
             })
+    }
+    _collectlist=()=>{
+        fetch('http://116.62.14.0:8402/favorite/list/'+this.state.uid)
+        .then(res=>res.json())
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({
+                collectlist_data:res.data
+            })
+        })
     }
     getcollect = () => {
         fetch('http://116.62.14.0:8402/login/materialcollection/' + this.state.uid)
@@ -65,11 +77,12 @@ export default class Collect extends Component {
                 }
 
             })
+
     }
     render() {
         return (
             <View>
-                {this.state.data.length !== 0 ?
+                {this.state.collectlist_data.length !== 0 ?
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
                             <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
@@ -82,7 +95,36 @@ export default class Collect extends Component {
                         <ScrollView>
                             <View style={{ flex: 1, }}>
                                 <View style={{ width: width, marginTop: 10 * s }}>
-                                    <FlatList
+                                <FlatList
+                                    // ListFooterComponent={}
+                                    extraData={this.state}
+                                    style={{backgroundColor: '#F4F4F4'}}
+                                    data={this.state.collectlist_data}
+                                    numColumns={1}
+                                    renderItem={({item})=>(
+                                            
+                                        <TouchableOpacity onPress={()=>{Actions.favorite({faid:item.faid,refresh: () => { this._collectlist() }})}}>
+                                            <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
+                                    height:150*s,borderRadius:10*s,padding:20*s}}>
+                                                <Image style={{width:120*s,height:120*s,marginRight:10*s}} source={{ uri: 'http://116.62.14.0:8402/images/' + item.faimage }}/>
+                                                <View style={{height:120*s,flexDirection:'column',justifyContent:'space-evenly'}}>
+                                                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                                                        <Text style={{fontSize:25*s,marginRight:10*s}}>{item.favoritename}</Text>
+
+                                                        {
+                                                            item.fhide==1?
+                                                            <Icon1 name='lock' color='grey' size={25*s}/>
+                                                            :
+                                                            <Text></Text>
+                                                        } 
+                                                    </View>
+                                                    <Text style={{color:'grey',fontSize:20*s}}>{item.fnum==null?'0个内容':item.fnum+`个内容`}</Text>     
+                                                </View> 
+                                            </View>
+                                        </TouchableOpacity>     
+                                    )}
+                                    />
+                                    {/* <FlatList
                                         data={this.state.data}
                                         numColumns={1}
                                         renderItem={({ item }) => (
@@ -112,7 +154,7 @@ export default class Collect extends Component {
                                                 </TouchableOpacity>
                                             </View>
                                         )}
-                                    />
+                                    /> */}
                                 </View>
                             </View>
                             <View style={{ height: 180 * s }}></View>

@@ -31,6 +31,7 @@ export default class Myset extends Component {
     out=()=>{
         AsyncStorage.removeItem('uid')
         .then(() => {
+            Actions.pop();
             Actions.login();
         });
     }

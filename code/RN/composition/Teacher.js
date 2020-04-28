@@ -32,7 +32,7 @@ export default class Teacher extends Component {
     render() {
         return (
             <View>
-                <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
+                {/* <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
                         <Icon name="left" color="#333" size={40 * s} />
                     </TouchableOpacity>
@@ -40,8 +40,17 @@ export default class Teacher extends Component {
                         <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.34 }}>名师推荐</Text>
                     </View>
                     <View>
-                        <Text onPress={()=>{Actions.home()}} style={{ color: 'red', fontSize: 34 * s, marginLeft: 360 * s }} >跳过</Text>
+                        <Text style={{ color: 'red', fontSize: 34 * s, marginLeft: 360 * s }} >跳过</Text>
                     </View>
+                </View> */}
+                {/* 搜索 */}
+                <View style={{backgroundColor:'#FFF',
+                alignItems:'center',flexDirection:'row',justifyContent:'center',height:90*s}}>
+                    <TouchableOpacity style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:60*s,width:'90%',borderRadius:30*s,backgroundColor:'#F5F5F5'}} 
+                    onPress={()=>{Actions.search()}}>
+                        <Text style={{color:'#666666'}}>请输入要搜索的教师</Text>
+                        <Icon style={{paddingLeft:10*s}} name='search1' size={30*s} color='#666666'/>
+                    </TouchableOpacity>
                 </View>
                 <FlatList
                     data={this.state.data}

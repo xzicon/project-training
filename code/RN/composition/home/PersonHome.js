@@ -51,6 +51,9 @@ export default class PersonHome extends Component {
             })
         })
     }
+    // follow_add_delete=()=>{
+
+    // }
     follow_add=(upid)=>{
         let data = {
             uid:this.state.look,
@@ -108,6 +111,17 @@ export default class PersonHome extends Component {
             })
         })
     }
+    // 收藏夹列表
+    _collectlist=()=>{
+        fetch('http://116.62.14.0:8402/favorite/plist/'+this.props.uid+'/'+this.state.look)
+        .then(res=>res.json())
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({
+                collectlist_data:res.data
+            })
+        })
+    }
     _write=()=>{
         fetch('http://116.62.14.0:8402/login/article/'+this.props.uid)
         .then(res=>res.json())
@@ -136,7 +150,7 @@ export default class PersonHome extends Component {
                 collect:1,
                 follow:0
             })
-            this._collect()
+            this._collectlist()
         }
     }
     change_follow=()=>{
@@ -283,34 +297,41 @@ export default class PersonHome extends Component {
                     </View>
                     :(
                         this.state.collect===1?
-                        <View>
+                        <View style={{marginBottom:410*s}}>
                         <FlatList
+                        // ListFooterComponent={}
+                        extraData={this.state}
                         style={{backgroundColor: '#F4F4F4'}}
-                        data={this.state.collect_data}
+                        data={this.state.collectlist_data}
                         numColumns={1}
                         renderItem={({item})=>(
-                           
-                                item.mimage===''?
-                                <View style={{alignItems:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
-                                height:200*s,borderRadius:10*s,padding:20*s}}>
-                                    <TouchableOpacity onPress={()=>{Actions.popular({mid:item.mid})}}>
-                                        <Text>{item.mtitle}</Text>
-                                    </TouchableOpacity>
+                                
+                            <TouchableOpacity onPress={()=>{Actions.favorite({faid:item.faid})}}>
+                                <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
+                        height:150*s,borderRadius:10*s,padding:20*s}}>
+                                    <Image style={{width:120*s,height:120*s,marginRight:10*s}} source={{ uri: 'http://116.62.14.0:8402/images/' + item.faimage }}/>
+                                    <View style={{height:120*s,flexDirection:'column',justifyContent:'space-evenly'}}>
+                                        <View style={{flexDirection:'row',alignItems:'center'}}>
+                                            <Text style={{fontSize:25*s,marginRight:10*s}}>{item.favoritename}</Text>
+
+                                            {
+                                                item.fhide==1?
+                                                <Icon1 name='lock' color='grey' size={25*s}/>
+                                                :
+                                                <Text></Text>
+                                            } 
+                                        </View>
+                                        <Text style={{color:'grey',fontSize:20*s}}>{item.fnum==null?'0个内容':item.fnum+`个内容`}</Text>     
+                                    </View> 
                                 </View>
-                                :
-                                <View style={{backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
-                                height:360*s,borderRadius:10*s,padding:20*s}}>
-                                    <TouchableOpacity onPress={()=>{Actions.popular({mid:item.mid})}}>
-                                        <Image style={{width:'100%',height:250*s}} source={{uri:'http://116.62.14.0:8402/images/'+item.mimage}}/>
-                                        <Text>{item.mtitle}</Text>
-                                    </TouchableOpacity>
-                                </View>
+                            </TouchableOpacity>     
                         )}
                         />
                     </View>
                         :
-                        <View>
+                        <View style={{marginBottom:410*s}}>
                         <FlatList
+                        
                         style={{backgroundColor: '#F4F4F4'}}
                         data={this.state.follow_data}
                         numColumns={1}

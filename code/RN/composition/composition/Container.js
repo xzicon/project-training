@@ -24,24 +24,24 @@ export default class Container extends Component {
     componentDidMount() {
         this.fetchf(this.props.flag)
     }
-    componentDidUpdate(){
-        if(this.props.flag==1){
-            this.fetchf(this.props.flag)
-        }else if(this.props.flag==2){
-            this.fetchf(this.props.flag)
-        }else if(this.props.flag==3){
-            this.fetchf(this.props.flag)
-        }else if(this.props.flag==4){
-            this.fetchf(this.props.flag)
-        }else if(this.props.flag==5){
-            this.fetchf(this.props.flag)
-        }else if(this.props.flag==6){
-            this.fetchf(this.props.flag)
-        }else{
-
-        }
+    // componentDidUpdate(){
+    //     if(this.props.flag==1){
+    //         this.fetchf(this.props.flag)
+    //     }else if(this.props.flag==2){
+    //         this.fetchf(this.props.flag)
+    //     }else if(this.props.flag==3){
+    //         this.fetchf(this.props.flag)
+    //     }else if(this.props.flag==4){
+    //         this.fetchf(this.props.flag)
+    //     }else if(this.props.flag==5){
+    //         this.fetchf(this.props.flag)
+    //     }else if(this.props.flag==6){
+    //         this.fetchf(this.props.flag)
+    //     }else{
+    //         break;
+    //     }
         
-    }
+    // }
     fetchf=(flag)=>{
         if(flag==1){
             fetch('http://116.62.14.0:8402/usort/tiaoguo')

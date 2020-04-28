@@ -3,19 +3,34 @@ import { Text, View, AsyncStorage, TextInput, ToastAndroid, TouchableOpacity, Di
 import RichTextView from './RichTextView'
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
-const { width, scale } = Dimensions.get('window');
+const { width, scale ,height} = Dimensions.get('window');
 const s = width / 640;
+// const options = {
+//   title: '请选择',
+//   cancelButtonTitle: '取消',
+//   takePhotoButtonTitle: '拍照',
+//   chooseFromLibraryButtonTitle: '选择相册',
+//   customButtons: [],
+//   storageOptions: {
+//     skipBackup: true,
+//     path: 'images',
+//   },
+// };
 const options = {
   title: '请选择',
-  cancelButtonTitle: '取消',
-  takePhotoButtonTitle: '拍照',
-  chooseFromLibraryButtonTitle: '选择相册',
-  customButtons: [],
+  // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  // quality: 0.8,
+          cancelButtonTitle: "取消",
+          takePhotoButtonTitle: "拍照",
+          chooseFromLibraryButtonTitle: "选择相册",
+          // allowsEditing: true,
+          // noData: false,
   storageOptions: {
-    skipBackup: true,
-    path: 'images',
+      skipBackup: true,
+      path: 'images',
   },
 };
+
 export default class AddEssay extends Component {
   constructor() {
     super();
@@ -38,33 +53,48 @@ export default class AddEssay extends Component {
           :
           this.setState({ uid: res })
       })
-    AsyncStorage.getItem('imgurl1').then((res) => {
-      if (res !== null) {
-        this.setState({
-          imageUrl1: JSON.parse(res),
-          flag: '2'
-        });
-      }
-    });
+      
   }
-  takephoto = () => {
+  takephoto = (e) => {
+    var formData = new FormData();
     ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel) {
-        return;
-      } else if (response.error) {
-        console.log('Error:', response.error);
-      } else if (response.customButton) {
-        console.log('custom:', response.customButton);
-      } else {
-        const source = { uri: response.uri };
-        this.setState({
-          imageUrl1: source,
-          flag: '2'
-        });
-        AsyncStorage.setItem('imgurl1', JSON.stringify(source), (err) => { });
-      }
+        if (response.didCancel) {
+            return;
+        } else if (response.error) {
+            console.log('Error:', response.error);
+        } else if (response.customButton) {
+            console.log('custom:', response.customButton);
+        } else {
+            const source = { uri: response.uri };
+            const file={uri: response.uri, type: response.type, name: response.fileName};
+            formData.append('image', file);
+            this.setState({
+                imageUrl: source.uri,
+            }, () => {
+                fetch('http://116.62.14.0:8402/upload', {
+                    method: 'POST',
+                    // mode:"cors",          
+                    body: formData
+                }).then(res=>res.json())
+                .then(res=>{
+                  console.log(res.status);
+                  console.log(res.data);
+                  this.setState({
+                    aimage:res.data
+                  })
+                  // let  swidth = Dimensions.get('window').width;
+                  // Image.getSize(this.state.aimage,(width,height)=>{
+                  //   this.setState({
+                  //     w:0.6*swidth,
+                  //     h:(0.6*swidth*height)/width
+                  //   })
+                  // })
+                })
+            });
+        }
     });
   }
+
   add = () => {
     var date = new Date();
     var Y = date.getFullYear() + '-';
@@ -99,9 +129,14 @@ export default class AddEssay extends Component {
         .then((res) => {
           console.log(res)
           if (res.status == 0) {
-            ToastAndroid.show('写作成功,待审核', 100)
+            this.setState({
+              atitle:'',
+              inputValue:'',
+              aimage:''
+            })
+            ToastAndroid.show('写作成功,待审核', 100);
             // Actions.pop({ e: true })
-            Actions.teacher();
+            Actions.teacher({aid: res.data, atitle: data.atitle, acontent: data.acontent});
           } else {
             ToastAndroid.show('发布失败', 100)
           }
@@ -174,10 +209,12 @@ export default class AddEssay extends Component {
         {/* <View style={{flexDirection:'row',justifyContent:'flex-end',backgroundColor:'#FFF'}}>
               <Text>{this.state.inputValue.length}/1000</Text>
             </View> */}
-        <Text onPress={() => { this.takephoto() }}>选择图片</Text>
-        <Image
-          source={this.state.imageUrl1}
-          style={{ width: width, height:400*s, marginTop: 10*s}}
+        <TouchableOpacity onPress={() => { this.takephoto() }}>
+            <Image style={{width:50,height:50}} source={require('../../assets/composition/essay/pic.png')}/>
+        </TouchableOpacity>
+        
+        <Image style={{ width: '90%', height:300*s, marginTop: 10*s}}
+        source={{uri:'http://116.62.14.0:8402/images/'+this.state.aimage}}
         />
       </View>
     )

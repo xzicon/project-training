@@ -10,7 +10,8 @@ import React, { useEffect, useState } from 'react';
 import {
 	View,
 	AsyncStorage, Dimensions, ToastAndroid, BackHandler, StyleSheet,
-	Overlay
+	Overlay,
+	Image
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { Router, Scene, Tabs, Actions, Lightbox, Modal } from 'react-native-router-flux';
@@ -29,6 +30,7 @@ import DetailEssay from './composition/home/DetailEssay';
 import PersonHome from './composition/home/PersonHome';
 import Search from './composition/home/Search';
 import SearchList from './composition/home/SearchList';
+import Favorite from './composition/home/Favorite';
 // 素材
 import Composition from './composition/composition/Composition';
 import Source from './composition/composition/Source';
@@ -54,7 +56,11 @@ import Message from './composition/userinfor/Message';
 
 import Teacher from './composition/userinfor/Teacher';
 import TeacherDetail from './composition/userinfor/TeacherDetail';
-
+import Teacher0 from './composition/Teacher';
+// 选择测试页面
+import Lesson from './composition/Lesson';
+import Lesson0 from './composition/Lesson0';
+import Reply from './composition/home/Reply';
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
 //不弹出警告提示
@@ -134,6 +140,8 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='search' component={Search} />
 									<Scene hideTabBar hideNavBar key='searchlist' component={SearchList} />
 									<Scene hideNavBar hideTabBar key='popular' component={Popular} />
+									<Scene hideTabBar hideNavBar key='favorite' component={Favorite}/>
+									<Scene hideTabBar hideNavBar key='reply' component={Reply}/>
 									{/* 老师点评 */}
 									<Scene hideTabBar hideNavBar key='teacher' component={Teacher} />
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
@@ -159,6 +167,46 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='searchEssay' component={Search} />
 									<Scene hideTabBar hideNavBar key='searchlist' component={SearchList} />
 									<Scene hideNavBar hideTabBar key='addEssaywrite' component={AddEssay} />
+								</Scene>
+								<Scene
+								key='addEssayPage'
+								title=" "
+								icon={
+									({ focused }) => 
+									// <Icon
+									// 	color={focused ? '#f23030' : '#767676'}
+									// 	name="user"
+									// 	size={35 * s}
+									// />
+									<View style={{width:100*s,height:100*s,borderRadius:50*s,backgroundColor:'#FFF',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+										<Image style={{width:90*s,height:90*s}} source={require('./assets/composition/essay/add.png')} />
+									</View>	
+								}
+								>
+									{/* <Scene key='lesson' hideNavBar component={Lesson0}/> */}
+									{/* <Scene key='pic' hideNavBar component={TestViewPager}/> */}
+									<Scene  hideNavBar hideTabBar key='addEssay' component={AddEssay} />
+									<Scene hideTabBar hideNavBar key='teacher' component={Teacher} />
+									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
+								
+								</Scene>
+								<Scene
+								key='LessonPage'
+								title="点评"
+								icon={
+									({ focused }) => <Icon
+										color={focused ? '#f23030' : '#767676'}
+										name="edit"
+										size={35 * s}
+									/>
+								}
+								>
+									{/* <Scene key='lesson' hideNavBar component={Lesson0}/> */}
+									{/* <Scene key='pic' hideNavBar component={TestViewPager}/> */}
+									<Scene  hideNavBar key='lesson' component={Teacher0} />
+									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
+									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
+
 								</Scene>
 								<Scene
 									key='userinforPage'
@@ -199,6 +247,11 @@ const App = () => {
 									{/* 消息 */}
 									<Scene key='message' component={Message} hideTabBar hideNavBar/>
 									<Scene hideTabBar hideNavBar key='detailEssayUser' component={DetailEssay} />
+									<Scene hideTabBar hideNavBar key='favorite' component={Favorite}/>
+									<Scene hideTabBar hideNavBar key='teacher' component={Teacher} />
+									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
+									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
+
 								</Scene>
 							</Tabs>
 						</Scene>

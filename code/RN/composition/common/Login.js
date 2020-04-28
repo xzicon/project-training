@@ -139,9 +139,11 @@ export default class Login extends Component {
                     </View>
                     <View style={styles.wraper}>
                         <Icon name="lock" color="gray" size={40*s}/>
-                        <TextInput placeholder='请输入密码' placeholderTextColor="gray"
+                        <TextInput placeholder='请输入密码' 
+                        placeholderTextColor="gray"
                             style={styles.input}
                             onChangeText={this.pwdhandle}
+                            secureTextEntry={true}
                         />
                     </View>
                     <View style={styles.tips}>
