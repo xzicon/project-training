@@ -34,23 +34,29 @@ export default class Remark extends Component {
                     :
                     this.setState({ tid: res })
                     console.log(this.state.tid)
-                    fetch('http://116.62.14.0:8402/grade/teacher/' + this.state.tid)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            this.setState({ data: res.data });
-                            console.log(res.data);
-                        })
+                    this.all()
                     
             })
     }
-    
+    all = () => {
+        fetch('http://116.62.14.0:8402/grade/teacher/' + this.state.tid)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({ data: res.data });
+                console.log(res.data);
+            })
+    }
+    fresh = ()=>{
+        this.all();
+    }
     render() {
         return (
             <View>
-                {this.state.data.length !== 0 ?
+                {this.state.data.length !== 0 ? 
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center',justifyContent:'center' }}>
-                                <Text style={{ color: '#333', fontSize: 34 * s,  }}>我的点评</Text>
+                            <Text style={{ color: '#333', fontSize: 34 * s,  }}>我的点评</Text>
+                            <TouchableOpacity onPress={this.fresh} ><Text style={{color:'#fff'}}>刷新</Text></TouchableOpacity>
                         </View>
                         <ScrollView>
                             <View style={{ flex: 1, }}>
@@ -89,7 +95,8 @@ export default class Remark extends Component {
                     :
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center',justifyContent:'center' }}>
-                                <Text style={{ color: '#333', fontSize: 34 * s,  }}>我的点评</Text>
+                            <Text style={{ color: '#333', fontSize: 34 * s,  }}>我的点评</Text>
+                            <TouchableOpacity onPress={this.fresh} ><Text style={{color:'#fff'}}>刷新</Text></TouchableOpacity>
                         </View>
                         <View style={{ width: width, marginTop: 20 * s, marginLeft: 20 * s }}>
                             <Text style={{ fontSize: 24 * s }}>你还没有点评哦~</Text>

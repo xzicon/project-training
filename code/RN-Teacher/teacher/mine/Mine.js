@@ -6,8 +6,6 @@ import { Actions } from 'react-native-router-flux';
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
 
-
-
 const others = [
     {
         title: '师资认证',
@@ -37,7 +35,6 @@ export default class Mine extends Component {
             data: [],
             tid: '',
             flag: '1',
-
         }
     }
     componentDidMount() {

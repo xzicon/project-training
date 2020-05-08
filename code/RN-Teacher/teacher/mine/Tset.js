@@ -40,6 +40,7 @@ export default class Tset extends Component {
     out=()=>{
         AsyncStorage.removeItem('tid')
         .then(() => {
+            Actions.pop();
             Actions.login();
         });
     }

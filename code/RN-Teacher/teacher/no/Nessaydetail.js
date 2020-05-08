@@ -40,7 +40,8 @@ export default class Nessaydetail extends Component {
                     <View style={{
                         width: 60, height: 50 * s,
                         borderRadius: 15 * s,
-                        justifyContent: 'center', alignItems: 'center'
+                        
+                        justifyContent: 'center', alignItems: 'flex-start'
                     }}>
                         <TouchableOpacity onPress={Actions.pop}><Text>取消</Text></TouchableOpacity>
                     </View>
