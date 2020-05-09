@@ -28,19 +28,21 @@ export default class FeedBack extends Component {
                 <li style={{width:'160px',fontWeight:'bold'}}>用户邮箱</li>
                 <li style={{width:'150px',fontWeight:'bold'}}>反馈时间</li>
                 <li style={{fontWeight:'bold'}}>操作</li>
-                {
-                  this.state.data.map((item,index)=>(
-                    <ul className='user_title' key={index}>
-                      <li>{item.fid}</li>
-                      <li style={{width:'160px',overflow:'hidden'}}>{item.fcontent}</li>
-                      <li>{item.uid}</li>
-                      <li>{item.uname}</li>
-                      <li style={{width:'160px'}}>{item.uemail}</li>
-                      <li style={{width:'150px'}}>{item.ftime}</li>
-                      <li><button>删除</button></li>
-                    </ul>
-                  ))
-                }
+                <div style={{width:'1000px',height:'500px',float:'left',overflowY:'auto'}}>
+                  {
+                    this.state.data.map((item,index)=>(
+                      <ul className='user_title' key={index}>
+                        <li>{item.fid}</li>
+                        <li style={{width:'160px',overflow:'hidden'}}>{item.fcontent}</li>
+                        <li>{item.uid}</li>
+                        <li>{item.uname}</li>
+                        <li style={{width:'160px'}}>{item.uemail}</li>
+                        <li style={{width:'150px'}}>{item.ftime}</li>
+                        <li><button>删除</button></li>
+                      </ul>
+                    ))
+                  }
+                </div>
               </ul>
             </div>
         )

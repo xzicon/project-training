@@ -23,7 +23,6 @@ export default class Login extends Component {
         this.setState({pwd:text})
     }
     handleLogin=()=>{
-      
       if(this.state.email !='' && this.state.pwd != ''){
         let data = {
           temail:this.state.email,

@@ -24,8 +24,8 @@ export default class CountManage extends Component {
   }
   render() {
     return (
-        <div style={{paddingTop:'60px'}}>
-            <div className='count' style={{marginLeft:'200px'}}>
+        <div style={{width:'70%',height:'25.5%',marginTop:'15%',marginLeft:'10%'}}>
+            <div className='count'>
                 <p>累计用户数量</p>
                 <p className='number'>{this.state.data[0].uid}</p>
             </div>

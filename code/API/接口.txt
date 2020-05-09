@@ -145,7 +145,7 @@ data.uid
 
 素材接口
 //http://116.62.14.0:8402/material，所有素材
-//http://116.62.14.0:8402/material/mtab/sucai 获得对应的标签
+//http://116.62.14.0:8402/material/mtab/sucai 获得对应的标签14:52 2020/4/2014:52 2020/4/2014:52 2020/4/2014:52 2020/4/20
 //http://116.62.14.0:8402/material/mtab/fanwen
 //http://116.62.14.0:8402/material/mtab/jifa
 //msid是标签的id

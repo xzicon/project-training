@@ -50,8 +50,8 @@ export default class Leader extends Component {
                 <Link to='/home/feedback'>
                     <button className={this.state.className==6?'leader_btns':'noset'} onClick={this.handleClick} index={6}>反馈管理</button>
                 </Link>
-                <Link to='/home/system'>
-                    <button className={this.state.className==7?'leader_btns':'noset'} onClick={this.handleClick} index={7}>系统管理</button>
+                <Link to='/home/recommend'>
+                    <button className={this.state.className==7?'leader_btns':'noset'} onClick={this.handleClick} index={7}>推荐位管理</button>
                 </Link>
             </div>
         )

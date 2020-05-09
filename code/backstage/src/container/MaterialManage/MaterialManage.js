@@ -5,12 +5,15 @@ import Search from '../../components/Search';
 export default class MaterialManage extends Component {
     render() {
         return (
-            <div style={{width:'1080px',height:'300px',float:'left'}}>
+            <div style={{width:'100%',height:'60%',float:'left'}}>
                 <Search/>
-                <div style={{width:'750px',height:'160px',marginLeft:'150px',fontSize:'16px',marginTop:'100px'}}>
-                    <Link to='/home/material/sucai'><div className='items'>作文素材</div></Link>
-                    <Link to='/home/material/fanwen'><div className='items'>写作范文</div></Link>
-                    <Link to='/home/material/jifa'><div className='items'>写作技法</div></Link>
+                <div style={{width:'100%',height:'41.5%',marginTop:'8.15%',marginLeft:'5%'}}>
+                    <Link to='/home/material/sucai'><div className='items' style={{width:'14%',marginLeft:'5%'}}>句段素材</div></Link>
+                    <Link to='/home/material/renwu'><div className='items'  style={{width:'14%',marginLeft:'5%'}}>人物素材</div></Link>
+                    <Link to='/home/material/shishi'><div className='items'  style={{width:'14%',marginLeft:'5%'}}>时事素材</div></Link>
+                    <Link to='/home/material/mingzhuyingshi'><div className='items'  style={{width:'14%',marginLeft:'5%'}}>名著影视</div></Link>
+                    {/* <Link to='/home/material/zhenti'><div className='items'>真题解析</div></Link> */}
+                    {/* <Link to='/home/material/jifa'><div className='items'>写作技法</div></Link> */}
                 </div>
             </div>
         )

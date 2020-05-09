@@ -12,11 +12,11 @@ export default class Sucai extends Component {
     
     componentDidMount(){
         let url = this.props.match.url.split('/')[3];
-        // console.log(url)
+        console.log(url)
         fetch(`http://116.62.14.0:8402/material/mtab/${url}`)
         .then((res)=>res.json())
         .then((res)=>{
-            // console.log(res.data);
+            console.log(res.data);
             this.setState({
                 tags: res.data
             })
@@ -28,12 +28,12 @@ export default class Sucai extends Component {
         return (
             <div>
                 <div style={{width:'150px',height:'28px',fontSize:'15px',margin:'15px 0 0 20px',lineHeight:'20px'}}>
-                <a href='#/home/material' style={{color:'black'}}>
-                    <img src='./images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
-                    返回上一页
-                </a>
+                    <a href='#/home/material' style={{color:'black'}}>
+                        <img src='./images/return.png' alt='' style={{float:'left',width:'20px',height:'20px'}}/>
+                        返回上一页
+                    </a>
                 </div>
-                <ul style={{width:'900px',height:'150px',margin:'10px 0 10px 60px'}}>
+                <ul style={{width:'900px',height:this.props.match.url.split('/')[3] == 'sucai' ? '175px' : '25px',margin:'10px 0 10px 60px'}}>
                 {
                     this.state.tags.map((item,index)=>(
                         <li key={index} className='tags'>
