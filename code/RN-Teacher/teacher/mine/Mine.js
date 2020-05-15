@@ -146,6 +146,7 @@ export default class Mine extends Component {
                     <View style={{ backgroundColor: "white", width: width * 0.96, marginTop: 15 / scale, marginLeft: '2%', marginRight: '2%' }}>
                         <TouchableOpacity onPress={() => Actions.tidentify()}  style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[0].title}</Text>
+                            <Text style={{ position: 'absolute', top:'5%', left: '75%', fontSize: 20 * s, color: '#666666' }}>{this.state.data.ispass==1?'认证通过':'未认证'}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Actions.tquestion()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>

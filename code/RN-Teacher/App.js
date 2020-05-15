@@ -38,13 +38,22 @@ import Tidentify from './teacher/mine/Tidentify';
 // 未点评
 import Nessay from './teacher/no/Nessay';
 import Nessaydetail from './teacher/no/Nessaydetail';
-import AddComment from './teacher/no/AddComment'
+import AddComment from './teacher/no/AddComment';
+import AddGrade from './teacher/no/AddGrade';
 //已点评
 import Remark from './teacher/remark/Remark';
 import Rarticle from './teacher/remark/Rarticle';
+//技法
+import Skill from './teacher/skill/Skill';
+import AddSkill from './teacher/skill/AddSkill';
+import AddSuccess from './teacher/skill/AddSuccess';
+import SkillContent from './teacher/skill/SkillContent';
+import SkillDetail from './teacher/skill/SkillDetail';
+import UpdateSkill from './teacher/skill/UpdateSkill';
+import UpdateSkillContent from './teacher/skill/UpdateSkillContent';
+
 
 import DetailEssay from './composition/home/DetailEssay';
-
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -115,7 +124,7 @@ const App = () => {
 									icon={
 										({ focused }) => <Icon
 											color={focused ? '#f23030' : '#767676'}
-											name="file1"
+											name="clockcircleo"
 											size={35 * s}
 										/>
 									}
@@ -123,6 +132,7 @@ const App = () => {
 									<Scene hideNavBar key='nessay' component={Nessay} />
 									<Scene hideNavBar hideTabBar key='nessaydetail' component={Nessaydetail} />
 									<Scene hideNavBar hideTabBar key='addcomment' component={AddComment} />
+									<Scene hideNavBar hideTabBar key='addgrade' component={AddGrade} />
 								</Scene>
 								
 								<Scene key='checkPage'
@@ -138,6 +148,27 @@ const App = () => {
 									<Scene key='remark' hideNavBar component={Remark} />
 									<Scene key='rarticle' component={Rarticle} hideTabBar hideNavBar />
 								</Scene>
+								
+								<Scene
+									key='skill'
+									title="技法"
+									icon={
+										({ focused }) => <Icon
+											color={focused ? '#f23030' : '#767676'}
+											name="filetext1"
+											size={35 * s}
+										/>
+									}
+								>
+									<Scene hideNavBar key='skill' component={Skill} />
+									<Scene hideNavBar hideTabBar key='addskill' component={AddSkill} />
+									<Scene hideNavBar hideTabBar key='addsuccess' component={AddSuccess} />
+									<Scene hideNavBar hideTabBar key='skillcontent' component={SkillContent} />
+									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
+									<Scene hideNavBar hideTabBar key='updateskill' component={UpdateSkill} />
+									<Scene hideNavBar hideTabBar key='updateskillcontent' component={UpdateSkillContent} />
+								</Scene>
+
 								<Scene
 									key='minePage'
 									title="个人中心"

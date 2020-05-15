@@ -11,6 +11,7 @@ export default class Nessay extends Component {
         this.state = ({
             data: [],
             tid: '',
+            refreshing:false
         })
     }
     componentDidMount() {
@@ -19,36 +20,53 @@ export default class Nessay extends Component {
                 res === null ?
                     this.setState({ tid: '' })
                     :
-                    this.setState({ tid: res })
-                this.all()
+                    this.setState({ tid: res },()=>{this.all()})
             })
     }
+    componentWillReceiveProps(){
+        if(this.props.refresh==1){
+            this.all()
+        }
+    }
     all = () => {
-        fetch('http://116.62.14.0:8402/grade/teacher/' + this.state.tid)
+        this.setState({
+            refreshing:true
+        },()=>{
+        fetch('http://116.62.14.0:8402/grade/noteacher/' + this.state.tid)
             .then((res) => res.json())
             .then((res) => {
                 console.log(res.data)
                 this.setState({
                     data: res.data,
+                    refreshing:false
                 })
             })
+        })
     }
-    fresh = ()=>{
-        this.all();
-    }
+    _renderFooter = () => (
+        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:50*s}}>
+            <Text>
+               到底了~
+            </Text>
+        </View>
+    )
     render() {
         return (
             <View>
                 {this.state.data.length !== 0 ?
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: '#333', fontSize: 34 * s, }}>未点评</Text>
-                            <TouchableOpacity onPress={this.fresh} ><Text style={{color:'#fff'}}>刷新</Text></TouchableOpacity>
+                            <Text style={{ color: '#333', fontSize: 30 * s, }}>未点评</Text>
                         </View>
                         <FlatList
-                            style={{ marginBottom: 10 * s }}
+                            style={{ marginBottom: 180 * s }}
                             data={this.state.data}
                             numColumns={1}
+                            refreshing = { this.state.refreshing }
+                            onRefresh = {()=>{
+                                this.all()
+                            }}
+                            ListFooterComponent={ this._renderFooter }
                             renderItem={({ item }) => (
                                 item.isgrade === 0 ?
                                     <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
@@ -70,8 +88,7 @@ export default class Nessay extends Component {
                     :
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: '#333', fontSize: 34 * s, }}>未点评</Text>
-                            <TouchableOpacity onPress={this.fresh} ><Text style={{color:'#fff'}}>刷新</Text></TouchableOpacity>
+                            <Text style={{ color: '#333', fontSize: 30 * s, }}>未点评</Text>
                         </View>
                         <View style={{ width: width, marginTop: 20 * s, marginLeft: 20 * s }}>
                             <Text style={{ fontSize: 24 * s }}>你还没有收到点评邀请哦~</Text>

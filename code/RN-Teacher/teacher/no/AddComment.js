@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Dimensions, ScrollView, ToastAndroid, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Checkbox, List, WhiteSpace } from '@ant-design/react-native';
+import RichEditor from '../rich/components/richWebView/RichEditor';
+import RichToolbarGrade from '../rich/components/richWebView/RichToolbarGrade';
+import {STATUS_BAR_HEIGHT,ScreenHeight} from '../rich/assets/css/common';
+import RichTextGrade from '../rich/components/richWebView/RichTextGrade';
+import RichText from '../rich/components/richWebView/RichText';
+
 const { width } = Dimensions.get('window');
 const s = width / 640;
 
-export default class Feedback extends Component {
+export default class AddComment extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +28,7 @@ export default class Feedback extends Component {
             gscorepoint: '',
             glosepoint: '',
             gmodityadvice: '',
+            acontent:this.props.acontent.replace(/\n/g,'<br>').replace(/\s/g,"&nbsp;"),
         }
     }
     componentDidMount() {
@@ -46,7 +53,7 @@ export default class Feedback extends Component {
             let data = {
                 aid: this.props.aid,
                 atitle: this.props.atitle,
-                acontent: this.props.acontent,
+                acontent: this.state.acontent,
                 gradetime: Y + M + D + h + m,
                 score: this.state.score,
                 rank: this.state.rank,
@@ -79,6 +86,13 @@ export default class Feedback extends Component {
                 })
         }
     }
+    gradenext=()=>{
+        if(this.richText.state.richcontent==''){
+            ToastAndroid.show('请保存',100)
+        }else{
+            Actions.addgrade({aid: this.props.aid, atitle: this.props.atitle,acontent: this.richText.state.richcontent,gid: this.props.gid,gclass:this.props.gclass});
+        }
+    }
     render() {
 
         return (
@@ -87,22 +101,42 @@ export default class Feedback extends Component {
                     <View style={{
                         width: 60, height: 50 * s,
                         borderRadius: 15 * s,
-                        justifyContent: 'center', alignItems: 'center'
+                        justifyContent: 'center', alignItems: 'flex-start'
                     }}>
-                        <TouchableOpacity onPress={Actions.pop}><Text>取消</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{Actions.pop()}}><Text>取消</Text></TouchableOpacity>
                     </View>
-                    <View style={{ width: '60%' }}></View>
+                    <View style={{ width: '60%' ,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                        <View  style={{width:'80%',alignItems:'center'}}><Text numberOfLines={1} ellipsizeMode="tail">{this.props.atitle}</Text></View>
+                    </View>
                     <View style={{
                         width: 60, height: 50 * s,
-                        borderWidth: 1, borderColor:'red',borderRadius: 15 * s,
+                        borderWidth: 1, borderColor: 'red', borderRadius: 15 * s,
                         justifyContent: 'center', alignItems: 'center'
                     }}>
-                        <TouchableOpacity onPress={this.comment}>
-                            <Text>发布</Text>
+                        <TouchableOpacity onPress={()=>{this.gradenext()}}>
+                            <Text>下一步</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{ alignContent:'center',justifyContent:"flex-start",flexDirection: 'row', width: width * 0.96, height: 60 * s, marginTop: 10 * s, marginLeft: 0.02 * width, marginRight: 0.02 * width }}>
+                <ScrollView>
+                    <RichEditor
+                    height={ScreenHeight-200*s}
+                    initialContentHTML={this.state.acontent}
+                    ref={ref => this.richText = ref}
+                    editorInitializedCallback={()=>{
+                        this.richText.focusContentEditor();
+                    }}
+                    />
+                </ScrollView>
+                <View>
+                <RichText
+                    getEditor={() => this.richText}
+                />
+                </View>
+                <RichToolbarGrade
+                    getEditor={() => this.richText}
+                />
+                {/* <View style={{ alignContent:'center',justifyContent:"flex-start",flexDirection: 'row', width: width * 0.96, height: 60 * s, marginTop: 10 * s, marginLeft: 0.02 * width, marginRight: 0.02 * width }}>
                     <View style={{height:'90%',width:'20%',justifyContent:'center'}}>
                         <Text style={{fontWeight:"bloder",fontFamily:'courier',fontSize:30*s,height:'100%',textAlignVertical:'center',justifyContent:'center',color:'red'}}>作文分数</Text>
                     </View>
@@ -225,7 +259,7 @@ export default class Feedback extends Component {
                             this.setState({ gmodityadvice:gmodityadvice })
                         }}
                         style={{alignContent:'center',justifyContent:'center',marginLeft: 20*s,height: '90%',fontSize: 20 * s, textAlignVertical: 'center' ,width:"38%",borderWidth:0.3,borderRadius:5*s}} editable={true} multiline={true} maxLength={200} placeholder="输入内容" placeholderTextColor='#4b4a4a' />
-                </View>
+                </View> */}
             </View>
         )
     }

@@ -3,20 +3,36 @@ import { View, Button, Text, StatusBar, FlatList, Dimensions, ScrollView, Image,
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
 
-const { width } = Dimensions.get('window');
+
+import WebView from 'react-native-webview';
+
+const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 
-// const data =[
-//     {
-//         aid:58,
-//         atitle:"蓦然回首",
-//         acontent:"我有两个家，一个家是一辈子的家，而另一个则是暂时的家，这个家叫做班级。我和我那三十几个家人，在那个暂时的家中学习，奋斗。我们之间就好似有一个契约，注定三年以后就会各奔东西。还记得我们第一次见面的时候，女生都是那么安静，男生都是那么温文尔雅。但是，慢慢的，我们熟悉了，可谓是“原形毕露”:从前乖巧的女孩子，一夜之间变成了女汉子，曾经温文尔雅的绅士，瞬间变成了男疯子。",
-//         uname:"写作小能手",
-//         uimage:"1576828950695.jpg",
-//         utime:"2020-04-13 16:40",
-//         atag:"#校园"
-//     }
-// ]
+const htmlContent=
+   { start:
+    `<!DOCTYPE html>
+    <html>
+    <head>
+    <meta name="viewport" content="user-scalable=1.0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <style>
+    * {outline: 0px solid transparent;-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-touch-callout: none;}
+    html, body { margin: 0; padding: 0;font-family: Arial, Helvetica, sans-serif; font-size:1em;}
+    body { overflow-y: hidden; -webkit-overflow-scrolling: touch;height: 100%;background-color: #FFF;}
+    img {max-width: 98%;margin-left:auto;margin-right:auto;display: block;}
+    .content {  font-family: Arial, Helvetica, sans-serif;color: #000033; width: 100%;height: 100%;-webkit-overflow-scrolling: touch;padding-left: 0;padding-right: 0;}
+    .pell { height: 100%;}
+    .pell-content { outline: 0; overflow-y: auto;padding:4px 5px 0;height: 100%;}
+    table {width: 100% !important;}
+    table td {width: inherit;}
+    table span { font-size: 12px !important; }
+    </style>
+    </head>
+    <body>
+    <div class="content"><div id="editor" class="pell">`,
+    
+    end:`</div></div></body></html> `
+};
 
 export default class Remark extends Component {
     constructor(props) {
@@ -24,6 +40,7 @@ export default class Remark extends Component {
         this.state = {
             data: [],
             tid: '',
+            refreshing:false
         }
     }
     componentDidMount() {
@@ -32,70 +49,99 @@ export default class Remark extends Component {
                 res === null ?
                     this.setState({ tid: '' })
                     :
-                    this.setState({ tid: res })
+                    this.setState({ tid: res },()=>{this.all()})
                     console.log(this.state.tid)
-                    this.all()
+                    
                     
             })
     }
+    componentWillReceiveProps(){
+        if(this.props.refresh==1){
+            this.all()
+        }
+    }
     all = () => {
-        fetch('http://116.62.14.0:8402/grade/teacher/' + this.state.tid)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data: res.data });
-                console.log(res.data);
-            })
+        this.setState({
+            refreshing:true
+        },()=>{
+            fetch('http://116.62.14.0:8402/grade/overteacher/' + this.state.tid)
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res.data)
+                    this.setState({
+                        data: res.data,
+                        refreshing:false
+                    })
+                })
+        })
     }
-    fresh = ()=>{
-        this.all();
-    }
+    _renderFooter = () => (
+        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:50*s}}>
+            <Text>
+               到底了~
+            </Text>
+        </View>
+    )
     render() {
         return (
             <View>
                 {this.state.data.length !== 0 ? 
                     <View>
-                        <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center',justifyContent:'center' }}>
-                            <Text style={{ color: '#333', fontSize: 34 * s,  }}>我的点评</Text>
-                            <TouchableOpacity onPress={this.fresh} ><Text style={{color:'#fff'}}>刷新</Text></TouchableOpacity>
+                       <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: '#333', fontSize: 30 * s, }}>我的点评</Text>
                         </View>
-                        <ScrollView>
-                            <View style={{ flex: 1, }}>
-                                <View style={{ width: width, marginTop: 10 * s }}>
-                                    <FlatList
-                                        data={this.state.data}
-                                        numColumns={1}
-                                        renderItem={({ item }) => (
-                                            item.isgrade === 1 ?
-                                            <View style={{ width: width * 0.96, height:  220 * s, backgroundColor: 'white', marginLeft: 0.02 * width, marginBottom: 0.02 * width, }}>
-                                                <TouchableOpacity onPress={() => Actions.rarticle({ gid: item.gid, })} >
-                                                    
-                                                    <View style={{ width: width * 0.94, height: '15%', marginTop: '2%', marginLeft: width * 0.02, marginRight: 0.02 * width,flexDirection:'row',justifyContent:'space-between'}}>
-                                                        <Text style={{widht:'50%',height:'100%', fontSize: 26 * s, fontWeight: 'bold', color: '#333',}} >{item.atitle}</Text>
-                                                        <Text style={{widht:'20%',height:'100%', fontSize: 26 * s, fontWeight: 'bold', color:'red',marginRight:'5%',fontFamily:'华文彩云',fontStyle:'italic',textDecorationLine:'underline',borderBottomWidth:1,borderBottomColor:'red'}}>&nbsp;{item.score}</Text>
-                                                    </View>
-                                                    <View style={{ width: width * 0.94, height: '45%', marginTop: '1%', marginLeft: width * 0.02, marginRight: 0.02 * width,overflow:"hidden",}}><Text style={{ fontSize: 20 * s, color: '#333' }} >{item.acontent}</Text></View>
-                                                    <View style={{ width: width * 0.94, height: '10%', marginTop: '2%', marginLeft: 0.02 * width,}}>
-                                                        <Text style={{ fontSize: 18 * s, color: 'gray' }} >{item.uname}</Text>
-                                                        
-                                                    </View>
-                                                    <View style={{ width: width * 0.94, height: '10%', marginLeft: 0.02 * width, marginBottom: '2%'}}>
-                                                        <Text style={{ fontSize: 18 * s, color: 'gray' }} >{item.invitetime}</Text>
-                                                    </View>
-                                                    
-                                                </TouchableOpacity>
-                                            </View>
-                                            :<View></View>
-                                        )}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ height: 180 * s }}></View>
-                        </ScrollView>
+                        <FlatList
+                            style={{ marginBottom: 180 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            refreshing = { this.state.refreshing }
+                            onRefresh = {()=>{
+                                this.all()
+                            }}
+                            ListFooterComponent={ this._renderFooter }
+                            renderItem={({ item }) => (
+                                item.isgrade === 1 ?
+                                <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
+                                        <View style={{ width: '100%', height: 160 * s }}>
+                                            <TouchableOpacity onPress={() => { Actions.rarticle({ gid: item.gid, }) }}>
+                                                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginBottom:15*s}}>
+                                                    <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom: 10 * s }}>{item.atitle}</Text>
+                                                    <Text style={{widht:'20%',height:'100%', fontSize: 26 * s, fontWeight: 'bold', color:'red',marginRight:'5%',fontFamily:'华文彩云',fontStyle:'italic',textDecorationLine:'underline',borderBottomWidth:1,borderBottomColor:'red'}}>&nbsp;{item.score}</Text>
+                                                </View>
+                                                <View style={{ height: 80*s, width:  '100%',overflow:'hidden'}}>                                
+                                                    <WebView
+                                                        style={{}}
+                                                        scrollEnabled={false}
+                                                        automaticallyAdjustContentInsets={false}
+                                                        useWebKit={true}
+                                                        scrollEnabled={false}
+                                                        hideKeyboardAccessoryView={true}
+                                                        keyboardDisplayRequiresUserAction={false}
+                                                        originWhitelist={["*"]}
+                                                        dataDetectorTypes={'none'}
+                                                        domStorageEnabled={false}
+                                                        bounces={false}
+                                                        javaScriptEnabled={true}
+                                                        source={{html:htmlContent.start+`<div  style=\"font-size:15px;\">`+item.acontent+`</div>`+htmlContent.end}}
+                                                        />
+                                                </View>   
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View>
+                                            <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.uname}</Text>
+                                            <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.gradetime}</Text>
+                                        </View>
+                                    </View>  
+                                :
+                                <View></View>
+                            )}
+                        />
+                        
                     </View>
                     :
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center',justifyContent:'center' }}>
-                            <Text style={{ color: '#333', fontSize: 34 * s,  }}>我的点评</Text>
+                            <Text style={{ color: '#333', fontSize: 30 * s,  }}>我的点评</Text>
                             <TouchableOpacity onPress={this.fresh} ><Text style={{color:'#fff'}}>刷新</Text></TouchableOpacity>
                         </View>
                         <View style={{ width: width, marginTop: 20 * s, marginLeft: 20 * s }}>

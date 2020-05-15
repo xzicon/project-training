@@ -105,8 +105,8 @@ export default class Register extends Component {
                           isloading:false
                         })
                         ToastAndroid.show('验证码正确，邮箱验证成功', 100);
-                        Actions.setpwd({temail:this.state.temail});
-                        //Actions.login();
+                        //Actions.setpwd({temail:this.state.temail});
+                        Actions.login();
                         break;
                     }
                     case "1":{

@@ -43,7 +43,7 @@ export default class Nessaydetail extends Component {
                         
                         justifyContent: 'center', alignItems: 'flex-start'
                     }}>
-                        <TouchableOpacity onPress={Actions.pop}><Text>取消</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{Actions.pop()}}><Text>取消</Text></TouchableOpacity>
                     </View>
                     <View style={{ width: '60%' }}></View>
                     <View style={{
@@ -51,13 +51,13 @@ export default class Nessaydetail extends Component {
                         borderWidth: 1, borderColor: 'red', borderRadius: 15 * s,
                         justifyContent: 'center', alignItems: 'center'
                     }}>
-                        <TouchableOpacity onPress={()=>Actions.addcomment({aid: this.state.data.aid, atitle: this.state.data.atitle,acontent: this.state.data.acontent,gid: this.state.data.gid})}>
+                        <TouchableOpacity onPress={()=>Actions.addcomment({aid: this.state.data.aid, atitle: this.state.data.atitle,acontent: this.state.data.acontent,gid: this.state.data.gid,gclass:this.state.data.gclass})}>
                             <Text>点评</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <ScrollView>
-                    <View style={{ alignItems: 'center', backgroundColor: '#FFF', marginTop: 10*s,marginBottom:20*s }}>
+                    <View style={{ alignItems: 'center', backgroundColor: '#FFF', marginTop: 10*s,marginBottom:20*s ,padding:20*s}}>
                         <View style={{ width: '95%' }}>
                             <View style={{ marginTop: 15, alignItems: 'center' }}><Text style={{ fontSize: 40 * s }}>{this.state.data.atitle}</Text></View>
                             <View style={{ width: '100%', padding: 10 * s }}><Text style={{ fontSize: 20 * s, color: '#666666', textAlign: 'center' }}>{this.state.data.uname}&nbsp;|&nbsp;{this.state.data.invitetime}&nbsp;|&nbsp;{this.state.data.gclass}</Text></View>

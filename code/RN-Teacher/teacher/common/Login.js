@@ -23,6 +23,7 @@ export default class Login extends Component {
         this.setState({pwd:text})
     }
     handleLogin=()=>{
+      
       if(this.state.email !='' && this.state.pwd != ''){
         let data = {
           temail:this.state.email,
@@ -145,6 +146,7 @@ export default class Login extends Component {
                         <TextInput placeholder='请输入密码' placeholderTextColor="gray"
                             style={styles.input}
                             onChangeText={this.pwdhandle}
+                            secureTextEntry={true}
                         />
                     </View>
                     <View style={styles.tips}>
