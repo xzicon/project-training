@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, Dimensions, Image, FlatList, ScrollView, 
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
 import Remark from './Remark';
+import Skill from './Skill';
 
 const { width } = Dimensions.get('window');
 const s = width / 640;
@@ -44,6 +45,14 @@ export default class TeacherDetail extends Component {
         .then((res) => res.json())
         .then((res) => {
             this.setState({ data: res.data, flag: '2' });
+            console.log(res.data);
+        })
+    }
+    skill=()=>{
+        fetch('http://116.62.14.0:8402/teacher/personal/' + this.props.tid)
+        .then((res) => res.json())
+        .then((res) => {
+            this.setState({ data: res.data, flag: '3' });
             console.log(res.data);
         })
     }
@@ -110,6 +119,9 @@ export default class TeacherDetail extends Component {
                             <TouchableOpacity onPress={() => { this.remark() }}>
                                 <Text style={{ fontSize: 24 * s }}>点评</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { this.skill() }}>
+                                <Text style={{ fontSize: 24 * s }}>技法</Text>
+                            </TouchableOpacity>
                         </View>
                         <ScrollView style={{ height: 730 * s }}>
                             <View style={{ width: width * 0.96, backgroundColor: '#fff', marginTop: 14 * s, marginLeft: 0.02 * width }}>
@@ -119,27 +131,27 @@ export default class TeacherDetail extends Component {
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>所在地区</Text>
-                                    <Text style={{ fontSize: 24 * s, marginLeft: 200 * s }}>{this.state.tarea}</Text>
+                                    <Text style={{ fontSize: 24 * s,width:'80%',textAlign:'right' }}>{this.state.data.tarea}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>老师学校</Text>
-                                    <Text style={{ fontSize: 24 * s, marginLeft: 200 * s }}>{this.state.tschool}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tschool}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>所教年级</Text>
-                                    <Text style={{ fontSize: 24 * s, marginLeft: 200 * s }}>{this.state.tyear}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tyear}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>教师性别</Text>
-                                    <Text style={{ fontSize: 24 * s, marginLeft: 200 * s }}>{this.state.tsex}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tsex}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>教龄时间</Text>
-                                    <Text style={{ fontSize: 24 * s, marginLeft: 200 * s }}>{this.state.tage}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tage}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>中高考阅卷经验</Text>
-                                    <Text style={{ fontSize: 24 * s, marginLeft: 126 * s }}>{this.state.texperience}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.texperience}</Text>
                                 </View>
 
                             </View>
@@ -149,7 +161,7 @@ export default class TeacherDetail extends Component {
                                     <Text style={{ width: width * 0.04, borderTopRightRadius: 60 * s, borderBottomRightRadius: 60 * s, backgroundColor: 'red' }}></Text>
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 20 * s, marginLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 24 * s }}>{this.state.tachievement}</Text>
+                                    <Text style={{ fontSize: 24 * s }}>{this.state.data.tachievement}</Text>
                                 </View>
                             </View>
                             <View style={{ width: width * 0.96, backgroundColor: '#fff', marginTop: 14 * s, marginLeft: 0.02 * width }}>
@@ -158,7 +170,7 @@ export default class TeacherDetail extends Component {
                                     <Text style={{ width: width * 0.04, borderTopRightRadius: 60 * s, borderBottomRightRadius: 60 * s, backgroundColor: 'red' }}></Text>
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 20 * s, marginLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 24 * s }}>{this.state.tsuccess}</Text>
+                                    <Text style={{ fontSize: 24 * s }}>{this.state.data.tsuccess}</Text>
                                 </View>
                             </View>
                             <View style={{ width: width * 0.96, backgroundColor: '#fff', marginTop: 14 * s, marginLeft: 0.02 * width }}>
@@ -167,13 +179,14 @@ export default class TeacherDetail extends Component {
                                     <Text style={{ width: width * 0.04, borderTopRightRadius: 60 * s, borderBottomRightRadius: 60 * s, backgroundColor: 'red' }}></Text>
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 20 * s, marginLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 24 * s }}>{this.state.ttrait}</Text>
+                                    <Text style={{ fontSize: 24 * s }}>{this.state.data.ttrait}</Text>
                                 </View>
                             </View>
                             <View style={{ height: 100 * s }}></View>
                         </ScrollView>
                     </View>
                     :
+                    (this.state.flag === '2' ?
                     <View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: 70 * s, alignItems: 'center', backgroundColor: '#fff' }}>
                             <TouchableOpacity onPress={() => { this.person() }}>
@@ -182,12 +195,41 @@ export default class TeacherDetail extends Component {
                             <TouchableOpacity onPress={() => { this.remark() }}>
                                 <Text style={{ color: 'red', fontSize: 24 * s }}>点评</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { this.skill() }}>
+                                <Text style={{ fontSize: 24 * s }}>技法</Text>
+                            </TouchableOpacity>
                         </View>
-                        <Remark  tid={this.props.tid}/>
+                        <ScrollView style={{ height: 730 * s }}> 
+                            <Remark  tid={this.props.tid}/>
+                            {/* <View style={{ height: 100 * s }}></View> */}
+                        </ScrollView>
+                        
                     </View>
+                    :
+                    <View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: 70 * s, alignItems: 'center', backgroundColor: '#fff' }}>
+                            <TouchableOpacity onPress={() => { this.person() }}>
+                                <Text style={{ fontSize: 24 * s }}>简介</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { this.remark() }}>
+                                <Text style={{  fontSize: 24 * s }}>点评</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { this.skill() }}>
+                                <Text style={{ color: 'red',fontSize: 24 * s }}>技法</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <ScrollView style={{ height: 730 * s }}> 
+                            <Skill  tid={this.props.tid}/>
+                            {/* <View style={{ height: 100 * s }}></View> */}
+                        </ScrollView>
+                        
+                    </View>
+                    )
+                    
                 }
                 <View style={{ position: 'absolute', bottom: 20 * s, paddingLeft: '50%' }}>
-                    <Text onPress={() => { this.comment() }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
+                    {/* <Text onPress={() => { this.comment() }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text> */}
+                    <Text onPress={() => { Actions.yelp({tid:this.props.tid}) }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
                 </View>
             </View>
         )

@@ -35,15 +35,21 @@ export default class Remark extends Component {
     }
     render() {
         return (
-            <View>
+            <View style={{  }}>
+                {this.state.data.length === 0 ?
+                <View style={{marginTop:'3%',marginLeft:'3%'}}>
+                    <Text style={{fontSize:23*s}}>该老师还未点评任何作文哦~</Text>
+                </View>
+                :
+                <View>
                 <FlatList
-                    style={{ marginBottom: 300 * s }}
+                    style={{  }}
                     data={this.state.data}
                     numColumns={1}
                     renderItem={({ item }) => (
-                        item.isgrade === 1 ?
                         
-                        <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
+                        item.isgrade ===1?
+                        <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s , }}>
                             <View style={{ width: '100%', height: 160 * s}}>
                                 <TouchableOpacity onPress={()=>{Actions.detailEssay({aid:item.aid})}}>
                                     <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom:10*s }}>{item.atitle}</Text>
@@ -54,10 +60,17 @@ export default class Remark extends Component {
                                 <Text style={{fontSize: 18 * s, color:'gray'}}>{item.uname}</Text>
                                 <Text style={{fontSize: 18 * s, color:'gray'}}>{item.invitetime}</Text>
                             </View>
-                        </View>:
-                        <View></View>
+                        </View>
+                        :
+                        <View ></View>
                     )}
                 />
+                {/* <View style={{marginTop:'3%',marginLeft:'3%'}}>
+                    <Text style={{fontSize:23*s}}>该老师还未点评任何作文哦~</Text>
+                </View> */}
+                </View>
+                }
+
             </View>
         )
     }

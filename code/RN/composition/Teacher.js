@@ -1,79 +1,187 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Dimensions, Image, FlatList, AsyncStorage } from 'react-native'
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Actions } from 'react-native-router-flux';
+import React, {Component} from 'react';
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+  FlatList,
+} from 'react-native';
+// import Icon from 'react-native-vector-icons/AntDesign';
+import { Scene, Actions, Tabs } from 'react-native-router-flux';
 
-const { width } = Dimensions.get('window');
+import {Flex, Carousel} from '@ant-design/react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import Banner from './Banner'
+const search = require('../assets/input_search.png');
+const xinxin = require('../assets/xinxin.png');
+const {width} = Dimensions.get('window');
 const s = width / 640;
 
-export default class Teacher extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            uid: '',
-            data: []
-        }
-    }
-    componentDidMount() {
-        AsyncStorage.getItem('uid')
-            .then((res) => {
-                res === null ?
-                    this.setState({ uid: '' })
-                    :
-                    this.setState({ uid: res })
-                fetch('http://116.62.14.0:8402/teacher/choicelist')
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ data: res.data });
-                        console.log(res.data);
-                    })
-            })
-    }
-    render() {
-        return (
-            <View>
-                {/* <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                    <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
-                        <Icon name="left" color="#333" size={40 * s} />
-                    </TouchableOpacity>
-                    <View>
-                        <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.34 }}>名师推荐</Text>
-                    </View>
-                    <View>
-                        <Text style={{ color: 'red', fontSize: 34 * s, marginLeft: 360 * s }} >跳过</Text>
-                    </View>
-                </View> */}
-                {/* 搜索 */}
-                <View style={{backgroundColor:'#FFF',
-                alignItems:'center',flexDirection:'row',justifyContent:'center',height:90*s}}>
-                    <TouchableOpacity style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:60*s,width:'90%',borderRadius:30*s,backgroundColor:'#F5F5F5'}} 
-                    onPress={()=>{Actions.search()}}>
-                        <Text style={{color:'#666666'}}>请输入要搜索的教师</Text>
-                        <Icon style={{paddingLeft:10*s}} name='search1' size={30*s} color='#666666'/>
-                    </TouchableOpacity>
-                </View>
-                <FlatList
-                    data={this.state.data}
-                    numColumns={1}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => { Actions.teacherdetail({tid:item.tid,aid: this.props.aid, atitle: this.props.atitle, acontent: this.props.acontent}) }} style={{ flexDirection: 'row', borderBottomColor: 'gray', borderBottomWidth: s, width: width, height: 100 * s, alignItems: 'center' }}>
-                            <View style={{ marginLeft: 30 * s }}>
-                                <Image
-                                    source={{uri:'http://116.62.14.0:8402/images/'+item.timage}}
 
-                                    style={{ width: 70 * s, height: 70 * s, borderRadius: 70 * s }}
-                                />
-                            </View>
-                            <View style={{ marginLeft: 30 * s }}>
-                                <Text style={{ fontSize: 24 * s }}>{item.tname}<Text style={{ color: 'orange', fontSize: 18 * s }}>&nbsp;&nbsp;{item.age}/{item.tyear}</Text></Text>
-                                <Text style={{ color: 'gray' }}>{item.tschool}</Text>
-                            </View>
-                            {/* <View style={{ marginLeft: 200 * s }}>
-                                <Text style={{ width: 50 * s, backgroundColor: 'red', color: '#fff', textAlign: 'center', borderRadius: 6 * s }}>{item.flag}</Text>
-                            </View> */}
-                        </TouchableOpacity>
-                    )} />
-            </View>
-        )
-    }
+const urlArr =['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588182898840&di=3dd7015c838685cd9778a50c9b2a31b5&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F5366d0160924ab1857f1cbae35fae6cd7a890b47.jpg','https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588182898839&di=8b9c837eb517d344b55733173b961108&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg']
+
+export default class Teacher extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uid: '',
+      data: [],
+      keyWord: '',
+    };
+  }
+  componentDidMount() {
+    AsyncStorage.getItem('uid').then(res => {
+      res === null ? this.setState({uid: ''}) : this.setState({uid: res});
+      fetch('http://116.62.14.0:8402/teacher/choicelist')
+        .then(res => res.json())
+        .then(res => {
+          console.log('res===>>', res);
+          this.setState({data: res.data});
+          console.log(res.data);
+        });
+    });
+  }
+  ItemSeparatorComponent = () => {
+    return <View style={{height: 1, backgroundColor: '#ddd'}} />;
+  };
+
+  ListHeaderComponent=()=>{
+      return(
+          <View>
+  <Banner dataSource={urlArr} />
+          <View
+            style={{
+              position:'absolute',
+              alignItems: 'center',
+              flexDirection: 'row',
+              borderRadius: 6,
+              top: 14*s,
+              paddingVertical: 5,
+              width: width - 60,
+              left: 30,
+              backgroundColor:'rgba(255,255,255,0.3)'
+            }}>
+            <Image
+              source={search}
+              style={{marginLeft: 20, width: 25, height: 25}}
+            />
+            <TextInput
+              style={{
+                paddingVertical: 5,
+                marginLeft: 10,
+                width: width - 120,
+              }}
+              clearButtonMode={'while-editing'}
+              onChangeText={text => {
+                this.setState({
+                  keyWord: text,
+                });
+              }}
+              value={this.state.keyWord}
+              keyboardType={'default'}
+              placeholder={'请输入关键字'}
+              placeholderTextColor = '#8F8F8F'
+            />
+          {/* </View> */}
+        </View>
+
+          </View>
+      )
+  }
+
+  render() {
+    const colorArr = ['#2c2', '#2c24', '#6ad', 'red'];
+    return (
+      <View style={{flex: 1}}>
+
+        {/* <View
+          style={{
+            borderBottomColor: '#ddd',
+            borderBottomWidth: 1,
+            width: width,
+            paddingBottom: 10,
+            paddingTop: 50 * s,
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}> */}
+        
+        <FlatList
+        //   style={{flex: 1}}
+        ListHeaderComponent={this.ListHeaderComponent}
+          ItemSeparatorComponent={this.ItemSeparatorComponent}
+          keyExtractor={(item, index) => index.toString()}
+          data={this.state.data}
+          numColumns={1}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => {Actions.teacherdetail({tid:item.tid}) }}>
+            <Flex
+              align="center"
+              justify="between"
+              style={{
+                paddingHorizontal: 20,
+                paddingVertical: 20,
+                backgroundColor: '#fff',
+              }}>
+                
+              <View style={{flexDirection: 'row'}}>
+                <View>
+                  <Image
+                    source={{
+                      uri: 'http://116.62.14.0:8402/images/' + item.timage,
+                    }}
+                    style={{
+                      width: 70 * s,
+                      height: 70 * s,
+                      borderRadius: 35 * s,
+                    }}
+                  />
+                </View>
+                <View style={{marginLeft: 30 * s}}>
+                  <Text style={{fontSize: 24 * s}}>
+                    {item.tname}
+                    <Text style={{color: 'orange', fontSize: 18 * s}}>
+                      &nbsp;&nbsp;{item.age}/{item.tyear}
+                    </Text>
+                  </Text>
+                  <Text style={{color: 'gray', marginTop: 10}}>
+                    {item.tschool ? item.tschool : '暂无介绍'}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  marginLeft: 200 * s,
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{fontSize: 14}}>教龄:</Text>
+                  <Text style={{fontSize: 12, marginLeft: 5, color: '#666'}}>
+                    {item.texperience ? item.texperience : 0}年
+                  </Text>
+                </View>
+                <Image
+                  source={xinxin}
+                  style={{width: 30, height: 30, marginLeft: 15}}
+                />
+              </View>
+            </Flex>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    );
+  }
 }
+const styles = StyleSheet.create({
+  wrapper: {
+    //    flex:1,
+    height: 100,
+    width: width,
+  },
+});

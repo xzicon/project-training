@@ -1,238 +1,304 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, StyleSheet, TextInput,AsyncStorage, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
+import {
+    Text, View, Animated, Easing, AsyncStorage, ScrollView, Modal, TouchableOpacity, StyleSheet, Dimensions, NavigationBar, ToastAndroid, FlatList, Image, TextInput, TouchableHighlight, TouchableWithoutFeedback,
+    TouchableNativeFeedback
+} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Icon1 from "react-native-vector-icons//AntDesign";
+import Icon1 from "react-native-vector-icons/AntDesign";
 import { Scene, Actions, Tabs } from 'react-native-router-flux';
-
-import Container from './Container';
-
-const { width ,scale} = Dimensions.get('window');
+import Swiper from 'react-native-swiper';
+import { Radio, WhiteSpace, List, Switch } from '@ant-design/react-native'
+const RadioItem = Radio.RadioItem;
+const { width, scale, height } = Dimensions.get('window');
 const s = width / 640;
+let date = new Date();
+let Y = date.getFullYear();
+let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+let D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+let groomdate = Y + '-' + M + '-' + D;
+let groomdate1 = Y + '/' + M + '/' + D;
+console.log(groomdate);
 
 export default class Composition extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            swiperShow: false,
             data: [],
-            data1: [],
-            data2: [],
-            data3: [],
-            data4: [],
-            data5: [],
-            usort_false:false,
-            onecolor: 'red',
-            oneborderBottomColor: '#ffdf41',
-            twocolor: '#000',
-            twoborderBottomColor: '#fff',
-            threecolor: '#000',
-            threeborderBottomColor: '#fff',
-            fourcolor: '#000',
-            fourborderBottomColor: '#fff',
-            fivecolor: '#000',
-            fiveborderBottomColor: '#fff',
-            sixcolor: '#000',
-            sixborderBottomColor: '#fff',
-            flag: 1
-        };
+            uid: '',
+            banner_data: [],
+            banner_data1: [],
+            banner_data2: [],
+            banner_data3: [],
+            banner_data4: [],
+            banner_data5: [],
+        }
     }
     componentDidMount() {
         AsyncStorage.getItem('uid')
-        .then((res)=>{
-            res===null?
-            this.setState({uid:''})
-            :
-            this.setState({uid:res})
-            this._usort();
-        })
-        
+            .then((res) => {
+                res === null ?
+                    this.setState({ uid: '' })
+                    :
+                    this.setState({ uid: res })
+                this.fetchf()
+                this.banner_data()
+            })
+        setTimeout(() => {
+            this.setState({
+                swiperShow: true,
+            });
+        }, 2)
+
     }
-    _usort=()=>{
-        fetch('http://116.62.14.0:8402/usort/msid/'+this.state.uid)
+    renderBanner() {
+        if (this.state.swiperShow && this.state.banner_data.length > 1) {
+            return (
+                this.state.banner_data.length === 5 ?
+                    <Swiper
+                        style={styles.wrapper}
+                        height={280 * s}
+                        showsButtons={false}
+                        removeClippedSubviews={false}
+                        autoplay={true}
+                        horizontal={true}
+                        paginationStyle={styles.paginationStyle}
+                        dotStyle={styles.dotStyle}
+                        activeDotStyle={styles.activeDotStyle}
+                    >
+                        <View style={{ position: 'relative' }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data1.mid })}>
+                                <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data1.mimage }} style={styles.bannerImg} />
+                                {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data1.mtitle}</Text> */}
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ position: 'relative' }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data2.mid })}>
+                                <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data2.mimage }} style={styles.bannerImg} />
+                                {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data2.mtitle}</Text> */}
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ position: 'relative' }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data3.mid })}>
+                                <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data3.mimage }} style={styles.bannerImg} />
+                                {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data3.mtitle}</Text> */}
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ position: 'relative' }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data4.mid })}>
+                                <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data4.mimage }} style={styles.bannerImg} />
+                                {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data4.mtitle}</Text> */}
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ position: 'relative' }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data5.mid })}>
+                                <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data5.mimage }} style={styles.bannerImg} />
+                                {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data5.mtitle}</Text> */}
+                            </TouchableOpacity>
+                        </View>
+                    </Swiper>
+                    : (this.state.banner_data.length === 4 ?
+                        <Swiper
+                            style={styles.wrapper}
+                            height={280 * s}
+                            showsButtons={false}
+                            removeClippedSubviews={false}
+                            autoplay={true}
+                            horizontal={true}
+                            paginationStyle={styles.paginationStyle}
+                            dotStyle={styles.dotStyle}
+                            activeDotStyle={styles.activeDotStyle}
+                        >
+                            <View style={{ position: 'relative' }}>
+                                <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data1.mid })}>
+                                    <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data1.mimage }} style={styles.bannerImg} />
+                                    {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data1.mtitle}</Text> */}
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ position: 'relative' }}>
+                                <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data2.mid })}>
+                                    <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data2.mimage }} style={styles.bannerImg} />
+                                    {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data2.mtitle}</Text> */}
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ position: 'relative' }}>
+                                <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data3.mid })}>
+                                    <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data3.mimage }} style={styles.bannerImg} />
+                                    {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data3.mtitle}</Text> */}
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ position: 'relative' }}>
+                                <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data4.mid })}>
+                                    <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data4.mimage }} style={styles.bannerImg} />
+                                    {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data4.mtitle}</Text> */}
+                                </TouchableOpacity>
+                            </View>
+                        </Swiper>
+                        : (this.state.banner_data.length === 3 ?
+                            <Swiper
+                                style={styles.wrapper}
+                                height={280 * s}
+                                showsButtons={false}
+                                removeClippedSubviews={false}
+                                autoplay={true}
+                                horizontal={true}
+                                paginationStyle={styles.paginationStyle}
+                                dotStyle={styles.dotStyle}
+                                activeDotStyle={styles.activeDotStyle}
+                            >
+                                <View style={{ position: 'relative' }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data1.mid })}>
+                                        <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data1.mimage }} style={styles.bannerImg} />
+                                        {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data1.mtitle}</Text> */}
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ position: 'relative' }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data2.mid })}>
+                                        <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data2.mimage }} style={styles.bannerImg} />
+                                        {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data2.mtitle}</Text> */}
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ position: 'relative' }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data3.mid })}>
+                                        <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data3.mimage }} style={styles.bannerImg} />
+                                        {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data3.mtitle}</Text> */}
+                                    </TouchableOpacity>
+                                </View>
+                            </Swiper>
+                            :
+                            <Swiper
+                                style={styles.wrapper}
+                                height={280 * s}
+                                showsButtons={false}
+                                removeClippedSubviews={false}
+                                autoplay={true}
+                                horizontal={true}
+                                paginationStyle={styles.paginationStyle}
+                                dotStyle={styles.dotStyle}
+                                activeDotStyle={styles.activeDotStyle}
+                            >
+                                <View style={{ position: 'relative' }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data1.mid })}>
+                                        <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data1.mimage }} style={styles.bannerImg} />
+                                        {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data1.mtitle}</Text> */}
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ position: 'relative' }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data2.mid })}>
+                                        <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data2.mimage }} style={styles.bannerImg} />
+                                        {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data2.mtitle}</Text> */}
+                                    </TouchableOpacity>
+                                </View>
+                            </Swiper>
+                        )));
+        } else {
+            return (
+                <View style={styles.wrapper}>
+                    <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data1.mid })}>
+                        <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data1.mimage }} style={styles.bannerImg} />
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+    }
+    banner_data = () => {
+        fetch('http://116.62.14.0:8402/carousel')
             .then((res) => res.json())
             .then((res) => {
-                res.data.length>0?
                 this.setState({
-                    data1: res.data[0],
-                    data2: res.data[1],
-                    data3: res.data[2],
-                    data4: res.data[3],
-                    data5: res.data[4]
-                })
-                :
-                this.setState({
-                    usort_false:true
-                })
-                //console.log(res.data);
+                    banner_data: res.data,
+                    banner_data1: res.data[0],
+                    banner_data2: res.data[1],
+                    banner_data3: res.data[2],
+                    banner_data4: res.data[3],
+                    banner_data5: res.data[4],
+                });
+                console.log(this.state.banner_data);
             })
     }
-    Change1 = () => {
-        console.log(1);
-        this.setState({
-            onecolor: 'red',
-            oneborderBottomColor: '#ffdf41',
-            twocolor: '#000',
-            twoborderBottomColor: '#fff',
-            threecolor: '#000',
-            threeborderBottomColor: '#fff',
-            fourcolor: '#000',
-            fourborderBottomColor: '#fff',
-            fivecolor: '#000',
-            fiveborderBottomColor: '#fff',
-            sixcolor: '#000',
-            sixborderBottomColor: '#fff',
-            flag : 1
-        })
-        
+    fetchf = () => {
+        fetch('http://116.62.14.0:8402/groom/time/'+groomdate)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    data: res.data,
+                });
+            })
     }
-    Change2 = () => {
-        this.setState({
-            onecolor: '#000',
-            oneborderBottomColor: '#fff',
-            twocolor: 'red',
-            twoborderBottomColor: '#ffdf41',
-            threecolor: '#000',
-            threeborderBottomColor: '#fff',
-            fourcolor: '#000',
-            fourborderBottomColor: '#fff',
-            fivecolor: '#000',
-            fiveborderBottomColor: '#fff',
-            sixcolor: '#000',
-            sixborderBottomColor: '#fff',
-            flag : 2
-        })
-    }
-    Change3 = () => {
-        this.setState({
-            onecolor: '#000',
-            oneborderBottomColor: '#fff',
-            twocolor: '#000',
-            twoborderBottomColor: '#fff',
-            threecolor: 'red',
-            threeborderBottomColor: '#ffdf41',
-            fourcolor: '#000',
-            fourborderBottomColor: '#fff',
-            fivecolor: '#000',
-            fiveborderBottomColor: '#fff',
-            sixcolor: '#000',
-            sixborderBottomColor: '#fff',
-            flag : 3
-        })
-    }
-    Change4 = () => {
-        this.setState({
-            onecolor: '#000',
-            oneborderBottomColor: '#fff',
-            twocolor: '#000',
-            twoborderBottomColor: '#fff',
-            threecolor: '#000',
-            threeborderBottomColor: '#fff',
-            fourcolor: 'red',
-            fourborderBottomColor: '#ffdf41',
-            fivecolor: '#000',
-            fiveborderBottomColor: '#fff',
-            sixcolor: '#000',
-            sixborderBottomColor: '#fff',
-            flag : 4
-        })
-    }
-    Change5 = () => {
-        this.setState({
-            onecolor: '#000',
-            oneborderBottomColor: '#fff',
-            twocolor: '#000',
-            twoborderBottomColor: '#fff',
-            threecolor: '#000',
-            threeborderBottomColor: '#fff',
-            fourcolor: '#000',
-            fourborderBottomColor: '#fff',
-            fivecolor: 'red',
-            fiveborderBottomColor: '#ffdf41',
-            sixcolor: '#000',
-            sixborderBottomColor: '#fff',
-            flag : 5
-        })
-    }
-    Change6 = () => {
-        this.setState({
-            onecolor: '#000',
-            oneborderBottomColor: '#fff',
-            twocolor: '#000',
-            twoborderBottomColor: '#fff',
-            threecolor: '#000',
-            threeborderBottomColor: '#fff',
-            fourcolor: '#000',
-            fourborderBottomColor: '#fff',
-            fivecolor: '#000',
-            fiveborderBottomColor: '#fff',
-            sixcolor: 'red',
-            sixborderBottomColor: '#ffdf41',
-            flag : 6
-        })
-    }
-
     render() {
-        // console.log(this.state.flag);
         return (
-            <View style={{ flex: 1, backgroundColor: '#f5f5f9' }}>
-                {/* header标题栏 */}
-                <View style={styles.header}>
-                    <View style={{width:'10%',alignItems:'center'}}>
-                        <TouchableOpacity onPress={() => Actions.source()}>
-                            <Image
-                                source={require('../../assets/composition/composition/all.png')}
-                                style={{ width: 40 * s, height: 40 * s }}
-                            />
+            <View>
+                <View style={{ position: 'relative' }}>
+                    {/* 搜索 */}
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', height: 240 * s, backgroundColor: '#fff' }}>
+                        {/* <Image source={require('../../assets/1.jpg')} style={{width:width,height:240*s}} /> */}
+                        <TouchableOpacity style={{ position: 'absolute', top: 10 * s, zIndex: 100, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: 60 * s, width: '90%', borderRadius: 30 * s, backgroundColor: '#F5F5F5' }}
+                            onPress={() => { Actions.searchEssay() }}>
+                            <Text style={{ color: '#666666' }}>请输入要搜索的内容</Text>
+                            <Icon1 style={{ paddingLeft: 10 * s }} name='search1' size={30 * s} color='#666666' />
                         </TouchableOpacity>
                     </View>
-                    {/* 搜索 */}
-                    <View style={{backgroundColor:'#FFF',
-                    alignItems:'center',flexDirection:'row',justifyContent:'center',height:90*s,width:'60%'}}>
-                        <TouchableOpacity style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:60*s,width:'100%',borderRadius:30*s,backgroundColor:'#F5F5F5'}} 
-                        onPress={()=>{Actions.searchEssay()}}>
-                            <Text style={{color:'#666666'}}>请输入要搜索的内容</Text>
-                            <Icon1 style={{paddingLeft:10*s}} name='search1' size={30*s} color='#666666'/>
-                        </TouchableOpacity>
+                    {/* 轮播 */}
+                    <View style={styles.container}>
+                        {this.renderBanner()}
+                    </View>
+                    {/* tab */}
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', height: 270 * s, backgroundColor: '#fff', alignItems: 'flex-end', paddingBottom: 30 * s, paddingTop: 20 * s }}>
+                        <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <TouchableOpacity onPress={() => { Actions.source() }}>
+                                <Image source={require('../../assets/composition/composition/composition.png')} style={{ marginLeft: 14 * s }} />
+                                <Text>素材分类</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { Actions.skill1() }}>
+                            {/* <TouchableOpacity> */}
+                                <Image source={require('../../assets/composition/composition/jifa.png')} style={{ marginLeft: 14 * s }} />
+                                <Text>技法学习</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { Actions.realpaper() }}>
+                            {/* <TouchableOpacity> */}
+                                <Image source={require('../../assets/composition/composition/zhenti.png')} style={{ marginLeft: 14 * s }} />
+                                <Text>真题解析</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <Image source={require('../../assets/composition/composition/heji.png')} style={{ marginLeft: 14 * s }} />
+                                <Text>日更合集</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    {/* 日更 */}
+                    <View style={{ flexDirection: 'row', backgroundColor: '#FFF', justifyContent: 'space-between', marginTop: 12 * s, padding: 20 * s, borderBottomColor: 'gray', borderBottomWidth: s }}>
+                        {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginRight: 20 * s }} /> */}
+                        <View><Text style={{ fontSize: 26 * s }}>每日推荐</Text></View>
+                        <View><Text style={{ fontSize: 20 * s, color: 'gray', marginTop: 4 * s }}>{groomdate1}</Text></View>
+                        {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginLeft: 20 * s }} /> */}
                     </View>
                     <View>
-                        <Text onPress={() => { Actions.seleced() }} style={{ color: 'red', fontSize: 28*s }}>修改标签</Text>
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item }) => (
+                                item.mimage === '' ?
+                                    <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
+                                        <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
+                                            <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
+                                            <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    :
+                                    <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
+                                        <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
+                                            <Image
+                                                style={{ width: "100%", height: 240 * s }}
+                                                source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
+                                            />
+                                            <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
+                                            <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                            )}
+                        />
                     </View>
-                </View>
-                {/* label 标签页*/}
-                {
-                        this.state.usort_false?
-                        <View style={styles.label1}>
-                        <TouchableOpacity>
-                            <Text style={[styles.onelabel, { color: this.state.onecolor }, { borderBottomColor: this.state.oneborderBottomColor }]} onPress={this.Change1}>推荐</Text>
-                        </TouchableOpacity>
-                        </View>
-                        :
-
-                    
-                <View style={styles.label}>
-                    <TouchableOpacity>
-                        <Text style={[styles.onelabel, { color: this.state.onecolor }, { borderBottomColor: this.state.oneborderBottomColor }]} onPress={this.Change1}>推荐</Text>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity>
-                        <Text style={[styles.twolabel, { color: this.state.twocolor }, { borderBottomColor: this.state.twoborderBottomColor }]} onPress={this.Change2}>{this.state.data1.msname}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[styles.threelabel, { color: this.state.threecolor }, { borderBottomColor: this.state.threeborderBottomColor }]} onPress={this.Change3}>{this.state.data2.msname}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[styles.fourlabel, { color: this.state.fourcolor }, { borderBottomColor: this.state.fourborderBottomColor }]} onPress={this.Change4}>{this.state.data3.msname}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[styles.fivelabel, { color: this.state.fivecolor }, { borderBottomColor: this.state.fiveborderBottomColor }]} onPress={this.Change5}>{this.state.data4.msname}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[styles.sixlabel, { color: this.state.sixcolor }, { borderBottomColor: this.state.sixborderBottomColor }]} onPress={this.Change6}>{this.state.data5.msname}</Text>
-                    </TouchableOpacity>
-                </View>
-                }
-                {/* container */}
-                <View>
-                    <Container flag={this.state.flag} msid={[this.state.data1.msid,this.state.data2.msid,this.state.data3.msid,this.state.data4.msid,this.state.data5.msid]} />
                 </View>
             </View>
         )
@@ -240,58 +306,34 @@ export default class Composition extends Component {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        height: 90 * s,
-        flexDirection: 'row',
-        alignItems: 'center',
-        width:'100%',
-        backgroundColor:'#FFF',
-        justifyContent: 'space-around'
+    container: {
+        height: 280 * s,
+        width: '90%',
+        position: 'absolute',
+        zIndex: 999,
+        top: 90 * s,
+        left: '5%',
     },
-    search: {
-        width: 400 * s,
-        height: 50 * s,
+    wrpaper: {
+        height: 280 * s,
+        width: '100%',
+    },
+    paginationStyle: {
+        bottom: 6 * s,
+    },
+    dotStyle: {
+        width: 14 * s,
+        height: 4 * s,
         backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center'
     },
-    label: {
-        width: width,
-        height: 60 * s,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around'
+    activeDotStyle: {
+        width: 30 * s,
+        height: 4 * s,
+        backgroundColor: 'red',
     },
-    label1: {
-        width: width,
-        height: 60 * s,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
+    bannerImg: {
+        height: 280 * s,
+        width: '100%',
+        borderRadius: 10 * s
     },
-    onelabel: {
-        borderBottomWidth: 4,
-        fontSize: 33*s
-    },
-    twolabel: {
-        borderBottomWidth: 4,
-        fontSize: 33*s
-    },
-    threelabel: {
-        borderBottomWidth: 4,
-        fontSize: 33*s
-    },
-    fourlabel: {
-        borderBottomWidth: 4,
-        fontSize: 33*s
-    },
-    fivelabel: {
-        borderBottomWidth: 4,
-        fontSize: 33*s
-    },
-    sixlabel: {
-        borderBottomWidth: 4,
-        fontSize: 33*s
-    }
 })

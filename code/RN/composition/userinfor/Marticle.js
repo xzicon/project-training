@@ -53,7 +53,7 @@ export default class Marticle extends Component {
                     case "0": {
                         console.log(data.data);
                         ToastAndroid.showWithGravity('删除成功!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-                        Actions.pop()
+                        Actions.write()
                         break;
                     }
                     default: {
@@ -71,7 +71,7 @@ export default class Marticle extends Component {
                     this.state.data.map(data =>
                         <View>
                             <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                                <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
+                                <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.write()}>
                                     <Icon name="left" color="#333" size={40 * s} />
                                 </TouchableOpacity>
                                 <View>

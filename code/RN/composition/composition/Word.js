@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/AntDesign';
 import Tword from './Tword';
 
 const { width, scale, height } = Dimensions.get('window');
@@ -27,7 +28,6 @@ export default class Word extends Component {
             twoborderBottomColor: '#fff',
             flag: '1'
         })
-        this.fetchp();
     }
     Change2 = () => {
         console.log(1);
@@ -36,10 +36,10 @@ export default class Word extends Component {
             oneborderBottomColor: '#fff',
             twocolor: 'red',
             twoborderBottomColor: '#ffdf41',
-            flag: '2'
+            flag: '2',
+            updatec: false,
+            updatea: false,
         })
-        this.fetchp();
-
     }
     componentDidMount() {
         this.fetchp();
@@ -56,46 +56,54 @@ export default class Word extends Component {
                 this.setState({ 
                     data: res.data 
                 });
-                // console.log(res.data);
             })
+    }
+    _word = () => {
+        return (
+            <Tword updatea={this.state.updatea} updatec={this.state.updatec} flag={this.state.flag} mid={this.props.mid} />
+        )
     }
     render() {
         if (this.props.lp === '1') {
             return (
                 <View>
-                    <View style={styles.lsource}>
-                        <TouchableOpacity onPress={() => { this.Change1() }}>
-                            <Text style={[styles.onelabel, { color: this.state.onecolor }, { borderBottomColor: this.state.oneborderBottomColor }]}>最热</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { this.Change2() }}>
-                            <Text style={[styles.twolabel, { color: this.state.twocolor }, { borderBottomColor: this.state.twoborderBottomColor }]}>最新</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <Tword flag={this.state.flag} mid={this.props.mid} />
+                    {this._word()}
                 </View>
             )
         } else {
             return (
                 <View>
-                    {this.state.data.length !== 0 ? this.state.data.map(data => (
-                        <View style={{ backgroundColor: '#cfc5bb', marginTop: 10*s, marginBottom: 10*s, flex: 1 }}>
-                            <View style={styles.header}>
-                                <TouchableOpacity onPress={() => Actions.people({uid: data.uid})}>
-                                    <Image
-                                        source={{ uri: 'http://116.62.14.0:8402/images/' + data.uimage }}
-                                        style={{ width: 60*s, height: 60*s, borderRadius: 60*s }}
-                                    />
-                                </TouchableOpacity>
-                                <View style={styles.theader}>
-                                    <Text style={{ fontSize: 24*s }}>{data.uname}</Text>
-                                    <Text style={{ fontSize: 20*s, color: 'gray' }}>{data.mctime}</Text>
+                    {this.state.data.length !== 0 ? this.state.data.map(item => (
+                        <View style={{ flexDirection: 'column' }}>
+                        <TouchableNativeFeedback
+                            background={TouchableNativeFeedback.SelectableBackground()}
+                            onPressOut={() => this.reply_modal(item)}
+                        >
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ width: '18%', paddingTop: 15 * s, justifyContent: 'center', flexDirection: 'row' }}>
+                                    <TouchableOpacity
+                                        onPress={() => { Actions.personHome({ uid: item.uid }) }}
+                                    >
+                                        <Image style={{ width: 60 * s, height: 60 * s, borderRadius: 60 * s, margin: 10 / scale }}
+                                            source={{ uri: 'http://116.62.14.0:8402/images/' + item.uimage }}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ paddingTop: 20 / scale, paddingRight: 20 / scale, width: '82%' }}>
+                                    <View>
+                                        <Text style={{ fontSize: 20 * s }}>{item.uname}</Text>
+                                    </View>
+                                    <View>
+                                        <Text style={{ fontSize: 18 * s, color: '#666666' }}>{item.mctime}</Text>
+                                    </View>
+                                    <View>
+                                        <Text style={{ marginTop: 20 / scale, marginRight: 20 / scale,paddingBottom: 20 / scale, fontSize: 20 * s, borderBottomWidth: 0.5*s, borderBottomColor: '#F0F0F0' }}>{item.mccontent}</Text>
+                                    </View>
                                 </View>
                             </View>
-                            <View style={styles.content}>
-                                <Text style={{fontSize: 24*s}}>{data.mccontent}</Text>
-                            </View>
+                        </TouchableNativeFeedback>
                         </View>
-                    )) : <View style={{ backgroundColor: '#cfc5bb', marginTop: 10*s, marginBottom: 10*s, flex: 1 }}>
+                    )) : <View style={{ margin: 20*s}}>
                             <Text>当前还没有评论哦~  </Text>
                         </View>}
                 </View>
@@ -131,12 +139,12 @@ const styles = StyleSheet.create({
     onelabel: {
         borderBottomWidth: 2*s,
         fontSize: 24*s,
-        marginLeft: 20 * s
+        marginLeft: width*0.05
     },
     twolabel: {
         borderBottomWidth: 2*s,
         fontSize: 24*s,
-        marginLeft: 20 * s
+        marginLeft: width*0.05
     },
     content: {
         marginLeft: 120 * s,

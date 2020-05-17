@@ -41,7 +41,7 @@ export default class AddEssay extends Component {
       inputValue: '',
       utime: '',
       aimage: '',
-      imageUrl1: '',
+      imageUrl: '',
       flag: '1'
     })
   }
@@ -53,7 +53,7 @@ export default class AddEssay extends Component {
           :
           this.setState({ uid: res })
       })
-      
+     
   }
   takephoto = (e) => {
     var formData = new FormData();
@@ -132,7 +132,8 @@ export default class AddEssay extends Component {
             this.setState({
               atitle:'',
               inputValue:'',
-              aimage:''
+              aimage:'',
+              imageUrl: '',
             })
             ToastAndroid.show('写作成功,待审核', 100);
             // Actions.pop({ e: true })
@@ -144,6 +145,7 @@ export default class AddEssay extends Component {
         })
     }
   }
+
   atitle = (atitle) => {
     if (atitle.length >= 10) {
       ToastAndroid.show('标题超出字数限制', 10)
@@ -151,16 +153,26 @@ export default class AddEssay extends Component {
       this.setState({ atitle: atitle })
     }
   }
+
+  back = ()=>{
+    this.setState({
+      atitle:'',
+      inputValue:'',
+      aimage:'',
+      imageUrl: '',
+    })
+    Actions.pop();
+  }
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ height: 80 * s, marginBottom: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffffff' }}>
+        <View style={{ height: 80 * s, marginBottom: 5, padding:15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff' }}>
           <View style={{
             width: 60, height: 50 * s,
-            borderRadius: 15 * s,
-            justifyContent: 'center', alignItems: 'center'
+            
+            justifyContent: 'center', alignItems: 'center',
           }}>
-            <TouchableOpacity onPress={Actions.pop}><Text>取消</Text></TouchableOpacity>
+            <TouchableOpacity onPress={this.back}><Text>取消</Text></TouchableOpacity>
           </View>
           <View style={{ width: '60%' }}></View>
           <View style={{
@@ -174,29 +186,35 @@ export default class AddEssay extends Component {
             </TouchableOpacity>
           </View>
         </View>
+
         <TextInput
-          style={{ backgroundColor: '#FFF', padding: 10, borderBottomWidth: 1, borderColor: 'grey' }}
+          style={{ width:'98%',marginLeft:'1%',backgroundColor: '#FFF', padding: 10,fontSize:26*s ,elevation:10 }}
           placeholder="在此输入作文标题"
+          placeholderTextColor="gray"
           onChangeText={this.atitle}
+          maxLength={20}
+          
         />
-        <View style={{
-          borderBottomWidth: 1, borderColor: 'grey',
+        <View style={{width:'98%',marginLeft:'1%',
+          marginTop:'0.5%',
           alignItems: 'center', flexDirection: 'row', backgroundColor: '#FFF'
         }}>
           <Text style={{ padding: 5 }}>#</Text>
-          <TextInput placeholder="标签"
+          <TextInput placeholder="标签" placeholderTextColor="#5a6d95"
+            style={{fontSize:20*s,color:'#5a6d95'}}
             onChangeText={(atag) => {
               this.setState({ atag: '#' + atag })
             }}
           />
         </View>
-        <View>
+        <View style={{width:'98%',marginTop:'0.5%',marginLeft:'1%',}}>
           <ScrollView>
             <RichTextView
-              style={{ height: 240, backgroundColor: '#FFF', marginBottom: 0, paddingBottom: 0 }}
-              inputStyle={{ padding: 10 }}
+              style={{ height:380, backgroundColor: '#FFF', marginBottom: 0, paddingBottom: 0 }}
+              inputStyle={{ padding: 10 ,fontSize:25*s}}
               placeholder="在此输入作文内容"
-              minHeight={240}
+              
+              minHeight={380}
               maxLength={2000}
               onChangeText={(inputValue) => {
                 this.setState({ inputValue: inputValue })
@@ -209,14 +227,19 @@ export default class AddEssay extends Component {
         {/* <View style={{flexDirection:'row',justifyContent:'flex-end',backgroundColor:'#FFF'}}>
               <Text>{this.state.inputValue.length}/1000</Text>
             </View> */}
-        <TouchableOpacity onPress={() => { this.takephoto() }}>
-            <Image style={{width:50,height:50}} source={require('../../assets/composition/essay/pic.png')}/>
-        </TouchableOpacity>
-        
-        <Image style={{ width: '90%', height:300*s, marginTop: 10*s}}
-        source={{uri:'http://116.62.14.0:8402/images/'+this.state.aimage}}
-        />
+        <View style={{width:'98%',height:340*s,marginTop:'0.5%',marginLeft:'1%',backgroundColor:'#fff'}}>
+          {this.state.aimage===''?
+            <TouchableOpacity onPress={() => { this.takephoto() }}>
+                <Image style={{width:54.5,height:55.5,margin:'4%'}} source={require('../../assets/composition/essay/pic.png')}/>
+            </TouchableOpacity>
+            :
+            <Image style={{ width: '90%', height:300*s,marginTop:'3%',marginLeft:'5%'}}
+            source={{uri:'http://116.62.14.0:8402/images/'+this.state.aimage}}
+            />
+          }
+        </View>
       </View>
     )
   }
 }
+ 

@@ -96,26 +96,26 @@ export default class Userinfor extends Component {
                                     :<Image source={this.state.imageUrl} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s, }} />}
                                 </TouchableOpacity>
                                 <View style={{ width: width * 0.5, justifyContent: 'center', paddingLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 28 * s, }}>{this.state.data.uname}</Text>
-                                    <Text style={{ fontSize: 20 * s, color: 'grey' }}>{this.state.data.udescribe}</Text>
+                                    <Text style={{ fontSize: 26 * s, }}>{this.state.data.uname}</Text>
+                                    <Text style={{ fontSize: 18 * s, color: 'grey' }}>{this.state.data.udescribe}</Text>
                                 </View>
                                 {/* 编辑资料 */}
                                 <TouchableOpacity onPress={() => { Actions.ziliao() }} style={{ width: 130 * s, justifyContent: 'center' }}  >
                                     <View style={{ width: 130 * s, borderWidth: 1, justifyContent: 'center', alignItems: 'center', padding: 10 * s }}>
-                                        <Text style={{ color: '#000', fontSize: 24 * s, }}>编辑资料</Text>
+                                        <Text style={{ color: '#000', fontSize: 20 * s, }}>编辑资料</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
                         </View>
                         <View style={{ width: width * 0.96, height: 75 * s, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                             <TouchableOpacity onPress={() => Actions.follow({ uid: this.state.uid })} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>关注</Text>
+                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>关注</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Actions.huozan() }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>获赞</Text>
+                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>获赞</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Actions.fensi({ uid: this.state.uid }) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>{this.state.data.ufans}粉丝</Text>
+                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>{this.state.data.ufans}粉丝</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -125,58 +125,58 @@ export default class Userinfor extends Component {
                             <Image
                                 resizeMode="contain"
                                 source={own[0].img}
-                                style={{ width: 40 * s, height: 40 * s, marginTop: '3%', marginBottom: '5%' }}
+                                style={{ width: 35 * s, height: 35 * s, marginTop: '3%', marginBottom: '5%' }}
                             />
-                            <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>收藏</Text>
+                            <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>收藏</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => { Actions.write({ uid: this.state.uid }) }} style={{ width: width * 0.22, alignItems: 'center', justifyContent: 'center' }}>
                             <Image
                                 resizeMode="contain"
                                 source={own[1].img}
-                                style={{ width: 40 * s, height: 40 * s, marginTop: '3%', marginBottom: '5%' }}
+                                style={{ width: 35 * s, height: 35 * s, marginTop: '3%', marginBottom: '5%' }}
                             />
-                            <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>创作</Text>
+                            <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>创作</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => { Actions.praise({ uid: this.state.uid }) }} style={{ width: width * 0.26, alignItems: 'center', justifyContent: 'center' }}>
                             <Image
                                 resizeMode="contain"
                                 source={own[2].img}
-                                style={{ width: 40 * s, height: 40 * s, marginTop: '3%', marginBottom: '5%' }}
+                                style={{ width: 35 * s, height: 35 * s, marginTop: '3%', marginBottom: '5%' }}
                             />
-                            <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>我赞过的</Text>
+                            <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>我赞过的</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => { Actions.mnew({ uid: this.state.uid }) }} style={{ width: width * 0.26, alignItems: 'center', justifyContent: 'center' }}>
                             <Image
                                 resizeMode="contain"
                                 source={own[3].img}
-                                style={{ width: 40 * s, height: 40 * s, marginTop: '3%', marginBottom: '5%' }}
+                                style={{ width: 35 * s, height: 35 * s, marginTop: '3%', marginBottom: '5%' }}
                             />
-                            <Text style={{ fontSize: 28 * s, color: '#333', textAlignVertical: 'center' }}>我评论的</Text>
+                            <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>我评论的</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ backgroundColor: "white", width: width * 0.96, marginTop: 15 / scale, marginLeft: '2%', marginRight: '2%' }}>
                         <TouchableOpacity style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
-                            <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[0].title}</Text>
+                            <Text style={{ position: 'absolute', left: '3%', fontSize: 24 * s, color: '#333' }} >{others[0].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Actions.question()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
-                            <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[1].title}</Text>
+                            <Text style={{ position: 'absolute', left: '3%', fontSize: 24 * s, color: '#333' }} >{others[1].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                         <TouchableOpacity style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
-                            <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[2].title}</Text>
+                            <Text style={{ position: 'absolute', left: '3%', fontSize: 24 * s, color: '#333' }} >{others[2].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Actions.feedback({ uid: this.state.uid })} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
-                            <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[3].title}</Text>
+                            <Text style={{ position: 'absolute', left: '3%', fontSize: 24 * s, color: '#333' }} >{others[3].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Actions.myset()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
-                            <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[4].title}</Text>
+                            <Text style={{ position: 'absolute', left: '3%', fontSize: 24 * s, color: '#333' }} >{others[4].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                     </View>

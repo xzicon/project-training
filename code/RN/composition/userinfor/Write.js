@@ -40,11 +40,11 @@ export default class Write extends Component {
                 {this.state.data.length !== 0 ?
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                            <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.userinfor()}>
+                            <TouchableOpacity style={{ left: 30 * s, }} onPress={() => Actions.userinfor()}>
                                 <Icon name="left" color="#333" size={40 * s} />
                             </TouchableOpacity>
                             <View>
-                                <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.3 }}>我的创作</Text>
+                                <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.32 }}>我的创作</Text>
                             </View>
                         </View>
                         <ScrollView>
@@ -62,21 +62,21 @@ export default class Write extends Component {
                                                     <View style={{ width: '100%', height: '50%', marginTop: '1%', paddingLeft: '3%', paddingRight: '3%', overflow: 'hidden' }}><Text style={{ fontSize: 24 * s, color: '#333' }} >{item.acontent}</Text></View>
                                                     <View style={{ width: '100%', height: '5%', marginTop: '1%', paddingLeft: '3%', }}><Text style={{ fontSize: 18 * s, color: '#333' }} >{item.atag}</Text></View>
                                                 </TouchableOpacity>
-                                                <View style={{flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
+                                                <View style={{flexDirection:'row',justifyContent:'flex-end',alignItems:'center', marginTop: 14*s}}>
                                                 {
                                                     item.aaudit==1?
                                                     <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'blue', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s }}>已发布</Text>
+                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'blue', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: 10*s }}>已发布</Text>
                                                     </View>
                                                     :
                                                     (
                                                         item.aaudit==0?
                                                         <View style={{ }}>
-                                                            <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s }}>未审核</Text>
+                                                            <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: 10*s }}>未审核</Text>
                                                         </View>
                                                         :
                                                         <View style={{ }}>
-                                                            <Text style={{ fontSize: 24 * s, backgroundColor: '#666666', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s }}>审核不通过</Text>
+                                                            <Text style={{ fontSize: 24 * s, backgroundColor: '#666666', color: '#fff', width: width * 0.24, textAlign: 'center', borderRadius: 14 * s, marginRight: 10*s }}>审核不通过</Text>
                                                         </View>
                                                     )
                                                     
@@ -84,16 +84,16 @@ export default class Write extends Component {
                                                 {
                                                 item.agrade==0?
                                                 <View style={{ }}>
-                                                    <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s }}>未邀请</Text>
+                                                    <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: '3%' }}>未邀请</Text>
                                                 </View>
                                                 :(
                                                     item.agrade==-1?
                                                     <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s }}>等待点评</Text>
+                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.2, textAlign: 'center', borderRadius: 14 * s, marginRight: '3%' }}>等待点评</Text>
                                                     </View>
                                                     :
                                                     <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s }}>已点评</Text>
+                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: '3%' }}>已点评</Text>
                                                     </View>
                                                 )
                                                 

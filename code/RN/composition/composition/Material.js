@@ -1,253 +1,269 @@
-import React, { Component } from 'react'
-import { Text, View, ScrollView, TouchableOpacity, StyleSheet, Dimensions, NavigationBar, ToastAndroid, FlatList, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Actions } from 'react-native-router-flux';
+import React, {
+    Component
+} from 'react';
+import {
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    BackHandler,
+    Dimensions,
+    Image,
+    Modal
+} from 'react-native';
 import Video from 'react-native-video';
-
 const { width, scale, height } = Dimensions.get('window');
 const s = width / 640;
-
-export default class Material extends Component {
+export default class VideoScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
             rate: 1,
-            volume: 1,
+            volume: 0.6,
             muted: false,
-            resizeMode: 'contain',
             duration: 0.0,
             currentTime: 0.0,
             paused: true,
-            flag: '1',
+            play: false,
+            volumeplay: false
         }
-
     }
-    componentDidMount() {
-        fetch('http://116.62.14.0:8402/material/zuire/' + this.props.msid)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data: res.data});
-                console.log(res.data);
-            })
+    static navigationOptions = {
+        header: null
+    };
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
     }
-    Change1 = () => {
-        fetch('http://116.62.14.0:8402/material/zuire/' + this.props.msid)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data: res.data, flag: '1' });
-                console.log(res.data);
-            })
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
     }
-    Change2 = () => {
-        fetch('http://116.62.14.0:8402/material/zuixin/' + this.props.msid)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data: res.data, flag: '2' });
-                console.log(res.data);
-            })
+    onBackAndroid = () => {
+        this.props.navigation.goBack();
+        return true;
+    };
+    onLoad = (data) => {
+        this.setState({ duration: data.duration });
+        console.log(data.duration + "xxx");
+    };
+    onProgress = (data) => {
+        this.setState({ currentTime: data.currentTime });
+        console.log(data.currentTime + "hhh");
+    };
+    onEnd = () => {
+        this.setState({ paused: true })
+        this.video.seek(0)
+    };
+    onAudioBecomingNoisy = () => {
+        this.setState({ paused: true })
+    };
+    onAudioFocusChanged = (event) => {
+        this.setState({ paused: !event.hasAudioFocus })
+    };
+    getCurrentTimePercentage() {
+        if (this.state.currentTime > 0) {
+            return parseFloat(this.state.currentTime) / parseFloat(this.state.duration);
+        }
+        return 0;
+    };
+    _play = () => {
+        this.setState({ play: true });
+    }
+    _play_false = () => {
+        this.setState({ play: false })
+    }
+    ratePlay = (rate) => {
+        if(rate === 1){
+            this.setState({rate: 1.5})
+        }else if(rate === 1.5){
+            this.setState({rate: 2})
+        }else if(rate === 2){
+            this.setState({rate: 0.75})
+        }else if(rate === 0.75){
+            this.setState({rate: 0.5})
+        }else if(rate === 0.5){
+            this.setState({rate: 1})
+        }
+    }
+    volumePlay1 = (volume) => {
+        if(volume >= 0 && volume < 1){
+            this.setState({volume: volume+0.1})
+        }else{
+            this.setState({volume: 1})
+        }
+    }
+    volumePlay2 = (volume) => {
+        if(volume > 0 && volume <= 1) {
+            this.setState({volume: volume-0.1})
+        }else{
+            this.setState({volume: 0})
+        }
+    }
+    _volume = () => {
+        this.setState({ volumeplay: true });
+    }
+    _volume_false = () => {
+        this.setState({ volumeplay: false })
     }
     render() {
+        const flexCompleted = this.getCurrentTimePercentage() * 100;
+        const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
         return (
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <Icon onPress={() => { Actions.pop() }} name="left" color="#000" style={{ marginLeft: 30 }} size={40 * s} />
-                    <Text style={{ color: '#000', marginLeft: width * 0.34, marginRight: width * 0.32, fontSize: 35 * s }}>{this.props.msname}</Text>
-                </View>
-                {this.state.flag === '1' ?
-                    <View>
-                        <View style={styles.source}>
-                            <TouchableOpacity>
-                                <Text onPress={() => { this.Change1() }} style={{ color: 'red', borderBottomColor: 'red', borderBottomWidth: 4 * s, marginLeft: 30 * s, fontSize: 26 * s }}>最热</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text onPress={() => { this.Change2() }} style={{ color: '#000',  marginLeft: 30 * s, fontSize: 26 * s }}>最新</Text>
-                            </TouchableOpacity>
+            <View style={styles.container}>
+                <Modal
+                    animationType='silde'
+                    onRequestClose={this._volume_false}//安卓必须设置
+                    transparent={true}
+                    visible={this.state.volumeplay}
+                    autoFocus={true}
+                >
+                    <TouchableOpacity style={styles.cover}
+                        onPress={this._volume_false}>
+                    </TouchableOpacity>
+                    <View style={{ position: 'absolute', top: 250 * s, right: 60 * s }}>
+                        <TouchableOpacity onPress={() => { this.volumePlay1(this.state.volume) }} style={{paddingTop: 10*s }}>
+                            <Image source={require('../../assets/composition/composition/jia.png')} style={{ width: 24 * s, height: 24 * s }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { this.volumePlay2(this.state.volume) }} style={{paddingTop: 10*s }}>
+                            <Image source={require('../../assets/composition/composition/jian.png')} style={{ width: 24 * s, height: 24 * s}} />
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+                <Modal
+                    animationType='silde'
+                    onRequestClose={this._play_false}//安卓必须设置
+                    transparent={true}
+                    visible={this.state.play}
+                    autoFocus={true}
+                >
+                    <TouchableOpacity style={styles.cover}
+                        onPress={this._play_false}>
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row', position: 'absolute', top: 314 * s, left: 30 * s, right: 30 * s, justifyContent: 'space-between' }}>
+                        <View>
+                            {this.state.paused ? 
+                            <TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })}>
+                                <Image source={require('../../assets/composition/composition/zanting.png')} style={{ width: 26 * s, height: 26 * s }} />
+                            </TouchableOpacity>:
+                            <TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })}>
+                                <Image source={require('../../assets/composition/composition/bofang.png')} style={{ width: 26 * s, height: 26 * s }} />
+                            </TouchableOpacity>}
                         </View>
-                        <View>
-                            <FlatList
-                                style={{ backgroundColor: '#fff' }}
-                                data={this.state.data}
-                                numColumns={1}
-                                renderItem={({ item }) => (
-                                    item.mimage === '' ?
-                                    <View>
-                                        <View style={styles.container}>
-                                            <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                <Text style={{ fontSize: 30 * s, margin: 10 * s, height: 320 * s, paddingTop: 100 * s }}>{item.mtitle}</Text>
-                                                <Text style={{ fontSize: 18 * s, textAlign: 'right', margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                        </View>
-                                        : (item.mimage.split('.')[1] === 'mp4' ?
-                                            <View style={styles.container}>
-                                                <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                    <TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })}>
-                                                        <Video
-                                                            source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                            ref={(ref) => { //方法对引用Video元素的ref引用进行操作
-                                                                this.video = ref
-                                                            }}
-                                                            style={{ width: width, height: 280*s }}
-                                                            rate={this.state.rate}//播放速率
-                                                            paused={this.state.paused}//暂停
-                                                            volume={this.state.volume}//调节音量
-                                                            muted={this.state.muted}//控制音频是否静音
-                                                        />
-                                                    </TouchableOpacity>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s }}>{item.mtitle}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                            :
-                                            <View style={styles.container}>
-                                                <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                    <Image
-                                                        style={{ width: width - 20* s, height: 280 * s, margin: 10 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s }}>{item.mtitle}</Text>
-                                                </TouchableOpacity>
-                                            </View>)
-                                )}
-                            />
-                        </View>
-                    </View> :
-                    (this.state.flag === '2' ?
-                        <View>
-                            <View style={styles.source}>
-                                <TouchableOpacity>
-                                    <Text onPress={() => { this.Change1() }} style={{ color: '#000', marginLeft: 30 * s, fontSize: 18 }}>最热</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <Text onPress={() => { this.Change2() }} style={{ color: 'red', borderBottomColor: 'red', marginLeft: 30 * s, borderBottomWidth: 4, fontSize: 18 }}>最新</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View>
-                                <FlatList
-                                    style={{ backgroundColor: '#fff' }}
-                                    data={this.state.data}
-                                    numColumns={1}
-                                    renderItem={({ item }) => (
-                                        item.mimage === '' ?
-                                            <View style={styles.container}>
-                                                <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                <Text style={{ fontSize: 30 * s, margin: 10 * s, height: 320 * s, paddingTop: 100 * s }}>{item.mtitle}</Text>
-                                                <Text style={{ fontSize: 18 * s, textAlign: 'right', margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                            : (item.mimage.split('.')[1] === 'mp4' ?
-                                                <View style={styles.container}>
-                                                    <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                        <TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })}>
-                                                            <Video
-                                                                source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                                ref={(ref) => { //方法对引用Video元素的ref引用进行操作
-                                                                    this.video = ref
-                                                                }}
-                                                                style={{ width: width, height: 260 * s }}
-                                                                rate={this.state.rate}//播放速率
-                                                                paused={this.state.paused}//暂停
-                                                                volume={this.state.volume}//调节音量
-                                                                muted={this.state.muted}//控制音频是否静音
-                                                            />
-                                                        </TouchableOpacity>
-                                                        <Text style={{ fontSize: 26 * s, margin: 10 * s }}>{item.mtitle}</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                                :
-                                                <View style={styles.container}>
-                                                    <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                    <Image
-                                                        style={{ width: width - 20* s, height: 280 * s, margin: 10 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s }}>{item.mtitle}</Text>
-                                                    </TouchableOpacity>
-                                                </View>)
-                                    )}
-                                />
-                            </View>
-                        </View> :
-                        <View>
-                            <View style={styles.source}>
-                                <TouchableOpacity>
-                                    <Text onPress={() => { this.Change1() }} style={{ color: this.state.onecolor, borderBottomColor: this.state.oneborderBottomColor, borderBottomWidth: 4, marginLeft: 30 * s, fontSize: 18 }}>最热</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <Text onPress={() => { this.Change2() }} style={{ color: this.state.twocolor, borderBottomColor: this.state.twoborderBottomColor, marginLeft: 30 * s, borderBottomWidth: 4, fontSize: 18 }}>最新</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View>
-                                <FlatList
-                                    style={{ backgroundColor: '#fff' }}
-                                    data={this.state.data}
-                                    numColumns={1}
-                                    renderItem={({ item }) => (
-                                        item.mimage === '' ?
-                                            <View style={styles.container}>
-                                                <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                <Text style={{ fontSize: 30 * s, margin: 10 * s, height: 320 * s, paddingTop: 100 * s }}>{item.mtitle}</Text>
-                                                <Text style={{ fontSize: 18 * s, textAlign: 'right', margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                            : (item.mimage.split('.')[1] === 'mp4' ?
-                                                <View style={styles.container}>
-                                                    <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                        <TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })}>
-                                                            <Video
-                                                                source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                                ref={(ref) => { //方法对引用Video元素的ref引用进行操作
-                                                                    this.video = ref
-                                                                }}
-                                                                style={{ width: width, height: 260 * s }}
-                                                                rate={this.state.rate}//播放速率
-                                                                paused={this.state.paused}//暂停
-                                                                volume={this.state.volume}//调节音量
-                                                                muted={this.state.muted}//控制音频是否静音
-                                                            />
-                                                        </TouchableOpacity>
-                                                        <Text style={{ fontSize: 26 * s, margin: 10 * s }}>{item.mtitle}</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                                :
-                                                <View style={styles.container}>
-                                                    <TouchableOpacity onPress={() => { Actions.popular({ mid: item.mid, mtab: item.mtab }) }}>
-                                                    <Image
-                                                        style={{ width: width - 20* s, height: 280 * s, margin: 10 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s }}>{item.mtitle}</Text>
-                                                    </TouchableOpacity>
-                                                </View>)
-                                    )}
-                                />
+                        <View style={styles.controls}>
+                            <View style={styles.generalControls}></View>
+                            <View style={styles.trackingControls}>
+                                <View style={styles.progress}>
+                                    <View style={[styles.innerProgressCompleted, { flex: flexCompleted }]} />
+                                    <View style={[styles.innerProgressRemaining, { flex: flexRemaining }]} />
+                                </View>
                             </View>
                         </View>
-                    )}
+                        <TouchableOpacity onPress={() => { this.ratePlay(this.state.rate) }}>
+                            <Text style={styles.controlOption}>
+                                {this.state.rate}x
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this._volume()} style={{ top: -4 * s }}>
+                            <Text style={{color:'#fff'}}>
+                                <Image source={require('../../assets/composition/composition/yinliang.png')} />
+                                {this.state.volume * 100}%
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+                <TouchableOpacity
+                    style={styles.fullScreen}
+                    onPress={() => this._play()}
+                >
+                    <Video
+                        ref={(ref) => {
+                            this.video = ref
+                        }}
+                        /* For ExoPlayer */
+                        source={{ uri: 'http://116.62.14.0:8402/images/1576652999706.mp4' }}
+                        style={styles.fullScreen}
+                        rate={this.state.rate}
+                        paused={this.state.paused}
+                        volume={this.state.volume}
+                        muted={this.state.muted}
+                        resizeMode={this.state.resizeMode}
+                        onLoad={this.onLoad}
+                        onProgress={this.onProgress}
+                        onEnd={this.onEnd}
+                        onAudioBecomingNoisy={this.onAudioBecomingNoisy}
+                        onAudioFocusChanged={this.onAudioFocusChanged}
+                        repeat={false}
+                    />
+                </TouchableOpacity>
             </View>
-        )
+        );
     }
 }
+
+
 const styles = StyleSheet.create({
-    header: {
-        backgroundColor: '#fff',
-        height: 90 * s,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    source: {
-        width: width,
-        height: 70 * s,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 10 * s,
-        marginBottom: 10 * s
-    },
     container: {
-        width: width,
-        height: 400 * s,
-        borderBottomColor: '#f5f4f9',
-        borderBottomWidth: 10 * s
-    }
-})
+        flex: 1,
+    },
+    fullScreen: {
+        height: 350 * s,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+    },
+    controls: {
+        backgroundColor: 'transparent',
+        width: '70%',
+        top: -10 * s
+    },
+    progress: {
+        flex: 1,
+        flexDirection: 'row',
+        overflow: 'hidden',
+    },
+    innerProgressCompleted: {
+        height: 10 * s,
+        backgroundColor: '#cccccc',
+    },
+    innerProgressRemaining: {
+        height: 10 * s,
+        backgroundColor: '#2C2C2C',
+    },
+    generalControls: {
+        flex: 1,
+        flexDirection: 'row',
+        borderRadius: 4,
+        overflow: 'hidden',
+        paddingTop: 10,
+    },
+    rateControl: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    volumeControl: {
+        fontSize: 26 * s,
+        color: '#fff',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    resizeModeControl: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    controlOption: {
+        alignSelf: 'center',
+        fontSize: 22 * s,
+        color: 'white',
+    },
+    cover: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    },
+});
