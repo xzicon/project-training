@@ -22,7 +22,7 @@ const settings =[
         title:'检查更新',
     },
 ]
-
+ 
 export default class Tset extends Component {
     constructor(){
         super();
@@ -30,13 +30,7 @@ export default class Tset extends Component {
             tid:''
         })
     }
-    componentDidMount(){
-        AsyncStorage.getItem('tid')
-        .then(res => {
-            let tid = JSON.parse(res);
-            console.log('tid'+tid)
-        })
-    }
+    
     out=()=>{
         AsyncStorage.removeItem('tid')
         .then(() => {

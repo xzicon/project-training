@@ -94,7 +94,7 @@ export default class Login extends Component {
           return true;
         }
       }else {
-        if(Actions.currentScene !== 'home' && Actions.currentScene !== 'login'){
+        if(Actions.currentScene !== 'nessay' && Actions.currentScene !== 'login'){
           Actions.pop();
           return true;
         }else{

@@ -14,25 +14,7 @@ export default class Tmessage extends Component {
             data: []
         }
     }
-    componentDidMount() {
-        AsyncStorage.getItem('uid')
-            .then((res) => {
-                res === null ?
-                    this.setState({ uid: '' })
-                    :
-                    this.setState({ uid: res })
-        this.mine();
-        })
-    }
-    mine = () => {
-        console.log(this.state.uid);
-        fetch('http://116.62.14.0:8402/message/pinglun/' + this.state.uid)
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data: res.data });
-                console.log(res.data);
-            })
-    }
+
     render() {
         return (
             <View>

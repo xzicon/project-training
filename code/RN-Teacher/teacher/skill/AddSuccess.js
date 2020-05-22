@@ -8,7 +8,7 @@ export default class AddSuccess extends Component {
         Actions.popTo('skill');
         setTimeout(()=> {
             Actions.refresh({refresh:1})
-        });
+        },100);
     }
     render() {
         return (

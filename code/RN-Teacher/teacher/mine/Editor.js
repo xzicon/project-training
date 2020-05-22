@@ -157,6 +157,10 @@ export default class Editor extends Component {
                 console.log(res.data);
             })
     }
+    out=()=>{
+        this.mine();
+        Actions.pop();
+    }
     // 修改头像
     takephoto = (e) => {
         var formData = new FormData();
@@ -629,7 +633,7 @@ export default class Editor extends Component {
 
                 </Modal>
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                    <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
+                    <TouchableOpacity style={{ left: 20 * s, }} onPress={this.out}>
                         <Icon name="left" color="#333" size={35 * s} />
                     </TouchableOpacity>
                     <View>

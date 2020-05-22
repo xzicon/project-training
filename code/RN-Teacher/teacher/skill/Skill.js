@@ -48,7 +48,7 @@ export default class Skill extends Component {
         })
     }
     _renderFooter = () => (
-        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:50*s}}>
+        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:50*s,marginBottom:100*s}}>
             <Text>
                到底了~
             </Text>
@@ -60,14 +60,6 @@ export default class Skill extends Component {
                 <View style={{flexDirection:'row',height:90*s,backgroundColor:'#FFF',alignItems:'center',justifyContent:'center'}}>
                     <Text style={{marginLeft:20*s,fontSize:30*s}}>我的技法</Text>
                     {/* <View><Text  onPress={()=>Actions.addskill({tid:this.state.tid})}> +发布技法 </Text></View> */}
-                </View>
-                <View style={{width:90*s,height:90*s,position:'absolute',top:900*s,right:30*s}}>
-                    <TouchableOpacity 
-                        style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',backgroundColor:'#d83e34',borderRadius:45*s}}
-                        onPress={()=>Actions.addskill({tid:this.state.tid})}
-                    >
-                        <Text style={{color:'#fff',fontSize:58*s}}>+</Text>
-                    </TouchableOpacity>
                 </View>
                 <FlatList
                     data={this.state.skill_data}
@@ -121,6 +113,15 @@ export default class Skill extends Component {
                         </View>
                     )}
                 />
+
+                <View style={{width:90*s,height:90*s,position:'absolute',top:900*s,right:30*s}}>
+                    <TouchableOpacity 
+                        style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',backgroundColor:'#d83e34',borderRadius:45*s}}
+                        onPress={()=>Actions.addskill({tid:this.state.tid})}
+                    >
+                        <Text style={{color:'#fff',fontSize:58*s}}>+</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }

@@ -84,59 +84,59 @@ const rank=[
 ];
 const glanguage=[
     {
-        type:'一等：',
+        type:'一等：行文流畅，语言生动准备，表达好。',
         img:require('../../assets/composition/teacher/selected1.png')
     },
     {
-        type:'二等：',
+        type:'二等：文从子顺，语言基本准确，表达尚好。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'三等：',
+        type:'三等：语言基本通顺，有少量语病。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'四等：',
+        type:'四等：语言不通顺，有少量语病。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'五等：',
+        type:'五等：文理不通。',
         img:require('../../assets/composition/teacher/select1.png')
     },
 ];
 const gstructure=[
     {
-        type:'一等：',
+        type:'一等：结构严谨，层次清晰，构思新颖、巧妙。',
         img:require('../../assets/composition/teacher/selected1.png')
     },
     {
-        type:'二等：',
+        type:'二等：结构紧凑，层次清楚，构思新颖。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'三等：',
+        type:'三等：结构完整，层次尚清楚。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'四等：',
+        type:'四等：结构层次混乱。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'五等：',
+        type:'五等：结构不完整，层次混乱。',
         img:require('../../assets/composition/teacher/select1.png')
     },
 ];
 const gcover=[
     {
-        type:'一等：',
+        type:'一等：字体工整、美观，书写、标点、格式正确，卷面干净。',
         img:require('../../assets/composition/teacher/selected1.png')
     },
     {
-        type:'二等：',
+        type:'二等：字体清楚，有少量错别字和标点符号，有少量涂改。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'三等：',
+        type:'三等：字迹潦草难辨，错别字和标点错误较多，有较多涂改。',
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
@@ -144,7 +144,7 @@ const gcover=[
         img:require('../../assets/composition/teacher/select1.png')
     },
     {
-        type:'五等：',
+        type:'五等：字体不易辨认，错别字和标点错误多，卷面很不整洁。',
         img:require('../../assets/composition/teacher/select1.png')
     },
 ];
@@ -355,7 +355,7 @@ export default class AddGrade extends Component {
         Actions.popTo('nessay');
         setTimeout(()=> {
             Actions.refresh({refresh:1})
-        });
+        },100);
     }
     render() {
 

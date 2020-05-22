@@ -16,7 +16,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { Router, Scene, Tabs, Actions, Lightbox, Modal } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 // 引导页
-import SwiperPage from './composition/common/SwiperPage';
+import SwiperPage from './teacher/common/SwiperPage';
 // 教师版登录注册页面
 import Login from './teacher/common/Login';
 import Register from './teacher/common/Register';
