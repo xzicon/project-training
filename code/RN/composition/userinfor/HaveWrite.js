@@ -67,11 +67,11 @@ export default class HaveWrite extends Component {
                                                 {
                                                     item.aaudit==1?
                                                     <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'blue', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: 28*s }}>已发布</Text>
+                                                        <Text style={{ fontSize: 24 * s, color: 'green', width: width * 0.16, textAlign: 'center', borderWidth:1, borderRadius: 14 * s, marginRight: 28*s }}>已发布</Text>
                                                     </View>
                                                     :
                                                         <View style={{ }}>
-                                                            <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight:28*s }}>未审核</Text>
+                                                            <Text style={{ fontSize: 24 * s, color: 'yellow', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight:28*s, borderWidth:1 }}>未审核</Text>
                                                         </View>
                                                 }
                                                 </View>

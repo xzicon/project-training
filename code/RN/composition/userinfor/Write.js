@@ -65,18 +65,18 @@ export default class Write extends Component {
                                                 <View style={{flexDirection:'row',justifyContent:'flex-end',alignItems:'center', marginTop: 14*s}}>
                                                 {
                                                     item.aaudit==1?
-                                                    <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'blue', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: 10*s }}>已发布</Text>
+                                                    <View style={{}}>
+                                                        <Text style={{ fontSize: 24 * s,  width: width * 0.16, textAlign: 'center',borderWidth:1, borderRadius: 14 * s, marginRight: 10*s,color:'green'}}>已发布</Text>
                                                     </View>
                                                     :
                                                     (
                                                         item.aaudit==0?
                                                         <View style={{ }}>
-                                                            <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: 10*s }}>未审核</Text>
+                                                            <Text style={{ fontSize: 24 * s,color: 'yellow', width: width * 0.16, textAlign: 'center', borderWidth:1,borderRadius: 14 * s, marginRight: 10*s }}>未审核</Text>
                                                         </View>
                                                         :
                                                         <View style={{ }}>
-                                                            <Text style={{ fontSize: 24 * s, backgroundColor: '#666666', color: '#fff', width: width * 0.24, textAlign: 'center', borderRadius: 14 * s, marginRight: 10*s }}>审核不通过</Text>
+                                                            <Text style={{ fontSize: 24 * s,  width: width * 0.24, textAlign: 'center',borderWidth:1, borderRadius: 14 * s, marginRight: 10*s,color:'red' }}>审核不通过</Text>
                                                         </View>
                                                     )
                                                     
@@ -84,16 +84,16 @@ export default class Write extends Component {
                                                 {
                                                 item.agrade==0?
                                                 <View style={{ }}>
-                                                    <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: '3%' }}>未邀请</Text>
+                                                    <Text style={{ fontSize: 24 * s,color: 'red', width: width * 0.16, textAlign: 'center', borderWidth:1, borderRadius: 14 * s, marginRight: '3%' }}>未邀请</Text>
                                                 </View>
                                                 :(
                                                     item.agrade==-1?
                                                     <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.2, textAlign: 'center', borderRadius: 14 * s, marginRight: '3%' }}>等待点评</Text>
+                                                        <Text style={{ fontSize: 24 * s, color: 'yellow', width: width * 0.2, textAlign: 'center', borderWidth:1, borderRadius: 14 * s, marginRight: '3%' }}>等待点评</Text>
                                                     </View>
                                                     :
                                                     <View style={{ }}>
-                                                        <Text style={{ fontSize: 24 * s, backgroundColor: 'red', color: '#fff', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight: '3%' }}>已点评</Text>
+                                                        <Text style={{ fontSize: 24 * s,  color: 'blue', width: width * 0.16, textAlign: 'center', borderWidth:1, borderRadius: 14 * s, marginRight: '3%' }}>已点评</Text>
                                                     </View>
                                                 )
                                                 

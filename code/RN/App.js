@@ -40,12 +40,13 @@ import Container from './composition/composition/Container'; // 素材分类详�
 import Material from './composition/composition/Material';
 import Popular from './composition/composition/Popular'; // 素材详情
 import Seleced from './composition/composition/Seleced';
-
 import Rarticle from './composition/home/Rarticle';
-import Skill from './composition/composition/skills/Skill';
-import SkillDetail from './composition/composition/skills/SkillDetail';
-import PaperDetail from './composition/composition/realpapers/PaperDetail';
-import Realpaper from './composition/composition/realpapers/Realpaper';
+import Skill from './composition/composition/skills/Skill'; // 技法
+import SkillDetail from './composition/composition/skills/SkillDetail'; // 技法详情
+import PaperDetail from './composition/composition/realpapers/PaperDetail'; // 真题详情
+import Realpaper from './composition/composition/realpapers/Realpaper'; // 真题
+import Collection from './composition/composition/collection/Collection'; // 合集
+
 // 我的
 import Userinfor from './composition/userinfor/Userinfor';
 import Myset from './composition/userinfor/Myset';
@@ -76,7 +77,6 @@ import TeacherDetail0 from './composition/TeacherDetail';
 // 选择测试页面
 import Lesson from './composition/Lesson';
 import Lesson0 from './composition/Lesson0';
-
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -153,7 +153,6 @@ const App = () => {
 									<Scene hideNavBar key='home' component={Home} />
 									<Scene hideNavBar hideTabBar key='addEssay' component={AddEssay} />
 									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
-									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
 									<Scene hideNavBar hideTabBar key='personHome' component={PersonHome} />
 									<Scene hideNavBar hideTabBar key='search' component={Search} />
 									<Scene hideTabBar hideNavBar key='searchlist' component={SearchList} />
@@ -193,8 +192,12 @@ const App = () => {
 									{/* 真题 */}
 									<Scene hideNavBar hideTabBar key='paperdetail' component={PaperDetail} />
 									<Scene hideNavBar hideTabBar key='realpaper' component={Realpaper} />
+
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
+
+									{/* 合集 */}
+									<Scene hideNavBar hideTabBar key='collection' component={Collection}/>
 								</Scene>
 								<Scene
 								key='addEssayPage'
@@ -217,6 +220,7 @@ const App = () => {
 									<Scene hideTabBar hideNavBar key='teacher' component={ADDTeacher} />
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={ADDTeacherDetail} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
+								
 								</Scene>
 								<Scene
 								key='LessonPage'
@@ -240,6 +244,7 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='havewrite' component={HaveWrite} />
 									<Scene key='havemarticle' component={HaveMarticle} hideTabBar hideNavBar />
 									<Scene key='edit' component={Edit} hideTabBar hideNavBar />
+
 								</Scene>
 								<Scene
 									key='userinforPage'
@@ -282,10 +287,11 @@ const App = () => {
 									<Scene hideTabBar hideNavBar key='detailEssayUser' component={DetailEssay} />
 									<Scene hideTabBar hideNavBar key='favorite' component={Favorite}/>
 									<Scene hideTabBar hideNavBar key='teacher' component={Teacher} />
-									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail0} />
+									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
 									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
 									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
+									
 								</Scene>
 							</Tabs>
 						</Scene>

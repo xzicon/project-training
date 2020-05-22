@@ -9,7 +9,7 @@ import Icon1 from 'react-native-vector-icons/Feather';
 import { Actions } from 'react-native-router-flux';
 import Video from 'react-native-video';
 import ViewShot, { captureRef, captureScreen } from "react-native-view-shot";
-import RNFS from 'react-native-fs';
+//import RNFS from 'react-native-fs';
 import Word from './Word';
 import { Radio, WhiteSpace, List, Switch } from '@ant-design/react-native'
 const RadioItem = Radio.RadioItem;

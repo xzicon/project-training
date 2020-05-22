@@ -109,25 +109,25 @@ export default class Composition extends Component {
                             dotStyle={styles.dotStyle}
                             activeDotStyle={styles.activeDotStyle}
                         >
-                            <View style={{ position: 'relative' }}>
+                            <View>
                                 <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data1.mid })}>
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data1.mimage }} style={styles.bannerImg} />
                                     {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data1.mtitle}</Text> */}
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ position: 'relative' }}>
+                            <View>
                                 <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data2.mid })}>
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data2.mimage }} style={styles.bannerImg} />
                                     {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data2.mtitle}</Text> */}
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ position: 'relative' }}>
+                            <View>
                                 <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data3.mid })}>
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data3.mimage }} style={styles.bannerImg} />
                                     {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data3.mtitle}</Text> */}
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ position: 'relative' }}>
+                            <View>
                                 <TouchableOpacity onPress={() => Actions.popular({ mid: this.state.banner_data4.mid })}>
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.banner_data4.mimage }} style={styles.bannerImg} />
                                     {/* <Text style={{ position: 'absolute', left: 20 * s, top: 20 * s, fontSize: 26 * s, color: '#fff' }}>{this.state.banner_data4.mtitle}</Text> */}
@@ -217,89 +217,90 @@ export default class Composition extends Component {
             })
     }
     fetchf = () => {
-        fetch('http://116.62.14.0:8402/groom/time/'+groomdate)
+        fetch('http://116.62.14.0:8402/groom/time/' + groomdate)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
                     data: res.data,
                 });
+                console.log(res.data);
             })
     }
     render() {
         return (
             <View>
-                <View style={{ position: 'relative' }}>
-                    {/* 搜索 */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', height: 240 * s, backgroundColor: '#fff' }}>
-                        {/* <Image source={require('../../assets/1.jpg')} style={{width:width,height:240*s}} /> */}
-                        <TouchableOpacity style={{ position: 'absolute', top: 10 * s, zIndex: 100, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: 60 * s, width: '90%', borderRadius: 30 * s, backgroundColor: '#F5F5F5' }}
-                            onPress={() => { Actions.searchEssay() }}>
-                            <Text style={{ color: '#666666' }}>请输入要搜索的内容</Text>
-                            <Icon1 style={{ paddingLeft: 10 * s }} name='search1' size={30 * s} color='#666666' />
+                {/* 搜索 */}
+                <View style={{ flexDirection: 'row', justifyContent: 'center', height: 80 * s, backgroundColor: '#fff' }}>
+                    {/* <Image source={require('../../assets/1.jpg')} style={{width:width,height:240*s}} /> */}
+                    <TouchableOpacity style={{ marginTop: 10 * s, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: 60 * s, width: '90%', borderRadius: 30 * s, backgroundColor: '#F5F5F5' }}
+                        onPress={() => { Actions.searchEssay() }}>
+                        <Text style={{ color: '#666666' }}>请输入要搜索的内容</Text>
+                        <Icon1 style={{ paddingLeft: 10 * s }} name='search1' size={30 * s} color='#666666' />
+                    </TouchableOpacity>
+                </View>
+                <ScrollView>
+                {/* 轮播 */}
+                <View style={styles.container}>
+                    {this.renderBanner()}
+                </View>
+                {/* tab */}
+                <View style={{ flexDirection: 'row', justifyContent: 'center',  backgroundColor: '#fff', alignItems: 'flex-end', paddingBottom: 30 * s, paddingTop: 20 * s }}>
+                    <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'space-between', }}>
+                        <TouchableOpacity onPress={() => { Actions.source() }}>
+                            <Image source={require('../../assets/composition/composition/composition.png')} style={{ marginLeft: 14 * s }} />
+                            <Text>素材分类</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { Actions.skill1() }}>
+                            {/* <TouchableOpacity> */}
+                            <Image source={require('../../assets/composition/composition/jifa.png')} style={{ marginLeft: 14 * s }} />
+                            <Text>技法学习</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { Actions.realpaper() }}>
+                            {/* <TouchableOpacity> */}
+                            <Image source={require('../../assets/composition/composition/zhenti.png')} style={{ marginLeft: 14 * s }} />
+                            <Text>真题解析</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { Actions.collection() }}>
+                            <Image source={require('../../assets/composition/composition/heji.png')} style={{ marginLeft: 14 * s }} />
+                            <Text>日更合集</Text>
                         </TouchableOpacity>
                     </View>
-                    {/* 轮播 */}
-                    <View style={styles.container}>
-                        {this.renderBanner()}
-                    </View>
-                    {/* tab */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', height: 270 * s, backgroundColor: '#fff', alignItems: 'flex-end', paddingBottom: 30 * s, paddingTop: 20 * s }}>
-                        <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'space-between', }}>
-                            <TouchableOpacity onPress={() => { Actions.source() }}>
-                                <Image source={require('../../assets/composition/composition/composition.png')} style={{ marginLeft: 14 * s }} />
-                                <Text>素材分类</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { Actions.skill1() }}>
-                            {/* <TouchableOpacity> */}
-                                <Image source={require('../../assets/composition/composition/jifa.png')} style={{ marginLeft: 14 * s }} />
-                                <Text>技法学习</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { Actions.realpaper() }}>
-                            {/* <TouchableOpacity> */}
-                                <Image source={require('../../assets/composition/composition/zhenti.png')} style={{ marginLeft: 14 * s }} />
-                                <Text>真题解析</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Image source={require('../../assets/composition/composition/heji.png')} style={{ marginLeft: 14 * s }} />
-                                <Text>日更合集</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    {/* 日更 */}
-                    <View style={{ flexDirection: 'row', backgroundColor: '#FFF', justifyContent: 'space-between', marginTop: 12 * s, padding: 20 * s, borderBottomColor: 'gray', borderBottomWidth: s }}>
-                        {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginRight: 20 * s }} /> */}
-                        <View><Text style={{ fontSize: 26 * s }}>每日推荐</Text></View>
-                        <View><Text style={{ fontSize: 20 * s, color: 'gray', marginTop: 4 * s }}>{groomdate1}</Text></View>
-                        {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginLeft: 20 * s }} /> */}
-                    </View>
-                    <View>
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.mimage === '' ?
-                                    <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                        <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                            <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                            <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    :
-                                    <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                        <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                            <Image
-                                                style={{ width: "100%", height: 240 * s }}
-                                                source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                            />
-                                            <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                            <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                            )}
-                        />
-                    </View>
                 </View>
+                {/* 日更 */}
+                <View style={{ flexDirection: 'row', backgroundColor: '#FFF', justifyContent: 'space-between', marginTop: 12 * s, padding: 20 * s, borderBottomColor: 'gray', borderBottomWidth: s }}>
+                    {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginRight: 20 * s }} /> */}
+                    <View><Text style={{ fontSize: 26 * s }}>每日推荐</Text></View>
+                    <View><Text style={{ fontSize: 20 * s, color: 'gray', marginTop: 4 * s }}>{groomdate1}</Text></View>
+                    {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginLeft: 20 * s }} /> */}
+                </View>
+                <View>
+                    <FlatList
+                        style={{ backgroundColor: '#fff', paddingBottom: 100 * s }}
+                        data={this.state.data}
+                        numColumns={1}
+                        renderItem={({ item }) => (
+                            item.mimage === '' ?
+                                <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
+                                        <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
+                                        <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
+                                    <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
+                                        <Image
+                                            style={{ width: "100%", height: 240 * s }}
+                                            source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
+                                        />
+                                        <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
+                                        <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                        )}
+                    />
+                </View>
+                </ScrollView>
             </View>
         )
     }
@@ -308,11 +309,10 @@ export default class Composition extends Component {
 const styles = StyleSheet.create({
     container: {
         height: 280 * s,
-        width: '90%',
-        position: 'absolute',
-        zIndex: 999,
-        top: 90 * s,
-        left: '5%',
+        width: '100%',
+        paddingLeft: '5%',
+        paddingRight:'5%',
+        backgroundColor:'#fff'
     },
     wrpaper: {
         height: 280 * s,

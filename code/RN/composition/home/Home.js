@@ -36,7 +36,7 @@ export default class HomePage extends Component {
             //         recommend_data:res.data
             //     })
             // })
-            this.all()
+            this.all();
         }
     }
     // 
