@@ -30,7 +30,7 @@ let groomdate5 = Y + '-' + M + '-' + D5;
 let groomdate6 = Y + '-' + M + '-' + D6;
 let groomdate7 = Y + '-' + M + '-' + D7;
 console.log(groomdate1, groomdate2, groomdate3, groomdate4, groomdate5, groomdate6, groomdate7);
-
+// 日更合集
 class AnimatedTabsExample extends Component {
     constructor() {
         super();
@@ -60,7 +60,8 @@ class AnimatedTabsExample extends Component {
             })
     }
     render() {
-        const animatedViewStyle = { flex: 1, marginTop: getDeviceHeight() / 4 };
+        const animatedViewStyle = { flex: 1,  };
+        // marginTop: getDeviceHeight() / 4
         const imageStyle = { flex: 1, width: getPanelWidth() };
         const tabContentStyle = {
             height: getDeviceHeight() - getDeviceHeight() / 2,
@@ -71,7 +72,7 @@ class AnimatedTabsExample extends Component {
             // <View>
                 
                 <View style={animatedViewStyle}>
-                    <View style={{ width: width, height: 90 * s, flexDirection: 'row', alignItems: 'center',marginTop:-215 }}>
+                    <View style={{backgroundColor:'#FFF', width: width, height: 90 * s, flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity onPress={() => Actions.pop()}>
                         <Icon size={35 * s} style={{ color: '#000', marginLeft: 20 * s }} name='left' />
                     </TouchableOpacity>

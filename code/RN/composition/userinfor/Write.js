@@ -15,7 +15,8 @@ export default class Write extends Component {
         super(props);
         this.state = {
             uid: '',
-            data: []
+            data: [],
+            refreshing:false
         }
     }
     componentDidMount() {
@@ -24,38 +25,53 @@ export default class Write extends Component {
                 res === null ?
                     this.setState({ uid: '' })
                     :
-                    this.setState({ uid: res })
-                fetch('http://116.62.14.0:8402/login/article/' + this.state.uid)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ data: res.data });
-                        console.log(res.data);
+                    this.setState({ uid: res },()=>{
+                        this.all()
                     })
+                
             })
     }
+    all=()=>{
+        this.setState({
+            refreshing:true
+        },()=>{
+            fetch('http://116.62.14.0:8402/login/article/' + this.state.uid)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ data: res.data ,refreshing:false});
+                        console.log(res.data);
+                    })
+        })
+        
+    }
 
+    back=()=>{
+        Actions.popTo('userinfor');
+    }
     render() {
         return (
             <View>
                 {this.state.data.length !== 0 ?
                     <View>
                         <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                            <TouchableOpacity style={{ left: 30 * s, }} onPress={() => Actions.userinfor()}>
+                            <TouchableOpacity style={{ left: 30 * s, }} onPress={() => {this.back()}}>
                                 <Icon name="left" color="#333" size={40 * s} />
                             </TouchableOpacity>
                             <View>
                                 <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.32 }}>我的创作</Text>
                             </View>
                         </View>
-                        <ScrollView>
-                            <View style={{ flex: 1, }}>
-                                <View style={{ width: width, marginTop: 10 * s, marginBottom: 200 * s }}>
                                     <FlatList
+                                        style={{marginBottom:200*s}}
                                         data={this.state.data}
                                         numColumns={1}
+                                        refreshing = { this.state.refreshing }
+                                        onRefresh = {()=>{
+                                            this.all()
+                                        }}
                                         renderItem={({ item }) => (
                                             <View style={{ width: width, height: 360 * s, backgroundColor: 'white', marginBottom: 10 * s, position: 'relative' }}>
-                                                <TouchableOpacity onPress={() => { Actions.marticle({ aid: item.aid }) }}
+                                                <TouchableOpacity onPress={() => { Actions.marticle({aid:item.aid,refresh:()=>{this.all()}})}}
                                                     style={{ width: width * 0.9, marginLeft: width * 0.05, height: 290 * s, borderWidth: 2 * s, borderColor: 'gray', marginTop: 10 * s }}>
                                                     <View style={{ width: '100%', height: '10%', marginTop: '1%', paddingLeft: '3%', }}><Text style={{ fontSize: 18 * s, color: 'gray' }} >{item.utime}</Text></View>
                                                     <View style={{ width: '100%', height: '15%', marginTop: '1%', paddingLeft: '3%', alignItems: 'center', }}><Text style={{ fontSize: 34 * s, color: '#333', textAlignVertical: 'center' }} >{item.atitle}</Text></View>
@@ -103,9 +119,7 @@ export default class Write extends Component {
                                             </View>
                                         )}
                                     />
-                                </View>
-                            </View>
-                        </ScrollView>
+
                     </View>
                     :
                     <View>

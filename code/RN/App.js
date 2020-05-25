@@ -33,6 +33,8 @@ import SearchList from './composition/home/SearchList';
 import Favorite from './composition/home/Favorite';
 import ADDTeacher from './composition/home/Teacher';
 import ADDTeacherDetail from './composition/home/TeacherDetail';
+import Reply from './composition/home/Reply';
+
 // 素材
 import Composition from './composition/composition/Composition'; // 素材
 import Source from './composition/composition/Source'; // 素材分类
@@ -63,20 +65,16 @@ import Edit from './composition/userinfor/Edit';
 import Follow from './composition/userinfor/Follow'
 import Huozan from './composition/userinfor/Huozan';
 import Message from './composition/userinfor/Message';
-
+import Teacherme from './composition/userinfor/Teacher';
+import TeacherDetailme from './composition/home/TeacherDetail';
 // 点评
-import Teacher from './composition/userinfor/Teacher';
-import TeacherDetail from './composition/userinfor/TeacherDetail';
-import Teacher0 from './composition/Teacher';
-import Yelp from './composition/userinfor/Yelp';
-import AddEassy from './composition/userinfor/AddEassy';
-import Reply from './composition/home/Reply';
-import HaveWrite from './composition/userinfor/HaveWrite';
-import HaveMarticle from './composition/userinfor/HaveMarticle';
-import TeacherDetail0 from './composition/TeacherDetail';
-// 选择测试页面
-import Lesson from './composition/Lesson';
-import Lesson0 from './composition/Lesson0';
+import TeacherDetail from './composition/comment/TeacherDetail';
+import Teacher0 from './composition/comment/Teacher';
+import Yelp from './composition/comment/Yelp';
+import AddEassy1 from './composition/comment/AddEassy';
+import HaveWrite from './composition/comment/HaveWrite';
+import HaveMarticle from './composition/comment/HaveMarticle';
+
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -159,9 +157,15 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='popular' component={Popular} />
 									<Scene hideTabBar hideNavBar key='favorite' component={Favorite}/>
 									<Scene hideTabBar hideNavBar key='reply' component={Reply}/>
+									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
+									<Scene key="material" hideNavBar hideTabBar component={Material} />
+									<Scene key="popular" hideNavBar hideTabBar component={Popular} />
+									<Scene key="container" hideTabBar hideNavBar component={Container} />
+									<Scene hideTabBar hideNavBar key='detailEssaywrite' component={DetailEssay} />
 									{/* 老师点评 */}
-									<Scene hideTabBar hideNavBar key='teacher' component={Teacher} />
-									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
+									<Scene hideTabBar hideNavBar key='teacher1' component={ADDTeacher} />
+									<Scene hideTabBar hideNavBar key='teacherdetail1' component={ADDTeacherDetail} />
+
 								</Scene>
 								<Scene
 									key='materialPage'
@@ -204,23 +208,13 @@ const App = () => {
 								title=" "
 								icon={
 									({ focused }) => 
-									// <Icon
-									// 	color={focused ? '#f23030' : '#767676'}
-									// 	name="user"
-									// 	size={35 * s}
-									// />
 									<View style={{width:100*s,height:100*s,borderRadius:50*s,backgroundColor:'#FFF',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
 										<Image style={{width:90*s,height:90*s}} source={require('./assets/composition/essay/add.png')} />
 									</View>	
 								}
 								>
-									{/* <Scene key='lesson' hideNavBar component={Lesson0}/> */}
-									{/* <Scene key='pic' hideNavBar component={TestViewPager}/> */}
 									<Scene  hideNavBar hideTabBar key='addEssay' component={AddEssay} />
-									<Scene hideTabBar hideNavBar key='teacher' component={ADDTeacher} />
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={ADDTeacherDetail} />
-									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
-								
 								</Scene>
 								<Scene
 								key='LessonPage'
@@ -233,14 +227,12 @@ const App = () => {
 									/>
 								}
 								>
-									{/* <Scene key='lesson' hideNavBar component={Lesson0}/> */}
-									{/* <Scene key='pic' hideNavBar component={TestViewPager}/> */}
 									<Scene hideNavBar key='lesson' component={Teacher0} />
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
 									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
-									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
+									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
-									<Scene hideNavBar hideTabBar key='addEssay1' component={AddEassy} />
+									<Scene hideNavBar hideTabBar key='addEssay1' component={AddEassy1} />
 									<Scene hideNavBar hideTabBar key='havewrite' component={HaveWrite} />
 									<Scene key='havemarticle' component={HaveMarticle} hideTabBar hideNavBar />
 									<Scene key='edit' component={Edit} hideTabBar hideNavBar />
@@ -284,12 +276,12 @@ const App = () => {
 									<Scene key='huozan' component={Huozan} hideTabBar hideNavBar />
 									{/* 消息 */}
 									<Scene key='message' component={Message} hideTabBar hideNavBar/>
-									<Scene hideTabBar hideNavBar key='detailEssayUser' component={DetailEssay} />
 									<Scene hideTabBar hideNavBar key='favorite' component={Favorite}/>
-									<Scene hideTabBar hideNavBar key='teacher' component={Teacher} />
-									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
+									<Scene hideTabBar hideNavBar key='teacher' component={Teacherme} />
+									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetailme} />
 									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
-									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
+									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
+									{/* <Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} /> */}
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
 									
 								</Scene>

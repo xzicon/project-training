@@ -244,6 +244,7 @@ export default class Popular extends Component {
                         }
                     })
             } else {
+                
                 // 修改
                 let data = {
                     uid: this.state.uid,
@@ -274,6 +275,9 @@ export default class Popular extends Component {
                     })
             }
         } else {
+            if (is_checked == null) {
+                this.favorite_false();
+            }else{
             let data = {
                 uid: this.state.uid,
                 mid: this.props.mid,
@@ -303,6 +307,7 @@ export default class Popular extends Component {
                         }
                     }
                 })
+            }
             // 收藏
         }
     }

@@ -7,7 +7,7 @@ import SearchList from './SearchList';
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 const hot_search=[
-    '疫情','高考','中考','勤洗手','疫情','高考','中考','勤洗手','疫情','高考','中考','勤洗手'
+    '疫情','高考','中考','勤洗手','爱国','青春','大学','教育','网课'
 ]
 const hot_topic=[
 
@@ -64,18 +64,6 @@ export default class Search extends Component {
             ToastAndroid.show('请输入搜索关键词',100)
         }else{
         let search1 = item;
-        // this.state.search_history==''?
-        // let str = search1
-        // :
-        
-        // for(let i=0;i<this.state.search_history.split(',').length;i++){
-        //     if(this.state.search_history.split(',')[i]==search1){
-        //         this.state.search_history[0]=search1;
-        //         this.state.search_history.split(',')[i+1]
-        //     }else{
-
-        //     }
-        // }
         
         let str = search1+','+this.state.search_history
         AsyncStorage.setItem('search',str.toString())

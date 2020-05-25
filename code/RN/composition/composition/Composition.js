@@ -32,6 +32,7 @@ export default class Composition extends Component {
             banner_data3: [],
             banner_data4: [],
             banner_data5: [],
+            refreshing:false
         }
     }
     componentDidMount() {
@@ -217,21 +218,26 @@ export default class Composition extends Component {
             })
     }
     fetchf = () => {
-        fetch('http://116.62.14.0:8402/groom/time/' + groomdate)
+        this.setState({
+            refreshing:true
+        },()=>{
+            fetch('http://116.62.14.0:8402/groom/time/' + groomdate)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
                     data: res.data,
+                    refreshing:false
                 });
                 console.log(res.data);
             })
+        })
+        
     }
     render() {
         return (
             <View>
                 {/* 搜索 */}
                 <View style={{ flexDirection: 'row', justifyContent: 'center', height: 80 * s, backgroundColor: '#fff' }}>
-                    {/* <Image source={require('../../assets/1.jpg')} style={{width:width,height:240*s}} /> */}
                     <TouchableOpacity style={{ marginTop: 10 * s, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: 60 * s, width: '90%', borderRadius: 30 * s, backgroundColor: '#F5F5F5' }}
                         onPress={() => { Actions.searchEssay() }}>
                         <Text style={{ color: '#666666' }}>请输入要搜索的内容</Text>
@@ -251,12 +257,10 @@ export default class Composition extends Component {
                             <Text>素材分类</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { Actions.skill1() }}>
-                            {/* <TouchableOpacity> */}
                             <Image source={require('../../assets/composition/composition/jifa.png')} style={{ marginLeft: 14 * s }} />
                             <Text>技法学习</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { Actions.realpaper() }}>
-                            {/* <TouchableOpacity> */}
                             <Image source={require('../../assets/composition/composition/zhenti.png')} style={{ marginLeft: 14 * s }} />
                             <Text>真题解析</Text>
                         </TouchableOpacity>
@@ -268,16 +272,18 @@ export default class Composition extends Component {
                 </View>
                 {/* 日更 */}
                 <View style={{ flexDirection: 'row', backgroundColor: '#FFF', justifyContent: 'space-between', marginTop: 12 * s, padding: 20 * s, borderBottomColor: 'gray', borderBottomWidth: s }}>
-                    {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginRight: 20 * s }} /> */}
-                    <View><Text style={{ fontSize: 26 * s }}>每日推荐</Text></View>
+                    <View><Text onPress={()=>{this.fetchf()}} style={{ fontSize: 26 * s }}>每日推荐</Text></View>
                     <View><Text style={{ fontSize: 20 * s, color: 'gray', marginTop: 4 * s }}>{groomdate1}</Text></View>
-                    {/* <Image source={require('../../assets/composition/composition/book.png')} style={{ marginTop: 6 * s, marginLeft: 20 * s }} /> */}
                 </View>
                 <View>
                     <FlatList
                         style={{ backgroundColor: '#fff', paddingBottom: 100 * s }}
                         data={this.state.data}
                         numColumns={1}
+                        onRefresh = {()=>{
+                            this.fetchf()
+                        }}
+                        refreshing = { this.state.refreshing }
                         renderItem={({ item }) => (
                             item.mimage === '' ?
                                 <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>

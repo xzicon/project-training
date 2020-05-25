@@ -227,6 +227,9 @@ export default class PaperDetail extends Component {
                 })
             }
         }else{
+            if (is_checked == null) {
+                this.favorite_false();
+            }else{
             let data = {
                 uid: this.state.uid,
                 mid: this.props.mid,
@@ -256,6 +259,7 @@ export default class PaperDetail extends Component {
                         }
                     }
                 })
+            }
             }
         }
     // 收藏 ————————————可以收藏没问题 但样式不会变
@@ -367,6 +371,9 @@ export default class PaperDetail extends Component {
                         transparent={false}
                         visible={this.state.create_modal}
                     >
+                        <TouchableOpacity style={styles.cover}
+                            onPress={this.create_false}>
+                        </TouchableOpacity>
                         <View style={styles.cover1}
                         >
                             <View style={{paddingLeft:'5%',paddingRight:'5%',backgroundColor:'#FFF',
@@ -661,6 +668,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         alignItems:'center',
         justifyContent:'space-between'
+    },
+    cover: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
     },
     cover2: {
         position: 'absolute',

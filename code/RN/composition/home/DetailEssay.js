@@ -440,10 +440,11 @@ export default class DetailEssay extends Component {
                             <View style={{ width: '95%' }}>
                                 <View style={{ width: '100%', paddingTop: 10 * s, flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ fontSize: 20 * s, color: '#666666' }}>{this.state.data.utime}</Text>
+                                    {this.state._grade === undefined ? <View></View>:
                                     <View>
                                         <Text style={{ marginRight: 15 * s, marginLeft: 20 * s, fontSize: 21, fontFamily: 'Times New Roman', fontWeight: '400', color: 'red', fontStyle: 'italic' }}>{this.state._grade}</Text>
                                         <Image source={require('../../assets/composition/composition/score.png')} style={{ width: 90 * s, height: 30 * s }} />
-                                    </View>
+                                    </View>}
                                 </View>
                                 <View style={{ margin: 15, alignItems: 'center' }}>
                                     <Text style={{ fontSize: 40 * s }}>{this.state.data.atitle}</Text>
@@ -516,9 +517,18 @@ export default class DetailEssay extends Component {
                         {/* 评论 */}
                         <View style={{ height: 50 * s, backgroundColor: '#FFF', flexDirection: 'row', alignItems: 'center', paddingLeft: '2.5%', paddingTop: 10*s }}><Text style={{ fontSize: 24 * s }}>评论</Text></View>
                         <FlatList
-                            style={{ backgroundColor: '#FFF', borderTopColor: '#F5F5F5', borderTopWidth: 1 }}
+                            style={{ backgroundColor: '#FFF', borderTopColor: '#F5F5F5', borderTopWidth: 1 ,marginBottom:20}}
                             data={this.state.comments}
                             // ListFooterComponent={this._renderFooter}//颜色不对
+                            ListFooterComponent={ ()=>{
+                                return(
+                                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',height:50*s}}>
+                                    <Text>
+                                        到底了~
+                                    </Text>
+                                </View>
+                                )
+                            } }
                             ListEmptyComponent={this._renderEmptyComponent}
                             numColumns={1}
                             renderItem={({ item }) => (

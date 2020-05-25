@@ -117,7 +117,7 @@ export default class Realpaper extends Component {
     }
     render() {
         return (
-            <View>
+            <View style={{felx:1}}>
                 {/* 标题栏 */}
                 <View style={{height: 90 * s,flexDirection:'row',alignItems:'center',justifyContent:'center',backgroundColor:"#fff"}}>
                     <Icon name='left' style={{position:'absolute',left:'5%'}} size={35 * s} onPress={()=>Actions.pop()}/>
@@ -249,8 +249,8 @@ export default class Realpaper extends Component {
                         </View>
                     </TouchableWithoutFeedback>
                 </Modal>
-                <ScrollView>
                     <FlatList
+                        style={{marginBottom:150*s}}
                         data = {this.state.data}
                         numColumns = {1}
                         refreshing = { this.state.refreshing }
@@ -321,7 +321,7 @@ export default class Realpaper extends Component {
                                         <Text style={{fontSize: 28 * s,fontWeight:"bold"}}>{item.truetitle}</Text>
                                         <Text style={{fontSize: 22 * s,marginTop: - 50 * s,lineHeight:32 * s}}>
                                             {item.truetitledetails.split('。')[1].slice(0,32)}
-                                            <Text style={{fontSize:20 * s,color:'#46A3FF'}}> ...全文</Text>
+                                            <Text style={{fontSize:20 * s,color:'#7B7B7B'}}> ...全文</Text>
                                         </Text>
                                         <Text style={{fontSize: 25 * s,marginTop: 20 *s}}>{item.truelocal}</Text>
                                     </View>
@@ -370,7 +370,6 @@ export default class Realpaper extends Component {
                                 <View></View>
                         )}
                     />
-                </ScrollView>
             </View>
         )
     }

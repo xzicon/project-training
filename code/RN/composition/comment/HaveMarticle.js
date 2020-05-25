@@ -36,8 +36,20 @@ export default class HaveMarticle extends Component {
                 res === null ?
                     this.setState({ uid: '' })
                     :
-                    this.setState({ uid: res })
-                this.getarticle();
+                    this.setState({ uid: res },()=>{
+                        this.getarticle();
+                        fetch('http://116.62.14.0:8402/login/me/' + this.state.uid + '/' + this.state.uid)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            this.setState({ uclass: res.data.uclass },()=>{
+                                this.state.uclass==null||this.state.uclass==''?
+                                this._uclass()
+                                :
+                                this._uclass_false()
+                            });
+                            console.log(res.data);
+                        })
+                    })
             })
     }
     getarticle = () => {
@@ -49,7 +61,100 @@ export default class HaveMarticle extends Component {
                 console.log(res.data);
             })
     }
-    comment = (aid, atitle, acontent, gclass) => {
+    _uclass = () => {
+        this.setState({ uclassplay: true },()=>{
+          this.moren(this.state.uclass)
+        })
+      }
+      moren=(uclass)=>{
+        if (uclass === '高一') {
+          this.setState({ uclass: '高一', color1: 'red', borderColor1: 'red', color2: '#000', borderColor2: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+          )
+      } else if (uclass === '高二') {
+          this.setState({ uclass: '高二', color2: 'red', borderColor2: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+          )
+      } else if (uclass === '高三') {
+          this.setState({ uclass: '高三', color3: 'red', borderColor3: 'red', color1: '#000', borderColor1: '#000', color2: '#000', borderColor2: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+          )
+      } else if (uclass === '初一') {
+          this.setState({ uclass: '初一', color4: 'red', borderColor4: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color2: '#000', borderColor2: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+          )
+        } else if (uclass === '初二') {
+          this.setState({ uclass: '初二', color5: 'red', borderColor5: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color2: '#000', borderColor2: '#000', color6: '#000', borderColor6: '#000' }
+          )
+        } else if (uclass === '初三') {
+          this.setState({ uclass: '初三', color6: 'red', borderColor6: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color2: '#000', borderColor2: '#000' }
+          )
+        }
+      }
+      _uclass_false = () => {
+          this.setState({ uclassplay: false ,teacheryear:(this.state.uclass=='高一'||this.state.uclass=='高二'||this.state.uclass=='高三')?'高中老师':'初中老师'})
+      }
+      update_uclass=(uclass,uid)=>{
+        let data = {
+          uid: uid,
+          uclass: uclass,
+        }
+        fetch('http://116.62.14.0:8402/login/uclass', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+              switch (data.status) {
+                case "0": {
+                  console.log(data.data);
+                  this.setState({
+                    uclassplay: false,
+                  });
+                  break;
+                }
+                default: {
+                  console.log(data.data);
+                  break;
+                }
+              }
+            })
+          }
+          _uclass_update = (uclass) => {
+      
+          if (uclass === '高一') {
+              this.setState({ uclass: '高一', color1: 'red', borderColor1: 'red', color2: '#000', borderColor2: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+              ,()=>{
+                this.update_uclass(this.state.uclass,this.state.uid);
+              })
+          } else if (uclass === '高二') {
+              this.setState({ uclass: '高二', color2: 'red', borderColor2: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+              ,()=>{
+                this.update_uclass(this.state.uclass,this.state.uid);
+              })
+          } else if (uclass === '高三') {
+              this.setState({ uclass: '高三', color3: 'red', borderColor3: 'red', color1: '#000', borderColor1: '#000', color2: '#000', borderColor2: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+              ,()=>{
+                this.update_uclass(this.state.uclass,this.state.uid);
+              })
+          } else if (uclass === '初一') {
+              this.setState({ uclass: '初一', color4: 'red', borderColor4: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color2: '#000', borderColor2: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' }
+              ,()=>{
+                this.update_uclass(this.state.uclass,this.state.uid);
+              })
+            } else if (uclass === '初二') {
+              this.setState({ uclass: '初二', color5: 'red', borderColor5: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color2: '#000', borderColor2: '#000', color6: '#000', borderColor6: '#000' }
+              ,()=>{
+                this.update_uclass(this.state.uclass,this.state.uid);
+              })
+            } else if (uclass === '初三') {
+              this.setState({ uclass: '初三', color6: 'red', borderColor6: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color2: '#000', borderColor2: '#000' }
+              ,()=>{
+                this.update_uclass(this.state.uclass,this.state.uid);
+              })
+            }
+      }
+    comment = () => {
         var date = new Date();
         var Y = date.getFullYear() + '-';
         var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -57,13 +162,13 @@ export default class HaveMarticle extends Component {
         var h = date.getHours() + ':';
         var m = date.getMinutes();
         let data = {
-            aid: aid,
+            aid: this.props.aid,
             tid: this.props.tid,
-            gclass: gclass,
-            atitle: atitle,
-            acontent: acontent,
+            gclass: this.state.uclass,
+            atitle: this.state.data1.atitle,
+            acontent: this.state.data1.acontent,
             invitetime: Y + M + D + h + m,
-            uid: this.state.uid
+            uid: this.state.data1.uid
         }
         fetch('http://116.62.14.0:8402/grade/invite', {
             method: 'POST',
@@ -77,7 +182,8 @@ export default class HaveMarticle extends Component {
                 if (res.status == 0) {
                     this.setState({ uclassplay: false })
                     this.getarticle();
-                    Actions.lesson();
+                    Actions.popTo('lesson');
+
                     ToastAndroid.show('邀请点评成功', 100)
                 } else {
                     ToastAndroid.show('邀请点评失败', 100)
@@ -85,33 +191,7 @@ export default class HaveMarticle extends Component {
 
             })
     }
-    _uclass = () => {
-        this.setState({ uclassplay: true })
-    }
-    _uclass_false = () => {
-        this.setState({ uclassplay: false })
-    }
-    _uclass_update = (uclass) => {
-        if (uclass === '高一') {
-            this.setState({ uclass: '高一', color1: 'red', borderColor1: 'red', color2: '#000', borderColor2: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment(this.state.data1.aid, this.state.data1.atitle, this.state.data1.acontent, '高一');
-        } else if (uclass === '高二') {
-            this.setState({ uclass: '高二', color2: 'red', borderColor2: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment(this.state.data1.aid, this.state.data1.atitle, this.state.data1.acontent, '高二');
-        } else if (uclass === '高三') {
-            this.setState({ uclass: '高三', color3: 'red', borderColor3: 'red', color1: '#000', borderColor1: '#000', color2: '#000', borderColor2: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment(this.state.data1.aid, this.state.data1.atitle, this.state.data1.acontent, '高三');
-        } else if (uclass === '初一') {
-            this.setState({ uclass: '初一', color4: 'red', borderColor4: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color2: '#000', borderColor2: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment(this.state.data1.aid, this.state.data1.atitle, this.state.data1.acontent, '初一');
-        } else if (uclass === '初二') {
-            this.setState({ uclass: '初二', color5: 'red', borderColor5: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color2: '#000', borderColor2: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment(this.state.data1.aid, this.state.data1.atitle, this.state.data1.acontent, '初二');
-        } else if (uclass === '初三') {
-            this.setState({ uclass: '初三', color6: 'red', borderColor6: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color2: '#000', borderColor2: '#000' })
-            this.comment(this.state.data1.aid, this.state.data1.atitle, this.state.data1.acontent, '初三');
-        }
-    }
+
     render() {
         return (
             <View>
@@ -147,15 +227,15 @@ export default class HaveMarticle extends Component {
                         </View>
                     </View>
                 </Modal>
-                {/* {
-                    this.state.data.map(data => */}
+                
                         <View>
-                            <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                                <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
+                            <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center',justifyContent:'space-between',padding:15*s }}>
+                                <TouchableOpacity style={{  }} onPress={() => Actions.pop()}>
                                     <Icon name="left" color="#333" size={40 * s} />
                                 </TouchableOpacity>
-                                <View>
-                                    <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.4 }}>{this.state.data1.atitle}</Text>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text onPress={()=>{this._uclass()}} style={{ color: '#333', fontSize: 18 * s,  }}>选择年级：{this.state.uclass}</Text>
+                                    <Icon name='down' size={23*s} color={'#666'}/>
                                 </View>
                             </View>
                             <ScrollView>
@@ -166,7 +246,7 @@ export default class HaveMarticle extends Component {
                                     <View style={{ width: '100%', marginTop: '2%', paddingLeft: '3%', }}><Text style={{ fontSize: 18 * s, color: '#333' }} >{this.state.data1.atag}</Text></View>
                                     <View style={{ width: '100%', marginTop: '6%', marginBottom: '2%' }}>
                                         {/* <TouchableOpacity onPress={() => this.comment(data.aid, data.atitle, data.acontent )} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  > */}
-                                        <TouchableOpacity onPress={() => this._uclass()} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
+                                        <TouchableOpacity onPress={() => this.comment()} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
                                             <View style={{ width: 100 * s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
                                                 <Text style={{ color: '#000', fontSize: 18 * s, padding: '10%', }}>邀请点评</Text>
                                             </View>
@@ -175,8 +255,7 @@ export default class HaveMarticle extends Component {
                                 </View>
                             </ScrollView>
                         </View>
-                    {/* )
-                } */}
+                    
             </View>
 
         )

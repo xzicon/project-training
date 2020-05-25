@@ -20,8 +20,10 @@ export default class Marticle extends Component {
                 res === null ?
                     this.setState({ uid: '' })
                     :
-                    this.setState({ uid: res })
-                this.getarticle();
+                    this.setState({ uid: res },()=>{
+                        this.getarticle();
+                    })
+                
             })
     }
     getarticle = () => {
@@ -32,6 +34,9 @@ export default class Marticle extends Component {
                 this.setState({ data: res.data });
                 console.log(res.data);
             })
+    }
+    refreshs=()=>{
+        this.getarticle();
     }
     fetchDelete = (e) => {
         console.log(e);
@@ -53,7 +58,7 @@ export default class Marticle extends Component {
                     case "0": {
                         console.log(data.data);
                         ToastAndroid.showWithGravity('删除成功!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-                        Actions.write()
+                        Actions.pop(this.props.refresh())
                         break;
                     }
                     default: {
@@ -63,20 +68,20 @@ export default class Marticle extends Component {
                 }
             })
     }
-
+    back=()=>{
+        Actions.pop(this.props.refresh());
+      }
     render() {
         return (
             <View>
                 {
                     this.state.data.map(data =>
                         <View>
-                            <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                                <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.write()}>
+                            <View style={{ width: width, height: 90 * s, padding:20*s,backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
+                                <TouchableOpacity style={{  }} onPress={() =>this.back()}>
                                     <Icon name="left" color="#333" size={40 * s} />
                                 </TouchableOpacity>
-                                <View>
-                                    <Text style={{ color: '#333', fontSize: 34 * s, left: width * 0.4 }}>{data.atitle}</Text>
-                                </View>
+                               
                             </View>
                             <ScrollView>
                                 <View style={{ width: width * 0.96, backgroundColor: 'white', marginTop: 10 * s, marginBottom: 190 * s, marginLeft: 0.02 * width, position: 'relative' }}>
@@ -86,7 +91,7 @@ export default class Marticle extends Component {
                                     <View style={{ width: '100%', marginTop: '2%', paddingLeft: '3%', }}><Text style={{ fontSize: 18 * s, color: '#333' }} >{data.atag}</Text></View>
                                     {data.agrade === 0 ?
                                     <View style={{ width: '100%', marginTop: '6%', marginBottom: '2%' }}>
-                                        <TouchableOpacity onPress={() => Actions.edit({ aid: data.aid })} style={{ position: 'absolute', right: '45%', bottom: '5%', }}  >
+                                        <TouchableOpacity onPress={() => Actions.edit({ aid: data.aid ,refresh:()=>{this.refreshs()}})} style={{ position: 'absolute', right: '45%', bottom: '5%', }}  >
                                             <View style={{ width: 80*s, borderColor: 'red', borderWidth: s, alignItems: 'center' }}>
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>编辑</Text>
                                             </View>
@@ -96,7 +101,7 @@ export default class Marticle extends Component {
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>删除</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => Actions.teacher({ aid: data.aid, atitle: data.atitle, acontent: data.acontent })} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
+                                        <TouchableOpacity onPress={() => Actions.teacher({ aid: data.aid, atitle: data.atitle, acontent: data.acontent ,uid:data.uid,refresh:()=>{this.refreshs()}})} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
                                             <View style={{ width: 100*s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>邀请点评</Text>
                                             </View>

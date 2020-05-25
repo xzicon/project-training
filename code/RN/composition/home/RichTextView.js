@@ -67,6 +67,7 @@ export default class RichTextView extends Component {
                                     })
                                 }
                         }
+                        value={this.props.value}
                     />
                     {
                         this.props.showCount ?

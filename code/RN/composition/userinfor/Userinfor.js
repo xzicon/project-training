@@ -59,24 +59,20 @@ export default class Userinfor extends Component {
                 res === null ?
                     this.setState({ uid: '' })
                     :
-                    this.setState({ uid: res })
+                    this.setState({ uid: res },()=>{this.all()})
 
-                fetch('http://116.62.14.0:8402/login/me/' + this.state.uid + '/' + this.state.uid)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ data: res.data });
-                        console.log(res.data);
-                    })
+                
             })
-        AsyncStorage.getItem('imgurl').then((res) => {
-            if (res !== null) {
-                this.setState({
-                    imageUrl: JSON.parse(res),
-                    flag: '2'
-                });
-            }
-        });
+        
 
+    }
+    all=()=>{
+        fetch('http://116.62.14.0:8402/login/me/' + this.state.uid + '/' + this.state.uid)
+        .then((res) => res.json())
+        .then((res) => {
+            this.setState({ data: res.data });
+            console.log(res.data);
+        })
     }
     render() {
         return (
@@ -100,7 +96,7 @@ export default class Userinfor extends Component {
                                     <Text style={{ fontSize: 18 * s, color: 'grey' }}>{this.state.data.udescribe}</Text>
                                 </View>
                                 {/* 编辑资料 */}
-                                <TouchableOpacity onPress={() => { Actions.ziliao() }} style={{ width: 130 * s, justifyContent: 'center' }}  >
+                                <TouchableOpacity onPress={() => { Actions.ziliao({refresh:()=>{this.all()}}) }} style={{ width: 130 * s, justifyContent: 'center' }}  >
                                     <View style={{ width: 130 * s, borderWidth: 1, justifyContent: 'center', alignItems: 'center', padding: 10 * s }}>
                                         <Text style={{ color: '#000', fontSize: 20 * s, }}>编辑资料</Text>
                                     </View>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Dimensions, Image, Modal, ScrollView, AsyncStorage, ToastAndroid, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, Dimensions, Image, FlatList, ScrollView, AsyncStorage, ToastAndroid } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
-import Remark from '../composition/userinfor/Remark';
-import Skill from '../composition/userinfor/Skill';
+import Remark from '../userinfor/Remark';
+import Skill from '../userinfor/Skill';
 
 const { width } = Dimensions.get('window');
 const s = width / 640;
@@ -14,21 +14,7 @@ export default class TeacherDetail extends Component {
         this.state = {
             uid: '',
             data: [],
-            flag: '1',
-            uclass: '',
-            uclassplay: false,
-            color1: '#000',
-            borderColor1: '#000',
-            color2: '#000',
-            borderColor2: '#000',
-            color3: '#000',
-            borderColor3: '#000',
-            color4: '#000',
-            borderColor4: '#000',
-            color5: '#000',
-            borderColor5: '#000',
-            color6: '#000',
-            borderColor6: '#000',
+            flag: '1'
         }
     }
     componentDidMount() {
@@ -70,34 +56,7 @@ export default class TeacherDetail extends Component {
             console.log(res.data);
         })
     }
-    _uclass = () => {
-        this.setState({ uclassplay: true })
-    }
-    _uclass_false = () => {
-        this.setState({ uclassplay: false })
-    }
-    _uclass_update = (uclass) => {
-        if (uclass === '高一') {
-            this.setState({ uclass: '高一', color1: 'red', borderColor1: 'red', color2: '#000', borderColor2: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment('高一');
-        } else if (uclass === '高二') {
-            this.setState({ uclass: '高二', color2: 'red', borderColor2: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment('高二');
-        } else if (uclass === '高三') {
-            this.setState({ uclass: '高三', color3: 'red', borderColor3: 'red', color1: '#000', borderColor1: '#000', color2: '#000', borderColor2: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment('高三');
-        } else if (uclass === '初一') {
-            this.setState({ uclass: '初一', color4: 'red', borderColor4: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color2: '#000', borderColor2: '#000', color5: '#000', borderColor5: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment('初一');
-        } else if (uclass === '初二') {
-            this.setState({ uclass: '初二', color5: 'red', borderColor5: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color2: '#000', borderColor2: '#000', color6: '#000', borderColor6: '#000' })
-            this.comment('初二');
-        } else if (uclass === '初三') {
-            this.setState({ uclass: '初三', color6: 'red', borderColor6: 'red', color1: '#000', borderColor1: '#000', color3: '#000', borderColor3: '#000', color4: '#000', borderColor4: '#000', color5: '#000', borderColor5: '#000', color2: '#000', borderColor2: '#000' })
-            this.comment('初三');
-        }
-    }
-    comment = (gclass) => {
+    comment = () => {
         var date = new Date();
         var Y = date.getFullYear() + '-';
         var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -107,7 +66,7 @@ export default class TeacherDetail extends Component {
         let data = {
             aid: this.props.aid,
             tid: this.props.tid,
-            gclass: gclass,
+            gclass: '高一',
             atitle: this.props.atitle,
             acontent: this.props.acontent,
             invitetime: Y + M + D + h + m,
@@ -123,8 +82,7 @@ export default class TeacherDetail extends Component {
             .then((res) => {
                 console.log(res.data)
                 if (res.status == 0) {
-                    this.setState({ uclassplay: false })
-                    Actions.marticle({aid:this.props.aid});
+                    Actions.home();
                     ToastAndroid.show('邀请点评成功', 100)
                 } else {
                     ToastAndroid.show('邀请点评失败', 100)
@@ -133,41 +91,8 @@ export default class TeacherDetail extends Component {
             })
     }
     render() {
-        console.log(this.state.data.tyear+'-----');
+        console.log(this.props.tid);
         return (
-            <View>
-                <Modal
-                    animationType='silde'
-                    onRequestClose={this._uclass_false}//安卓必须设置
-                    transparent={true}
-                    visible={this.state.uclassplay}
-                    autoFocus={true}
-                >
-                    <TouchableOpacity style={styles.cover}
-                        onPress={this._uclass_false}>
-                    </TouchableOpacity>
-                    <View style={{ width: width * 0.9, top: 100 * s, left: width * 0.05, backgroundColor: '#fff' }}>
-                        <View style={styles.header}>
-                            <Text style={styles.fon}>请选择年级</Text>
-                        </View>
-                        <View style={styles.container}>
-                            <Text style={styles.cbox}>高中:</Text>
-                            <View style={styles.zbox}>
-                                <View><Text onPress={() => { this._uclass_update('高一') }} style={[styles.box, { borderColor: this.state.borderColor1, color: this.state.color1 }]}>高一</Text></View>
-                                <View><Text onPress={() => { this._uclass_update('高二') }} style={[styles.box, { borderColor: this.state.borderColor2, color: this.state.color2 }]}>高二</Text></View>
-                                <View><Text onPress={() => { this._uclass_update('高三') }} style={[styles.box, { borderColor: this.state.borderColor3, color: this.state.color3 }]}>高三</Text></View>
-                            </View>
-                        </View>
-                        <View style={styles.container}>
-                            <Text style={styles.cbox}>初中:</Text>
-                            <View style={styles.zbox}>
-                                <View><Text onPress={() => { this._uclass_update('初一') }} style={[styles.box, { borderColor: this.state.borderColor4, color: this.state.color4 }]}>初一</Text></View>
-                                <View><Text onPress={() => { this._uclass_update('初二') }} style={[styles.box, { borderColor: this.state.borderColor5, color: this.state.color5 }]}>初二</Text></View>
-                                <View><Text onPress={() => { this._uclass_update('初三') }} style={[styles.box, { borderColor: this.state.borderColor6, color: this.state.color6 }]}>初三</Text></View>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
             <View style={{ position: 'relative' }}>
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
@@ -303,56 +228,10 @@ export default class TeacherDetail extends Component {
                     
                 }
                 <View style={{ position: 'absolute', bottom: 20 * s, paddingLeft: '50%' }}>
-                    <Text onPress={() => this._uclass()} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
+                    {/* <Text onPress={() => { this.comment() }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text> */}
+                    <Text onPress={() => { Actions.yelp({tid:this.props.tid}) }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
                 </View>
             </View>
-        </View>
         )
     }
 }
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: '#fff',
-        height: 90 * s,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderBottomColor: 'gray',
-        borderBottomWidth: s,
-        width: '100%',
-        padding: 20 * s
-    },
-    fon: {
-        width: '100%',
-        fontSize: 24 * s,
-        textAlign: 'center'
-    },
-    container: {
-        padding: 40 * s,
-        justifyContent: 'center',
-    },
-    cbox: {
-        fontSize: 24 * s
-    },
-    zbox: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    box: {
-        fontSize: 20 * s,
-        borderWidth: s,
-        borderRadius: 10 * s,
-        paddingTop: 20 * s,
-        paddingBottom: 20 * s,
-        paddingLeft: 40 * s,
-        paddingRight: 40 * s,
-        marginTop: 20 * s
-    },
-    cover: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    },
-})

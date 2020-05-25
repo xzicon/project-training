@@ -5,16 +5,6 @@ import { Actions } from 'react-native-router-flux';
 const { width } = Dimensions.get('window');
 const s = width / 640;
 
-// const data=[
-//     {
-//         tid:'1',
-//         taid:'1',
-//         ttitle:'teacher shill',
-//         tcontent:'自行车v的风格和  微软推你看过',
-//         tname:'点评君',
-//         ttime:'2020-04-30'
-//     }
-// ]
 
 export default class Skill extends Component {
     constructor(props) {
@@ -35,7 +25,16 @@ export default class Skill extends Component {
             })
     }
     skill = () => {
-        
+        fetch('http://116.62.14.0:8402/skill/tlist/'+this.props.tid)
+        .then((res) => res.json())
+            .then((res) => {
+                console.log('skill')
+                console.log(res.data)
+                this.setState({
+                    data: res.data,
+                })
+                
+            })
     }
     render() {
         return (
@@ -52,18 +51,21 @@ export default class Skill extends Component {
                         numColumns={1}
                         renderItem={({ item }) => (
                             
-                            <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s , }}>
-                                <View style={{ width: '100%', height: 160 * s}}>
+                            <TouchableOpacity 
+                            onPress={()=>{Actions.skilldetail({sid:item.sid})}}
+                            style={{ flexDirection:'row',justifyContent:'space-between',alignItems:'center',backgroundColor: '#FFF',height: 200 * s,marginTop:5*s,marginBottom:3*s,padding:20*s}}>
+                                <View style={{ }}>
                                     <TouchableOpacity >
-                                        <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom:10*s }}>{item.ttitle}</Text>
-                                        <Text numberOfLines={3} style={{fontSize: 20 * s}}>{item.tcontent}</Text>
+                                        <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom:10*s }}>{item.skilltitle}</Text>
+                                        <Text numberOfLines={3} style={{fontSize: 20 * s}}>{item.tname}</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>
-                                    <Text style={{fontSize: 18 * s, color:'gray'}}>{item.tname}</Text>
-                                    <Text style={{fontSize: 18 * s, color:'gray'}}>{item.ttime}</Text>
+                                    <Image 
+                                    style={{width:150*s,height:150*s}}
+                                    source={{'uri':'http://116.62.14.0:8402/images/'+item.skillimage}}/>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                             
                         )}
                     />

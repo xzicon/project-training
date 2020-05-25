@@ -39,6 +39,11 @@ export default class HomePage extends Component {
             this.all();
         }
     }
+    componentWillReceiveProps(){
+        if(this.props.refresh==1){
+            this.all()
+        }
+    }
     // 
     all = ()=>{
         this.setState({
@@ -56,7 +61,7 @@ export default class HomePage extends Component {
             })
         }, 1000);
     }
-    // 
+
     new = () => {
         this.setState({
             refreshing: true
@@ -74,6 +79,19 @@ export default class HomePage extends Component {
                 })
             })
         }, 1000);
+    }
+    // 关注
+    guanzhu=()=>{
+        fetch('http://116.62.14.0:8402/article/uconcern/'+this.state.uid)
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res.data[0])
+
+                this.setState({
+                    follow_data:res.data,
+                    follow:1
+                })
+            })
     }
     // 关注推荐页面切换
     change=()=>{
@@ -196,9 +214,18 @@ export default class HomePage extends Component {
                                     numColumns={1}
                                     // ListFooterComponent={ this._renderFooter }
                                     onRefresh = {()=>{
-                                        this.all()
+                                        this.guanzhu()
                                     }}
                                     refreshing = { this.state.refreshing }
+                                    ListFooterComponent={ ()=>{
+                                        return(
+                                        <View style={{flexDirection:'row',justifyContent:'center',height:50*s}}>
+                                            <Text>
+                                                到底了~
+                                            </Text>
+                                        </View>
+                                        )
+                                    } }
                                     renderItem={({item})=>(
                                         this._container(item)
                                     )}
@@ -216,7 +243,7 @@ export default class HomePage extends Component {
                                 {this.state.new===1?
                                 // 最新
                                 <View style={{flex:1}}>
-                                    <ScrollView>
+                                    {/* <ScrollView> */}
                                     <View style={{alignItems:'center',flexDirection:'row',height:40*s,paddingLeft:10*s,justifyContent:'flex-end',paddingRight:20*s}}>
                                         {/* <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)'}}>最新</Text></TouchableOpacity>
                                         <TouchableOpacity onPress={this.change_new}><Text>最热</Text></TouchableOpacity> */}
@@ -233,7 +260,16 @@ export default class HomePage extends Component {
                                         style={{paddingBottom:10*s}}
                                         data={this.state.recommend_data_new}
                                         numColumns={1}
-                                        ListFooterComponent={ this._renderFooter }
+                                        ListFooterComponent={ ()=>{
+                                            return(
+                                            <View style={{flexDirection:'row',justifyContent:'center',height:50*s}}>
+                                                <Text>
+                                                    到底了~
+                                                </Text>
+                                            </View>
+                                            )
+                                        } }
+                                        // ListFooterComponent={ this._renderFooter }
                                         onRefresh = {()=>{
                                             this.new()
                                         }}
@@ -243,7 +279,7 @@ export default class HomePage extends Component {
 
                                         )}
                                     />
-                                    </ScrollView>
+                                    {/* </ScrollView> */}
                                     </View>
                                     :(
                                         // 最热
@@ -255,7 +291,7 @@ export default class HomePage extends Component {
                                             <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)',fontSize:20*s}}>最热</Text></TouchableOpacity>
                                             </View>
                                         </View>  */}
-                                    <ScrollView>
+                                    {/* <ScrollView> */}
                                     <View style={{alignItems:'center',flexDirection:'row',height:40*s,paddingLeft:10*s,justifyContent:'flex-end',paddingRight:20*s}}>
                                         {/* <TouchableOpacity onPress={this.change_new}><Text >最新</Text></TouchableOpacity>
                                         <TouchableOpacity style={{borderBottomWidth:4,borderBottomColor:'rgb(255, 223, 65)'}}><Text style={{color: 'rgb(216, 62, 52)'}}>最热</Text></TouchableOpacity> */}
@@ -275,12 +311,21 @@ export default class HomePage extends Component {
                                     onRefresh = {()=>{
                                         this.all()
                                     }}
+                                    ListFooterComponent={ ()=>{
+                                        return(
+                                        <View style={{flexDirection:'row',justifyContent:'center',height:50*s}}>
+                                            <Text>
+                                                到底了~
+                                            </Text>
+                                        </View>
+                                        )
+                                    } }
                                     refreshing = { this.state.refreshing }
                                     renderItem={({item})=>(
                                         this._container(item)
                                     )}
                                 />
-                                </ScrollView>
+                                {/* </ScrollView> */}
                             </View>
                         )}
                                 

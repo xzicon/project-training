@@ -134,7 +134,7 @@ export default class Ziliao extends Component {
           case "0": {
             console.log(data.data);
             ToastAndroid.show('修改资料成功', 100);
-            Actions.userinfor();
+            Actions.pop(this.props.refresh());
             break;
           }
           default: {
@@ -158,6 +158,8 @@ export default class Ziliao extends Component {
       this.setState({uclassplay: true,color5: 'red',borderColor5: 'red',color1: '#000',borderColor1: '#000',color3: '#000',borderColor3: '#000',color4: '#000',borderColor4: '#000',color2: '#000',borderColor2: '#000',color6: '#000',borderColor6: '#000'})
     } else if(uclass === '初三'){
       this.setState({uclassplay: true,color6: 'red',borderColor6: 'red',color1: '#000',borderColor1: '#000',color3: '#000',borderColor3: '#000',color4: '#000',borderColor4: '#000',color5: '#000',borderColor5: '#000',color2: '#000',borderColor2: '#000'})
+    }else if(uclass === '无'){
+      this.setState({uclassplay: true,color6: '#000',borderColor6: '#000',color1: '#000',borderColor1: '#000',color3: '#000',borderColor3: '#000',color4: '#000',borderColor4: '#000',color5: '#000',borderColor5: '#000',color2: '#000',borderColor2: '#000'})
     }
   }
   _uclass_false = () => {

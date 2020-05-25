@@ -452,6 +452,15 @@ export default class Favorite extends Component {
                         renderItem={({item})=>(
                            
                                 item.mimage===''?
+
+                                <View style={{backgroundColor: '#F4F4F4',alignItems:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
+                                height:200*s,borderRadius:10*s,padding:20*s}}>
+                                    <TouchableOpacity onPress={()=>{Actions.popular({mid:item.mid})}}>
+                                        <Text>{item.mtitle}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                (item.mimage.split('.')[1] === 'mp4' ?
                                 <View style={{backgroundColor: '#F4F4F4',alignItems:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
                                 height:200*s,borderRadius:10*s,padding:20*s}}>
                                     <TouchableOpacity onPress={()=>{Actions.popular({mid:item.mid})}}>
@@ -466,6 +475,7 @@ export default class Favorite extends Component {
                                         <Text>{item.mtitle}</Text>
                                     </TouchableOpacity>
                                 </View>
+                                )
                         )}
                         />
             </View>
