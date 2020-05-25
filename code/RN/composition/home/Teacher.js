@@ -577,7 +577,7 @@ update_uclass=(uclass,uid)=>{
             }}>
             <Image
               source={search}
-              style={{marginLeft: 20, width: 25, height: 25}}
+              style={{marginLeft: 20*s, width: 30*s, height: 30*s}}
             />
             <TextInput
             returnKeyType="search"//设置键盘样式
@@ -585,6 +585,7 @@ update_uclass=(uclass,uid)=>{
                 paddingVertical: 5,
                 marginLeft: 10,
                 width: width - 100,
+                fontSize:17*s
               }}
               clearButtonMode={'while-editing'}
               onChangeText={(text)=>{this._change(text)}}

@@ -227,7 +227,7 @@ export default class TeacherDetail extends Component {
                     )
                     
                 }
-                <View style={{ position: 'absolute', bottom: 20 * s, paddingLeft: '50%' }}>
+                <View style={{ position: 'absolute', bottom: 20 * s, left:(width-140*s)/2,right:(width-140*s)/2}}>
                     {/* <Text onPress={() => { this.comment() }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text> */}
                     <Text onPress={() => { Actions.yelp({tid:this.props.tid}) }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
                 </View>
