@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import Remark from '../userinfor/Remark';
 import Skill from '../userinfor/Skill';
 
-const { width } = Dimensions.get('window');
+const { width ,height,scale} = Dimensions.get('window');
 const s = width / 640;
 
 export default class TeacherDetail extends Component {
@@ -38,6 +38,7 @@ export default class TeacherDetail extends Component {
             .then((res) => {
                 this.setState({ data: res.data, flag: '1' });
                 console.log(res.data);
+                console.log('personnnnnnnn')
             })
     }
     remark = () => {
@@ -93,7 +94,7 @@ export default class TeacherDetail extends Component {
     render() {
         console.log(this.props.tid);
         return (
-            <View style={{ position: 'relative' }}>
+            <View style={{ flex:1 }}>
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity style={{ left: 20 * s, }} onPress={() => Actions.pop()}>
                         <Icon name="left" color="#333" size={40 * s} />
@@ -143,15 +144,15 @@ export default class TeacherDetail extends Component {
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>教师性别</Text>
-                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tsex}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tsex==0?'女':'男'}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
                                     <Text style={{ fontSize: 24 * s }}>教龄时间</Text>
-                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tage}</Text>
+                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.tage}年</Text>
                                 </View>
-                                <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s }}>
+                                <View style={{ flexDirection: 'row', marginBottom: 20 * s, marginTop: 10 * s, marginLeft: 20 * s ,marginRight:20*s,justifyContent:'space-between'}}>
                                     <Text style={{ fontSize: 24 * s }}>中高考阅卷经验</Text>
-                                    <Text style={{ fontSize: 24 * s, width:'80%',textAlign:'right' }}>{this.state.data.texperience}</Text>
+                                    <Text style={{ fontSize: 24 * s,}}>{this.state.data.texperience==1?'有':'无'}</Text>
                                 </View>
 
                             </View>
@@ -199,9 +200,8 @@ export default class TeacherDetail extends Component {
                                 <Text style={{ fontSize: 24 * s }}>技法</Text>
                             </TouchableOpacity>
                         </View>
-                        <ScrollView style={{ height: 730 * s }}> 
+                        <ScrollView style={{ height: height-320*s }}> 
                             <Remark  tid={this.props.tid}/>
-                            {/* <View style={{ height: 100 * s }}></View> */}
                         </ScrollView>
                         
                     </View>
@@ -218,17 +218,15 @@ export default class TeacherDetail extends Component {
                                 <Text style={{ color: 'red',fontSize: 24 * s }}>技法</Text>
                             </TouchableOpacity>
                         </View>
-                        <ScrollView style={{ height: 730 * s }}> 
+                        <ScrollView style={{ height:  height-350*s }}> 
                             <Skill  tid={this.props.tid}/>
-                            {/* <View style={{ height: 100 * s }}></View> */}
                         </ScrollView>
                         
                     </View>
                     )
                     
                 }
-                <View style={{ position: 'absolute', bottom: 20 * s, left:(width-140*s)/2,right:(width-140*s)/2}}>
-                    {/* <Text onPress={() => { this.comment() }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text> */}
+                <View style={{ position: 'absolute', bottom: 50 * s, left:(width-140*s)/2,right:(width-140*s)/2}}>
                     <Text onPress={() => { Actions.yelp({tid:this.props.tid}) }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
                 </View>
             </View>

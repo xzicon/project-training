@@ -36,6 +36,13 @@ export default class Skill extends Component {
                 
             })
     }
+    _renderFooter = () => (
+        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:50*s}}>
+            <Text>
+               到底了~
+            </Text>
+        </View>
+    )
     render() {
         return (
             <View style={{ flex: 1, }}>
@@ -46,18 +53,19 @@ export default class Skill extends Component {
                 :
                 <View>
                     <FlatList
-                        style={{  }}
+                        style={{ marginBottom: 180 * s }}
                         data={this.state.data}
                         numColumns={1}
+                        // ListFooterComponent={ this._renderFooter }
                         renderItem={({ item }) => (
                             
                             <TouchableOpacity 
                             onPress={()=>{Actions.skilldetail({sid:item.sid})}}
-                            style={{ flexDirection:'row',justifyContent:'space-between',alignItems:'center',backgroundColor: '#FFF',height: 200 * s,marginTop:5*s,marginBottom:3*s,padding:20*s}}>
-                                <View style={{ }}>
-                                    <TouchableOpacity >
+                            style={{ flexDirection:'row',justifyContent:'space-between',alignItems:'center',backgroundColor: '#FFF',height: 200 * s,marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s,padding:20*s}}>
+                                <View style={{ width:width-200*s}}>
+                                    <TouchableOpacity style={{flexDirection:'column',justifyContent:'space-between', height:'80%',}}>
                                         <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom:10*s }}>{item.skilltitle}</Text>
-                                        <Text numberOfLines={3} style={{fontSize: 20 * s}}>{item.tname}</Text>
+                                        <Text numberOfLines={3} style={{fontSize: 20 * s}}>{item.skilltime}</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>

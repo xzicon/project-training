@@ -128,7 +128,7 @@ export default class Remark extends Component {
                     <View>
                         
                         <View style={{ width: width, marginTop: 20 * s, marginLeft: 20 * s }}>
-                            <Text style={{ fontSize: 24 * s }}>你还没有点评哦~</Text>
+                            <Text style={{ fontSize: 24 * s }}>该老师还没有点评哦~</Text>
                         </View>
                     </View>}
             </View>

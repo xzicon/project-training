@@ -582,7 +582,7 @@ update_uclass=(uclass,uid)=>{
             <TextInput
             returnKeyType="search"//设置键盘样式
               style={{
-                paddingVertical: 5,
+                paddingVertical: 0,
                 marginLeft: 10,
                 width: width - 100,
                 fontSize:17*s

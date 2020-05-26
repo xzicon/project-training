@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TouchableOpacity, FlatList, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Image, TouchableOpacity, FlatList, AsyncStorage, ImageBackground } from 'react-native';
 import AnimatedTabs from 'react-native-animated-tabs';
 import { Scene, Actions, Tabs } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -59,6 +59,52 @@ class AnimatedTabsExample extends Component {
                 });
             })
     }
+    con=(groom,item ,index)=>{
+        const rili = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+        return(
+            <View>
+                {
+                    index==0?
+                        <View style={{marginLeft:20*s,marginRight:20*s,marginBottom:5*s,marginTop:5*s,flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
+                            <Text style={{marginTop:13*s,marginRight:10*s}}>{groom.substr(groom.indexOf('-')+1,2)[0]==0?rili[groom.substr(groom.indexOf('-')+1,2)[1]-1]:rili[groom.substr(groom.indexOf('-')+1,2)-1]}</Text>
+                            <ImageBackground style={{width:45*s,height:45*s}} source={require('../../../assets/composition/composition/rili.png')}>
+                                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:13*s}}>
+                                    
+                                    <Text>{groom.substr(groom.indexOf('-',6)+1,2)}</Text>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    :
+                    <Text></Text>
+                }
+                {
+            item.groomdate === groom ?
+                item.mimage === '' ?
+                    <View>
+                        <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
+                                <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
+                                <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    :
+                    <View>
+                        <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
+                            <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
+                                <Image
+                                    style={{ width: "100%", height: 240 * s }}
+                                    source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
+                                />
+                                <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                : <View></View>
+        }
+        </View>
+        )
+    }
     render() {
         const animatedViewStyle = { flex: 1,  };
         // marginTop: getDeviceHeight() / 4
@@ -67,7 +113,7 @@ class AnimatedTabsExample extends Component {
             height: getDeviceHeight() - getDeviceHeight() / 2,
             width: getPanelWidth()
         };
-
+        const rili = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
         return (
             // <View>
                 
@@ -85,234 +131,70 @@ class AnimatedTabsExample extends Component {
                         activePanel={this.state.activePanel}
                         onAnimateFinish={activePanel => this.setState({ activePanel })}
                     >
+                        
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item ,index}) => (
+                                this.con(groomdate1,item,index)
+                            )}
+                        />
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item ,index}) => (
+                                this.con(groomdate2,item,index)
+                           
+                            )}
+                        />
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item ,index}) => (
+                                this.con(groomdate3,item,index)
+                           
+                            )}
+                        />
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item ,index}) => (
+                                this.con(groomdate4,item,index)
+                           
+                            )}
+                        />
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item ,index}) => (
+                                this.con(groomdate5,item,index)
+                           
+                            )}
+                        />
+                        <FlatList
+                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
+                            data={this.state.data}
+                            numColumns={1}
+                            renderItem={({ item ,index}) => (
+                                this.con(groomdate6,item,index)
+                           
+                            )}
+                        />
 
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate1 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
-                        {/* <Image style={imageStyle} source={require('../../../assets/composition/composition/composition.png')} resizeMode='stretch'/> */}
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate2 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate3 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate4 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate5 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate6 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item }) => (
-                                item.groomdate === groomdate7 ?
-                                    item.mimage === '' ?
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Text style={{ fontSize: 26 * s, margin: 10 * s, paddingTop: 20 * s }}>{item.mtitle}</Text>
-                                                    <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        :
-                                        <View>
-                                            <View style={{ justifyContent: 'center', flexDirection: 'row', marginTop: 20 * s }}>
-                                                <TouchableOpacity onPress={() => Actions.popular({ mid: item.mid })} style={{ padding: 10 * s, width: '90%', borderStyle: 'dashed', borderColor: 'gray', borderWidth: s, borderRadius: 14 * s }}>
-                                                    <Image
-                                                        style={{ width: "100%", height: 240 * s }}
-                                                        source={{ uri: 'http://116.62.14.0:8402/images/' + item.mimage }}
-                                                    />
-                                                    <Text style={{ fontSize: 26 * s }}>{item.mtitle}</Text>
-                                                    {/* <Text style={{ textAlign: 'right', fontSize: 18 * s, margin: 10 * s, color: 'gray' }}>{item.mlocal}</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    : <View></View>
-                            )}
-                        />
                     </AnimatedTabs>
 
                     <View style={styles.buttons}>
                         <TouchableOpacity style={styles.text} onPress={() => this.goToPanel(-1)}>
-                            <Text>Previous</Text>
+                            <Text>后一天</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.text} onPress={() => this.goToPanel(1)}>
-                            <Text>Next</Text>
+                            <Text>前一天</Text>
                         </TouchableOpacity>
                     </View>
                 </View >

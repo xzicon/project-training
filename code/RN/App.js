@@ -215,6 +215,8 @@ const App = () => {
 								>
 									<Scene  hideNavBar hideTabBar key='addEssay' component={AddEssay} />
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={ADDTeacherDetail} />
+									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
+									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
 								</Scene>
 								<Scene
 								key='LessonPage'
@@ -236,6 +238,9 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='havewrite' component={HaveWrite} />
 									<Scene key='havemarticle' component={HaveMarticle} hideTabBar hideNavBar />
 									<Scene key='edit' component={Edit} hideTabBar hideNavBar />
+									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
+
+
 
 								</Scene>
 								<Scene
