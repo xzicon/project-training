@@ -226,9 +226,15 @@ export default class TeacherDetail extends Component {
                     )
                     
                 }
+                {this.props.state === 0 ? 
+                <View style={{ position: 'absolute', bottom: 50 * s, left:(width-140*s)/2,right:(width-140*s)/2}}>
+                    <Text style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#cdcdcd', width: 140 * s, borderRadius: 20 * s }}>无法邀请</Text>
+                </View>
+                :
                 <View style={{ position: 'absolute', bottom: 50 * s, left:(width-140*s)/2,right:(width-140*s)/2}}>
                     <Text onPress={() => { Actions.yelp({tid:this.props.tid}) }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
                 </View>
+                }
             </View>
         )
     }

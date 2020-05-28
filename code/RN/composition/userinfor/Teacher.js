@@ -295,6 +295,7 @@ update_uclass=(uclass,uid)=>{
       this.state.teacheryear=='高中老师'?
             (
               (item.tyear=='高一'||item.tyear=='高二'||item.tyear=='高三')?
+              item.state === 0 ? <View></View>:
               <Flex
             align="center"
             justify="between"
@@ -384,6 +385,7 @@ update_uclass=(uclass,uid)=>{
             :
             (
               (item.tyear=='初一'||item.tyear=='初二'||item.tyear=='初三')?
+              item.state === 0 ? <View></View>:
               <Flex
             align="center"
             justify="between"

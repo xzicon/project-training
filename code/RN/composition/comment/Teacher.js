@@ -242,7 +242,7 @@ export default class Teacher extends Component {
                 paddingVertical: 20,
                 backgroundColor: '#fff',
               }}>
-              <TouchableOpacity onPress={() => { Actions.teacherdetail({ tid: item.tid }) }}>
+              <TouchableOpacity onPress={() => { Actions.teacherdetail({ tid: item.tid, state: item.state }) }}>
 
                 <View style={{ flexDirection: 'row' }}>
                   <View>
@@ -261,7 +261,7 @@ export default class Teacher extends Component {
                     <Text style={{ fontSize: 24 * s }}>
                       {item.tname}
                       <Text style={{ color: 'orange', fontSize: 18 * s }}>
-                        &nbsp;&nbsp;/{item.tyear}
+                        &nbsp;&nbsp;{item.tage}年教龄/{item.tyear}
                       </Text>
                     </Text>
                     <Text style={{ color: 'gray', marginTop: 10 }}>
@@ -273,26 +273,27 @@ export default class Teacher extends Component {
               <View
                 style={{
                   marginLeft: 160 * s,
-                  flexDirection: 'column',
+                  flexDirection: 'row',
                   justifyContent: 'center',
                 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={{ fontSize: 14 }}>教龄:</Text>
-                  <Text style={{ fontSize: 12, marginLeft: 5, color: '#666' }}>
-                    {item.tage}年
-                  </Text>
+                  {item.state == 0 ?
+                    <Text style={{width: 60*s,height:30*s,backgroundColor:'#cdcdcd',textAlign:'center',lineHeight:30*s}}>休息</Text>
+                  :
+                    <Text style={{width: 60*s,height:30*s,backgroundColor:'green',textAlign:'center',lineHeight:30*s,color:'#fff'}}>在线</Text>
+                  }
                 </View>
                 <TouchableOpacity onPress={() => { this._like(item.tid) }}>
                   {
                     item.look == null ?
                       <Image
                         source={xinxin}
-                        style={{ width: 30, height: 30, marginLeft: 15 }}
+                        style={{ width: 30*s, height: 30*s, marginLeft: 20*s }}
                       />
                       :
                       <Image
                         source={xinxin0}
-                        style={{ width: 30, height: 30, marginLeft: 15 }}
+                        style={{ width: 30*s, height: 30*s, marginLeft: 20*s }}
                       />
 
                   }
