@@ -70,6 +70,13 @@ export default class Popular extends Component {
                 this.getMaterial();
             })
     }
+    componentWillReceiveProps() {
+        if (this.props.refresh == 1) {
+            this.setState({
+                updatea:true
+            })
+        }
+    }
     getMaterial = () => {
         fetch('http://116.62.14.0:8402/material/xiang/' + this.props.mid + '/' + this.state.uid)
             .then((res) => res.json())
@@ -108,7 +115,7 @@ export default class Popular extends Component {
         }).then(res => res.json())
             .then((res) => {
                 if (res.status == 0) {
-                    ToastAndroid.show('评论成功', 100);
+                    ToastAndroid.show('积分+1，经验值+5', 100);
                     this._comment();
                     this.getMaterial();
                     this.setState({
@@ -461,6 +468,7 @@ export default class Popular extends Component {
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
     }
+    
     onBackAndroid = () => {
         this.props.navigation.goBack();
         return true;
@@ -907,6 +915,10 @@ export default class Popular extends Component {
                     data={this.state.data}
                     style={{ backgroundColor: '#fff' }}
                     numColumns={1}
+                    // onRefresh={() => {
+                    //     this.new()
+                    // }}
+                    // refreshing={this.state.refreshing}
                     renderItem={({ item }) => (
                         this.props.mtab === 'sucai' ? (
                             item.mimage === '' ?

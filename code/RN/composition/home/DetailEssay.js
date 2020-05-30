@@ -227,7 +227,7 @@ export default class DetailEssay extends Component {
             }).then(res => res.json())
                 .then((res) => {
                     if (res.status == 0) {
-                        ToastAndroid.show('评论成功', 100);
+                        ToastAndroid.show('积分+1，经验值+3', 100);
                         this._comment_false();
                         this.getarticle();
                     } else {

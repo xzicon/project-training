@@ -30,8 +30,11 @@ export default class AddEssay extends Component {
       aimage: '',
       imageUrl: '',
       flag: '1',
-      mid:null,
-      uclassplay:false
+      uclassplay:false,
+      mid:undefined,
+      mtitle:'',
+      truetitle:'',
+      update:false
     })
   }
   componentDidMount() {
@@ -55,6 +58,26 @@ export default class AddEssay extends Component {
           })
       })
      
+  }
+  componentWillReceiveProps(nextProps) {
+    // console.log('componentWillReceiveProps')
+   this.setState({update:nextProps.update,mid:nextProps.mid,mtitle:nextProps.mtitle,truetitle:nextProps.truetitle})
+  }
+
+  getMaterial = () => {
+    fetch('http://116.62.14.0:8402/material/xiang/' + this.state.mid + '/' + this.state.uid)
+        .then((res) => res.json())
+        .then((res) => {
+            console.log(res.data)
+            this.setState({ mtitle: res.data[0].mtitle ,truetitle:res.data[0].truetitle});
+        })
+  }
+  select_material=()=>{
+    if(this.state.mid==undefined){
+      Actions.materiallist();
+    }else if(this.state.update==true){
+      Actions.materiallist();
+    }
   }
   _uclass = () => {
     this.setState({ uclassplay: true },()=>{
@@ -205,7 +228,7 @@ export default class AddEssay extends Component {
         uid: Number(this.state.uid),
         utime: Y + M + D + h + m,
         aimage: this.state.aimage,
-        mid: this.state.mid
+        mid: this.state.mid==undefined?null:this.state.mid
       }
       fetch('http://116.62.14.0:8402/aud/addarticle', {
         method: 'POST',
@@ -393,7 +416,9 @@ export default class AddEssay extends Component {
             }}
           />
         </View>
-        <View style={{width:'98%',marginLeft:'1%',
+        <TouchableOpacity 
+        onPress={()=>{this.select_material()}}
+        style={{width:'98%',marginLeft:'1%',
           marginTop:'0.5%',
           paddingLeft:'3%',paddingRight:'3%',
           alignItems: 'center', flexDirection: 'row', backgroundColor: '#FFF',
@@ -406,10 +431,10 @@ export default class AddEssay extends Component {
             <Image 
                 style={{width:30*s,height:30*s,marginRight:10*s}}
                 source={require('../../assets/composition/add/sucai.png')}/>
-            <Text>参与素材话题</Text>
+            <Text style={{width:width-100*s,color:'#5a6d95'}} numberOfLines={1} ellipsizeMode='middle'>{(this.state.mtitle==''&&this.state.truetitle=='')?'参与素材话题':(this.state.mtitle==''?this.state.truetitle:this.state.mtitle)}</Text>
           </View>
           <Icon name='right' size={28*s} color={'#666'}/>
-        </View>
+        </TouchableOpacity>
         <View style={{width:'98%',height:240*s,marginTop:'0.5%',marginLeft:'1%',backgroundColor:'#fff'}}>
           {this.state.aimage===''?
             <TouchableOpacity onPress={() => { this.takephoto() }}>

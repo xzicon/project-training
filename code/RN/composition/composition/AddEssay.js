@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, AsyncStorage, TextInput, ToastAndroid, TouchableOpacity, Dimensions, ScrollView, Image } from 'react-native'
-import RichTextView from './RichTextView'
+import RichTextView from '../home/RichTextView'
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -167,12 +167,13 @@ export default class AddEssay extends Component {
     }
     else if (this.state.inputValue == '') {
       ToastAndroid.show('请输入作文内容', 100)
-    } else if (this.state.inputValue.length >= 2500) {
-      ToastAndroid.show('作文内容字数超出限制', 100)
-    }
+    } 
     // else if (this.state.inputValue.length < 300) {
     //   ToastAndroid.show('作文内容不足300字', 100)
     // }
+    else if (this.state.inputValue.length >= 2500) {
+      ToastAndroid.show('作文内容字数超出限制', 100)
+    }
     else {
       var date = new Date();
       var Y = date.getFullYear() + '-';
@@ -211,7 +212,7 @@ export default class AddEssay extends Component {
                 imageUrl: '',
               },()=>{
                 ToastAndroid.show('积分+5,经验值+15', 100);
-                Actions.teacher1({atitle: data.atitle,
+                Actions.teacher11({atitle: data.atitle,
                   acontent: data.acontent,
                   uid: data.uid,
                   aid:this.state.aid

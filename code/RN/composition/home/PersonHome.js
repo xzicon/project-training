@@ -16,7 +16,9 @@ export default class PersonHome extends Component {
             collect_data:[],
             follow:0,
             follow_data:[],
-            me_data:[]
+            me_data:[],
+            me_rank:'',
+            follow_me_data:[]
         })
     }
     componentDidMount(){
@@ -25,9 +27,14 @@ export default class PersonHome extends Component {
             res===null?
             this.setState({look:''})
             :
-            this.setState({look:res})
+            this.setState({look:res},()=>{
+                this.me();
 
-            this.me()
+                this.me_rank();
+                this.follow();
+                this.follow_me();
+            })
+
             if(this.state.write===1){
                 this._write()
             }
@@ -37,8 +44,19 @@ export default class PersonHome extends Component {
         fetch('http://116.62.14.0:8402/login/me/'+this.props.uid+'/'+this.state.look)
         .then(res=>res.json())
         .then((res)=>{
+            console.log(res.data)
             this.setState({
                 me_data:res.data
+            })
+        })
+    }
+    me_rank=()=>{
+        fetch('http://116.62.14.0:8402/points/personal/'+this.props.uid)
+        .then(res=>res.json())
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({
+                me_rank:res.data
             })
         })
     }
@@ -50,6 +68,16 @@ export default class PersonHome extends Component {
                 follow_data:res.data
             })
         })
+    }
+    follow_me=()=>{
+        fetch('http://116.62.14.0:8402/login/fans/'+this.props.uid)
+        .then(res=>res.json())
+        .then((res)=>{
+            this.setState({
+                follow_me_data:res.data
+            })
+        })
+        
     }
     // follow_add_delete=()=>{
 
@@ -67,7 +95,6 @@ export default class PersonHome extends Component {
             body: JSON.stringify(data)
           }).then(res=>res.json())
           .then((res)=>{
-              console.log(res)
               if(res.status==0){
                 this.me();
               }else if(res.status==1){
@@ -90,7 +117,6 @@ export default class PersonHome extends Component {
             body: JSON.stringify(data)
           }).then(res=>res.json())
           .then((res)=>{
-              console.log(res)
               if(res.status==0){
                   this.follow();
               }else if(res.status==1){
@@ -123,14 +149,24 @@ export default class PersonHome extends Component {
         })
     }
     _write=()=>{
-        fetch('http://116.62.14.0:8402/login/article/'+this.props.uid)
-        .then(res=>res.json())
-        .then((res)=>{
-            console.log(res.data)
-            this.setState({
-                write_data:res.data
+        if(this.props.uid==this.state.look){
+            fetch('http://116.62.14.0:8402/login/article/'+this.props.uid)
+            .then(res=>res.json())
+            .then((res)=>{
+                this.setState({
+                    write_data:res.data
+                })
             })
-        })
+        }else{
+            fetch('http://116.62.14.0:8402/login/articles/'+this.props.uid)
+            .then(res=>res.json())
+            .then((res)=>{
+                this.setState({
+                    write_data:res.data
+                })
+            })
+        }
+        
 
     }
     change=()=>{
@@ -166,15 +202,15 @@ export default class PersonHome extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <View style={{paddingLeft:'5%',paddingRight:'5%',backgroundColor:'#FFF',
-                alignItems:'center',flexDirection:'row',justifyContent:'space-between',height:90*s}}>
+                <View style={{paddingLeft:'5%',paddingRight:'5%',backgroundColor:'#F5F5F5',
+                alignItems:'center',flexDirection:'row',justifyContent:'space-between',height:80*s}}>
                     {/* 返回 */}
                     <TouchableOpacity style={{width:'15%'}} onPress={Actions.pop}>
                         <Icon size={40*s} style={{color:'#000'}} name='left'/>
                     </TouchableOpacity>
-                    <View style={{alignItems:'center',width:'60%'}}>
+                    {/* <View style={{alignItems:'center',width:'60%'}}>
                         <Text style={{fontSize:28*s}}>主页</Text>  
-                    </View>       
+                    </View>        */}
                     <View style={{width:'15%'}}>
                         {
                         this.state.me_data.look===this.state.me_data.uid?
@@ -206,8 +242,18 @@ export default class PersonHome extends Component {
                         <Image
                         style={{width:100*s,height:100*s,borderRadius:50*s}}
                          source={{uri:'http://116.62.14.0:8402/images/'+this.state.me_data.uimage}}/>
-                        <Text style={{}}>{this.state.me_data.uname}</Text>
-                        <Text>{this.state.me_data.udescribe}</Text>
+                        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                            <Text style={{fontSize:25*s}}>{this.state.me_data.uname}</Text>
+                            <Text style={{fontSize:15*s}}>{this.state.me_rank.class}</Text>
+                        </View>
+                        {/* <Text>{this.state.me_data.uclass}</Text> */}
+                        
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={{fontSize:18*s}}>关注  {this.state.follow_data.length}</Text>
+                            <Text style={{fontSize:18*s}}>   |   </Text>
+                            <Text style={{fontSize:18*s}}>粉丝  {this.state.follow_me_data.length}</Text>
+                        </View>
+                        <Text style={{fontSize:18*s}}>简介：{this.state.me_data.udescribe}</Text>
                     </View>
                 </View>
                 <View style={{flexDirection:'row',justifyContent:'space-around',height:70*s,alignItems:'center',backgroundColor:'#fff'}}>
@@ -269,7 +315,7 @@ export default class PersonHome extends Component {
                                                     source={{uri:'http://116.62.14.0:8402/images/'+this.state.me_data.uimage}}/>
                                                 </TouchableOpacity>
                                                 <View>
-                                                    <Text>{this.state.me_data.uname}</Text>
+                                                    <Text>{this.state.me_data.uname}<Text>{this.state.me_rank.class}</Text></Text>
                                                     <Text>{item.utime}</Text>
                                                 </View>
                                             </View>

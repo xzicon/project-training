@@ -34,6 +34,7 @@ import Favorite from './composition/home/Favorite';
 import ADDTeacher from './composition/home/Teacher';
 import ADDTeacherDetail from './composition/home/TeacherDetail';
 import Reply from './composition/home/Reply';
+import Materiallist from './composition/home/Materiallist';
 
 // 素材
 import Composition from './composition/composition/Composition'; // 素材
@@ -48,7 +49,8 @@ import SkillDetail from './composition/composition/skills/SkillDetail'; // 技�
 import PaperDetail from './composition/composition/realpapers/PaperDetail'; // 真题详情
 import Realpaper from './composition/composition/realpapers/Realpaper'; // 真题
 import Collection from './composition/composition/collection/Collection'; // 合集
-
+import ADDTeacher1 from './composition/composition/Teacher';
+import AddEassy2 from './composition/composition/AddEssay';
 // 我的
 import Userinfor from './composition/userinfor/Userinfor';
 import Myset from './composition/userinfor/Myset';
@@ -74,6 +76,8 @@ import Yelp from './composition/comment/Yelp';
 import AddEassy1 from './composition/comment/AddEassy';
 import HaveWrite from './composition/comment/HaveWrite';
 import HaveMarticle from './composition/comment/HaveMarticle';
+import AddORC from './composition/comment/AddORC';
+import Materiallist1 from './composition/comment/Materiallist';
 
 
 const { width, scale } = Dimensions.get('window');
@@ -165,7 +169,7 @@ const App = () => {
 									{/* 老师点评 */}
 									<Scene hideTabBar hideNavBar key='teacher1' component={ADDTeacher} />
 									<Scene hideTabBar hideNavBar key='teacherdetail1' component={ADDTeacherDetail} />
-
+									<Scene hideNavBar hideTabBar key='paperdetail' component={PaperDetail} />
 								</Scene>
 								<Scene
 									key='materialPage'
@@ -189,7 +193,7 @@ const App = () => {
 									<Scene hideTabBar hideNavBar key='detailEssaywrite' component={DetailEssay} />
 									<Scene hideNavBar hideTabBar key='searchEssay' component={Search} />
 									<Scene hideTabBar hideNavBar key='searchlist' component={SearchList} />
-									<Scene hideNavBar hideTabBar key='addEssaywrite' component={AddEssay} />
+									<Scene hideNavBar hideTabBar key='addEssaywrite' component={AddEassy2} />
 									{/* 技法 */}
 									<Scene hideNavBar hideTabBar key='skill1' component={Skill} />
 									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
@@ -198,6 +202,7 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='realpaper' component={Realpaper} />
 
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
+									<Scene hideTabBar hideNavBar key='teacher11' component={ADDTeacher1} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
 
 									{/* 合集 */}
@@ -217,6 +222,7 @@ const App = () => {
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={ADDTeacherDetail} />
 									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
 									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
+									<Scene hideNavBar hideTabBar key='materiallist' component={Materiallist}/>
 								</Scene>
 								<Scene
 								key='LessonPage'
@@ -239,6 +245,8 @@ const App = () => {
 									<Scene key='havemarticle' component={HaveMarticle} hideTabBar hideNavBar />
 									<Scene key='edit' component={Edit} hideTabBar hideNavBar />
 									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
+									<Scene hideNavBar hideTabBar key='addORC' component={AddORC}/>
+									<Scene hideNavBar hideTabBar key='materiallist' component={Materiallist1}/>
 
 
 
@@ -286,9 +294,9 @@ const App = () => {
 									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetailme} />
 									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
 									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
-									{/* <Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} /> */}
+									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
-									
+									<Scene hideNavBar hideTabBar key='paperdetail' component={PaperDetail} />
 								</Scene>
 							</Tabs>
 						</Scene>

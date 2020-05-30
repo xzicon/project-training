@@ -64,20 +64,6 @@ class AnimatedTabsExample extends Component {
         return(
             <View>
                 {
-                    index==0?
-                        <View style={{marginLeft:20*s,marginRight:20*s,marginBottom:5*s,marginTop:5*s,flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
-                            <Text style={{marginTop:13*s,marginRight:10*s}}>{groom.substr(groom.indexOf('-')+1,2)[0]==0?rili[groom.substr(groom.indexOf('-')+1,2)[1]-1]:rili[groom.substr(groom.indexOf('-')+1,2)-1]}</Text>
-                            <ImageBackground style={{width:45*s,height:45*s}} source={require('../../../assets/composition/composition/rili.png')}>
-                                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:13*s}}>
-                                    
-                                    <Text>{groom.substr(groom.indexOf('-',6)+1,2)}</Text>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    :
-                    <Text></Text>
-                }
-                {
             item.groomdate === groom ?
                 item.mimage === '' ?
                     <View>
@@ -101,7 +87,33 @@ class AnimatedTabsExample extends Component {
                         </View>
                     </View>
                 : <View></View>
-        }
+                }
+                </View>
+        )
+    }
+    cc=(groom)=>{
+        const rili = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+        return(
+        <View style={{marginBottom:60*s}}>
+            <View style={{backgroundColor:'#FFF',paddingLeft:20*s,paddingRight:20*s,paddingBottom:5*s,paddingTop:5*s,flexDirection:'row',justifyContent:'flex-end',alignItems:'center'}}>
+                <Text style={{marginTop:13*s,marginRight:10*s}}>{groom.substr(groom.indexOf('-')+1,2)[0]==0?rili[groom.substr(groom.indexOf('-')+1,2)[1]-1]:rili[groom.substr(groom.indexOf('-')+1,2)-1]}</Text>
+                <ImageBackground style={{width:45*s,height:45*s}} source={require('../../../assets/composition/composition/rili.png')}>
+                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:12*s}}>
+                        <Text>{groom.substr(groom.indexOf('-',6)+1,2)}</Text>
+                    </View>
+                </ImageBackground>
+            </View>
+            <FlatList
+                style={{ backgroundColor: '#fff', marginBottom: 60 * s ,height:height-250*s}}
+                data={this.state.data}
+                numColumns={1}
+                renderItem={({ item ,index}) => (
+                    item.groomdate==groom?
+                    this.con(groom,item,index)
+                    :
+                    <View></View>
+                )}
+            />
         </View>
         )
     }
@@ -113,9 +125,7 @@ class AnimatedTabsExample extends Component {
             height: getDeviceHeight() - getDeviceHeight() / 2,
             width: getPanelWidth()
         };
-        const rili = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
         return (
-            // <View>
                 
                 <View style={animatedViewStyle}>
                     <View style={{backgroundColor:'#FFF', width: width, height: 90 * s, flexDirection: 'row', alignItems: 'center' }}>
@@ -131,61 +141,13 @@ class AnimatedTabsExample extends Component {
                         activePanel={this.state.activePanel}
                         onAnimateFinish={activePanel => this.setState({ activePanel })}
                     >
-                        
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item ,index}) => (
-                                this.con(groomdate1,item,index)
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item ,index}) => (
-                                this.con(groomdate2,item,index)
-                           
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item ,index}) => (
-                                this.con(groomdate3,item,index)
-                           
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item ,index}) => (
-                                this.con(groomdate4,item,index)
-                           
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item ,index}) => (
-                                this.con(groomdate5,item,index)
-                           
-                            )}
-                        />
-                        <FlatList
-                            style={{ backgroundColor: '#fff', paddingBottom: 20 * s }}
-                            data={this.state.data}
-                            numColumns={1}
-                            renderItem={({ item ,index}) => (
-                                this.con(groomdate6,item,index)
-                           
-                            )}
-                        />
-
+                        {this.cc(groomdate1)}
+                        {this.cc(groomdate2)}
+                        {this.cc(groomdate3)}
+                        {this.cc(groomdate4)}
+                        {this.cc(groomdate5)}
+                        {this.cc(groomdate6)}
+                        {this.cc(groomdate7)}
                     </AnimatedTabs>
 
                     <View style={styles.buttons}>
@@ -198,13 +160,11 @@ class AnimatedTabsExample extends Component {
                         </TouchableOpacity>
                     </View>
                 </View >
-            // </View>
         );
     }
 
     goToPanel(direction) {
         const nextPanel = this.state.activePanel + direction;
-
         if (nextPanel >= 0 && nextPanel < panelsCount) {
             this.setState({ activePanel: nextPanel });
         }
@@ -213,11 +173,12 @@ class AnimatedTabsExample extends Component {
 
 const styles = StyleSheet.create({
     text: {
-        padding: 15,
+        padding: 20*s,
         alignSelf: 'center'
     },
     buttons: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor:'#FFF'
     }
 });
 

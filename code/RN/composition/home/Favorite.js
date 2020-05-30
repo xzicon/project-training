@@ -450,7 +450,7 @@ export default class Favorite extends Component {
                           }}
                         numColumns={1}
                         renderItem={({item})=>(
-                           
+                           item.istrue==0?(
                                 item.mimage===''?
 
                                 <View style={{backgroundColor: '#F4F4F4',alignItems:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
@@ -476,6 +476,26 @@ export default class Favorite extends Component {
                                     </TouchableOpacity>
                                 </View>
                                 )
+                           ):(
+                            item.mimage===''?
+
+                            <View style={{backgroundColor: '#F4F4F4',alignItems:'center',flexDirection:'row',justifyContent:'center',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
+                            height:200*s,borderRadius:10*s,padding:20*s}}>
+                                {/* <Text>技法</Text> */}
+                                <TouchableOpacity onPress={()=>{Actions.paperdetail({mid:item.mid})}}>
+                                    
+                                    <Text>{item.truetitle}</Text>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            <View style={{backgroundColor: '#F4F4F4',backgroundColor:'#FFF',marginLeft:20*s,marginRight:20*s,marginTop:10*s,marginBottom:10*s,
+                                height:360*s,borderRadius:10*s,padding:20*s}}>
+                                    <TouchableOpacity onPress={()=>{Actions.paperdetail({mid:item.mid})}}>
+                                        <Image style={{width:'100%',height:250*s}} source={{uri:'http://116.62.14.0:8402/images/'+item.mimage}}/>
+                                        <Text>{item.truetitle}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                           )
                         )}
                         />
             </View>

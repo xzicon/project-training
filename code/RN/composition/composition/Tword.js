@@ -12,6 +12,7 @@ export default class Tword extends Component {
         this.state = {
             data: [],
             new: 0,
+            updatea:this.props.updatea
         }
 
     }
@@ -20,6 +21,17 @@ export default class Tword extends Component {
         console.log(this.props.flag);
         if (this.state.new === 0) {
             this.hot()
+        }
+    }
+    componentWillReceiveProps(){
+        if(this.state.updatea){
+            this.setState({
+                new:1,
+                updatea:false
+            },()=>{
+                this.new()
+            })
+            
         }
     }
     change_new = () => {

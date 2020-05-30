@@ -169,7 +169,6 @@ export default class Skill extends Component {
                                 <TouchableOpacity activeOpacity={1} style={styles.box} onPress={()=>Actions.skilldetail({sid:item.sid})}>
                                     <View style={styles.text}>
                                         <Text style={{fontSize: 28 * s,fontWeight:"bold",overflow:'hidden'}}>{item.skilltitle}</Text>
-                                        
                                         <Text style={{fontSize: 22 * s}}>{item.tname} 发布</Text>
                                     </View>
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + item.skillimage }} style={styles.image}/>
@@ -179,9 +178,6 @@ export default class Skill extends Component {
                                     <TouchableOpacity activeOpacity={1} style={styles.box} onPress={()=>Actions.skilldetail({sid:item.sid})}>
                                     <View style={styles.text}>
                                         <Text style={{fontSize: 28 * s,fontWeight:"bold",overflow:'hidden'}}>{item.skilltitle}</Text>
-                                        <Text></Text>
-                                        <Text></Text>
-                                        <Text></Text>
                                         <Text style={{fontSize: 22 * s}}>{item.tname} 发布</Text>
                                     </View>
                                     <Image source={{ uri: 'http://116.62.14.0:8402/images/' + item.skillimage }} style={styles.image}/>

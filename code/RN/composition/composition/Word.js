@@ -17,6 +17,7 @@ export default class Word extends Component {
             twoborderBottomColor: '#fff',
             flag: '1',
             data: [],
+            updatea: this.props.updatea,
         }
     }
     Change1 = () => {

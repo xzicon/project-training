@@ -198,7 +198,7 @@ export default class HomePage extends Component {
                             source={{ uri: 'http://116.62.14.0:8402/images/' + item.uimage }} />
                     </TouchableOpacity>
                     <View>
-                        <Text>{item.uname}</Text>
+                        <Text>{item.uname} <Text>{item.value}</Text></Text>
                         <Text>{item.utime}</Text>
                     </View>
                 </View>

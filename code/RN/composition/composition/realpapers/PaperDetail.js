@@ -594,8 +594,8 @@ export default class PaperDetail extends Component {
                                         <Icon2 name='navigate' style={{ color: 'red' }} size={30 * s}/>
                                         <Text style={{ fontSize: 25 * s,margin: 10 * s,fontWeight:'bold',color:'red' }}>精彩练笔</Text>
                                     </View>
-
-                                    <Tword mid={item.mid}/>
+                                        {/* updatea={this.state.updatea} updatec={this.state.updatec} */}
+                                    <Tword mid={item.mid} updatea={true}/>
                                 </View>
                             </View>
                         )}

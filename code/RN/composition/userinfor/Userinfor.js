@@ -48,9 +48,12 @@ export default class Userinfor extends Component {
         super(props);
         this.state = {
             data: [],
+            p_data:[],
             uid: '',
             flag: '1',
-            imageUrl:''
+            imageUrl:'',
+            follow_data:[],
+            huozan_data:[],
         }
     }
     componentDidMount() {
@@ -59,18 +62,48 @@ export default class Userinfor extends Component {
                 res === null ?
                     this.setState({ uid: '' })
                     :
-                    this.setState({ uid: res },()=>{this.all()})
+                    this.setState({ uid: res },()=>{
+                        this.all();this.point();
+                        this.follow();
+                        this.huozan();
+                    })
 
                 
             })
         
 
     }
+    huozan=()=>{
+        fetch('http://116.62.14.0:8402/login/likes/'+this.state.uid)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({huozan_data:res.data});
+            console.log(res.data);
+        })
+    }
+    follow = () => {
+        fetch('http://116.62.14.0:8402/login/guanzhu/' + this.state.uid + '/' + this.state.uid)
+            .then(res => res.json())
+            .then((res) => {
+                console.log(res.data)
+                this.setState({
+                    follow_data: res.data
+                })
+            })
+    }
     all=()=>{
         fetch('http://116.62.14.0:8402/login/me/' + this.state.uid + '/' + this.state.uid)
         .then((res) => res.json())
         .then((res) => {
             this.setState({ data: res.data });
+            console.log(res.data);
+        })
+    }
+    point=()=>{
+        fetch('http://116.62.14.0:8402/points/personal/' + this.state.uid )
+        .then((res) => res.json())
+        .then((res) => {
+            this.setState({ p_data: res.data });
             console.log(res.data);
         })
     }
@@ -92,7 +125,7 @@ export default class Userinfor extends Component {
                                     :<Image source={this.state.imageUrl} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s, }} />}
                                 </TouchableOpacity>
                                 <View style={{ width: width * 0.5, justifyContent: 'center', paddingLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 26 * s, }}>{this.state.data.uname}</Text>
+                                    <Text style={{ fontSize: 26 * s, }}>{this.state.data.uname}<Text>{this.state.p_data.class}</Text></Text>
                                     <Text style={{ fontSize: 18 * s, color: 'grey' }}>{this.state.data.udescribe}</Text>
                                 </View>
                                 {/* 编辑资料 */}
@@ -103,15 +136,19 @@ export default class Userinfor extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{ width: width * 0.96, height: 75 * s, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-                            <TouchableOpacity onPress={() => Actions.follow({ uid: this.state.uid })} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>关注</Text>
-                            </TouchableOpacity>
+                        <View style={{ width: width * 0.96, height: 75 * s, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' ,borderTopWidth:1/scale,borderTopColor:'#F0F0F0'}}>
+                            
                             <TouchableOpacity onPress={() => { Actions.huozan() }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text>{this.state.huozan_data.length}</Text>
                                 <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>获赞</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={() => Actions.follow({ uid: this.state.uid })} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text>{this.state.follow_data.length}</Text>
+                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>关注</Text>
+                            </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Actions.fensi({ uid: this.state.uid }) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>{this.state.data.ufans}粉丝</Text>
+                                <Text>{this.state.data.ufans}</Text>
+                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>粉丝</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -57,38 +57,27 @@ export default class TeacherDetail extends Component {
             console.log(res.data);
         })
     }
-    comment = () => {
-        var date = new Date();
-        var Y = date.getFullYear() + '-';
-        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-        var D = date.getDate() + ' ';
-        var h = date.getHours() + ':';
-        var m = date.getMinutes();
+
+    yelp=()=>{
         let data = {
-            aid: this.props.aid,
-            tid: this.props.tid,
-            gclass: '高一',
-            atitle: this.props.atitle,
-            acontent: this.props.acontent,
-            invitetime: Y + M + D + h + m,
-            uid: this.state.uid
+            uid:Number(this.state.uid)
         }
-        fetch('http://116.62.14.0:8402/grade/invite', {
+        fetch('http://116.62.14.0:8402/grade/invitepoint', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        }).then(res => res.json())
+          }).then(res => res.json())
             .then((res) => {
-                console.log(res.data)
-                if (res.status == 0) {
-                    Actions.home();
-                    ToastAndroid.show('邀请点评成功', 100)
-                } else {
-                    ToastAndroid.show('邀请点评失败', 100)
+                if(res.status==0){
+                    Actions.yelp({tid:this.props.tid}) 
+                }else if(res.status==-9){
+                    ToastAndroid.show('积分不足，不能邀请',100);
+                    // Actions.pop();
+                }else{
+                    console.log('error')
                 }
-
             })
     }
     render() {
@@ -232,7 +221,7 @@ export default class TeacherDetail extends Component {
                 </View>
                 :
                 <View style={{ position: 'absolute', bottom: 50 * s, left:(width-140*s)/2,right:(width-140*s)/2}}>
-                    <Text onPress={() => { Actions.yelp({tid:this.props.tid}) }} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
+                    <Text onPress={() => { this.yelp()}} style={{ textAlign: 'center', fontSize: 24 * s, padding: 10 * s, backgroundColor: '#FFD700', width: 140 * s, borderRadius: 20 * s }}>邀请点评</Text>
                 </View>
                 }
             </View>

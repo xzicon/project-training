@@ -88,7 +88,7 @@ export default class Remark extends Component {
                                 item.isgrade === 1 ?
                                 <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
                                         <View style={{ width: '100%', height: 160 * s }}>
-                                            <TouchableOpacity onPress={() => { Actions.detailEssay({ aid: item.aid, }) }}>
+                                            <TouchableOpacity onPress={() => { Actions.rarticle({ gid: item.gid }) }}>
                                                 
                                                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginBottom:15*s}}>
                                                     <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom: 10 * s }}>{item.atitle}</Text>

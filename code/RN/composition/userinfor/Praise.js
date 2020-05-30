@@ -43,6 +43,7 @@ export default class Praise extends Component {
                             </View>
                         </View>
                         <FlatList
+                        style={{marginBottom:190*s}}
                             data={this.state.data}
                             numColumns={1}
                             renderItem={({ item }) => (

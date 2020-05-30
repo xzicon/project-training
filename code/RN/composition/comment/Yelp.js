@@ -26,8 +26,14 @@ export default class Yelp extends Component {
                     </View>
                     <View>
                         <TouchableOpacity onPress={()=>{Actions.addEssay1({tid:this.props.tid})}}>
-                    <Image source={require('../../assets/composition/mine/write.png')} style={{marginLeft: 16*s}}/>
-                        <Text style={{fontSize: 24*s, marginTop:10*s,}}>上传文章</Text>
+                        <Image source={require('../../assets/composition/mine/write.png')} style={{marginLeft: 16*s}}/>
+                        <Text style={{fontSize: 24*s, marginTop:10*s,}}>文字上传</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={()=>{Actions.addORC({tid:this.props.tid})}}>
+                        <Image source={require('../../assets/composition/add/pic.png')} style={{marginLeft: 16*s}}/>
+                        <Text style={{fontSize: 24*s, marginTop:10*s,}}>图片上传</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

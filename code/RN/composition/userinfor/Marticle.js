@@ -96,7 +96,7 @@ export default class Marticle extends Component {
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>编辑</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.fetchDelete(data.aid)} style={{ position: 'absolute', right: '25%', bottom: '5%', }}  >
+                                        <TouchableOpacity onPress={() => this.fetchDelete(data.aid,data.agrade)} style={{ position: 'absolute', right: '25%', bottom: '5%', }}  >
                                             <View style={{ width: 80*s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>删除</Text>
                                             </View>
@@ -114,7 +114,7 @@ export default class Marticle extends Component {
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>编辑</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.fetchDelete(data.aid)} style={{ position: 'absolute', right: '25%', bottom: '5%', }}  >
+                                        <TouchableOpacity onPress={() => this.fetchDelete(data.aid,data.agrade)} style={{ position: 'absolute', right: '25%', bottom: '5%', }}  >
                                             <View style={{ width: 80*s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>删除</Text>
                                             </View>

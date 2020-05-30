@@ -260,7 +260,8 @@ update_uclass=(uclass,uid)=>{
                 this.grade(data.aid,this.state.select_tid,this.state.uclass,data.atitle,data.acontent,data.uid);
               }else{
                 
-                Actions.popTo('home');
+                Actions.popTo('popular');
+                Actions.popTo('paperdetail');
                 setTimeout(()=> {
                     Actions.refresh({refresh:1})
                 },100);
@@ -294,13 +295,13 @@ update_uclass=(uclass,uid)=>{
             console.log(res.data)
             if (res.status == 0) {
                 ToastAndroid.show('邀请点评成功,积分-90,经验值+30', 100);
-                Actions.popTo('home');
+                Actions.popTo('popular');
                 setTimeout(()=> {
                     Actions.refresh({refresh:1})
                 },100);
             } else if(res.status == -9){
               ToastAndroid.show('邀请点评失败,积分不够', 100);
-              Actions.popTo('home');
+              Actions.popTo('popular');
                 setTimeout(()=> {
                     Actions.refresh({refresh:1})
                 },100);
