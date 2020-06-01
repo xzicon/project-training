@@ -14,7 +14,8 @@ export default class TeacherDetail extends Component {
         this.state = {
             uid: '',
             data: [],
-            flag: '1'
+            flag: '1',
+            tid:this.props.tid
         }
     }
     componentDidMount() {
@@ -73,7 +74,7 @@ export default class TeacherDetail extends Component {
                 if(res.status==0){
                     Actions.yelp({tid:this.props.tid}) 
                 }else if(res.status==-9){
-                    ToastAndroid.show('积分不足，不能邀请',100);
+                    ToastAndroid.show('积分不足50，无法邀请',100);
                     // Actions.pop();
                 }else{
                     console.log('error')

@@ -603,6 +603,11 @@ export default class Popular extends Component {
             console.log(error);
         }
     }
+    refreshing=()=>{
+        this.setState({
+            updatea:true
+        })
+    }
     render() {
         const flexCompleted = this.getCurrentTimePercentage() * 100;
         const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
@@ -770,6 +775,7 @@ export default class Popular extends Component {
                                         mccontent: mccontent
                                     })
                                 }}
+                                onSubmitEditing={()=>{this.addComment()}}
                             />
                         </View>
                         <View style={{ justifyContent: 'space-between', marginTop: 10 * s }}>
@@ -1241,7 +1247,7 @@ export default class Popular extends Component {
                                         <Text style={{ fontSize: 18 * s }}>收藏&nbsp;&nbsp;{item.mcollect}</Text>
                                         : <Text style={{ fontSize: 18 * s }}>已收藏&nbsp;&nbsp;{item.mcollect}</Text>}
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{ width: '15%', alignItems: 'center' }} onPress={() => { Actions.addEssaywrite({ mid: item.mid }) }}>
+                                <TouchableOpacity style={{ width: '15%', alignItems: 'center' }} onPress={() => { Actions.addEssaywrite({ mid: item.mid ,refresh:()=>{this.refreshing()}}) }}>
                                     <Image
                                         style={{ width: 40 * s, height: 40 * s }}
                                         source={require('../../assets/composition/composition/write0.png')}

@@ -26,7 +26,7 @@ const xinxin0 = require('../../assets/xinxin0.png');
 
 
 
-export default class Teacher extends Component {
+export default class TeacherSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -271,8 +271,12 @@ update_uclass=(uclass,uid)=>{
         .then((res) => {
             console.log(res.data)
             if (res.status == 0) {
-                ToastAndroid.show('邀请点评成功,积分-90,经验值+30', 100);
-                Actions.pop(this.props.refresh());
+              ToastAndroid.show('邀请点评成功,积分-90,经验值+30', 100);
+              // Actions.pop(this.props.refresh());
+                Actions.popTo('lesson');
+                setTimeout(()=> {
+                    Actions.refresh({refresh:1})
+                },100);
                 
             } else if(res.status==-9){
               ToastAndroid.show('邀请点评失败,积分不足', 100)

@@ -156,8 +156,9 @@ export default class Skill extends Component {
                         </View>
                     </TouchableWithoutFeedback>
                 </Modal>
-                <View>
+                <View style={{flex:1}}>
                     <FlatList
+                    // style={{marginBottom:200*s}}
                         data = {this.state.data}
                         numColumns = {1}
                         refreshing = { this.state.refreshing }

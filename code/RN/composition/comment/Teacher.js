@@ -133,7 +133,7 @@ export default class Teacher extends Component {
     this.setState({
       keyWord: text,
 
-    }, () => { this._search(this.state.keyWord) });
+    } );
   }
   render() {
     return (
@@ -171,14 +171,15 @@ export default class Teacher extends Component {
             </View>
           </View>
           </Modal> */}
-        <View>
+        {/* <View>
           <Banner dataSource={urlArr} />
+          <View style={{height:70*s}}></View>
           <View
             style={{
-              position: 'absolute',
+              // position: 'absolute',
               alignItems: 'center',
               flexDirection: 'row',
-              height: 70 * s,
+              height: 65 * s,
               top: 14 * s,
               paddingVertical: 5,
               width: width - 30,
@@ -213,6 +214,56 @@ export default class Teacher extends Component {
                 :
                 <Text></Text>
             }
+          </View>
+        </View> */}
+        <View style={{  backgroundColor:'#2dbdf9',height:150*s,flexDirection:'row'}}>
+            <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+              height: 65 * s,
+              top: 14 * s,
+              paddingVertical: 5,
+              width: width - 30,
+              left: 15,
+              backgroundColor: 'rgba(255,255,255,0.3)',
+              borderRadius: 35 * s
+            }}>
+              <Image
+                source={search}
+                style={{ marginLeft: 20, width: 25, height: 25 }}
+              />
+              <TextInput
+              returnKeyType="search"//设置键盘样式
+              style={{
+                paddingVertical: 5,
+                marginLeft: 10,
+                width: width - 100,
+              }}
+              clearButtonMode={'while-editing'}
+              onChangeText={(text) => { this.change(text) }}
+              value={this.state.keyWord}
+              keyboardType={'default'}
+              placeholder={'请输入教师名称'}
+              placeholderTextColor='#8F8F8F'
+              onSubmitEditing={() => { this._search(this.state.keyWord) }}
+            />
+            </View>
+            
+            
+        </View>
+        <View style={{ position: 'absolute',top: 100*s,alignItems:'center',justifyContent:'center',flexDirection:'row',width:'100%'}}>
+            <TouchableOpacity onPress={()=>{Actions.yelp({tid:''}) }} style={{width:'95%'}}>
+              <Image style={{height:100,width:'100%'}} source={require('../../assets/composition/mine/shangchuan.png')}/>
+            </TouchableOpacity>
+        </View>
+        <View style={{height:100*s}}>
+
+        </View>
+        <View style={{flexDirection:'row',height:70*s,alignItems:'center',justifyContent:'center',backgroundColor:'#F0F0F0'}}>
+          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+            <Text>名师推荐</Text>
+            <Image style={{width:30*s,height:30*s}} source={require('../../assets/composition/mine/tuijian.png')}/>
           </View>
         </View>
         {

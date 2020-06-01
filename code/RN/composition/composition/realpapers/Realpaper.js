@@ -249,6 +249,7 @@ export default class Realpaper extends Component {
                         </View>
                     </TouchableWithoutFeedback>
                 </Modal>
+                {/* <View style={{flex:1}}> */}
                     <FlatList
                         style={{marginBottom:150*s}}
                         data = {this.state.data}
@@ -370,6 +371,7 @@ export default class Realpaper extends Component {
                                 <View></View>
                         )}
                     />
+                    {/* </View> */}
             </View>
         )
     }

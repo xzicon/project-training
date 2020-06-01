@@ -15,6 +15,7 @@ import Icon1 from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import RichTextView from './RichTextView';
 import { myFetch } from '../utils/index'
+import Title from '../common/Title';
 const { width, scale, height } = Dimensions.get('window');
 const s = width / 640;
 
@@ -374,6 +375,7 @@ export default class DetailEssay extends Component {
                                                 arcontent: accontent
                                             })
                                     }}
+                                    onSubmitEditing={() => {this.addComment()}}
                                 />
                             </View>
                             <View style={{ justifyContent: 'space-between', marginTop: 10 * s }}>
@@ -404,8 +406,18 @@ export default class DetailEssay extends Component {
                             />
                         </TouchableOpacity>
                         {/* 用户名 */}
-                        <View style={{ marginLeft: 20 / scale, width: 320 * s }}>
-                            <Text>{this.state.data.uname}</Text>
+                        <View style={{ marginLeft: 20 / scale, width: 320 * s ,flexDirection:'row'}}>
+                            {/* <Text>{this.state.data.uname}</Text><Text>{this.state.data.level}</Text> */}
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                <Text style={{marginRight:5*s,fontSize:20*s,}}>{this.state.data.uname}</Text>
+                                {
+                                    this.state.data.level!=undefined?
+                                    <Title level={this.state.data.level}/>
+                                    :
+                                    <View></View>
+                                }
+                                
+                            </View>
                         </View>
 
                         {/* <View style={{}}>
@@ -465,15 +477,15 @@ export default class DetailEssay extends Component {
                                 }
                                 {/* 链接素材 */}
                                 {
-                                    this.state.data.mtitle == null ?
+                                    this.state.data.mid == null ?
                                         <View></View>
                                         :
-                                        <TouchableOpacity onPress={() => { Actions.popular({ mid: this.state.data.mid }) }} style={{ width: '100%', justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 * s }}>
+                                        <TouchableOpacity onPress={() => { this.state.data.mtitle!=''?Actions.popular({ mid: this.state.data.mid }):Actions.paperDetail({mid:this.state.data.mid}) }} style={{ width: '100%', justifyContent: 'flex-end', flexDirection: 'row', marginTop: 10 * s }}>
                                             <View style={{ width: '100%', backgroundColor: '#4682B4', borderRadius: 15 / scale, padding: 10 / scale, justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
                                                 <View style={{ width: '10%', flexDirection: 'row', justifyContent: 'center' }}>
                                                     <Icon2 name='tags' size={28 * s} color='#FFF' />
                                                 </View>
-                                                <Text style={{ fontSize: 20 * s, color: '#FFF', width: '90%' }}>{this.state.data.mtitle}</Text>
+                                                <Text style={{ fontSize: 20 * s, color: '#FFF', width: '90%' }}>{this.state.data.mtitle==''?this.state.data.truetitle:this.state.data.mtitle}</Text>
                                             </View>
                                         </TouchableOpacity>
                                 }
@@ -550,7 +562,17 @@ export default class DetailEssay extends Component {
                                             </View>
                                             <View style={{ paddingTop: 20 / scale, paddingBottom: 20 / scale, paddingRight: 20 / scale, width: '82%' }}>
                                                 <View>
-                                                    <Text style={{ fontSize: 20 * s, color: '#666666' }}>{item.uname}</Text>
+                                                    {/* <Text style={{ fontSize: 20 * s, color: '#666666' }}>{item.uname}{item.level}</Text> */}
+                                                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                                                        <Text style={{marginRight:5*s,fontSize:20*s,color:'#666666'}}>{item.uname}</Text>
+                                                        {
+                                                            item.level!=undefined?
+                                                            <Title level={item.level}/>
+                                                            :
+                                                            <View></View>
+                                                        }
+                                                        
+                                                    </View>
                                                 </View>
                                                 <View>
                                                     <Text style={{ marginTop: 20 / scale, marginRight: 20 / scale }}>{item.accontent}</Text>
@@ -565,7 +587,7 @@ export default class DetailEssay extends Component {
                                         <View style={{ flexDirection: 'row' }}>
                                             <View style={{ width: '18%' }}></View>
                                             <View style={{ paddingTop: 20 / scale, paddingBottom: 20 / scale, paddingRight: 20 / scale, width: '82%' }}>
-                                                <TouchableOpacity onPress={() => { Actions.reply({ refresh: () => { this.getarticle() }, acid: item.acid, actime: item.actime, accontent: item.accontent, uid: item.uid, uimage: item.uimage, uname: item.uname, acnum: item.acnum }) }}>
+                                                <TouchableOpacity onPress={() => { Actions.reply({ refresh: () => { this.getarticle() }, acid: item.acid, actime: item.actime, accontent: item.accontent, uid: item.uid, uimage: item.uimage, uname: item.uname, acnum: item.acnum,arlevel:item.level }) }}>
                                                     <View style={{ marginRight: 20 / scale, backgroundColor: '#F0F0F0' }}>
                                                         <Text style={{ margin: 10 * s, color: '#5482b4' }}>
                                                             共{item.acnum}条回复>

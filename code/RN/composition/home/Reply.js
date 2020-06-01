@@ -9,6 +9,7 @@ import { Text, View, AsyncStorage ,FlatList,
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Title from '../common/Title';
 const {width,scale,height} = Dimensions.get('window');
 const s = width / 640;
 export default class Reply extends Component {
@@ -21,7 +22,8 @@ export default class Reply extends Component {
                 uimage:this.props.uimage,
                 uname:this.props.uname,
                 accontent:this.props.accontent,
-                actime:this.props.actime
+                actime:this.props.actime,
+                level:this.props.arlevel
             },
             com:false,
             reply_acid:null
@@ -184,7 +186,18 @@ export default class Reply extends Component {
                     </View>
                     <View style={{paddingTop:20/scale,paddingBottom:20/scale,paddingRight:20/scale,width:'82%'}}>
                         <View>
-                            <Text style={{fontSize:20*s,color:'#666666'}}>{this.state.articlecomment.uname}</Text>
+                            {/* <Text style={{fontSize:20*s,color:'#666666'}}>{this.state.articlecomment.uname}{this.state.articlecomment.level}</Text> */}
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                <Text style={{marginRight:5*s,fontSize:20*s,color:'#666666'}}>{this.state.articlecomment.uname}</Text>
+                                {
+                                    this.state.articlecomment.level!=undefined?
+                                    <Title level={this.state.articlecomment.level}/>
+                                    :
+                                    <View></View>
+                                }
+                                
+                            </View>
+                            
                             <Text style={{fontSize:20*s,color:'#666666'}}>{this.state.articlecomment.actime}</Text>
                         </View>
                         <View>
@@ -226,7 +239,17 @@ export default class Reply extends Component {
                                     </View>
                                     <View style={{paddingTop:20/scale,paddingBottom:20/scale,paddingRight:20/scale,width:'82%'}}>
                                         <View>
-                                            <Text style={{fontSize:20*s,color:'#666666'}}>{item.uname}</Text>
+                                            {/* <Text style={{fontSize:20*s,color:'#666666'}}>{item.uname}{item.level}</Text> */}
+                                            <View style={{flexDirection:'row'}}>
+                                                <Text style={{marginRight:5*s,fontSize:20*s,color:'#666666'}}>{item.uname}</Text>
+                                                {
+                                                    item.level!=undefined?
+                                                    <Title level={item.level}/>
+                                                    :
+                                                    <View></View>
+                                                }
+                                                
+                                            </View>
                                             <Text style={{fontSize:20*s}}>{item.artime}</Text>
                                         </View>
                                         <View>

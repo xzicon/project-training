@@ -63,7 +63,7 @@ export default class Feedback extends Component {
                         <TouchableOpacity style={{ position: 'absolute', top: '25%', left: '5%', }} onPress={() => Actions.pop()}>
                             <Text style={{ fontSize: 24 * s }}>取消</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ position: 'absolute', top: '20%', right: '5%', }} onPress={this.update}>
+                        <TouchableOpacity style={{ position: 'absolute', top: '20%', right: '5%', }} onPress={()=>{this.fetchFeedback()}}>
                             <View style={{ width: 100*s, borderColor: 'red', borderWidth: 1 * s, alignItems: 'center' }}>
                                 <Text style={{ fontSize: 24 * s, color: '#000', padding: '5%' }}>反馈</Text>
                             </View>

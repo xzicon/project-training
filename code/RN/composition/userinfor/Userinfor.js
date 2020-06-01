@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, Dimensions, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, StatusBar, AsyncStorage, } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux';
+import Title from '../common/Title';
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -54,6 +55,8 @@ export default class Userinfor extends Component {
             imageUrl:'',
             follow_data:[],
             huozan_data:[],
+            isqiandao_data:[],
+            teacher_list_data:[]
         }
     }
     componentDidMount() {
@@ -66,12 +69,29 @@ export default class Userinfor extends Component {
                         this.all();this.point();
                         this.follow();
                         this.huozan();
+                        this.isqiandao();
+                        this.teacher_list()
+                        
                     })
 
                 
             })
-        
-
+    }
+    teacher_list = () => {
+        fetch('http://116.62.14.0:8402/cteacher/ulist/' + this.state.uid)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({ teacher_list_data: res.data });
+                console.log(res.data);
+            })
+    }
+    isqiandao=()=>{
+        fetch('http://116.62.14.0:8402/points/count/'+this.state.uid)
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({isqiandao_data:res.data});
+            // console.log(res.data);
+        })
     }
     huozan=()=>{
         fetch('http://116.62.14.0:8402/login/likes/'+this.state.uid)
@@ -116,23 +136,40 @@ export default class Userinfor extends Component {
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
-                    <View style={{ width: width * 0.96, height: 250 * s, marginTop: 10 / scale, marginLeft: width * 0.02, marginRight: width * 0.02, position: 'relative', backgroundColor: 'white' }}>
-                        <View style={{ width: width * 0.96, height: 175 * s, justifyContent: 'center' }}>
-                            <View style={{ width: width * 0.96, flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ width: width, height: 250 * s, marginTop: 10 / scale, marginRight: width * 0.02, position: 'relative', backgroundColor: 'white' }}>
+                        <View style={{ width: width, height: 175 * s, justifyContent: 'center' }}>
+                            <View style={{ width: width, flexDirection: 'row', justifyContent: 'flex-start',alignItems:'center',paddingLeft:45 *s }}>
                                 <TouchableOpacity onPress={() => Actions.personHome({ uid: this.state.data.uid })} style={{ alignItems: 'center', width: 90 * s }}>
                                 {this.state.flag === '1' ?
-                                    <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.data.uimage }} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s, }} />
-                                    :<Image source={this.state.imageUrl} style={{ width: 90 * s, height: 90 * s, borderRadius: 45 * s, }} />}
+                                    <Image source={{ uri: 'http://116.62.14.0:8402/images/' + this.state.data.uimage }} style={{ width: 100 * s, height: 100 * s, borderRadius: 50 * s, }} />
+                                    :<Image source={this.state.imageUrl} style={{ width: 100 * s, height: 100 * s, borderRadius: 50 * s, }} />}
                                 </TouchableOpacity>
                                 <View style={{ width: width * 0.5, justifyContent: 'center', paddingLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 26 * s, }}>{this.state.data.uname}<Text>{this.state.p_data.class}</Text></Text>
-                                    <Text style={{ fontSize: 18 * s, color: 'grey' }}>{this.state.data.udescribe}</Text>
+                                <View style={{flexDirection:'row',width: 220 * s,}}>
+                                    <Text numberOfLines={1} ellipsizeMode = 'tail' style={{ marginRight:5*s,fontSize: 26 * s, overflow:'hidden'}}>{this.state.data.uname}</Text>
+                                    {/* {console.log(this.state.data.level+'aaaaaaaaaaaaa')} */}
+                                    {
+                                        this.state.data.level!=undefined?(
+                                        
+                                        <Title level={this.state.data.level}/>
+                                        )
+                                        :
+                                        <View></View>
+                                    }
+                                    
                                 </View>
-                                {/* 编辑资料 */}
-                                <TouchableOpacity onPress={() => { Actions.ziliao({refresh:()=>{this.all()}}) }} style={{ width: 130 * s, justifyContent: 'center' }}  >
-                                    <View style={{ width: 130 * s, borderWidth: 1, justifyContent: 'center', alignItems: 'center', padding: 10 * s }}>
-                                        <Text style={{ color: '#000', fontSize: 20 * s, }}>编辑资料</Text>
-                                    </View>
+                                    <TouchableOpacity onPress={() => { Actions.ziliao() }} style={{position:'absolute',top:3 *s,left:260 *s}}>
+                                        {/* <View style={{ }}> */}
+                                            {/* <Text style={{ color: '#000', fontSize: 20 * s, }}>编辑</Text> */}
+                                            <Image style={{width:20*s,height:20*s}} source={require('../../assets/composition/mine/edit.png')}/>
+                                        {/* </View> */}
+                                    </TouchableOpacity>
+                                    <Text numberOfLines={1} ellipsizeMode = 'tail' style={{ fontSize: 19 * s, color: 'grey',paddingTop:5 * s }}>{this.state.data.udescribe}</Text>
+                                    <Text style={{paddingTop:5 * s,fontSize: 15 * s, color: 'grey',}}>总积分:{this.state.p_data.point}  总经验值:{this.state.p_data.value}</Text>
+                                </View>
+                                <TouchableOpacity activeOpacity={1} onPress={() => Actions.qiandao({uid:this.state.uid,uimage:this.state.data.uimage,uname:this.state.data.uname,refresh:()=>{this.isqiandao()}})} style={{width:128 * s,height:45 *s,backgroundColor:'#ADADAD',position:'absolute',top:70 *s,right:0,borderTopLeftRadius:23 *s,borderBottomLeftRadius: 23 *s}}>
+                                    <Text style={{lineHeight:45 * s,textAlign:'center',color:'#fff'}}>{this.state.isqiandao_data.isre==true?'今日已签到':'每日签到'}</Text>
+                                    <Image source={require('../../assets/composition/mine/qiandao.png')} style={{position:'absolute',right: 50 * s,top: -35 *s}}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -149,6 +186,10 @@ export default class Userinfor extends Component {
                             <TouchableOpacity onPress={() => { Actions.fensi({ uid: this.state.uid }) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text>{this.state.data.ufans}</Text>
                                 <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>粉丝</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { Actions.xiai({ uid: this.state.uid }) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text>{this.state.teacher_list_data.length}</Text>
+                                <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>喜爱</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

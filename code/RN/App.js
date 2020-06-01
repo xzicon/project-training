@@ -69,6 +69,8 @@ import Huozan from './composition/userinfor/Huozan';
 import Message from './composition/userinfor/Message';
 import Teacherme from './composition/userinfor/Teacher';
 import TeacherDetailme from './composition/home/TeacherDetail';
+import Qiandao from './composition/userinfor/Qiandao';
+import Biangeng from './composition/userinfor/Biangeng';
 // 点评
 import TeacherDetail from './composition/comment/TeacherDetail';
 import Teacher0 from './composition/comment/Teacher';
@@ -78,7 +80,8 @@ import HaveWrite from './composition/comment/HaveWrite';
 import HaveMarticle from './composition/comment/HaveMarticle';
 import AddORC from './composition/comment/AddORC';
 import Materiallist1 from './composition/comment/Materiallist';
-
+import Xiai from './composition/userinfor/Xiai';
+import TeacherSelect from './composition/comment/TeacherSelect';
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -166,6 +169,7 @@ const App = () => {
 									<Scene key="popular" hideNavBar hideTabBar component={Popular} />
 									<Scene key="container" hideTabBar hideNavBar component={Container} />
 									<Scene hideTabBar hideNavBar key='detailEssaywrite' component={DetailEssay} />
+									<Scene key='paperDetail' hideTabBar hideNavBar component={PaperDetail}/>
 									{/* 老师点评 */}
 									<Scene hideTabBar hideNavBar key='teacher1' component={ADDTeacher} />
 									<Scene hideTabBar hideNavBar key='teacherdetail1' component={ADDTeacherDetail} />
@@ -247,7 +251,8 @@ const App = () => {
 									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
 									<Scene hideNavBar hideTabBar key='addORC' component={AddORC}/>
 									<Scene hideNavBar hideTabBar key='materiallist' component={Materiallist1}/>
-
+									<Scene hideTabBar hideNavBar key='teacher11' component={ADDTeacher1} />
+									<Scene hideTabBar hideNavBar key='teacher' component={TeacherSelect} />
 
 
 								</Scene>
@@ -291,12 +296,15 @@ const App = () => {
 									<Scene key='message' component={Message} hideTabBar hideNavBar/>
 									<Scene hideTabBar hideNavBar key='favorite' component={Favorite}/>
 									<Scene hideTabBar hideNavBar key='teacher' component={Teacherme} />
-									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetailme} />
+									<Scene hideTabBar hideNavBar key='teacherdetail' component={TeacherDetail} />
 									<Scene hideTabBar hideNavBar key='detailEssay' component={DetailEssay} />
 									<Scene hideNavBar hideTabBar key='skilldetail' component={SkillDetail} />
 									<Scene hideTabBar hideNavBar key='rarticle' component={Rarticle} />
 									<Scene hideTabBar hideNavBar key='yelp' component={Yelp} />
 									<Scene hideNavBar hideTabBar key='paperdetail' component={PaperDetail} />
+									<Scene hideNavBar hideTabBar key='qiandao' component={Qiandao}/>
+									<Scene hideNavBar hideTabBar key='biangeng' component={Biangeng}/>
+									<Scene hideNavBar hideTabBar key='xiai' component={Xiai}/>
 								</Scene>
 							</Tabs>
 						</Scene>

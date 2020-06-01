@@ -3,6 +3,7 @@ import { View, Text, ToastAndroid, StyleSheet, Dimensions, TextInput, ScrollView
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/Feather';
 import { Actions } from 'react-native-router-flux';
+import Title from '../common/Title';
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
 
@@ -198,7 +199,16 @@ export default class HomePage extends Component {
                             source={{ uri: 'http://116.62.14.0:8402/images/' + item.uimage }} />
                     </TouchableOpacity>
                     <View>
-                        <Text>{item.uname} <Text>{item.value}</Text></Text>
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={{marginRight:5*s}}>{item.uname}</Text>
+                            {
+                                item.level!=undefined?
+                                <Title level={item.level}/>
+                                :
+                                <View></View>
+                            }
+                        </View>
+                        
                         <Text>{item.utime}</Text>
                     </View>
                 </View>

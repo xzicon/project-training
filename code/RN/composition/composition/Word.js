@@ -3,6 +3,7 @@ import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity, TouchableN
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Tword from './Tword';
+import Title from '../common/Title';
 
 const { width, scale, height } = Dimensions.get('window');
 const s = width / 640;
@@ -92,7 +93,17 @@ export default class Word extends Component {
                                 </View>
                                 <View style={{ paddingTop: 20 / scale, paddingRight: 20 / scale, width: '82%' }}>
                                     <View>
-                                        <Text style={{ fontSize: 20 * s }}>{item.uname}</Text>
+                                        {/* <Text style={{ fontSize: 20 * s }}>{item.uname}{item.level}</Text> */}
+                                        <View style={{flexDirection:'row'}}>
+                                            <Text style={{marginRight:5*s,fontSize: 20 * s}}>{item.uname}</Text>
+                                            {
+                                                item.level!=undefined?
+                                                <Title level={item.level}/>
+                                                :
+                                                <View></View>
+                                            }
+                                            
+                                        </View>
                                     </View>
                                     <View>
                                         <Text style={{ fontSize: 18 * s, color: '#666666' }}>{item.mctime}</Text>

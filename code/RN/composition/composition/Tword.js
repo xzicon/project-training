@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import Icon1 from 'react-native-vector-icons/Feather';
+import Title from '../common/Title';
 
 const { width, scale, height } = Dimensions.get('window');
 const s = width / 640;
@@ -96,7 +97,17 @@ export default class Tword extends Component {
                                             />
                                         </TouchableOpacity>
                                         <View style={styles.theader}>
-                                            <Text style={{ fontSize: 20 * s }}>{data.uname}</Text>
+                                            {/* <Text style={{ fontSize: 20 * s }}>{data.uname}{data.level}</Text> */}
+                                            <View style={{flexDirection:'row'}}>
+                                                <Text style={{marginRight:5*s,fontSize: 20 * s}}>{data.uname}</Text>
+                                                {
+                                                    data.level!=undefined?
+                                                    <Title level={data.level}/>
+                                                    :
+                                                    <View></View>
+                                                }
+                                                
+                                            </View>
                                             <Text style={{ fontSize: 18 * s, color: 'gray' }}>{data.utime}</Text>
                                         </View>
                                     </View>
@@ -130,7 +141,7 @@ export default class Tword extends Component {
                                                 />
                                             </TouchableOpacity>
                                             <View style={styles.theader}>
-                                                <Text style={{ fontSize: 20 * s }}>{data.uname}</Text>
+                                                <Text style={{ fontSize: 20 * s }}>{data.uname}{data.level}</Text>
                                                 <Text style={{ fontSize: 18 * s, color: 'gray' }}>{data.utime}</Text>
                                             </View>
                                         </View>
@@ -173,7 +184,7 @@ const styles = StyleSheet.create({
         marginTop: 10 * s
     },
     theader: {
-        marginLeft: 40 * s
+        marginLeft: 20 * s
     },
     container: {
         paddingLeft: '5%',

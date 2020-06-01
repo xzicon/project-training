@@ -306,7 +306,7 @@ export default class Favorite extends Component {
                                 <Text style={{marginLeft:20*s}}>编辑信息</Text>
                             </TouchableOpacity>  
                         </View>
-                        <View>
+                        {/* <View>
                             <TouchableOpacity
                             style={{flexDirection:'row',alignItems:'center',height:80*s,width:width,padding:20*s,borderBottomColor:'#F0F0F0',borderBottomWidth:1}}
                             >
@@ -314,7 +314,7 @@ export default class Favorite extends Component {
                                 name='switcher'/>
                                 <Text style={{marginLeft:20*s}}>批量管理</Text>
                             </TouchableOpacity>  
-                        </View>
+                        </View> */}
                         <View>
                             <TouchableOpacity
                             onPress={this.delete_favorite}
@@ -326,14 +326,14 @@ export default class Favorite extends Component {
                                 <Text style={{marginLeft:20*s}}>删除该文件夹</Text>
                             </TouchableOpacity>  
                         </View>
-                        <View>
+                        {/* <View>
                             <TouchableOpacity
                             style={{flexDirection:'row',alignItems:'center',height:80*s,width:width,padding:20*s,borderBottomColor:'#F0F0F0',borderBottomWidth:1}}
                             >
                                 <Icon2 size={40*s} style={{color:'#000'}} name='error-outline'/>
                                 <Text style={{marginLeft:20*s}}>举报</Text>
                             </TouchableOpacity>   
-                        </View>
+                        </View> */}
                         <TouchableOpacity 
                         style={{flexDirection:'row',alignItems:'center',justifyContent:'center',height:90*s,width:width}}
                         onPress={this._edit_false}>

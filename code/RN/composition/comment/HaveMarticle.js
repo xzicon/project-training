@@ -52,6 +52,7 @@ export default class HaveMarticle extends Component {
                     })
             })
     }
+    
     getarticle = () => {
         console.log(this.props.aid);
         fetch('http://116.62.14.0:8402/article/xiangqing/' + this.props.aid)
@@ -60,6 +61,9 @@ export default class HaveMarticle extends Component {
                 this.setState({ data: res.data, data1: res.data[0] });
                 console.log(res.data);
             })
+    }
+    refreshs=()=>{
+        this.getarticle();
     }
     _uclass = () => {
         this.setState({ uclassplay: true },()=>{
@@ -245,12 +249,27 @@ export default class HaveMarticle extends Component {
                                     <View style={{ width: '100%', marginTop: '2%', paddingLeft: '3%', paddingRight: '3%', }}><Text style={{ fontSize: 24 * s, color: '#333' }} >{this.state.data1.acontent}</Text></View>
                                     <View style={{ width: '100%', marginTop: '2%', paddingLeft: '3%', }}><Text style={{ fontSize: 18 * s, color: '#333' }} >{this.state.data1.atag}</Text></View>
                                     <View style={{ width: '100%', marginTop: '6%', marginBottom: '2%' }}>
+                                        {console.log('tid:'+this.props.tid)}
+                                        {
+                                            this.props.tid!=''?
+                                            <TouchableOpacity onPress={() => this.comment()} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
+                                                <View style={{ width: 100 * s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
+                                                    <Text style={{ color: '#000', fontSize: 18 * s, padding: '10%', }}>邀请点评</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            :
+                                            <TouchableOpacity
+
+                                             onPress={() => Actions.teacher({ aid: this.props.aid, atitle: this.state.data1.atitle, acontent: this.state.data1.acontent ,uid:this.state.uid,refresh:()=>{this.refreshs()}})} 
+                                             style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
+                                                <View style={{ width: 150 * s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
+                                                    <Text style={{ color: '#000', fontSize: 18 * s, padding: '10%', }}>选择老师邀请</Text>
+                                                </View>
+                                            </TouchableOpacity>
+
+                                        }
                                         {/* <TouchableOpacity onPress={() => this.comment(data.aid, data.atitle, data.acontent )} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  > */}
-                                        <TouchableOpacity onPress={() => this.comment()} style={{ position: 'absolute', right: '5%', bottom: '5%', }}  >
-                                            <View style={{ width: 100 * s, borderColor: 'red', borderWidth: s, alignItems: 'center', }}>
-                                                <Text style={{ color: '#000', fontSize: 18 * s, padding: '10%', }}>邀请点评</Text>
-                                            </View>
-                                        </TouchableOpacity>
+                                        
                                     </View>
                                 </View>
                             </ScrollView>

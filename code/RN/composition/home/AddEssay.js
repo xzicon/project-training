@@ -210,12 +210,13 @@ export default class AddEssay extends Component {
                 aimage:'',
                 imageUrl: '',
               },()=>{
-                ToastAndroid.show('积分+5,经验值+15', 100);
-                Actions.teacher1({atitle: data.atitle,
-                  acontent: data.acontent,
-                  uid: data.uid,
-                  aid:this.state.aid
-                  });
+                ToastAndroid.show('发布成功，积分+5,经验值+15', 100);
+                // Actions.teacher1({atitle: data.atitle,
+                //   acontent: data.acontent,
+                //   uid: data.uid,
+                //   aid:this.state.aid
+                //   });
+                Actions.popTo('home');
               }
               )}
             )
@@ -271,7 +272,7 @@ export default class AddEssay extends Component {
           }}>
             <TouchableOpacity
               onPress={()=>{this.add()}}>
-              <Text>下一步</Text>
+              <Text>确认发布</Text>
             </TouchableOpacity>
           </View>
         </View>

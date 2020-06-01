@@ -3,6 +3,7 @@ import { Text, View ,TouchableOpacity,Animated,StyleSheet,Dimensions,Image, Asyn
 import Icon from 'react-native-vector-icons/AntDesign'
 import {Actions} from 'react-native-router-flux'
 import Icon1 from 'react-native-vector-icons/Feather';
+import Title from '../common/Title';
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 export default class PersonHome extends Component {
@@ -243,8 +244,16 @@ export default class PersonHome extends Component {
                         style={{width:100*s,height:100*s,borderRadius:50*s}}
                          source={{uri:'http://116.62.14.0:8402/images/'+this.state.me_data.uimage}}/>
                         <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                            <Text style={{fontSize:25*s}}>{this.state.me_data.uname}</Text>
-                            <Text style={{fontSize:15*s}}>{this.state.me_rank.class}</Text>
+                            <Text style={{fontSize:25*s,marginRight:5*s}}>{this.state.me_data.uname}</Text>
+                            {
+                                this.state.me_rank.class!=undefined?(
+                                
+                                <Title level={this.state.me_rank.class}/>
+                                )
+                                :
+                                <View></View>
+                            }
+                                            
                         </View>
                         {/* <Text>{this.state.me_data.uclass}</Text> */}
                         
@@ -314,10 +323,21 @@ export default class PersonHome extends Component {
                                                     <Image style={{width:60*s,height:60*s,borderRadius:30*s}} 
                                                     source={{uri:'http://116.62.14.0:8402/images/'+this.state.me_data.uimage}}/>
                                                 </TouchableOpacity>
-                                                <View>
-                                                    <Text>{this.state.me_data.uname}<Text>{this.state.me_rank.class}</Text></Text>
+                                                <View >
+                                                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                                                    <Text style={{marginRight:5*s}}>{this.state.me_data.uname}</Text>
+                                                    {
+                                                        this.state.me_rank.class!=undefined?(
+                                                        
+                                                        <Title level={this.state.me_rank.class}/>
+                                                        )
+                                                        :
+                                                        <View></View>
+                                                    }
+                                                    </View>
                                                     <Text>{item.utime}</Text>
                                                 </View>
+                                                
                                             </View>
                                             {/* 点击详情页 */}
                                             <View style={{width:'100%',height:180*s}}>
@@ -392,7 +412,17 @@ export default class PersonHome extends Component {
                                         <Image style={{width:100*s,height:100*s,borderRadius:50*s}}
                                         source={{uri:'http://116.62.14.0:8402/images/'+item.uimage}}/>
                                         <View style={{marginLeft:'15%'}}>
-                                        <Text>{item.uname}</Text>
+                                        <View style={{flexDirection:'row',alignItems:'center'}}>
+                                            <Text style={{marginRight:5*s}}>{item.uname}</Text>
+                                            {
+                                                item.level!=undefined?(
+                                                
+                                                <Title level={item.level}/>
+                                                )
+                                                :
+                                                <View></View>
+                                            }
+                                        </View>
                                         </View>
                                     </TouchableOpacity>
                                     {item.woid===null?

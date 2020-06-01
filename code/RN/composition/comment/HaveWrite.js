@@ -71,7 +71,7 @@ export default class HaveWrite extends Component {
                                                     </View>
                                                     :
                                                         <View style={{ }}>
-                                                            <Text style={{ fontSize: 24 * s, color: 'yellow', width: width * 0.16, textAlign: 'center', borderRadius: 14 * s, marginRight:28*s, borderWidth:1 }}>未审核</Text>
+                                                            <Text style={{ fontSize: 24 * s, color: 'yellow', width: width * 0.20, textAlign: 'center', borderRadius: 14 * s, marginRight:28*s, borderWidth:1 }}>审核不通过</Text>
                                                         </View>
                                                 }
                                                 </View>

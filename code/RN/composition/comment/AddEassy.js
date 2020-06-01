@@ -244,7 +244,16 @@ export default class AddEssay extends Component {
               aid:res.data
             },()=>{
               if(isgrade==true){
-                this.grade(res.data,this.props.tid,this.state.uclass,data.atitle,data.acontent,data.uid);
+                if(this.props.tid==''){
+                  ToastAndroid.show('发布成功，积分+5,经验值+15', 100);
+                  Actions.teacher1({atitle: data.atitle,
+                    acontent: data.acontent,
+                    uid: data.uid,
+                    aid:this.state.aid
+                    });
+                }else{
+                  this.grade(res.data,this.props.tid,this.state.uclass,data.atitle,data.acontent,data.uid);
+                }
               }else{
                 ToastAndroid.show('写作成功,待审核', 100);
                 Actions.popTo('lesson');
@@ -370,7 +379,7 @@ export default class AddEssay extends Component {
           }}>
             <TouchableOpacity
               onPress={()=>{this.add(true)}}>
-              <Text>邀请</Text>
+              <Text>{this.props.tid==''?'下一步':'邀请'}</Text>
             </TouchableOpacity>
           </View>
         </View>

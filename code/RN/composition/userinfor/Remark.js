@@ -85,7 +85,7 @@ export default class Remark extends Component {
                             }}
                             ListFooterComponent={ this._renderFooter }
                             renderItem={({ item }) => (
-                                item.isgrade === 1 ?
+                                item.isgrade === 1 && item.uid !=null && item.aid!=null?
                                 <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
                                         <View style={{ width: '100%', height: 160 * s }}>
                                             <TouchableOpacity onPress={() => { Actions.rarticle({ gid: item.gid }) }}>
