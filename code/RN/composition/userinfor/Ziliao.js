@@ -209,6 +209,9 @@ export default class Ziliao extends Component {
         }
       })
   }
+  back=()=>{
+    Actions.pop(this.props.refresh)
+  }
   render() {
     console.log(this.state.color1);
     return (
@@ -247,7 +250,7 @@ export default class Ziliao extends Component {
         </Modal>
         <View>
           <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 20 * s, paddingRight: 20 * s }}>
-            <TouchableOpacity onPress={() => Actions.pop()}>
+            <TouchableOpacity onPress={() => this.back()}>
               <Icon size={36 * s} style={{ color: '#000' }} name='left' />
             </TouchableOpacity>
             <View>

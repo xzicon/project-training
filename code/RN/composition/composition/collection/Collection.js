@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions, Image, TouchableOpacity, FlatList, 
 import AnimatedTabs from 'react-native-animated-tabs';
 import { Scene, Actions, Tabs } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/AntDesign';
-
+import moment from 'moment';
 const getDeviceHeight = () => Dimensions.get('window').height;
 const getDeviceWidth = () => Dimensions.get('window').width;
 const getPanelWidth = () => getDeviceWidth() / 1.3;
@@ -12,24 +12,16 @@ const panelsCount = 4;
 
 const { width, scale, height } = Dimensions.get('window');
 const s = width / 640;
-let date = new Date();
-let Y = date.getFullYear();
-let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
-let D1 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
-let D2 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) - 1;
-let D3 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) - 2;
-let D4 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) - 3;
-let D5 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) - 4;
-let D6 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) - 5;
-let D7 = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) - 6;
-let groomdate1 = Y + '-' + M + '-' + D1;
-let groomdate2 = Y + '-' + M + '-' + D2;
-let groomdate3 = Y + '-' + M + '-' + D3;
-let groomdate4 = Y + '-' + M + '-' + D4;
-let groomdate5 = Y + '-' + M + '-' + D5;
-let groomdate6 = Y + '-' + M + '-' + D6;
-let groomdate7 = Y + '-' + M + '-' + D7;
-console.log(groomdate1, groomdate2, groomdate3, groomdate4, groomdate5, groomdate6, groomdate7);
+let groomdate1 = moment().format('YYYY-MM-DD');
+let groomdate2 = moment().subtract(1, 'days').format('YYYY-MM-DD');
+let groomdate3 = moment().subtract(2, 'days').format('YYYY-MM-DD');
+let groomdate4 = moment().subtract(3, 'days').format('YYYY-MM-DD');
+let groomdate5 = moment().subtract(4, 'days').format('YYYY-MM-DD');
+let groomdate6 = moment().subtract(5, 'days').format('YYYY-MM-DD');
+let groomdate7 = moment().subtract(6, 'days').format('YYYY-MM-DD');
+// console.log(groomdate1, groomdate2, groomdate3, groomdate4, groomdate5, groomdate6, groomdate7,'000');
+// console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
+// console.log(moment().subtract(1, 'days').format('YYYY-MM-DD'))
 // 日更合集
 class AnimatedTabsExample extends Component {
     constructor() {
@@ -100,6 +92,7 @@ class AnimatedTabsExample extends Component {
                 <ImageBackground style={{width:45*s,height:45*s}} source={require('../../../assets/composition/composition/rili.png')}>
                     <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:12*s}}>
                         <Text>{groom.substr(groom.indexOf('-',6)+1,2)}</Text>
+                        {console.log(groom.slice(8)+'ooo')}
                     </View>
                 </ImageBackground>
             </View>

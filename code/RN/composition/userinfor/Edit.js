@@ -77,7 +77,7 @@ export default class Edit extends Component {
             <ScrollView style={{ backgroundColor: '#f5f5f5' }}>
                 <View style={{ flex: 1, }}>
                     <View style={{ width: width, height: 80 * s, position: 'relative', backgroundColor: 'white' }}>
-                        <TouchableOpacity style={{ position: 'absolute', top: '25%', left: '5%', }} onPress={() => {Actions.pop()}}>
+                        <TouchableOpacity style={{ position: 'absolute', top: '25%', left: '5%', }} onPress={() => {Actions.pop(this.props.refresh())}}>
                             <Text style={{ fontSize: 24 * s }}>取消</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ position: 'absolute', top: '20%', right: '5%', }} onPress={()=>{this.update()}}>

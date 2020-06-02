@@ -16,11 +16,11 @@ export default class Title extends Component {
     }
     componentDidMount() {
         if(this.state.level == 'lv1') {
-            this.setState({title1 : '白话八股 lv1',bgcolor: '#9370DB'})
+            this.setState({title1 : '白话八股 lv1',bgcolor: '#a39ac5'})
         } else if(this.state.level == 'lv2') {
             this.setState({title1 : '不蔓不枝 lv2',bgcolor: '#ADD8E6'})
         } else if(this.state.level == 'lv3') {
-            this.setState({title1 : '行云流水 lv3',bgcolor: '#BA55D3'})
+            this.setState({title1 : '行云流水 lv3',bgcolor: '#fddea5'})
         } else if(this.state.level == 'lv4') {
             this.setState({title1 : '字字珠玑 lv4',bgcolor: '#9ec87e'})
         } else if(this.state.level == 'lv5') {

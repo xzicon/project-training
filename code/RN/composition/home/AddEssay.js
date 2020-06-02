@@ -209,6 +209,9 @@ export default class AddEssay extends Component {
                 inputValue:'',
                 aimage:'',
                 imageUrl: '',
+                mtitle:'',
+                mid:undefined,
+                truetitle:'',
               },()=>{
                 ToastAndroid.show('发布成功，积分+5,经验值+15', 100);
                 // Actions.teacher1({atitle: data.atitle,
@@ -216,7 +219,10 @@ export default class AddEssay extends Component {
                 //   uid: data.uid,
                 //   aid:this.state.aid
                 //   });
-                Actions.popTo('home');
+                Actions.pop();
+                // setTimeout(()=> {
+                //     Actions.refresh({refresh:1})
+                // },100);
               }
               )}
             )

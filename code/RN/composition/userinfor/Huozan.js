@@ -32,7 +32,7 @@ export default class Huozan extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1}}>
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity onPress={() => Actions.pop()}>
                         <Icon size={35 * s} style={{ color: '#000', marginLeft: 20 * s }} name='left' />
@@ -41,8 +41,9 @@ export default class Huozan extends Component {
                         <Text style={{ fontSize: 26 * s, marginLeft: width * 0.36 }}>获赞</Text>
                     </View>
                 </View>
+                <ScrollView>
                 {this.state.data.length !== 0 ? this.state.data.map(data => (
-                    <ScrollView>
+                    // <ScrollView>
                         <View style={{width:0.96*width, marginLeft:0.02*width, backgroundColor: '#fff', marginTop: 10*s, marginBottom: 10*s}}>
                             <View style={{flexDirection:'row',margin:10*s}}>
                                 <TouchableOpacity onPress={() => Actions.personHome({uid: data.uid})}>
@@ -57,14 +58,15 @@ export default class Huozan extends Component {
                             </View>
                             <Text style={{ fontSize: 18*s, marginLeft: 14* s }}>点赞了这篇文章</Text>
                             <View style={{backgroundColor:'#EDEDED', margin: 10*s}}>
-                                <Text onPress={() => Actions.detailEssayUser({ aid: data.aid })} style={{fontSize: 24*s,margin:10*s,textAlign:'center'}}>{data.atitle}</Text>
-                                <Text onPress={() => Actions.detailEssayUser({ aid: data.aid })} style={{fontSize: 20*s,margin:10*s, height: 100*s}}>{data.acontent}</Text>
+                                <Text onPress={() => Actions.detailEssay({ aid: data.aid })} style={{fontSize: 24*s,margin:10*s,textAlign:'center'}}>{data.atitle}</Text>
+                                <Text onPress={() => Actions.detailEssay({ aid: data.aid })} style={{fontSize: 20*s,margin:10*s, height: 100*s}}>{data.acontent}</Text>
                             </View>
                         </View>
-                    </ScrollView>
+                    // </ScrollView>
                     )) : <View style={{margin: 10*s, flex: 1 }}>
                             <Text>当前还没有收到赞哦~  </Text>
                         </View>}
+                        </ScrollView>
                 </View>
         )
     }

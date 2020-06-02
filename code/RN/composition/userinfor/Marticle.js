@@ -109,7 +109,7 @@ export default class Marticle extends Component {
                                     </View>
                                     :
                                     <View style={{ width: '100%', marginTop: '6%', marginBottom: '2%' }}>
-                                        <TouchableOpacity onPress={() => Actions.edit({ aid: data.aid })} style={{ position: 'absolute', right: '45%', bottom: '5%', }}  >
+                                        <TouchableOpacity onPress={() => Actions.edit({ aid: data.aid,refresh:()=>{this.refreshs()} })} style={{ position: 'absolute', right: '45%', bottom: '5%', }}  >
                                             <View style={{ width: 80*s, borderColor: 'red', borderWidth: s, alignItems: 'center' }}>
                                                 <Text style={{ color: '#000', fontSize: 18*s, padding: '10%', }}>编辑</Text>
                                             </View>

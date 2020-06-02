@@ -194,10 +194,11 @@ export default class Favorite extends Component {
               key={index}
             >
                 <TouchableOpacity
+                onPress={()=>{this.state.favoritelist[index-1].istrue == 0?Actions.popular({mid:this.state.favoritelist[index-1].mid}):Actions.paperdetail({mid:this.state.favoritelist[index-1].mid})}}
                 // onPress={this.myScrollView.scrollTo({ x: 0, y: this.layoutY, animated: true})}
                  style={{flexDirection:'row',width:'80%',paddingLeft:30*s}}>
                     <Text style={{marginRight:10*s,color:'#666666'}}>{index<10?'0'+index:index}</Text>
-                    <Text>{this.state.favoritelist[index-1].mtitle}</Text>
+                    <Text>{this.state.favoritelist[index-1].istrue == 0?this.state.favoritelist[index-1].mtitle:this.state.favoritelist[index-1].truetitle}</Text>
                 </TouchableOpacity>
             </List.Item>
           );
@@ -344,7 +345,7 @@ export default class Favorite extends Component {
                 <View style={{paddingLeft:'5%',paddingRight:'5%',backgroundColor:'#FFF',
                 alignItems:'center',flexDirection:'row',justifyContent:'space-between',height:90*s}}>
                     {/* 返回 */}
-                    <TouchableOpacity style={{width:'15%'}} onPress={Actions.pop}>
+                    <TouchableOpacity style={{width:'15%'}} onPress={()=>{Actions.pop(this.props.refresh())}}>
                         <Icon size={40*s} style={{color:'#000'}} name='left'/>
                     </TouchableOpacity>
                     {/* 目录 */}

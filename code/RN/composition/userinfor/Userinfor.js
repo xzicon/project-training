@@ -66,16 +66,20 @@ export default class Userinfor extends Component {
                     this.setState({ uid: '' })
                     :
                     this.setState({ uid: res },()=>{
-                        this.all();this.point();
-                        this.follow();
-                        this.huozan();
-                        this.isqiandao();
-                        this.teacher_list()
+                        this.refreshing();
                         
                     })
 
                 
             })
+    }
+    refreshing=()=>{
+        this.all();
+        this.point();
+        this.follow();
+        this.huozan();
+        this.isqiandao();
+        this.teacher_list();
     }
     teacher_list = () => {
         fetch('http://116.62.14.0:8402/cteacher/ulist/' + this.state.uid)
@@ -146,7 +150,7 @@ export default class Userinfor extends Component {
                                 </TouchableOpacity>
                                 <View style={{ width: width * 0.5, justifyContent: 'center', paddingLeft: 20 * s }}>
                                 <View style={{flexDirection:'row',width: 220 * s,}}>
-                                    <Text numberOfLines={1} ellipsizeMode = 'tail' style={{ marginRight:5*s,fontSize: 26 * s, overflow:'hidden'}}>{this.state.data.uname}</Text>
+                                    <Text  numberOfLines={1} ellipsizeMode = 'tail' style={{ width:130*s,marginRight:5*s,fontSize: 26 * s, overflow:'hidden'}}>{this.state.data.uname}</Text>
                                     {/* {console.log(this.state.data.level+'aaaaaaaaaaaaa')} */}
                                     {
                                         this.state.data.level!=undefined?(
@@ -158,7 +162,7 @@ export default class Userinfor extends Component {
                                     }
                                     
                                 </View>
-                                    <TouchableOpacity onPress={() => { Actions.ziliao() }} style={{position:'absolute',top:3 *s,left:260 *s}}>
+                                    <TouchableOpacity onPress={() => { Actions.ziliao({refresh:()=>{this.refreshing()}}) }} style={{position:'absolute',top:3 *s,left:260 *s}}>
                                         {/* <View style={{ }}> */}
                                             {/* <Text style={{ color: '#000', fontSize: 20 * s, }}>编辑</Text> */}
                                             <Image style={{width:20*s,height:20*s}} source={require('../../assets/composition/mine/edit.png')}/>
@@ -179,15 +183,15 @@ export default class Userinfor extends Component {
                                 <Text>{this.state.huozan_data.length}</Text>
                                 <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>获赞</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => Actions.follow({ uid: this.state.uid })} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => Actions.follow({ uid: this.state.uid ,refresh:()=>{this.refreshing()}})} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text>{this.state.follow_data.length}</Text>
                                 <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>关注</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { Actions.fensi({ uid: this.state.uid }) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => { Actions.fensi({ uid: this.state.uid ,refresh:()=>{this.refreshing()}}) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text>{this.state.data.ufans}</Text>
                                 <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>粉丝</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { Actions.xiai({ uid: this.state.uid }) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => { Actions.xiai({ uid: this.state.uid ,refresh:()=>{this.refreshing()}}) }} style={{ width: width * 0.32, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text>{this.state.teacher_list_data.length}</Text>
                                 <Text style={{ fontSize: 24 * s, color: '#333', textAlignVertical: 'center' }}>喜爱</Text>
                             </TouchableOpacity>

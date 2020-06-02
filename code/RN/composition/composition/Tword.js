@@ -141,7 +141,17 @@ export default class Tword extends Component {
                                                 />
                                             </TouchableOpacity>
                                             <View style={styles.theader}>
-                                                <Text style={{ fontSize: 20 * s }}>{data.uname}{data.level}</Text>
+                                                <View style={{flexDirection:'row'}}>
+                                                    <Text style={{marginRight:5*s,fontSize: 20 * s}}>{data.uname}</Text>
+                                                    {
+                                                        data.level!=undefined?
+                                                        <Title level={data.level}/>
+                                                        :
+                                                        <View></View>
+                                                    }
+                                                    
+                                                </View>
+                                                {/* <Text style={{ fontSize: 20 * s }}>{data.uname}{data.level}</Text> */}
                                                 <Text style={{ fontSize: 18 * s, color: 'gray' }}>{data.utime}</Text>
                                             </View>
                                         </View>

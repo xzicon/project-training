@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from "react-native-vector-icons/AntDesign";
 import { Scene, Actions, Tabs } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
+import moment from 'moment';
 import { Radio, WhiteSpace, List, Switch } from '@ant-design/react-native'
 const RadioItem = Radio.RadioItem;
 const { width, scale, height } = Dimensions.get('window');
@@ -308,15 +309,16 @@ export default class Composition extends Component {
                     </View>
                     {/* 一句话 */}
                     <View style={{ position: 'relative', marginTop: 20 * s, marginBottom: 10 * s }}>
+                        
                         <View style={{ position: 'absolute', width: 60 * s, height: 70 * s, backgroundColor: this.state.backgroundColor1, left: '7%', top: -20 * s, zIndex: 1, justifyContent: 'center', alignItems: 'center',borderRadius:6*s }}>
-                            <Text style={{ fontSize: 24 * s, color: '#fff' }}>{groomdate1}</Text>
-                            <Text style={{ fontSize: 30 * s, color: '#fff' }}>{D}</Text>
+                            <Text style={{ fontSize: 24 * s, color: '#fff' }}>{(moment().format('MM').slice(0,1)=='0'?moment().format('M'):moment().format('MM'))+'月'}</Text>
+                            <Text style={{ fontSize: 30 * s, color: '#fff' }}>{moment().format('DD')}</Text>
                         </View>
                         <View style={{ width: '90%', marginLeft: '5%', backgroundColor: this.state.backgroundColor2, height: 60 * s,borderRadius:16*s }}>
                             <Text style={{ fontSize: 24 * s, lineHeight: 60 * s, color: '#fff', marginLeft: '16%' }}>{this.state.short_data.sentence}</Text>
                         </View>
                         <View style={{ position: 'absolute',left: '74%',top: 12*s}}>
-                            <Text style={{ fontSize: 40 * s, lineHeight: 60 * s, marginLeft: '16%',color:this.state.color }}>{this.state.week}</Text>
+                            <Text style={{ fontSize: 40 * s, lineHeight: 60 * s, marginLeft: '16%',color:this.state.color }}>{moment().format('dddd').slice(0,3)}</Text>
                         </View>
                     </View>
                     <View>

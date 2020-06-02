@@ -53,7 +53,7 @@ export default class Biangeng extends Component {
                                 item.changereason == '邀请老师点评作文' ? (
                                     <View style={{width:width * 0.7,flexDirection:'row'}}>
                                         <Text numberOfLines={1} style={{fontSize:25 * s}}>{item.pvtime.split(' ')[1]} : </Text>
-                                        <Text numberOfLines={10} style={{fontSize:25 * s}}>{item.changereason}, 经验值+{item.valuechange}, 积分-{item.pointchange}</Text>
+                                        <Text numberOfLines={10} style={{fontSize:25 * s}}>{item.changereason}, 经验值+{item.valuechange}, 积分{item.pointchange}</Text>
                                     </View>
                                 ):(
                                     <View style={{width:width * 0.7,flexDirection:'row'}}>

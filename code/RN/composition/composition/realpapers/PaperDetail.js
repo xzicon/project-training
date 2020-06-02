@@ -371,7 +371,7 @@ export default class PaperDetail extends Component {
                         transparent={false}
                         visible={this.state.create_modal}
                     >
-                        <TouchableOpacity style={styles.cover}
+                        <TouchableOpacity style={styles.cover1}
                             onPress={this.create_false}>
                         </TouchableOpacity>
                         <View style={styles.cover1}
@@ -676,6 +676,14 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    cover1: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundColor: '#F0F0F0'
     },
     cover2: {
         position: 'absolute',

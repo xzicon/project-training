@@ -216,7 +216,7 @@ export default class Teacher extends Component {
             }
           </View>
         </View> */}
-        <View style={{  backgroundColor:'#2dbdf9',height:150*s,flexDirection:'row'}}>
+        <View style={{  backgroundColor:'#4994f9',height:150*s,flexDirection:'row'}}>
             <View
             style={{
               alignItems: 'center',

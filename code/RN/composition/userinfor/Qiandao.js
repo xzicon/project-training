@@ -162,9 +162,30 @@ export default class Qiandao extends Component {
                     >
                         <View style={styles.modalLayer1}>
                             <View style={styles.modalContainer1}>
-                                <Text style={{fontSize:28 * s}}>签到攻略</Text>
-                                <View>
-                                    {/* 内容 */}
+                                <Text style={{fontSize:28 * s,height:50*s}}>攻略</Text>
+                                <View style={{height:480*s,width:'90%'}}>
+                                    <ScrollView showsVerticalScrollIndicator={false}>
+                                        <Text style={{fontWeight:'bold'}}>签到奖励</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0-7天积分+3,经验值+10</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-30天积分+4,经验值+15</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;31天以上积分+5,经验值+20</Text>
+                                        <Text style={{fontWeight:'bold'}}>注册奖励</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分+20,经验值+50</Text>
+                                        <Text style={{fontWeight:'bold'}}>评论奖励</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论素材积分+1,经验值+5</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论作文积分+1,经验值+3</Text>
+                                        <Text style={{fontWeight:'bold'}}>发布作文or练笔奖励</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分+5,经验值+15</Text>
+                                        <Text style={{fontWeight:'bold'}}>邀请点评奖励</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分-50,经验值+30</Text>
+                                        <Text style={{fontWeight:'bold'}}>等级评定</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'<100'}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'lv1'}</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'<300'}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'lv2'}</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'<600'}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'lv3'}</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'<1000'}&nbsp;&nbsp;&nbsp;&nbsp;{'lv4'}</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'<1500'}&nbsp;&nbsp;&nbsp;&nbsp;{'lv5'}</Text>
+                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'>=1500'}&nbsp;&nbsp;{'lv6'}</Text>
+                                    </ScrollView>
                                 </View>
                                 <TouchableOpacity activeOpacity={  1} onPress={()=>this.setState({modalRead:false})} style={{width:width * 0.7,height:65 * s,marginTop:30 * s,backgroundColor:'#000'}}>
                                     <Text style={{fontSize:28 * s,color:'#fff',textAlign:'center',lineHeight:65 * s}}>我知道了</Text>
@@ -186,9 +207,9 @@ export default class Qiandao extends Component {
                             renderItem={({ item }) => (
                                 <View style={{width:'40%',borderWidth:1,borderColor:'#666',height:150*s,margin:20*s,flexDirection:'column',alignItems:'center',justifyContent:'space-around',padding:5}}>
                                     <Title level={item}/>
-                                    <Text>{item}等级用户可以佩戴</Text>
-                                    <View style={{width:90*s,height:50*s,flexDirection:'row',alignItems:'center',justifyContent:'center',borderWidth:1,borderColor:'#666',backgroundColor:this.state.level==item?'#666':'#FFF'}}>
-                                        <Text>{this.state.level==item?<Text style={{color:'#FFF'}}>正在佩戴</Text>:(item.slice(2)<this.state.level.slice(2)?'你已拥有':'还未拥有')}</Text>
+                                    <Text style={{fontSize:18*s}}>{item}等级用户可佩戴</Text>
+                                    <View style={{width:90*s,height:40*s,flexDirection:'row',alignItems:'center',justifyContent:'center',borderWidth:1,borderColor:'#666',backgroundColor:this.state.level==item?'#666':'#FFF'}}>
+                                        <Text style={{fontSize:19*s}}>{this.state.level==item?<Text style={{color:'#FFF'}}>正在佩戴</Text>:(item.slice(2)<this.state.level.slice(2)?'你已拥有':'还未拥有')}</Text>
                                     </View>
 
                                 </View>

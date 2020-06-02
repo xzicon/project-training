@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, Image, TouchableOpacity, Dimensions, AsyncStorage } from 'react-native';
+import { Text, View, FlatList, Image, TouchableOpacity,ToastAndroid, Dimensions, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Actions } from 'react-native-router-flux'
+import Title from '../common/Title';
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -57,11 +58,14 @@ export default class Follow extends Component {
                 }
             })
     }
+    back=()=>{
+        Actions.pop(this.props.refresh())
+    }
     render() {
         return (
             <View>
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => Actions.pop()}>
+                    <TouchableOpacity onPress={() => this.back()}>
                         <Icon size={40 * s} style={{ color: '#000', marginLeft: 20 * s }} name='left' />
                     </TouchableOpacity>
                     <View>
@@ -83,8 +87,9 @@ export default class Follow extends Component {
                                             <TouchableOpacity style={{ width: '40%', flexDirection: 'row', alignItems: 'center' }} onPress={() => { Actions.personHome({ uid: item.taid }) }}>
                                                 <Image style={{ width: 100 * s, height: 100 * s, borderRadius: 50 * s }}
                                                     source={{ uri: 'http://116.62.14.0:8402/images/' + item.uimage }} />
-                                                <View style={{ marginLeft: '15%' }}>
-                                                    <Text style={{ fontSize: 26 * s }}>{item.uname}</Text>
+                                                <View style={{ marginLeft: '15%' ,flexDirection:'row',alignItems:'center'}}>
+                                                    <Text style={{ fontSize: 26 * s ,marginRight:5*s}}>{item.uname}</Text>
+                                                    <Title level={item.level}/>
                                                 </View>
                                             </TouchableOpacity>
                                             {item.woid === null ?

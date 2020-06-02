@@ -246,7 +246,7 @@ export default class AddEssay extends Component {
               if(isgrade==true){
                 if(this.props.tid==''){
                   ToastAndroid.show('发布成功，积分+5,经验值+15', 100);
-                  Actions.teacher1({atitle: data.atitle,
+                  Actions.teacher({atitle: data.atitle,
                     acontent: data.acontent,
                     uid: data.uid,
                     aid:this.state.aid
@@ -321,6 +321,8 @@ export default class AddEssay extends Component {
       inputValue:'',
       aimage:'',
       imageUrl: '',
+      mid:undefined,
+      mtitle:''
     },()=>{Actions.pop()})
     
   }

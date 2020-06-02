@@ -82,6 +82,7 @@ import AddORC from './composition/comment/AddORC';
 import Materiallist1 from './composition/comment/Materiallist';
 import Xiai from './composition/userinfor/Xiai';
 import TeacherSelect from './composition/comment/TeacherSelect';
+import Qiandaojilu from './composition/userinfor/Qiandaojilu';
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -305,6 +306,7 @@ const App = () => {
 									<Scene hideNavBar hideTabBar key='qiandao' component={Qiandao}/>
 									<Scene hideNavBar hideTabBar key='biangeng' component={Biangeng}/>
 									<Scene hideNavBar hideTabBar key='xiai' component={Xiai}/>
+									<Scene hideNavBar hideTabBar key='qiandaojilu' component={Qiandaojilu}/>
 								</Scene>
 							</Tabs>
 						</Scene>

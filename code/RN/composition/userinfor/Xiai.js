@@ -64,7 +64,7 @@ export default class Xiai extends Component {
             <View style={{flex:1}}>
                 
                 <View style={{ width: width, height: 90 * s, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center',justifyContent:'space-between' }}>
-                    <TouchableOpacity onPress={() => Actions.pop()}>
+                    <TouchableOpacity onPress={() => Actions.pop(this.props.refresh())}>
                         <Icon size={35 * s} style={{ color: '#000', marginLeft: 20 * s }} name='left' />
                     </TouchableOpacity>
                     <View>

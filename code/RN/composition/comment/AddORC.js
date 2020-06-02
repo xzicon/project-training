@@ -4,6 +4,9 @@ import RichTextView from '../home/RichTextView'
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
+import * as Progress from 'react-native-progress';
+
+
 const { width, scale ,height} = Dimensions.get('window');
 const s = width / 640;
 
@@ -230,6 +233,7 @@ export default class AddORC extends Component {
                     body: formData
                 }).then(res=>res.json())
                 .then(res=>{
+                  ToastAndroid.show('上传成功',100)
                   console.log(res.status);
                   console.log(res.data);
                   var ocrimg=this.state.ocrimg;
@@ -276,6 +280,7 @@ export default class AddORC extends Component {
                 }
                 console.log(words);
               if(res.status==0){
+                ToastAndroid.show('识别成功',100)
                     this.setState({
                         inputValue: this.state.inputValue+'\n'+words
                     })
@@ -298,6 +303,9 @@ export default class AddORC extends Component {
     // console.log(aa.b);
     
   }
+  // add11 = (isgrade)=>{
+
+  // }
   add = (isgrade) => {
     var date = new Date();
     var Y = date.getFullYear() + '-';
@@ -307,7 +315,10 @@ export default class AddORC extends Component {
     var m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes());
     console.log(date);
     console.log(date.getHours())
-    if (this.state.inputValue === '') {
+    if (this.state.atitle === '') {
+      ToastAndroid.show('请输入作文标题', 100)
+    }
+    else if (this.state.inputValue === '') {
       ToastAndroid.show('请输入作文内容', 100)
     } else if (this.state.inputValue.length >= 2500) {
       ToastAndroid.show('作文内容字数超出限制', 100)
@@ -338,7 +349,7 @@ export default class AddORC extends Component {
               if(isgrade==true){
                 if(this.props.tid==''){
                   ToastAndroid.show('发布成功，积分+5,经验值+15', 100);
-                  Actions.teacher1({atitle: data.atitle,
+                  Actions.teacher({atitle: data.atitle,
                     acontent: data.acontent,
                     uid: data.uid,
                     aid:this.state.aid
@@ -452,6 +463,8 @@ export default class AddORC extends Component {
                     </View>
                 </Modal>
                 <ScrollView>
+                {/* <Progress.Bar progress={0.3} width={200} /> */}
+                {/* <Progress.Circle size={30} indeterminate={true} /> */}
         <View style={{ height: 80 * s, marginBottom: 5, padding:15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff' }}>
           <View style={{
             width: 60, height: 50 * s,
@@ -515,7 +528,7 @@ export default class AddORC extends Component {
         }}
         onPress={()=>{this._ocr_progress(this.state.ocrimg)}}>
             <View style={{borderRadius:40*s,backgroundColor:'#1296db',width:'80%',height:70*s,alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
-                <Text>确认识别</Text>
+                <Text style={{color:'#FFF'}}>确认识别</Text>
             </View>
           </TouchableOpacity>
         <View style={{width:'98%',marginTop:'0.5%',marginLeft:'1%',}}>
