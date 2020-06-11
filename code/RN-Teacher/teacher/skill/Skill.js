@@ -73,9 +73,9 @@ export default class Skill extends Component {
                         <View style={{flex:1}}>
                             {
                                 item.skillimage==''?
-                                <View style={{flexDirection:'row',justifyContent:'space-between',padding:20*s,marginTop:10*s,marginLeft: 10 * s, marginRight: 10 * s,backgroundColor:'#FFF'}}>
+                                <TouchableOpacity onPress={()=>{Actions.skilldetail({sid:item.sid,refresh:()=>{this.all()}})}} style={{flexDirection:'row',justifyContent:'space-between',padding:20*s,marginTop:10*s,marginLeft: 10 * s, marginRight: 10 * s,backgroundColor:'#FFF'}}>
                                     <View style={{flexDirection:'column',justifyContent:'space-between'}}>
-                                        <Text style={{fontSize:25*s}} onPress={()=>{Actions.skilldetail({sid:item.sid,refresh:()=>{this.all()}})}}>{item.skilltitle}</Text>  
+                                        <Text style={{fontSize:25*s}} >{item.skilltitle}</Text>  
                                         <Text>{item.skilltime}</Text>
                                         <View style={{flexDirection:'row'}}>
                                             <Image
@@ -87,11 +87,11 @@ export default class Skill extends Component {
                                     <View 
                                     style={{width:150*s,height:150*s}}
                                     />
-                                </View>
+                                </TouchableOpacity>
                                 :
-                                <View style={{flexDirection:'row',justifyContent:'space-between',padding:20*s,marginTop:10*s,marginLeft: 10 * s, marginRight: 10 * s,backgroundColor:'#FFF'}}>
+                                <TouchableOpacity onPress={()=>{Actions.skilldetail({sid:item.sid,refresh:()=>{this.all()}})}} style={{flexDirection:'row',justifyContent:'space-between',padding:20*s,marginTop:10*s,marginLeft: 10 * s, marginRight: 10 * s,backgroundColor:'#FFF'}}>
                                     <View style={{flexDirection:'column',justifyContent:'space-between',width:400*s}}>
-                                        <Text style={{fontSize:25*s}} onPress={()=>{Actions.skilldetail({sid:item.sid,refresh:()=>{this.all()}})}}>{item.skilltitle}</Text>  
+                                        <Text style={{fontSize:25*s}} >{item.skilltitle}</Text>  
                                        
                                         <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                                             <View style={{flexDirection:'row'}}>
@@ -107,7 +107,7 @@ export default class Skill extends Component {
                                     style={{width:150*s,height:150*s}}
                                     source={{ uri: 'http://116.62.14.0:8402/images/' + item.skillimage }}
                                     />
-                                </View>
+                                </TouchableOpacity>
                             }
                             
                         </View>

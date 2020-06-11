@@ -35,6 +35,7 @@ import Tmessage from './teacher/mine/Tmessage';
 import Connection from './teacher/mine/Connection';
 import Dianpinganli from './teacher/mine/Dianpinganli';
 import Tidentify from './teacher/mine/Tidentify';
+import Tstate from './teacher/mine/Tstate';
 // 未点评
 import Nessay from './teacher/no/Nessay';
 import Nessaydetail from './teacher/no/Nessaydetail';
@@ -54,6 +55,7 @@ import UpdateSkillContent from './teacher/skill/UpdateSkillContent';
 
 
 import DetailEssay from './composition/home/DetailEssay';
+
 
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
@@ -192,7 +194,7 @@ const App = () => {
 									<Scene key='connection' component={Connection} hideTabBar hideNavBar />
 									<Scene key='dianpinganli' component={Dianpinganli} hideTabBar hideNavBar />
 									<Scene key='tidentify' component={Tidentify} hideTabBar hideNavBar />
-									
+									<Scene key='tstate' component={Tstate} hideTabBar hideNavBar />
 									{/* 编辑个人资料 */}
 									<Scene key='editor' component={Editor} hideTabBar hideNavBar />
 									

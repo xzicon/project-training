@@ -11,6 +11,9 @@ const others = [
         title: '师资认证',
     },
     {
+        title: '状态切换',
+    },
+    {
         title: '常见问题',
     },
     {
@@ -37,6 +40,7 @@ export default class Mine extends Component {
             flag: '1',
         }
     }
+    
     componentDidMount() {
         AsyncStorage.getItem('tid')
             .then((res) => {
@@ -44,14 +48,9 @@ export default class Mine extends Component {
                     this.setState({ tid: '' })
                     :
                     this.setState({ tid: res })
-
-                fetch('http://116.62.14.0:8402/teacher/personal/' + this.state.tid )
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ data: res.data });
-                        console.log(res.data);
-                    })
+                this.mine();
             })
+            
         // AsyncStorage.getItem('imgurl').then((res) => {
         //     if (res !== null) {
         //         this.setState({
@@ -61,6 +60,14 @@ export default class Mine extends Component {
         //     }
         // });
 
+    }
+    mine =()=>{
+        fetch('http://116.62.14.0:8402/teacher/personal/' + this.state.tid )
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({ data: res.data });
+                console.log(res.data);
+            })
     }
     render() {
         console.log(this.state.data);
@@ -81,11 +88,15 @@ export default class Mine extends Component {
                                     
                                 </TouchableOpacity>
                                 <View style={{ width: width * 0.5, justifyContent: 'center', paddingLeft: 20 * s }}>
-                                    <Text style={{ fontSize: 28 * s, }}>{this.state.data.tname}</Text>
+                                    <View style={{width:'60%',flexDirection: 'row', justifyContent: 'space-between'}}>
+                                        <Text style={{ fontSize: 28 * s, }}>{this.state.data.tname}</Text>
+                                        {this.state.data.state===0?<Text style={{ fontSize: 20 * s,width:'35%',backgroundColor:'gray',color:'#fff',textAlign:'center' }}>休息</Text>:<Text style={{ fontSize: 20 * s,width:'35%',backgroundColor:'green',color:'#fff',textAlign:'center',}}>在线</Text>}
+                                    </View>
+                                    
                                     <Text style={{ fontSize: 20 * s, color: 'grey' }}>学校:{this.state.data.tschool}</Text>
                                 </View>
                                 {/* 编辑资料 */}
-                                <TouchableOpacity onPress={() => { Actions.editor() }} style={{ width: 130 * s, justifyContent: 'center' }}  >
+                                <TouchableOpacity onPress={() => { Actions.editor({refresh:()=>this.mine()}) }} style={{ width: 130 * s, justifyContent: 'center' }}  >
                                     <View style={{ width: 130 * s, borderWidth: 1, justifyContent: 'center', alignItems: 'center', padding: 10 * s }}>
                                         <Text style={{ color: '#000', fontSize: 24 * s, }}>编辑资料</Text>
                                     </View>
@@ -149,24 +160,29 @@ export default class Mine extends Component {
                             <Text style={{ position: 'absolute', top:'5%', left: '75%', fontSize: 20 * s, color: '#666666' }}>{this.state.data.ispass==1?'认证通过':'未认证'}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Actions.tquestion()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity onPress={() => Actions.tstate({refresh:()=>this.mine()})}  style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[1].title}</Text>
+                            <Text style={{ position: 'absolute', top:'5%', left: '80%', fontSize: 20 * s, color: '#666666' }}>{this.state.data.state==1?'在线':'休息'}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity onPress={() => Actions.tquestion()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[2].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Actions.tfeedback({ tid: this.state.tid })} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[3].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Actions.connection()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity onPress={() => Actions.tfeedback({ tid: this.state.tid })} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[4].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Actions.tset()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                        <TouchableOpacity onPress={() => Actions.connection()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
                             <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[5].title}</Text>
+                            <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Actions.tset()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>
+                            <Text style={{ position: 'absolute', left: '3%', fontSize: 28 * s, color: '#333' }} >{others[6].title}</Text>
                             <Icon size={30 * s} name="right" color="#d8d8d8" style={{ position: 'absolute', top: '3%', right: '5%' }} />
                         </TouchableOpacity>
                         {/* <TouchableOpacity onPress={() => Actions.dianpinganli()} style={{ width: width * 0.96, height: 50 * s, backgroundColor: 'white', position: 'relative', marginTop: 20 * s }}>

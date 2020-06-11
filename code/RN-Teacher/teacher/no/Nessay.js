@@ -69,6 +69,23 @@ export default class Nessay extends Component {
                             ListFooterComponent={ this._renderFooter }
                             renderItem={({ item }) => (
                                 item.isgrade === 0 ?
+                                    (item.aid===null || item.uid ===null?
+                                    <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s ,position:'relative'}}>
+                                        <View style={{ width: '100%', height: 160 * s }}>
+                                            <TouchableOpacity onPress={() => { Actions.nessaydetail({ gid: item.gid }) }}>
+                                                <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom: 10 * s }}>{item.atitle}</Text>
+                                                <Text numberOfLines={3} style={{ fontSize: 20 * s }}>{item.acontent}</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View>
+                                            <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.uname}</Text>
+                                            <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.invitetime}</Text>
+                                        </View>
+                                        <View style={{position:'absolute',width:0.98*width,backgroundColor:'#f3f3f3',opacity:0.8,paddingTop:110*s,paddingBottom:110*s}}>
+                                            <Text style={{ fontSize: 28 * s,color:'gray',textAlign:'center'}}>此作文已被学生删除</Text>
+                                        </View>
+                                    </View> 
+                                    :
                                     <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
                                         <View style={{ width: '100%', height: 160 * s }}>
                                             <TouchableOpacity onPress={() => { Actions.nessaydetail({ gid: item.gid }) }}>
@@ -80,7 +97,11 @@ export default class Nessay extends Component {
                                             <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.uname}</Text>
                                             <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.invitetime}</Text>
                                         </View>
-                                    </View> :
+                                        
+                                    </View> 
+                                    
+                                    )
+                                :
                                     <View></View>
                             )}
                         />

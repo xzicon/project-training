@@ -227,11 +227,19 @@ export default class Tidentify extends Component {
                 <View style={{width:'100%',height:30*s,justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>
                     <Text style={{fontSize:20*s}}>上传身份证背面</Text>
                 </View>
+                {this.state.tshow===''|| tidentityfront==='' || tidentityback===''?
+                <TouchableOpacity onPress={() => {ToastAndroid.showWithGravity('图片不能为空!', ToastAndroid.SHORT, ToastAndroid.CENTER);}} style={{width:'100%',height:100*s,backgroundColor:'#fff',justifyContent: 'center',alignItems: 'center',marginTop:'3%'}}>
+                    <View style={{width:'70%',height:'70%',alignItems:'center',justifyContent:'center',backgroundColor:'blue',borderRadius:30*s}}>
+                        <Text style={{fontSize:26*s,color:'#fff'}}>提交</Text>
+                    </View>
+                </TouchableOpacity>
+                :
                 <TouchableOpacity onPress={() => { this.push() }} style={{width:'100%',height:100*s,backgroundColor:'#fff',justifyContent: 'center',alignItems: 'center',marginTop:'3%'}}>
                     <View style={{width:'70%',height:'70%',alignItems:'center',justifyContent:'center',backgroundColor:'blue',borderRadius:30*s}}>
                         <Text style={{fontSize:26*s,color:'#fff'}}>提交</Text>
                     </View>
                 </TouchableOpacity>
+                }
                 
             </ScrollView>
         )

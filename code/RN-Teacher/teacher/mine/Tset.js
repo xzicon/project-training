@@ -37,6 +37,7 @@ export default class Tset extends Component {
             Actions.pop();
             Actions.login();
         });
+        console.log(this.state.tid)
     }
     render() {
         
@@ -77,7 +78,7 @@ export default class Tset extends Component {
                             justifyContent: 'center',
                             flexDirection:'row'
                         }}
-                        onPress={this.out}>
+                        onPress={()=>{this.out()}}>
                         <Text style={{color:'white',fontSize:30*s}}>退出登录</Text>
                     </TouchableOpacity>
 

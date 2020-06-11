@@ -101,7 +101,46 @@ export default class Remark extends Component {
                             ListFooterComponent={ this._renderFooter }
                             renderItem={({ item }) => (
                                 item.isgrade === 1 ?
-                                <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
+                                    (item.aid===null || item.uid ===null?
+                                    <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s,justifyContent:'center',position:'relative'}}>
+                                        
+                                            <View style={{ width: '100%', height: 160 * s, }}>
+                                                <TouchableOpacity  >
+                                                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginBottom:15*s}}>
+                                                        <Text style={{ fontSize: 26 * s, fontWeight: 'bold', marginBottom: 10 * s }}>{item.atitle}</Text>
+                                                        <Text style={{widht:'20%',height:'100%', fontSize: 26 * s, fontWeight: 'bold', color:'red',marginRight:'5%',fontFamily:'华文彩云',fontStyle:'italic',textDecorationLine:'underline',borderBottomWidth:1,borderBottomColor:'red'}}>&nbsp;{item.score}</Text>
+                                                    </View>
+                                                    <View style={{ height: 80*s, width:  '100%',overflow:'hidden'}}>                                
+                                                        <WebView
+                                                            style={{}}
+                                                            scrollEnabled={false}
+                                                            automaticallyAdjustContentInsets={false}
+                                                            useWebKit={true}
+                                                            scrollEnabled={false}
+                                                            hideKeyboardAccessoryView={true}
+                                                            keyboardDisplayRequiresUserAction={false}
+                                                            originWhitelist={["*"]}
+                                                            dataDetectorTypes={'none'}
+                                                            domStorageEnabled={false}
+                                                            bounces={false}
+                                                            javaScriptEnabled={true}
+                                                            source={{html:htmlContent.start+`<div  style=\"font-size:15px;\">`+item.acontent+`</div>`+htmlContent.end}}
+                                                            />
+                                                    </View>   
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View>
+                                                <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.uname}</Text>
+                                                <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.gradetime}</Text>
+                                            </View>
+                                        
+                                            <View style={{position:'absolute',width:0.98*width,backgroundColor:'#f3f3f3',opacity:0.8,paddingTop:110*s,paddingBottom:110*s}}>
+                                                <Text style={{ fontSize: 28 * s,color:'gray',textAlign:'center'}}>此作文已被学生删除</Text>
+                                            </View>
+                                        
+                                    </View>
+                                    :
+                                    <View style={{ backgroundColor: '#FFF', marginLeft: 10 * s, marginRight: 10 * s, marginTop: 10 * s, height: 250 * s, overflow: 'hidden', padding: 20 * s }}>
                                         <View style={{ width: '100%', height: 160 * s }}>
                                             <TouchableOpacity onPress={() => { Actions.rarticle({ gid: item.gid, }) }}>
                                                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginBottom:15*s}}>
@@ -131,7 +170,7 @@ export default class Remark extends Component {
                                             <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.uname}</Text>
                                             <Text style={{ fontSize: 18 * s, color: 'gray' }}>{item.gradetime}</Text>
                                         </View>
-                                    </View>  
+                                    </View>)
                                 :
                                 <View></View>
                             )}
